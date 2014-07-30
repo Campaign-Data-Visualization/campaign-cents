@@ -1,11 +1,26 @@
 "use strict";
 
-var mongoose    = require('mongoose'),
+var mysql    = require('mysql'),
     morgan      = require('morgan'),
     bodyParser  = require('body-parser'),
     middle      = require('./middleware');
 
-mongoose.connect(process.env.DB_URL || 'mongodb://localhost/myApp');
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'user',
+  password : 'password'
+});
+
+connection.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+
+  console.log('connected as id ' + connection.threadId);
+});
+
+
 /*
  * Include all your global env variables here.
 */
