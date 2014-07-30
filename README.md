@@ -4,9 +4,9 @@
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Liam Dorpalen-Barry
+  - __Scrum Master__: Jonathan Bird
+  - __Development Team Members__: Kevin Liang
 
 ## Table of Contents
 
