@@ -1,0 +1,10 @@
+{
+  "name": "campaign-cents",
+  "version": "",
+  "dependencies": {
+    "bootstrap-css-only": "*",
+    "angular": "*" ,
+    "angular-ui-router": "*"
+  }
+}
+
