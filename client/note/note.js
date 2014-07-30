@@ -1,14 +1,14 @@
-angular.module('campaign-cents.main.note', ['ui.router'])
+angular.module('myApp.main.note', ['ui.router'])
 
 .config(function ($stateProvider) {
 
   $stateProvider
-    .state('campaign-cents.main.note', {
+    .state('myApp.main.notes', {
       url: '/notes',
       templateUrl: 'note/note.tpl.html',
       controller: 'NoteController'
     });
 })
 .controller('NoteController', function ($scope) {
-  $scope.notes = [];
+  $scope.message = 'Yooo!';
 });

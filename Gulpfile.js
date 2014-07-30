@@ -6,10 +6,9 @@ var gulp    = require('gulp'),
     notify  = require('gulp-notify'),
     plumber = require('gulp-plumber'),
     client  = require('tiny-lr')(),
-    list    = require('gulp-task-listing'),
     nodemon = require('gulp-nodemon'),
-    lr_port = 35729,
-    
+    lr_port = 35728,
+    stylus   = require('gulp-stylus');
 
 
 var paths = {
@@ -17,12 +16,22 @@ var paths = {
   views: ['!client/lib/*.html', 'client/**/*.html', 'client/index.html'],
   styles: {
     css: ['!client/lib/**/*.css', 'client/styles/css/*.css', 'client/**/*.css'],
-    
+    stylus: ['client/styles/stylus/*.styl', 'client/**/*.styl'],
     dest: 'client/styles/css'
   }
 };
-var build = ['', 'css', 'lint'];
+var build = ['stylus', 'css', 'lint'];
 
+
+var stylus = require('gulp-stylus');
+gulp.task('stylus', function () {
+  return gulp.src(paths.styles.stylus)
+    .pipe(plumber())
+    .pipe(stylus())
+    .pipe(gulp.dest(paths.styles.dest))
+    .pipe(refresh(client))
+    .pipe(notify({message: 'Stylus done'}));
+});
 
 
 gulp.task('bowerInstall', function  () {
@@ -69,7 +78,7 @@ gulp.task('live', function () {
 });
 
 gulp.task('watch', function () {
-  
+  gulp.watch(paths.styles.stylus, ['stylus']);
   gulp.watch(paths.views, ['html']);
   gulp.watch(paths.scripts, ['lint']);
 });

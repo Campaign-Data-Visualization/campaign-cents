@@ -1,17 +1,18 @@
 (function (angular) {
-  "use strict";
-  angular.module('campaign-cents', [
-    'ui.router'
- ,'campaign-cents.main'])
-  .config(function ($stateProvider) {
+  'use strict';
+  angular.module('myApp', [
+    'ui.router',
+    'ngFx'
+ ,'myApp.main'])
+  .config(function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/myApp/main/notes');
+
     $stateProvider
-      .state('campaign-cents', {
+      .state('myApp', {
+        url: '/myApp',
         abstract: true,
         template: '<ui-view></ui-view>'
       });
-  })
-  .run(function ($state) {
-    $state.transitionTo('campaign-cents.main');
   });
 }(angular));
 

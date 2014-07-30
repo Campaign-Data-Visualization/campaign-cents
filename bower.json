@@ -1,9 +1,11 @@
 {
-  "name": "campaign-cents",
-  "version": "",
+  "name": "my-app",
+  "version": "0.0.1",
   "dependencies": {
     "bootstrap-css-only": "*",
     "angular": "*" ,
+    "angular-cookies": "*",
+    "ngFx": "*",
     "angular-ui-router": "*"
   }
 }

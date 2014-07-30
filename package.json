@@ -20,6 +20,7 @@
     "gulp-task-listing": "*",
     "jshint-stylish": "*",
     "gulp-concat": "*",
-    "gulp-uglify": "*"
+    "gulp-uglify": "*",
+    "gulp-stylus": "*"
   }
 }

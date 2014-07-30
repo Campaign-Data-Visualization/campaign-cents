@@ -1,7 +1,7 @@
 (function (angular) {
   "use strict";
 
-  angular.module('campaign-cents')
+  angular.module('myApp')
   .directive('search', function () {
     return {
 
