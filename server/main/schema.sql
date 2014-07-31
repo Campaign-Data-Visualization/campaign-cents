@@ -1,21 +1,20 @@
-CREATE DATABASE testdata;
+CREATE DATABASE money2;
 
-USE testdata;
+USE money2;
 
-CREATE TABLE test (
-  id MEDIUMINT NOT NULL AUTO_INCREMENT, 
-  test_id INTEGER(3),
-  text VARCHAR(140),
-  room_id INTEGER(3),
-  time_stamp TIMESTAMP,
-  PRIMARY KEY(id)
+CREATE TABLE koch (
+  col1 VARCHAR(255),
+  col2 VARCHAR(255),
+  col3 VARCHAR(255),
+  col4 VARCHAR(255)
 );
 
-CREATE TABLE testusers (
-  id MEDIUMINT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(25),
-  PRIMARY KEY(id)
-);
+LOAD DATA INFILE "/Users/macbook/Documents/apps/campaign-cents/server/main/koch1.csv"
+INTO TABLE koch
+COLUMNS TERMINATED BY ','
+LINES TERMINATED BY '\r';
+
+
 /* Create other tables and define schemas for them here! */
 
 
