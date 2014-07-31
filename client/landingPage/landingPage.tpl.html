@@ -1,11 +1,18 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12"> 
-      <div class="jumbotron">   
-        <h1>Funder Counter</h1>
-        <section>
-          {{ message }}
-        </section>
+<div ng-controller="SearchController">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12"> 
+        <div class="search-box">
+            <div class="jumbotron rounded-corners">   
+              <h2 class="headline">Funder Counter</h2>
+                <form class='form-search' role="form" ng-submit="search()">
+                  <input type="text" class="form-control input-group" placeholder={{message}}>
+                  </input>
+                  <button class="btn btn-lg btn-primary btn-block input-group" type="submit">Search!</button>
+                </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
