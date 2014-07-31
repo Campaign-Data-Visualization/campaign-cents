@@ -7,8 +7,9 @@ var mysql    = require('mysql'),
 
 var connection = mysql.createConnection({
   host     : 'localhost',
-  user     : 'user',
-  password : 'password'
+  user     : 'root',
+  password : '',
+  database: 'money2'
 });
 
 connection.connect(function(err) {
@@ -18,6 +19,12 @@ connection.connect(function(err) {
   }
 
   console.log('connected as id ' + connection.threadId);
+});
+
+connection.query('SELECT * from koch', function(err, rows, fields) {
+  if (err) throw err;
+
+  console.log('The database is: ', rows, fields);
 });
 
 
