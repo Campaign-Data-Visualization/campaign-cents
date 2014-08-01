@@ -6,10 +6,10 @@ var mysql    = require('mysql'),
     middle      = require('./middleware');
 
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database: 'money2'
+  host     : process.env.host || 'localhost',
+  user     : process.env.user || 'root',
+  password : process.env.password || '',
+  database : process.env.database
 });
 
 connection.connect(function(err) {
