@@ -9,6 +9,15 @@
              </div>
              <div class="row">
               <h1> Top Organization Donors </h1>
+              <div class="panel panel-default">
+                <div class="panel-heading">Top Organization Donors</div>
+                  <table class="table">
+                    <tr ng-repeat="donor in funding.donors| orderBy: -'amount' | limitTo: 10"> 
+                      <td class="donor-row" >{{ donor.title }}</td>
+                      <td class="donor-row" >{{donor.amount}}</td> 
+                    </tr>
+                  </table>
+              </div>
              </div>
           </div>
           <div class="col-md-7">
