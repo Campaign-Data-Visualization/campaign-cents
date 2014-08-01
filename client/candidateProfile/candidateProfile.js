@@ -11,4 +11,5 @@ angular.module('myApp.main.candidateProfile', ['ui.router'])
 })
 .controller('CandidateProfileController', function ($scope) {
   $scope.message = 'See the candiadate and related data';
+  $scope.name = 'Ted Cruz';
 });
