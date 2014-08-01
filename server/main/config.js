@@ -1,6 +1,6 @@
 "use strict";
 
-var mysql    = require('mysql'),
+var mysql       = require('mysql'),
     morgan      = require('morgan'),
     bodyParser  = require('body-parser'),
     middle      = require('./middleware');
@@ -17,15 +17,13 @@ connection.connect(function(err) {
     console.error('error connecting: ' + err.stack);
     return;
   }
-
   console.log('connected as id ' + connection.threadId);
 });
 
-connection.query('SELECT * from koch', function(err, rows, fields) {
-  if (err) throw err;
-
-  console.log('The database is: ', rows, fields);
-});
+// connection.query('SELECT * from koch', function(err, rows, fields) {
+//   if (err) throw err;
+//   console.log('The database is: ', rows, fields);
+// });
 
 
 /*
