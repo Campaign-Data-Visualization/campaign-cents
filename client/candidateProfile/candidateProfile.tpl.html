@@ -1,6 +1,44 @@
-<div class="container-fluid">
-  <h2>Candidate Profile</h2>
-  <section>
-    {{ message }}
-  </section>
+<div ng-controller="CandidateProfileController">
+  <div class="candidate-body">
+    <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-4">
+             <div class="row">
+              <h1> {{name}} </h1>
+                <img src="http://joemiller.us/wp-content/uploads/ted-cruz-big-gulp.jpg" class="img-responsive rounded-corners" alt="Sen. Ted Cruz">
+             </div>
+             <div class="row">
+              <h2> Top Organization Donors </h2>
+              <div class="panel panel-default">
+                <div class="panel-heading">Top Organization Donors</div>
+                  <table class="table">
+                    <tr ng-repeat="donor in funding.donors| orderBy: -'amount' | limitTo: 10"> 
+                      <td class="donor-row" >{{ donor.title }}</td>
+                      <td class="donor-row" >{{donor.amount}}</td> 
+                    </tr>
+                  </table>
+              </div>
+             </div>
+          </div>
+          <div class="col-md-7">
+            <h2> Tier 1 and 2 Donors </h2>
+              <div class="panel panel-default">
+                <div class="panel-heading">Total Funding From Funder Organizations</div>
+                  <table class="table">
+                    <tr> 
+                      <td class="donor-row" >Tier One Contributions: {{tierOne}}</td>
+                    </tr>
+                    <tr>
+                      <td class="donor-row" >Tier Two Contributions: {{tierTwo}}</td> 
+                    </tr>
+                  </table>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">Politician Information</div>
+                {{politician.bio}}
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
