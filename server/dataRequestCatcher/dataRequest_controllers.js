@@ -1,6 +1,6 @@
 "use strict";
 
-var Note = require('./note_model.js'),
+var Note = require('./dataRequest_model.js'),
     Q    = require('q');
 
 module.exports = exports = {

@@ -3,11 +3,11 @@
 var express = require('express');
 var app = express();
 var routers = {};
-var NoteRouter = express.Router();
-routers.NoteRouter = NoteRouter;
+var DataRequestRouter = express.Router();
+routers.DataRequestRouter = DataRequestRouter;
 
 require('./config.js')(app, express, routers);
 
-require('../note/note_routes.js')(NoteRouter);
+require('../dataRequestCatcher/dataRequest_routes.js')(NoteRouter);
 
 module.exports = exports = app;
