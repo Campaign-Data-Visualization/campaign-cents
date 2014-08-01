@@ -1,3 +1,18 @@
+.panel-middle {
+  padding: 5px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.not-overlapped {
+  margin-left: 5%;
+}
+
+.centered {
+  margin-left: 20%;
+  margin-bottom: 2%;
+}
+
 .candidate-body {
   margin-top: 8%;
 }

@@ -4,13 +4,13 @@
       <div class="row">
           <div class="col-md-4">
              <div class="row">
-              <h1> {{name}} </h1>
-                <img src="http://joemiller.us/wp-content/uploads/ted-cruz-big-gulp.jpg" class="img-responsive rounded-corners" alt="Sen. Ted Cruz">
+              <h1 class="centered"> {{name}} </h1>
+                <img src="http://joemiller.us/wp-content/uploads/ted-cruz-big-gulp.jpg" class="img-responsive not-overlapped rounded-corners" alt="Sen. Ted Cruz">
              </div>
              <div class="row">
-              <h2> Top Organization Donors </h2>
-              <div class="panel panel-default">
-                <div class="panel-heading">Top Organization Donors</div>
+              <h3 class="centered"> Top Organization Donors </h3>
+              <div class="panel panel-default panel-middle">
+                <div class="panel-heading panel-middle">Donors by Organization</div>
                   <table class="table">
                     <tr ng-repeat="donor in funding.donors| orderBy: -'amount' | limitTo: 10"> 
                       <td class="donor-row" >{{ donor.title }}</td>
@@ -21,8 +21,8 @@
              </div>
           </div>
           <div class="col-md-7">
-            <h2> Tier 1 and 2 Donors </h2>
-              <div class="panel panel-default">
+            <h3 class="centered"> Tier 1 and 2 Donors </h3>
+              <div class="panel panel-default panel-middle">
                 <div class="panel-heading">Total Funding From Funder Organizations</div>
                   <table class="table">
                     <tr> 
@@ -33,7 +33,7 @@
                     </tr>
                   </table>
               </div>
-              <div class="panel panel-default">
+              <div class="panel panel-default panel-middle">
                 <div class="panel-heading">Politician Information</div>
                 {{politician.bio}}
               </div>
