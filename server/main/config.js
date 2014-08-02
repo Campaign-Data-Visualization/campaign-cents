@@ -34,13 +34,13 @@ var connection = mysql.createConnection({
   database : process.env.database || ''
 });
 
-// connection.connect(function(err) {
-//   if (err) {
-//     console.error('error connecting: ' + err.stack);
-//     return;
-//   }
-//   console.log('connected as id ' + connection.threadId);
-// });
+connection.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+  console.log('<======================connected to DB as id ' + connection.threadId);
+});
 
 // connection.query('SELECT * from koch', function(err, rows, fields) {
 //   if (err) throw err;
