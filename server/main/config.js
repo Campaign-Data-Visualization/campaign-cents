@@ -51,10 +51,18 @@ connection.connect(function(err) {
 //   console.log("<================= created koch table ==================>")
 // });
 
-connection.query("INSERT INTO koch (col1, col2, col3, col4) VALUES ('Yo1', 'Yo2', 'Yo3', 'Yo4')", function(err, rows, fields){
+// connection.query("INSERT INTO koch (col1, col2, col3, col4) VALUES ('Yo1', 'Yo2', 'Yo3', 'Yo4')", function(err, rows, fields){
+//   if (err) throw err;
+//   console.log("<===================inserted values in koch table==================>");
+// });
+
+var dataPath = '"/Users/Dorpalen-Barry/Documents/campaign-cents/campaign-cents/server/main/koch1.csv"';
+
+connection.query('LOAD DATA INFILE ' + dataPath + ' INTO TABLE koch COLUMNS TERMINATED BY "," LINES TERMINATED BY "\r"', function(err, rows, fields){
   if (err) throw err;
-  console.log("<===================inserted values in koch table==================>");
+  console.log("<===================loaded csv data into koch table==================>");
 });
+
 connection.query("SELECT * from koch", function(err, rows, fields){
   if (err) throw err;
   console.log('<===========The database is SELECT-ing from koch table ==============>');
