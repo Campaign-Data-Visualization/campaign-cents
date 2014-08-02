@@ -34,6 +34,7 @@ var connection = mysql.createConnection({
   database : process.env.database || ''
 });
 
+
 connection.connect(function(err) {
   if (err) {
     console.error('error connecting: ' + err.stack);
