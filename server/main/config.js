@@ -23,7 +23,6 @@ module.exports = exports = function (app, express, routers) {
   app.use(middle.handleError);
 };
 
-
 //This DB section is commented out to deploy. 
 //It should be uncommented once get cloud db running
 
