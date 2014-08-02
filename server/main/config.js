@@ -56,13 +56,13 @@ connection.connect(function(err) {
 //   console.log("<===================inserted values in koch table==================>");
 // });
 
-// var dataPath = '"D:\home\site\wwwroot\server\main\koch1.csv"';
+var dataPath = '"D:\home\site\wwwroot\server\main\koch1.csv"';
 // var dataPath = '"/Users/Dorpalen-Barry/Documents/campaign-cents/campaign-cents/server/main/koch1.csv"';
 
-// connection.query('LOAD DATA INFILE ' + dataPath + ' INTO TABLE koch COLUMNS TERMINATED BY "," LINES TERMINATED BY "\r"', function(err, rows, fields){
-//   if (err) throw err;
-//   console.log("<===================loaded csv data into koch table==================>");
-// });
+connection.query('LOAD DATA INFILE ' + dataPath + ' INTO TABLE koch COLUMNS TERMINATED BY "," LINES TERMINATED BY "\r"', function(err, rows, fields){
+  if (err) throw err;
+  console.log("<===================loaded csv data into koch table==================>");
+});
 
 
 connection.query("SELECT * from koch", function(err, rows, fields){
