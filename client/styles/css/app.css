@@ -1,3 +1,36 @@
+.row-top {
+  margin-top: 5%;
+}
+.headline{
+  margin-bottom: 2%;
+
+}
+.panel-middle{
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 11px;
+
+}
+
+.rounded-corners{
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px; /* future proofing */
+  -khtml-border-radius: 10px; /* for old Konqueror browsers */
+}
+
+.panel-heading{
+
+}
+
+.donor-row{
+
+}
+.take-action{
+  margin-left: 75%;
+  padding: 1%;
+  font-weight: bold;
+}
 #messages {
   color: #d3d3d3;
 }
