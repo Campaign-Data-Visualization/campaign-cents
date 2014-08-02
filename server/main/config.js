@@ -27,12 +27,12 @@ module.exports = exports = function (app, express, routers) {
 //This DB section is commented out to deploy. 
 //It should be uncommented once get cloud db running
 
-// var connection = mysql.createConnection({
-//   host     : process.env.host || 'localhost',
-//   user     : process.env.user || 'root',
-//   password : process.env.password || '',
-//   database : process.env.database
-// });
+var connection = mysql.createConnection({
+  host     : process.env.host || 'localhost',
+  user     : process.env.user || 'root',
+  password : process.env.password || '',
+  database : process.env.database || ''
+});
 
 // connection.connect(function(err) {
 //   if (err) {
