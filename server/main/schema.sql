@@ -1,3 +1,4 @@
+
 CREATE DATABASE money2;
 
 USE money2;
@@ -9,11 +10,10 @@ CREATE TABLE koch (
   col4 VARCHAR(255)
 );
 
-LOAD DATA INFILE "/Users/macbook/Documents/apps/campaign-cents/server/main/koch1.csv"
+LOAD DATA INFILE "/campaign-cents/server/main/koch1.csv"
 INTO TABLE koch
 COLUMNS TERMINATED BY ','
 LINES TERMINATED BY '\r';
-
 
 /* Create other tables and define schemas for them here! */
 
