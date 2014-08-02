@@ -8,6 +8,6 @@ routers.DataRequestRouter = DataRequestRouter;
 
 require('./config.js')(app, express, routers);
 
-require('../dataRequestCatcher/dataRequest_routes.js')(NoteRouter);
+require('../dataRequestCatcher/dataRequest_routes.js')(DataRequestRouter);
 
 module.exports = exports = app;
