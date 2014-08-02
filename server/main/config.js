@@ -42,14 +42,14 @@ connection.connect(function(err) {
   console.log('<======================connected to DB as id ' + connection.threadId);
 });
 
-connection.query('CREATE TABLE noWayThisExists (Name  varchar(255), Amount varchar(255))', function(err, rows, fields) {
-  if (err) throw err;
-  // console.log('The database is: ', rows, fields);
-});
-// connection.query('CREATE TABLE koch ( col1 VARCHAR(255), col2 VARCHAR(255), col3 VARCHAR(255), col4 VARCHAR(255))', function(err, rows, fields){
+// connection.query('CREATE TABLE noWayThisExists (Name  varchar(255), Amount varchar(255))', function(err, rows, fields) {
 //   if (err) throw err;
-//   console.log
+//   console.log('The database is: ', rows, fields);
 // });
+connection.query('CREATE TABLE koch ( col1 VARCHAR(255), col2 VARCHAR(255), col3 VARCHAR(255), col4 VARCHAR(255))', function(err, rows, fields){
+  if (err) throw err;
+  console.log("<================= created koch table ==================>")
+});
 
 // connection.query("INSERT INTO koch (col1, col2, col3, col4) VALUES ('Yo1', 'Yo2', 'Yo3', 'Yo4')", function(err, rows, fields){
 //   if (err) throw err;
