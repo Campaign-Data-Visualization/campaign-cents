@@ -1,6 +1,7 @@
 {
   "name": "package",
   "version": "0.0.0",
+  "main":"serer.js",
   "dependencies": {
     "express": "*",
     "mongoose": "*",
