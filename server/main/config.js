@@ -51,6 +51,8 @@ connection.query('CREATE TABLE koch ( col1 VARCHAR(255), col2 VARCHAR(255), col3
   console.log("<================= created koch table ==================>")
 });
 
+
+
 // connection.query("INSERT INTO koch (col1, col2, col3, col4) VALUES ('Yo1', 'Yo2', 'Yo3', 'Yo4')", function(err, rows, fields){
 //   if (err) throw err;
 //   console.log
