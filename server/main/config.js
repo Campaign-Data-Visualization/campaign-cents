@@ -64,6 +64,7 @@ connection.query('LOAD DATA INFILE ' + dataPath + ' INTO TABLE koch COLUMNS TERM
   console.log("<===================loaded csv data into koch table==================>");
 });
 
+
 connection.query("SELECT * from koch", function(err, rows, fields){
   if (err) throw err;
   console.log('<===========The database is SELECT-ing from koch table ==============>');
