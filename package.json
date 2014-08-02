@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "main": "serer.js",
   "dependencies": {
+    "body-parser": "*",
     "express": "*",
     "mongoose": "*",
     "morgan": "^1.2.2",
     "mysql": "^2.4.1",
-    "body-parser": "*",
-    "q": "*"
+    "q": "*",
+    "ui-router": "0.0.1"
   },
   "devDependencies": {
     "gulp": "*",
