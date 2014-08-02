@@ -1,17 +1,21 @@
-<div ng-controller="SearchController">
-  <div class="container-fluid">
+<div ng-controller="SearchController" class="searchPage">
+  
     <div class="row">
-      <div class="col-md-12"> 
-        <div class="search-box">
-            <div class="jumbotron rounded-corners">   
-              <h2 class="headline">Funder Counter</h2>
+      <div class="search-box">
+  
+        <div class="well"> 
+          <div class="container-fluid">
+            <center>  
+              <h2 class="headline">Koch Counter</h2>
                 <form class='form-search' role="form" ng-submit="search()">
                   <input type="text" class="form-control input-group" placeholder={{message}}>
                   </input>
-                  <button class="center btn btn-md btn-primary" type="submit">Search!</button>
+                  <button class="center btn btn-md btn-primary searchButton" type="submit">Search</button>
                 </form>
+              </center>
             </div>
-          </div>
+          
+
         </div>
       </div>
     </div>
