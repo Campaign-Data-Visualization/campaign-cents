@@ -30,7 +30,7 @@ var connection = mysql.createConnection({
   host     : process.env.host || 'localhost',
   user     : process.env.user || 'root',
   password : process.env.password || '',
-  database : process.env.database || ''
+  database : process.env.database || 'testdb'
 });
 
 
@@ -42,7 +42,46 @@ connection.connect(function(err) {
   console.log('<======================connected to DB as id ' + connection.threadId);
 });
 
-// connection.query('SELECT * from koch', function(err, rows, fields) {
+connection.query('CREATE TABLE noWayThisExists (Name  varchar(255), Amount varchar(255))', function(err, rows, fields) {
+  if (err) throw err;
+  // console.log('The database is: ', rows, fields);
+});
+// connection.query('CREATE TABLE koch ( col1 VARCHAR(255), col2 VARCHAR(255), col3 VARCHAR(255), col4 VARCHAR(255))', function(err, rows, fields){
+//   if (err) throw err;
+//   console.log
+// });
+
+// connection.query("INSERT INTO koch (col1, col2, col3, col4) VALUES ('Yo1', 'Yo2', 'Yo3', 'Yo4')", function(err, rows, fields){
+//   if (err) throw err;
+//   console.log
+// });
+// connection.query("SELECT * from koch", function(err, rows, fields){
 //   if (err) throw err;
 //   console.log('The database is: ', rows, fields);
 // });
+// connection.query(
+// "CREATE DATABASE money2;
+
+// USE money2;
+
+// CREATE TABLE koch (
+//   col1 VARCHAR(255),
+//   col2 VARCHAR(255),
+//   col3 VARCHAR(255),
+//   col4 VARCHAR(255)
+// );
+
+// LOAD DATA INFILE ß
+// INTO TABLE koch
+// COLUMNS TERMINATED BY ','
+// LINES TERMINATED BY '\r';",
+// function(err, rows, fields) {
+//   if (err) throw err;
+//   console.log('<==============The database is done being created========> ');
+// });
+
+
+
+
+
+
