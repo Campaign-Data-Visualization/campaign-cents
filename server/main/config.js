@@ -5,25 +5,6 @@ var mysql       = require('mysql'),
     bodyParser  = require('body-parser'),
     middle      = require('./middleware');
 
-var connection = mysql.createConnection({
-  host     : process.env.host || 'localhost',
-  user     : process.env.user || 'root',
-  password : process.env.password || '',
-  database : process.env.database
-});
-
-connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
-  console.log('connected as id ' + connection.threadId);
-});
-
-// connection.query('SELECT * from koch', function(err, rows, fields) {
-//   if (err) throw err;
-//   console.log('The database is: ', rows, fields);
-// });
 
 
 /*
@@ -41,3 +22,27 @@ module.exports = exports = function (app, express, routers) {
   app.use(middle.logError);
   app.use(middle.handleError);
 };
+
+
+//This DB section is commented out to deploy. 
+//It should be uncommented once get cloud db running
+
+// var connection = mysql.createConnection({
+//   host     : process.env.host || 'localhost',
+//   user     : process.env.user || 'root',
+//   password : process.env.password || '',
+//   database : process.env.database
+// });
+
+// connection.connect(function(err) {
+//   if (err) {
+//     console.error('error connecting: ' + err.stack);
+//     return;
+//   }
+//   console.log('connected as id ' + connection.threadId);
+// });
+
+// connection.query('SELECT * from koch', function(err, rows, fields) {
+//   if (err) throw err;
+//   console.log('The database is: ', rows, fields);
+// });
