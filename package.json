@@ -4,6 +4,7 @@
   "dependencies": {
     "express": "*",
     "mongoose": "*",
+    "mysql": "^2.4.1",
     "q": "*"
   },
   "devDependencies": {
