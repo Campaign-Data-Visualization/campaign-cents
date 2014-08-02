@@ -25,13 +25,13 @@ module.exports = exports = {
         // if the first five characters/numbers are a zip code
         // assuming the input is a string - refactor if otherwise
         if (typeof parseInt(candidateOrganizationZipcode.slice(0,5)) === 'number') {
-          var zipcode = candidateOrganizationZipcode.slice(0, 5);
-          //query the DB for the zip code info / candidate list
-          connection.query('SELECT * FROM tablename', function(err, rows, fields) {
-            if (err) throw err;
-            console.log('The database is: ', rows, fields);
-          });
-          return data;
+          // var zipcode = candidateOrganizationZipcode.slice(0, 5);
+          // query the DB for the zip code info / candidate list
+          // connection.query('SELECT * FROM tablename', function(err, rows, fields) {
+          //   if (err) throw err;
+          //   console.log('The database is: ', rows, fields);
+          // });
+          // return data;
         }else{
           // if input is candidate/organization ...
           // query database for candidate/organization specific information
@@ -41,7 +41,7 @@ module.exports = exports = {
         
             // if organization ...
 
-            return data;
+            // return data;
           
         }
       
@@ -49,12 +49,13 @@ module.exports = exports = {
       
     
     });
-    $promise(candidateOrganizationZipcode)
-      .then(function (data) {
-        res.send(data);
-      })
-      .fail(function (reason) {
-        next(reason);
-      });
+    // $promise(candidateOrganizationZipcode)
+    //   .then(function (data) {
+    //     res.send(data);
+    //   })
+    //   .fail(function (reason) {
+    //     next(reason);
+    //   });
   }
 };
+
