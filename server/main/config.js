@@ -51,15 +51,15 @@ connection.connect(function(err) {
 //   console.log("<================= created koch table ==================>")
 // });
 
-connection.query("INSERT INTO koch (col1, col2, col3, col4) VALUES ('Yo1', 'Yo2', 'Yo3', 'Yo4')", function(err, rows, fields){
-  if (err) throw err;
-  console.log("<===================inserted values in koch table==================>");
-});
-connection.query("SELECT * from koch", function(err, rows, fields){
-  if (err) throw err;
-  console.log('<===========The database is SELECT-ing from koch table ==============>');
-  console.log(rows, fields);
-});
+// connection.query("INSERT INTO koch (col1, col2, col3, col4) VALUES ('Yo1', 'Yo2', 'Yo3', 'Yo4')", function(err, rows, fields){
+//   if (err) throw err;
+//   console.log("<===================inserted values in koch table==================>");
+// });
+// connection.query("SELECT * from koch", function(err, rows, fields){
+//   if (err) throw err;
+//   console.log('<===========The database is SELECT-ing from koch table ==============>');
+//   console.log(rows, fields);
+// });
 // connection.query(
 // "CREATE DATABASE money2;
 
