@@ -9,14 +9,16 @@
     <div class= "row top">
       <div class="col-md-6">
         <div class="panel panel-default panel-middle">
-          <div class="panel-heading">Politician Information</div>
+          <div class="panel-heading">Organization Profile </div>
             {{profile}}
         </div>
       </div>
       <div class="col-md-6">
         <div class="panel panel-default panel-middle">
-          <div class="panel-heading">Politician Information</div>
-            {{profile}}
+          <div class="panel-heading">Organization Contributions</div>
+          Tier One Contributions: {{tierOne}}<br>
+          Tier Two Contributions: {{tierTwo}}<br>
+          Total: {{tierOne + tierTwo}}
         </div>
     </div>
   </div>
