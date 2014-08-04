@@ -1,3 +1,15 @@
+.org-panel {
+  padding: 1%;
+}
+.org-panel-left {
+  margin-left: 15%;
+  margin-right: 5%;
+}
+.org-panel-right {
+  margin-left: 5%;
+  margin-right: 15%;
+}
+
 .row-top {
   margin-top: 5%;
 }
