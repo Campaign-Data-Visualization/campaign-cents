@@ -1,6 +1,43 @@
-<div class="container-fluid">
-  <h2>Notes</h2>
-  <section>
-    {{ message }}
-  </section>
+<div ng-controller="OrgProfileController">
+  <div class="container-fluid">
+    <div class ="row row-top text-center">
+      <div class="col-md-12">
+        <h1>{{org}}</h1>
+      </div>
+    </div>
+    <div class= "row top">
+      <div class="col-md-6">
+        <div class="panel panel-default org-panel org-panel-left">
+          <div class="panel-heading">Organization Profile </div>
+            {{profile}}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default org-panel org-panel-right">
+          <div class="panel-heading">Organization Contributions</div>
+          <table class="table table-border">
+            <thead>
+              <tr> 
+                <th>Type of Contribution</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td> Tier One Contributions: </td>
+                <td> {{tierOne}} </td> 
+              </tr>
+              <tr> 
+                <td>Tier Two Contributions</td>
+                <td>{{tierTwo}}</td>
+              </tr>
+              <tr> 
+                <td>Total</td>
+                <td>{{tierOne + tierTwo}}</td>
+              </tr>
+          </table>
+        </div>
+    </div>
+  </div>
 </div>
+  

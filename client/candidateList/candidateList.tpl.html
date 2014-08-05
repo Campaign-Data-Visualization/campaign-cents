@@ -1,6 +1,61 @@
-<div class="container-fluid">
-  <h2>Candidate List</h2>
-  <section>
-    {{ message }}
-  </section>
+<div ng-controller="CandidateListController">
+	<div class="container-fluid">
+	  <div class='row row-top'>
+        <h1 class='text-center'>Zip Code 94103</h1>
+	  </div>
+	  <div class='row'>
+	  <div class='col-md-4'>
+	      <div class="dropdown" id='dropdown'>
+			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+			    Sort by:
+			    <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+			    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Quantity of funds</a></li>
+			    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tier of funds</a></li>
+			    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Party</a></li>
+			  </ul>
+	      </div>
+	  </div>    
+	  <div class='col-md-4'>
+	  </div>   	  
+	  <div class='col-md-4'>
+		  <nav class="navbar navbar-default" role="navigation" style="width: 300px;">
+			  <div class="container">
+		      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-8">
+		        <ul class="nav navbar-nav">
+		          <li><a href="#">All</a></li>
+		          <li><a href="#">Incumbent</a></li>
+		          <li><a href="#">Contender</a></li>
+		        </ul>
+		      </div><!-- /.navbar-collapse -->
+			  </div>
+			</nav>
+	  </div>
+    </div>
+	  <div class='row'>
+	  <div class='col-md-4'>
+		    <div class="panel panel-default panel-middle">
+		    <h3>Candidates by House</h3>
+		      <table class="table table-bordered">
+		        <tr ng-repeat="candidate in candidates.house | limitTo: 10"> 
+		          <td class="candidate-row" >{{ candidate.name }}</td>
+		        </tr>
+		      </table>
+		    </div>
+	  </div>
+	  <div class='col-md-4'>
+		    <div class="panel panel-default panel-middle">
+		    <h3>Candidates by Senate</h3>
+		      <table class="table table-bordered">
+		        <tr ng-repeat="candidate in candidates.senate | limitTo: 10"> 
+		          <td class="candidate-row" >{{ candidate.name }}</td>
+		        </tr>
+		      </table>
+		    </div>
+	  </div>
+	  </div>
+	</div>
 </div>
+
+
