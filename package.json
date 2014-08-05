@@ -9,6 +9,7 @@
     "morgan": "^1.2.2",
     "mysql": "^2.4.1",
     "q": "*",
+    "sunlight-congress-api": "^0.1.0",
     "ui-router": "0.0.1"
   },
   "devDependencies": {

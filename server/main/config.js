@@ -3,7 +3,8 @@
 var mysql       = require('mysql'),
     morgan      = require('morgan'),
     bodyParser  = require('body-parser'),
-    middle      = require('./middleware');
+    middle      = require('./middleware'),
+    api         = require("sunlight-congress-api");
 
 
 
@@ -25,6 +26,14 @@ module.exports = exports = function (app, express, routers) {
 
 //This DB section is commented out to deploy. 
 //It should be uncommented once get cloud db running
+
+var success = function(data){
+    console.log("This was a successful Open Congress API call", data);
+}
+
+api.init("49e2cbc00fdd496bbd036a26d1858d33");
+
+api.votes().filter("year", "2012").call(success);
 
 var connection = mysql.createConnection({
   host     : process.env.host || 'localhost',
@@ -67,11 +76,11 @@ connection.connect(function(err) {
 // });
 
 
-connection.query("SELECT * from koch", function(err, rows, fields){
-  if (err) throw err;
-  console.log('<===========The database is SELECT-ing from koch table ==============>');
-  console.log(rows, fields);
-});
+// connection.query("SELECT * from koch", function(err, rows, fields){
+//   if (err) throw err;
+//   console.log('<===========The database is SELECT-ing from koch table ==============>');
+//   console.log(rows, fields);
+// });
 // connection.query("INSERT INTO koch (col1, col2, col3, col4) VALUES ('Yo1', 'Yo2', 'Yo3', 'Yo4')", function(err, rows, fields){
 //   if (err) throw err;
 //   console.log("<===================inserted values in koch table==================>");
