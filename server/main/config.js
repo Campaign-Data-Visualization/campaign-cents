@@ -27,13 +27,13 @@ module.exports = exports = function (app, express, routers) {
 //This DB section is commented out to deploy. 
 //It should be uncommented once get cloud db running
 
-var success = function(data){
-    console.log("This was a successful Open Congress API call", data);
-}
+// var success = function(data){
+//     console.log("This was a successful Open Congress API call", data);
+// }
 
-api.init("49e2cbc00fdd496bbd036a26d1858d33");
+// api.init("49e2cbc00fdd496bbd036a26d1858d33");
 
-api.votes().filter("year", "2012").call(success);
+// api.votes().filter("year", "2012").call(success);
 
 var connection = mysql.createConnection({
   host     : process.env.host || 'localhost',
@@ -111,7 +111,6 @@ connection.connect(function(err) {
 //   if (err) throw err;
 //   console.log('<==============The database is done being created========> ');
 // });
-
 
 
 
