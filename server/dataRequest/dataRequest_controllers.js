@@ -1,7 +1,7 @@
 "use strict";
 
-var Note = require('./dataRequest_model.js'),
-    Q    = require('q'),
+// var Note = require('./dataRequest_model.js'),
+var    Q  = require('q'),
     mysql = require('mysql');
 
 module.exports = exports = {
