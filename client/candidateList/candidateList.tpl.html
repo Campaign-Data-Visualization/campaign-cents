@@ -1,6 +1,38 @@
-<div class="container-fluid">
-  <h2>Candidate List</h2>
-  <section>
-    {{ message }}
-  </section>
+<div ng-controller="CandidateListController">
+	<div class="container-fluid">
+	  <div class='row'>
+	  <div class='col-md-12'>
+	  <h1>Zip Code 94103</h1>
+		    <div class="panel-heading panel-middle"><h3>Candidates by House</h3>
+		      <table class="table table-bordered">
+		        <tr ng-repeat="candidate in candidates.house | limitTo: 10"> 
+		          <td class="candidate-row" >{{ candidate.name }}</td>
+		        </tr>
+		      </table>
+		    </div>
+		    <div class="panel-heading panel-middle"><h3>Candidates by Senate</h3>
+		      <table class="table table-bordered">
+		        <tr ng-repeat="candidate in candidates.senate | limitTo: 10"> 
+		          <td class="candidate-row" >{{ candidate.name }}</td>
+		        </tr>
+		      </table>
+		    </div>
+	  </div>
+	  </div>
+	</div>
 </div>
+
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+    Dropdown
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+    <li role="presentation" class="divider"></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+  </ul>
+</div>
+

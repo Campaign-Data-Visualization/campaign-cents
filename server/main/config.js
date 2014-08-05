@@ -76,6 +76,7 @@ connection.query("SELECT * from koch", function(err, rows, fields){
 //   if (err) throw err;
 //   console.log("<===================inserted values in koch table==================>");
 // });
+
 // connection.query("SELECT * from koch", function(err, rows, fields){
 //   if (err) throw err;
 //   console.log('<===========The database is SELECT-ing from koch table ==============>');

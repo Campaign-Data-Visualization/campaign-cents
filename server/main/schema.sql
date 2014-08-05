@@ -1,7 +1,7 @@
 
-CREATE DATABASE money2;
+CREATE DATABASE testdb;
 
-USE money2;
+USE testdb;
 
 CREATE TABLE koch (
   col1 VARCHAR(255),
