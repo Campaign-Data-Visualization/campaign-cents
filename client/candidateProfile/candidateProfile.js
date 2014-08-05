@@ -8,9 +8,16 @@ angular.module('myApp.main.candidateProfile', ['ui.router'])
       controller: 'CandidateProfileController'
     });
 })
-.controller('CandidateProfileController', function ($scope) {
+.controller('CandidateProfileController', function ($scope, $http) {
   $scope.message = 'See the candidate and related data';
   $scope.name = 'Ted Cruz';
+  $scope.loadCandidate = function(){
+    $http.get("api/candidate").success(function (data){
+      $scope.candidates = data;
+    }).error(function () {
+      alert("an unexpected error ocurred!");
+    });
+  };
   $scope.funding =  {
     donors: [
                     {
