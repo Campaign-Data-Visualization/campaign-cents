@@ -9,6 +9,7 @@
 */
 
 var app   = require('./main/app.js'),
+    api   = require('./main/sunlightAPI.js'),
     port  = app.get('port'),
     log   = 'Listening on ' + app.get('base url') + ':' + port;
 
