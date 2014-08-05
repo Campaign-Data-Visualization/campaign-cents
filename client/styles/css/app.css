@@ -1,6 +1,11 @@
 .org-panel {
   padding: 1%;
 }
+
+#dropdown{
+  margin-left:10%;
+}
+
 .org-panel-left {
   margin-left: 15%;
   margin-right: 5%;
