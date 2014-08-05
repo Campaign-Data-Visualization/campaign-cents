@@ -15,6 +15,7 @@ angular.module('myApp.main.landingPage', ['ui.router'])
   	var input = $scope.searchInput;
   	console.log("input variable in the search controller:" + input);
     DataRequestFactory.getData(input);
+    $scope.searchInput = "";
   }
 
   $scope.message = 'Search for a zip code / candidate / organization below';
