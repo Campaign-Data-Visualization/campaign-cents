@@ -1,4 +1,4 @@
-<div ng-controller="CandidateProfileController">
+<div ng-controller="CandidateProfileController" ng-init="loadCandidates()">
   <div class="candidate-body">
     <div class="container-fluid">
       <div class="row row-top"></div>
@@ -8,6 +8,7 @@
               <h1 class="text-center headline"> {{name}} </h1>
                 <img src="http://joemiller.us/wp-content/uploads/ted-cruz-big-gulp.jpg" class="img-responsive not-overlapped rounded-corners" alt="Sen. Ted Cruz">
              </div>
+
              <div class="row">
               <h3 class="text-center headline"> Top Organization Donors </h3>
               <div class="panel panel-default panel-middle">
@@ -16,6 +17,26 @@
                     <tr ng-repeat="donor in funding.donors| orderBy: -'amount' | limitTo: 10"> 
                       <td class="donor-row" >{{ donor.title }}</td>
                       <td class="donor-row" >{{donor.amount}}</td> 
+                    </tr>
+                  </table>
+              </div>
+             </div>
+              <div class="row">
+              <h3 class="text-center headline"> Angular Info</h3>
+              <div class="panel panel-default panel-middle">
+                <div class="panel-heading panel-middle">Donors by Organization</div>
+                  <table class="table">
+                    <tr> 
+                        <td>First Name: {{candidates.results[0].first_name}}</td>
+                    </tr>
+                     <tr> 
+                        <td>Last Name: {{candidates.results[0].last_name}}</td>
+                    </tr>
+                    <tr> 
+                        <td>First Name: {{candidates.results[0].first_name}}</td>
+                    </tr>
+                    <tr> 
+                        <td>First Name: {{candidates.results[0].first_name}}</td>
                     </tr>
                   </table>
               </div>

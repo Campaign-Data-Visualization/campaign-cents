@@ -31,7 +31,7 @@ module.exports = exports = function (app, express, routers) {
 //     console.log("This was a successful Open Congress API call", data);
 // }
 
-// api.init("49e2cbc00fdd496bbd036a26d1858d33");
+// api.init("instert-api-key-here");
 
 // api.votes().filter("year", "2012").call(success);
 
