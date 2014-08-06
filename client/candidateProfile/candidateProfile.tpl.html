@@ -6,8 +6,9 @@
           <div class="col-md-4">
              <div class="row">
               <h1 class="text-center headline"> {{name}} </h1>
-                <img src="http://joemiller.us/wp-content/uploads/ted-cruz-big-gulp.jpg" class="img-responsive not-overlapped rounded-corners" alt="Sen. Ted Cruz">
-             </div>
+              <img class="img-responsive not-overlapped rounded-corners" src="http://theunitedstates.io/images/congress/450x550/{{candidates.results[0].bioguide_id}}.jpg">
+<!--                 <img src="http://joemiller.us/wp-content/uploads/ted-cruz-big-gulp.jpg" class="img-responsive not-overlapped rounded-corners" alt="Sen. Ted Cruz">
+ -->             </div>
 
              <div class="row">
               <h3 class="text-center headline"> Top Organization Donors </h3>
@@ -24,7 +25,7 @@
               <div class="row">
               <h3 class="text-center headline"> Angular Info</h3>
               <div class="panel panel-default panel-middle">
-                <div class="panel-heading panel-middle">Donors by Organization</div>
+                <div class="panel-heading panel-middle">Politician Details</div>
                   <table class="table">
                     <tr> 
                         <td>First Name: {{candidates.results[0].first_name}}</td>
@@ -33,10 +34,10 @@
                         <td>Last Name: {{candidates.results[0].last_name}}</td>
                     </tr>
                     <tr> 
-                        <td>First Name: {{candidates.results[0].first_name}}</td>
+                        <td>Party: {{candidates.results[0].party}}</td>
                     </tr>
                     <tr> 
-                        <td>First Name: {{candidates.results[0].first_name}}</td>
+                        <td>ID: {{candidates.results[0].bioguide_id}}</td>
                     </tr>
                   </table>
               </div>
