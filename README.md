@@ -1,12 +1,12 @@
 # Project Name
 
-> Pithy project description
+A project to visualize and explore campaign finance data.  
 
 ## Team
 
   - __Product Owner__: Liam Dorpalen-Barry
   - __Scrum Master__: Jonathan Bird
-  - __Development Team Members__: Kevin Liang
+  - __Development Team Members__: Kevin Liang, Jasen Lew
 
 ## Table of Contents
 
