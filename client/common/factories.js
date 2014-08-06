@@ -14,13 +14,13 @@
       .then(function(response){
 
         if(response.data.type === 'zip'){
-          path = '/myApp/main/candidateList';
+          path = 'myApp.main.candidateList';
           callback(path);
         }else if(response.data.type === 'candidate'){
-          path = '/orgProfile';
+          path = 'myApp.main.candidateProfile';
           callback(path);
         }else if(esponse.data.type === 'organization'){
-          path = '/candidateProfile';
+          path = 'myApp.main.orgProfile';
           callback(path);
         }
       })

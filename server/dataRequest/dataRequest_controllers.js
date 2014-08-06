@@ -22,11 +22,11 @@ module.exports = exports = {
     //candidateOrganizationZipcode is the user input in string format
     var candidateOrganizationZipcode = req.body.input;
     console.log("<---------------inside server:-------------->")
-    console.log(candidateOrganizationZipcode);
     //so we don't have to deal with the hyphon in the second part of zip codes
     //we're splitting off the first five
     var firstFiveChar = candidateOrganizationZipcode.slice(0,5);
-    if(parseInt(firstFiveChar) === 'NaN'){
+    console.log("parseInt on first five char of input: "+ isNaN(firstFiveChar));
+    if(isNaN(firstFiveChar)){
       //process as a candidate or organization
       console.log("IT'S A CANDIDATE/ORG");
       // <-------------QUERY THE DATADAE with the name ------------------>
