@@ -19,36 +19,60 @@ module.exports = exports = {
   // handles client POST request by querying database with input and
   // responding with requested data
   post: function (req, res, next) {
-    var candidateOrganizationZipcode = req.body.data;
-    var $promise = Q.fcall(function(candidateOrganizationZipcode){
-      // parse input to determine whether input is a zipcode or candidate/organization
-        // if the first five characters/numbers are a zip code
-        // assuming the input is a string - refactor if otherwise
-        if (typeof parseInt(candidateOrganizationZipcode.slice(0,5)) === 'number') {
-          // var zipcode = candidateOrganizationZipcode.slice(0, 5);
-          // query the DB for the zip code info / candidate list
-          // connection.query('SELECT * FROM tablename', function(err, rows, fields) {
-          //   if (err) throw err;
-          //   console.log('The database is: ', rows, fields);
-          // });
-          // return data;
-        }else{
-          // if input is candidate/organization ...
-          // query database for candidate/organization specific information
+    //candidateOrganizationZipcode is the user input in string format
+    var candidateOrganizationZipcode = req.body.input;
+    console.log("<---------------inside server:-------------->")
+    console.log(candidateOrganizationZipcode);
+    //so we don't have to deal with the hyphon in the second part of zip codes
+    //we're splitting off the first five
+    var firstFiveChar = candidateOrganizationZipcode.slice(0,5);
+    if(parseInt(firstFiveChar) === 'NaN'){
+      //process as a candidate or organization
+      console.log("IT'S A CANDIDATE/ORG");
+      // <-------------QUERY THE DATADAE with the name ------------------>
+      res.send({type:'candidate'});
+    }else{
+      //process as zip code
+      console.log('ITS A ZIP CODE');
+      res.send({type:'zip'});
+      // <-------------QUERY THE DATADAE with the Zip ------------------>
+      // connection.query('SELECT * FROM tablename', function(err, rows, fields) {
+      //       if (err) throw err;
+      //       console.log('The database is: ', rows, fields);
+      //     });
+
+
+    }
+
+    // var $promise = Q.fcall(function(candidateOrganizationZipcode){
+    //   // parse input to determine whether input is a zipcode or candidate/organization
+    //     // if the first five characters/numbers are a zip code
+    //     // assuming the input is a string - refactor if otherwise
+    //     if (typeof parseInt(candidateOrganizationZipcode.slice(0,5)) === 'number') {
+    //       // var zipcode = candidateOrganizationZipcode.slice(0, 5);
+    //       // query the DB for the zip code info / candidate list
+    //       // connection.query('SELECT * FROM tablename', function(err, rows, fields) {
+    //       //   if (err) throw err;
+    //       //   console.log('The database is: ', rows, fields);
+    //       // });
+    //       // return data;
+    //     }else{
+    //       // if input is candidate/organization ...
+    //       // query database for candidate/organization specific information
             
 
-            // if candidate ...
+    //         // if candidate ...
         
-            // if organization ...
+    //         // if organization ...
 
-            // return data;
+    //         // return data;
           
-        }
+    //     }
       
               
       
     
-    });
+    // });
     // $promise(candidateOrganizationZipcode)
     //   .then(function (data) {
     //     res.send(data);

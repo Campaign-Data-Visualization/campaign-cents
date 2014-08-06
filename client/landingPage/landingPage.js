@@ -9,13 +9,19 @@ angular.module('myApp.main.landingPage', ['ui.router'])
     })
 })
 
-.controller('SearchController', function($scope, $window, DataRequestFactory){
+.controller('SearchController', function($scope, DataRequestFactory, $rootElement, $location, $q, $state){
   
   $scope.search = function(){
+    DataRequestFactory.redirectPath;
   	var input = $scope.searchInput;
   	console.log("input variable in the search controller:" + input);
-    DataRequestFactory.getData(input);
-    $scope.searchInput = "";
+    DataRequestFactory.getData(input, function(path){
+      console.log(path);
+      $location.path(path);
+      // $state.go(path);
+      // $location.path("/myApp/main/candidateList");
+      console.log(path);
+    }) 
   }
 
   $scope.message = 'Search for a zip code / candidate / organization below';
