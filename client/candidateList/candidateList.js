@@ -11,8 +11,12 @@ angular.module('myApp.main.candidateList', ['ui.router'])
 })
 .controller('CandidateListController', function ($scope, DataRequestFactory, $http) {
   // filter candidates by zipcode input from search page
+<<<<<<< HEAD
   $scope.input = DataRequestFactory.inputValue;
   console.log("This is the search input within CandListController", $scope.input);
+=======
+  $scope.zipcode = 94103;
+>>>>>>> Updating zipcodesø
   $scope.candidates = {
   	house: [
    	  {
