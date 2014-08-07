@@ -7,31 +7,14 @@ var gulp    = require('gulp'),
     plumber = require('gulp-plumber'),
     client  = require('tiny-lr')(),
     nodemon = require('gulp-nodemon'),
-    lr_port = 35728,
-    stylus   = require('gulp-stylus');
+    lr_port = 35728;
 
 
 var paths = {
   scripts: ['!client/lib/**/*.js', 'client/**/*.js'],
-  views: ['!client/lib/*.html', 'client/**/*.html', 'client/index.html'],
-  styles: {
-    css: ['!client/lib/**/*.css', 'client/styles/css/*.css', 'client/**/*.css'],
-    stylus: ['client/styles/stylus/*.styl', 'client/**/*.styl'],
-    dest: 'client/styles/css'
-  }
+  views: ['!client/lib/*.html', 'client/**/*.html', 'client/index.html']
 };
-var build = ['stylus', 'css', 'lint'];
-
-
-var stylus = require('gulp-stylus');
-gulp.task('stylus', function () {
-  return gulp.src(paths.styles.stylus)
-    .pipe(plumber())
-    .pipe(stylus())
-    .pipe(gulp.dest(paths.styles.dest))
-    .pipe(refresh(client))
-    .pipe(notify({message: 'Stylus done'}));
-});
+var build = ['lint'];
 
 
 gulp.task('bowerInstall', function  () {
@@ -44,13 +27,6 @@ gulp.task('html', function () {
     .pipe(plumber())
     .pipe(refresh(client))
     .pipe(notify({message: 'Views refreshed'}));
-});
-
-gulp.task('css', function () {
-  return gulp.src(paths.styles.css)
-    .pipe(plumber())
-    .pipe(refresh(client))
-    .pipe(notify({message: 'CSS refreshed'}));
 });
 
 gulp.task('lint', function () {
@@ -78,7 +54,6 @@ gulp.task('live', function () {
 });
 
 gulp.task('watch', function () {
-  gulp.watch(paths.styles.stylus, ['stylus']);
   gulp.watch(paths.views, ['html']);
   gulp.watch(paths.scripts, ['lint']);
 });
