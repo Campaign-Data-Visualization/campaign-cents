@@ -13,6 +13,8 @@
       })
       .then(function(response){    
         if(response.data.type === 'zip'){
+          list = response.data.listCandidates;
+          // console.log('INSIDE DATAREQUESTFACTORY, SHOW LIST: ', list);
           path = 'myApp.main.candidateList';
           callback(path, inputValue);
         }else if(response.data.type === 'candidate'){
