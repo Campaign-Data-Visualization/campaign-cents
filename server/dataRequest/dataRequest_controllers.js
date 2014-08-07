@@ -34,7 +34,7 @@ module.exports = exports = {
     }else{
       //process as zip code
       console.log('ITS A ZIP CODE');
-      res.send({type:'zip'});
+      res.send({type:'zip', input: candidateOrganizationZipcode});
       // <-------------QUERY THE DATADAE with the Zip ------------------>
       // connection.query('SELECT * FROM tablename', function(err, rows, fields) {
       //       if (err) throw err;
