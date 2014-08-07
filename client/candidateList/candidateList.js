@@ -9,8 +9,10 @@ angular.module('myApp.main.candidateList', ['ui.router'])
       controller: 'CandidateListController'
     });
 })
-.controller('CandidateListController', function ($scope) {
+.controller('CandidateListController', function ($scope, DataRequestFactory, $http) {
   // filter candidates by zipcode input from search page
+  $scope.input = DataRequestFactory.inputValue;
+  console.log("This is the search input within CandListController", $scope.input);
   $scope.candidates = {
   	house: [
    	  {
