@@ -2,8 +2,8 @@
   'use strict';
   angular.module('myApp', [
     'ui.router',
-    'ngFx'
- ,'myApp.main'])
+    'ngFx',
+    'myApp.main'])
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/myApp/main/landingPage');
 
