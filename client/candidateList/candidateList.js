@@ -1,3 +1,4 @@
+"use strict";
 angular.module('myApp.main.candidateList', ['ui.router'])
 
 .config(function ($stateProvider) {
@@ -9,14 +10,14 @@ angular.module('myApp.main.candidateList', ['ui.router'])
       controller: 'CandidateListController'
     });
 })
-.controller('CandidateListController', function ($scope, DataRequestFactory, $http) {
+.controller('CandidateListController', function ($scope, DataRequestFactory) {
   // filter candidates by zipcode input from search page
   $scope.input = DataRequestFactory.inputValue;
-  console.log("This is the search input within CandListController", $scope.input);
+  console.log('This is the search input within CandListController', $scope.input);
   $scope.candidates = DataRequestFactory.candList.list;
-  console.log("Kevin's stuff: ", $scope.candidates);
-  console.log("KEVIN'S STUFF: ", $scope.candidates.house);
-  console.log("KEVIN'S STUFF: ", $scope.candidates.senate);
+  console.log('Kevin\'s stuff: ', $scope.candidates);
+  console.log('KEVIN\'S STUFF: ', $scope.candidates.house);
+  console.log('KEVIN\'S STUFF: ', $scope.candidates.senate);
 
   // $scope.candidates = DataRequestFactory.getData().then(function(list){})
 
