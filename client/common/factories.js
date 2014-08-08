@@ -5,6 +5,7 @@
   .factory('DataRequestFactory', function($http, $location){
     var path =  '/candidateList';
     var inputValue = {};
+    var candList = {};
     var getData = function(input, callback){
       return $http({
       	method: 'POST',
@@ -13,10 +14,13 @@
       })
       .then(function(response){    
         if(response.data.type === 'zip'){
-          list = response.data.listCandidates;
+          // var list = response.data.listCandidates;
           // console.log('INSIDE DATAREQUESTFACTORY, SHOW LIST: ', list);
+          candList.list = response.data.listCandidates;
+          console.log("Inside the promise, candList", candList.list);
           path = 'myApp.main.candidateList';
           callback(path, inputValue);
+          return candList;
         }else if(response.data.type === 'candidate'){
           path = 'myApp.main.candidateProfile';
           callback(path);
@@ -28,11 +32,17 @@
       .then(function(response){
         inputValue.inputValue = input;
         console.log("Inside the promise", inputValue.inputValue);
-        return inputValue; 
+        return inputValue;
       })
+      // .then(function(response){
+      //   candList.list = response.data.listCandidates;
+      //   console.log("Inside the promise, candList", candList.list);
+      //   return candList;
+      // })
     }
       return {
         'inputValue': inputValue,
+        'candList': candList,
         'getData': getData
       };
   })
