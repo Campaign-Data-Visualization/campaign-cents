@@ -13,36 +13,44 @@ angular.module('myApp.main.candidateList', ['ui.router'])
   // filter candidates by zipcode input from search page
   $scope.input = DataRequestFactory.inputValue;
   console.log("This is the search input within CandListController", $scope.input);
-  $scope.candidates = {
-  	house: [
-   	  {
-        name: 'Kevin L',
-        zipcode: 12345,
-        party: 1
-   	  },{
-        name: 'Liam D',
-        zipcode: 12345,
-        party: 2
-   	  },{
-        name: 'Kimberly R',
-        zipcode: 54321,
-        party: 1 
-      }
-  	],
-  	senate: [
-      {
-        name: 'Jake C',
-        zipcode: 12345,
-        party: 1
-   	  },{
-        name: 'Jennifer P',
-        zipcode: 12345,
-        party: 2
-   	  },{
-        name: 'David L',
-        zipcode: 54321,
-        party: 1 
-      }
-  	]
-  };
+  $scope.candidates = DataRequestFactory.candList.list;
+  console.log("Kevin's stuff: ", $scope.candidates);
+  console.log("KEVIN'S STUFF: ", $scope.candidates.house);
+  console.log("KEVIN'S STUFF: ", $scope.candidates.senate);
+
+  // $scope.candidates = DataRequestFactory.getData().then(function(list){})
+
+  // $scope.candidates = {
+  // 	house: [
+  //  	  {
+  //       name: 'Kevin L',
+  //       zipcode: 12345,
+  //       party: 'Republican'
+  //  	  },{
+  //       name: 'Liam D',
+  //       zipcode: 12345,
+  //       party: 'Democrat'
+  //  	  },{
+  //       name: 'Kimberly R',
+  //       zipcode: 54321,
+  //       party: 'Democrat'
+  //     }
+  // 	],
+  // 	senate: [
+  //     {
+  //       name: 'Jake C',
+  //       zipcode: 12345,
+  //       party: 'Democrat'
+  //  	  },{
+  //       name: 'Jennifer P',
+  //       zipcode: 12345,
+  //       party: 'Democrat'
+  //  	  },{
+  //       name: 'David L',
+  //       zipcode: 54321,
+  //       party: 'Republican'
+  //     }
+  // 	]
+  // };
 });
+

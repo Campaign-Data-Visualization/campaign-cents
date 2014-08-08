@@ -39,7 +39,7 @@
 		    <h3>Candidates by House</h3>
 		      <table class="table table-bordered">
 		        <tr ng-repeat="candidate in candidates.house | limitTo: 10"> 
-		          <td class="candidate-row" >{{ candidate.name }}</td>
+		          <td class="candidate-row" >{{ candidate.name }} - {{candidate.party}}</td>
 		        </tr>
 		      </table>
 		    </div>
@@ -49,7 +49,7 @@
 		    <h3>Candidates by Senate</h3>
 		      <table class="table table-bordered">
 		        <tr ng-repeat="candidate in candidates.senate | limitTo: 10"> 
-		          <td class="candidate-row" >{{ candidate.name }}</td>
+		          <td class="candidate-row" >{{ candidate.name }} - {{candidate.party}}</td>
 		        </tr>
 		      </table>
 		    </div>

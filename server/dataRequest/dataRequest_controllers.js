@@ -34,7 +34,7 @@ module.exports = exports = {
     }else{
       //process as zip code
       console.log('ITS A ZIP CODE');
-      res.send({type:'zip', input: candidateOrganizationZipcode});
+      res.send({type:'zip', input: candidateOrganizationZipcode, listCandidates: candidates});
       // <-------------QUERY THE DATADAE with the Zip ------------------>
       // connection.query('SELECT * FROM tablename', function(err, rows, fields) {
       //       if (err) throw err;
@@ -72,14 +72,39 @@ module.exports = exports = {
               
       
     
-    // });
-    // $promise(candidateOrganizationZipcode)
-    //   .then(function (data) {
-    //     res.send(data);
-    //   })
-    //   .fail(function (reason) {
-    //     next(reason);
-    //   });
   }
 };
+
+var candidates = {
+    house: [
+      {
+        name: 'Kevin L',
+        zipcode: 12345,
+        party: 'Republican'
+      },{
+        name: 'Liam D',
+        zipcode: 12345,
+        party: 'Democrat'
+      },{
+        name: 'Kimberly R',
+        zipcode: 54321,
+        party: 'Democrat'
+      }
+    ],
+    senate: [
+      {
+        name: 'Jake C',
+        zipcode: 12345,
+        party: 'Democrat'
+      },{
+        name: 'Jennifer P',
+        zipcode: 12345,
+        party: 'Democrat'
+      },{
+        name: 'David L',
+        zipcode: 54321,
+        party: 'Republican'
+      }
+    ]
+  };
 

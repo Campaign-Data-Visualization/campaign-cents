@@ -6,10 +6,6 @@
   margin-left:10%;
 }
 
-.not-overlapped{
-  margin-left: 5%;
-}
-
 .org-panel-left {
   margin-left: 15%;
   margin-right: 5%;
@@ -61,21 +57,21 @@
 }
 
 .search-box {
-	position: fixed;
-	left: 200px;
-	top: 200px;
-	width: 480px;
+  position: fixed;
+  left: 200px;
+  top: 200px;
+  width: 480px;
 }
 
 .navbarPositioning {
-	position: static;
+  position: static;
 }
 
 .body{
-	background-color: #F0FFF0;
+  background-color: #F0FFF0;
 }
 
 .searchButton {
-	position: relative;
-	top: 5px;
+  position: relative;
+  top: 5px;
 }
