@@ -1,3 +1,4 @@
+'use strict';
 angular.module('myApp.main.landingPage', ['ui.router'])
 
 .config(function ($stateProvider) {
@@ -6,7 +7,7 @@ angular.module('myApp.main.landingPage', ['ui.router'])
       url: '/landingPage',
       templateUrl: 'landingPage/landingPage.tpl.html',
       controller: 'SearchController'
-    })
+    });
 })
 
 .controller('SearchController', function($scope, DataRequestFactory, $rootElement, $location, $q, $state){
@@ -14,11 +15,11 @@ angular.module('myApp.main.landingPage', ['ui.router'])
   $scope.search = function(){
     DataRequestFactory.redirectPath;
   	var input = $scope.searchInput;
-    console.log("This is the search input: ", $scope.searchInput);
+    console.log('This is the search input: ', $scope.searchInput);
     DataRequestFactory.getData(input, function(path){
       $state.go(path);
-    }) 
-  }
+    }); 
+  };
 
   $scope.message = 'Search for a zip code / candidate / organization below';
   
@@ -32,4 +33,4 @@ angular.module('myApp.main.landingPage', ['ui.router'])
   //     }
   //  )}();
 
-})
+});

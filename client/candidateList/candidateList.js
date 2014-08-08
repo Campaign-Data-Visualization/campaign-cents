@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 angular.module('myApp.main.candidateList', ['ui.router'])
 
 .config(function ($stateProvider) {

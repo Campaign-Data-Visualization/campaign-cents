@@ -1,8 +1,8 @@
 // (function(angular){
-  "use strict";
+  'use strict';
   angular.module('myApp')
 
-  .factory('DataRequestFactory', function($http, $location){
+  .factory('DataRequestFactory', function($http){
     var path =  '/candidateList';
     var inputValue = {};
     var candList = {};
@@ -17,7 +17,7 @@
           // var list = response.data.listCandidates;
           // console.log('INSIDE DATAREQUESTFACTORY, SHOW LIST: ', list);
           candList.list = response.data.listCandidates;
-          console.log("Inside the promise, candList", candList.list);
+          console.log('Inside the promise, candList', candList.list);
           path = 'myApp.main.candidateList';
           callback(path, inputValue);
           return candList;
@@ -31,19 +31,19 @@
       })
       .then(function(response){
         inputValue.inputValue = input;
-        console.log("Inside the promise", inputValue.inputValue);
+        console.log('Inside the promise', inputValue.inputValue);
         return inputValue;
-      })
+      });
       // .then(function(response){
       //   candList.list = response.data.listCandidates;
-      //   console.log("Inside the promise, candList", candList.list);
+      //   console.log('Inside the promise, candList', candList.list);
       //   return candList;
       // })
-    }
+    };
       return {
         'inputValue': inputValue,
         'candList': candList,
         'getData': getData
       };
-  })
+  });
 // }(angular));

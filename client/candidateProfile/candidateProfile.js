@@ -1,3 +1,4 @@
+'use strict';
 angular.module('myApp.main.candidateProfile', ['ui.router'])
 .config(function ($stateProvider) {
 
@@ -12,12 +13,12 @@ angular.module('myApp.main.candidateProfile', ['ui.router'])
   $scope.message = 'See the candidate and related data';
   $scope.name = 'Ted Cruz';
   $scope.loadCandidates = function(){
-    $http.get("https://congress.api.sunlightfoundation.com/legislators?last_name=Cruz&apikey=49e2cbc00fdd496bbd036a26d1858d33"
+    $http.get('https://congress.api.sunlightfoundation.com/legislators?last_name=Cruz&apikey=49e2cbc00fdd496bbd036a26d1858d33'
       ).success(function (data){
         console.log('success with get to api', data);
       $scope.candidates = data;
     }).error(function () {
-      alert("an unexpected error ocurred!");
+        console.log('An unexpected error ocurred!');
     });
   };
   $scope.funding =  {
