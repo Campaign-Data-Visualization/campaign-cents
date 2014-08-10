@@ -4,13 +4,15 @@
   "main": "serer.js",
   "dependencies": {
     "body-parser": "*",
+    "config": "^1.0.2",
     "express": "*",
     "mongoose": "*",
     "morgan": "^1.2.2",
     "mysql": "^2.4.1",
     "q": "*",
     "sunlight-congress-api": "^0.1.0",
-    "ui-router": "0.0.1"
+    "ui-router": "0.0.1",
+    "votesmart": "0.0.3"
   },
   "devDependencies": {
     "gulp": "*",
