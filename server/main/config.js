@@ -4,7 +4,9 @@ var mysql       = require('mysql'),
     morgan      = require('morgan'),
     bodyParser  = require('body-parser'),
     middle      = require('./middleware'),
-    api         = require("sunlight-congress-api");
+    api         = require("sunlight-congress-api"),
+    VoteSmart = require('votesmart'),
+    config = require('config');
 
 
 
@@ -34,6 +36,57 @@ module.exports = exports = function (app, express, routers) {
 // api.init("instert-api-key-here");
 
 // api.votes().filter("year", "2012").call(success);
+
+// <<<<<<<<<============================================>>>>>>>>>>
+// Calling SUNLIGHT FOUNDATION API 
+var sunlightKey = config.get('sunlight.key');
+var sunlightUrl = config.get('sunlight.url')
+
+api.init({
+  key: sunlightKey,
+  url: sunlightUrl
+});
+
+console.log("The sunlight API just got called");
+
+var success = function(data){
+    console.log("This was a successful Open Congress API call", data);
+}
+
+// api.votes().filter("year", "2012").call(success);
+
+api.legislators().filter("first_name", "John").call(success);
+
+
+//<<<<<<<<<<<<<<<<<<==============================>>>>>>>>>>>>>>>>
+// Calling Votesmart API
+
+
+// Load apiKey from config.json - you can replace this code and manually set your API key here
+
+
+var apiConfig = config.get('votesmart.apiKey');
+
+console.log("This is my api key ", apiConfig);
+
+var votesmart = new VoteSmart(apiConfig);
+
+votesmart.candidateBio('26732', function(err, json) {
+  if (err) throw err;
+  console.log(json);
+});
+
+// votesmart.npat('26732', function(err, json) {
+//   if (err) throw err;
+//   // console.log(json);
+//   json.npat.section.forEach(function(e) {
+//     console.log(e);
+//   })
+// });
+
+
+
+// <<<<<<==========  Create MySQL connection =============>>>>>>>>
 
 var connection = mysql.createConnection({
   host     : process.env.host || 'localhost',
