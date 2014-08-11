@@ -1,7 +1,15 @@
-.not-overlapped {
-  margin-left: 7%;
+.search {
+  width: 40%;
+  margin: auto;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
-.org-panel {
+
+/*.org-panel {
+>>>>>>> Styled with bootstrap theme.
   padding: 1%;
 }
 
@@ -39,8 +47,8 @@
 .rounded-corners{
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
-  border-radius: 10px; /* future proofing */
-  -khtml-border-radius: 10px; /* for old Konqueror browsers */
+  border-radius: 10px;
+  -khtml-border-radius: 10px;
 }
 
 .panel-heading{
@@ -77,4 +85,4 @@
 .searchButton {
   position: relative;
   top: 5px;
-}
+}*/
