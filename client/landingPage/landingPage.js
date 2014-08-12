@@ -15,9 +15,10 @@ angular.module('myApp.main.landingPage', ['ui.router'])
   $scope.search = function(){
     DataRequestFactory.redirectPath;
   	var input = $scope.searchInput;
+    $stateParams.id = input;
     console.log('This is the search input: ', $scope.searchInput);
     DataRequestFactory.getData(input, function(path){
-      $state.go(path);
+      // $state.go(path);
     }); 
   };
 
