@@ -64,22 +64,35 @@ module.exports = exports = function (app, express, routers) {
 
 // Load apiKey from config.json - you can replace this code and manually set your API key here
 
-// var apiConfig = config.get('votesmart.apiKey');
 
-// console.log("This is my api key ", apiConfig);
 
-// var votesmart = new VoteSmart(apiConfig);
+var apiConfig = config.get('votesmart.apiKey');
 
-// console.log("TESTING VOTESMART API");
-// votesmart.Candidates(94103,2012, 'NULL', function(err, json) {
-//   if (err) throw err;
-//   for (var i = 0; i < json.candidateList.candidate.length; i++){
-//     if((json.candidateList.candidate[i].electionStage === 'General') && (json.candidateList.candidate[i].electionOffice === 'U.S. House' 
-//     || json.candidateList.candidate[i].electionOffice === 'U.S. Senate')){
-//       console.log(json.candidateList.candidate[i]);
-//     }
-//   }
-// });
+
+VoteSmart.prototype.Candidates = function(zipcode, electionYear, zip4, callback){
+  var params = {
+    zip5: zipcode,
+    electionYear: electionYear,
+    zip4: zip4
+  };
+  this.makeRequest('Candidates.getByZip', params, callback);
+};
+
+
+console.log("This is my api key ", apiConfig);
+
+var votesmart = new VoteSmart(apiConfig);
+
+console.log("TESTING VOTESMART API");
+votesmart.Candidates(94103,2012, 'NULL', function(err, json) {
+  if (err) throw err;
+  for (var i = 0; i < json.candidateList.candidate.length; i++){
+    if((json.candidateList.candidate[i].electionStage === 'General') && (json.candidateList.candidate[i].electionOffice === 'U.S. House' 
+    || json.candidateList.candidate[i].electionOffice === 'U.S. Senate')){
+      console.log(json.candidateList.candidate[i]);
+    }
+  }
+});
 
 // votesmart.candidateBio('26732', function(err, json) {
 //   if (err) throw err;
