@@ -3,3 +3,4 @@ client/config.js
 node_modules/
 _DS_Store
 DS_Store
+config/

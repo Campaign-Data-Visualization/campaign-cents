@@ -39,23 +39,23 @@ module.exports = exports = function (app, express, routers) {
 
 // <<<<<<<<<============================================>>>>>>>>>>
 // Calling SUNLIGHT FOUNDATION API 
-var sunlightKey = config.get('sunlight.key');
-var sunlightUrl = config.get('sunlight.url')
+// var sunlightKey = config.get('sunlight.key');
+// var sunlightUrl = config.get('sunlight.url')
 
-api.init({
-  key: sunlightKey,
-  url: sunlightUrl
-});
+// api.init({
+//   key: sunlightKey,
+//   url: sunlightUrl
+// });
 
-console.log("The sunlight API just got called");
+// console.log("The sunlight API just got called");
 
-var success = function(data){
-    console.log("This was a successful Open Congress API call", data);
-}
+// var success = function(data){
+//     console.log("This was a successful Open Congress API call", data);
+// }
 
 // api.votes().filter("year", "2012").call(success);
 
-api.legislators().filter("first_name", "John").call(success);
+// api.legislators().filter("first_name", "John").call(success);
 
 
 //<<<<<<<<<<<<<<<<<<==============================>>>>>>>>>>>>>>>>
@@ -70,10 +70,21 @@ console.log("This is my api key ", apiConfig);
 
 var votesmart = new VoteSmart(apiConfig);
 
-votesmart.candidateBio('26732', function(err, json) {
+console.log("TESTING VOTESMART API");
+votesmart.Candidates(94103,2012, 'NULL', function(err, json) {
   if (err) throw err;
-  console.log(json);
+  for (var i = 0; i < json.candidateList.candidate.length; i++){
+    if((json.candidateList.candidate[i].electionStage === 'General') && (json.candidateList.candidate[i].electionOffice === 'U.S. House' 
+    || json.candidateList.candidate[i].electionOffice === 'U.S. Senate')){
+      console.log(json.candidateList.candidate[i]);
+    }
+  }
 });
+
+// votesmart.candidateBio('26732', function(err, json) {
+//   if (err) throw err;
+//   console.log(json);
+// });
 
 // votesmart.npat('26732', function(err, json) {
 //   if (err) throw err;
