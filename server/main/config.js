@@ -64,7 +64,6 @@ api.legislators().filter("first_name", "John").call(success);
 
 // Load apiKey from config.json - you can replace this code and manually set your API key here
 
-
 var apiConfig = config.get('votesmart.apiKey');
 
 console.log("This is my api key ", apiConfig);
