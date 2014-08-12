@@ -12,7 +12,9 @@
       	url: '/dataRequest',
       	data: {input: input}
       })
-      .then(function(response){    
+      .then(function(response){
+        console.log(response.data.type);
+
         // if(response.data.type === 'zip'){
         //   // var list = response.data.listCandidates;
         //   // console.log('INSIDE DATAREQUESTFACTORY, SHOW LIST: ', list);
