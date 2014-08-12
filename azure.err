@@ -1,13 +1,30 @@
-Fri Aug 01 2014 21:17:10 GMT-0700 (PDT):
-<Error 67 74 3b 63 5f 5f 44 69 73 70 6c 61 79 43 6c 61 73 73 31 30 2e 26 6c 74 3b 52 65 73 6f 6c 76 65 26 67 74 3b 62 5f 5f 63 28 49 42 69 6e 64 69 6e 67 20 62 ...>
-Error
-    at Function.ServiceClient._normalizeError (/Users/Dorpalen-Barry/.nvm/v0.10.29/lib/node_modules/azure-cli/node_modules/azure-common/lib/services/serviceclient.js:785:23)
-    at ScmService.ServiceClient._processResponse (/Users/Dorpalen-Barry/.nvm/v0.10.29/lib/node_modules/azure-cli/node_modules/azure-common/lib/services/serviceclient.js:450:41)
-    at processResponseCallback (/Users/Dorpalen-Barry/.nvm/v0.10.29/lib/node_modules/azure-cli/node_modules/azure-common/lib/services/serviceclient.js:213:35)
-    at IncomingMessage.<anonymous> (/Users/Dorpalen-Barry/.nvm/v0.10.29/lib/node_modules/azure-cli/node_modules/azure-common/lib/services/serviceclient.js:242:17)
-    at IncomingMessage.emit (events.js:117:20)
-    at _stream_readable.js:929:16
-    at process._tickCallback (node.js:419:13)
-    at doLogStream (/Users/Dorpalen-Barry/.nvm/v0.10.29/lib/node_modules/azure-cli/lib/commands/asm/site.log._js:259:11)
-    at __2 (/Users/Dorpalen-Barry/.nvm/v0.10.29/lib/node_modules/azure-cli/lib/commands/asm/site.log._js:96:18)
+Tue Aug 12 2014 10:31:00 GMT-0700 (PDT):
+{ [Error: Unable to locate site named campaign-cents]
+  stack: [Getter/Setter],
+  __frame: 
+   { name: 'lookupSiteNameAndWebSpace__20',
+     line: 871,
+     file: '/Users/Dorpalen-Barry/.nvm/v0.10.29/lib/node_modules/azure-cli/lib/commands/asm/websites/websitesclient._js',
+     prev: 
+      { name: 'ensureRepositoryUri__17',
+        line: 800,
+        file: '/Users/Dorpalen-Barry/.nvm/v0.10.29/lib/node_modules/azure-cli/lib/commands/asm/websites/websitesclient._js',
+        prev: [Object],
+        active: false,
+        offset: 3,
+        col: 19 },
+     active: false,
+     offset: 12,
+     col: 4 },
+  rawStack: [Getter] }
+Error: Unable to locate site named campaign-cents
+    at ___ (/Users/Dorpalen-Barry/.nvm/v0.10.29/lib/node_modules/azure-cli/lib/commands/asm/websites/websitesclient._js:867:20)
+    at ___ (/Users/Dorpalen-Barry/.nvm/v0.10.29/lib/node_modules/azure-cli/node_modules/streamline/lib/callbacks/runtime.js:85:13)
+    at ___ (/Users/Dorpalen-Barry/.nvm/v0.10.29/lib/node_modules/azure-cli/lib/commands/asm/websites/websitesclient._js:473:131)
+    at __tryCatch (/Users/Dorpalen-Barry/.nvm/v0.10.29/lib/node_modules/azure-cli/node_modules/streamline/lib/callbacks/runtime.js:141:4)
+    at ___ (/Users/Dorpalen-Barry/.nvm/v0.10.29/lib/node_modules/azure-cli/lib/commands/asm/websites/websitesclient._js:473:67)
+    at getSites__7 (/Users/Dorpalen-Barry/.nvm/v0.10.29/lib/node_modules/azure-cli/lib/commands/asm/websites/websitesclient._js:473:33)
+    at lookupSiteNameAndWebSpace__20 (/Users/Dorpalen-Barry/.nvm/v0.10.29/lib/node_modules/azure-cli/lib/commands/asm/websites/websitesclient._js:883:4)
+    at ensureRepositoryUri__17 (/Users/Dorpalen-Barry/.nvm/v0.10.29/lib/node_modules/azure-cli/lib/commands/asm/websites/websitesclient._js:803:19)
+    at __2 (/Users/Dorpalen-Barry/.nvm/v0.10.29/lib/node_modules/azure-cli/lib/commands/asm/site.log._js:94:26)
 
