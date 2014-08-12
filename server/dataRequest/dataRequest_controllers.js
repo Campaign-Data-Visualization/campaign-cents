@@ -19,12 +19,21 @@ module.exports = exports = {
   // handles client POST request by querying database with input and
   // responding with requested data
   post: function (req, res, next) {
+    
     //candidateOrganizationZipcode is the user input in string format
-    var candidateOrganizationZipcode = req.body.input;
+    var candidateOrganizationZipcode = req.body.input.input;
+    console.log("candidateOrganizationZipcode: ", candidateOrganizationZipcode);
     console.log("<---------------inside server:-------------->")
-    //so we don't have to deal with the hyphon in the second part of zip codes
-    //we're splitting off the first five
-    var firstFiveChar = candidateOrganizationZipcode.slice(0,5);
+    
+    //we're slicing off the first five so we don't have to deal with the hyphon in the second part of zip codes
+    if(isNaN(candidateOrganizationZipcode)){
+      console.log("candidateOrganizationZipcode: ", candidateOrganizationZipcode);
+      var firstFiveChar = candidateOrganizationZipcode.slice(0,5);
+    }else{
+      var firstFiveChar = candidateOrganizationZipcode
+    }
+
+
     console.log("parseInt on first five char of input: "+ isNaN(firstFiveChar));
     if(isNaN(firstFiveChar)){
       //process as a candidate or organization
@@ -34,7 +43,7 @@ module.exports = exports = {
     }else{
       //process as zip code
       console.log('ITS A ZIP CODE');
-      res.send({type:'zip', input: candidateOrganizationZipcode, listCandidates: candidates});
+      res.send({type:'zip', input: candidateOrganizationZipcode, arrayOfCandidates: candidates});
       // <-------------QUERY THE DATADAE with the Zip ------------------>
       // connection.query('SELECT * FROM tablename', function(err, rows, fields) {
       //       if (err) throw err;

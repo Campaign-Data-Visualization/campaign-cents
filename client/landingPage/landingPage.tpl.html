@@ -9,7 +9,7 @@
               <form class='form-search' role="form" ng-submit="search()">
                 <input text-angular ng-model="searchInput" type="text" class="form-control input-group"  placeholder={{message}}>
                 </input>
-                <button class="center btn btn-md btn-primary searchButton" type="submit" ui-sref="myApp.main.candidateList({id: searchInput })">Search</button>
+                <button class="center btn btn-md btn-primary searchButton" type="submit" ui-sref="myApp.main.candidateList({input: searchInput })">Search</button>
               </form>
             </center>
           </div>
