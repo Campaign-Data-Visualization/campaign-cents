@@ -13,13 +13,13 @@ angular.module('myApp.main.landingPage', ['ui.router'])
 .controller('SearchController', function($scope, DataRequestFactory, $rootElement, $location, $q, $state){
   
   $scope.search = function(){
-    DataRequestFactory.redirectPath;
-  	var input = $scope.searchInput;
-    $stateParams.id = input;
-    console.log('This is the search input: ', $scope.searchInput);
-    DataRequestFactory.getData(input, function(path){
-      // $state.go(path);
-    }); 
+    // DataRequestFactory.redirectPath;
+    //<------------this is for sending data to the server---->
+  	  // var input = $scope.searchInput;
+      //  console.log('This is the search input: ', $scope.searchInput);
+      //  DataRequestFactory.getData(input, function(path){
+      //    // $state.go(path);
+      //  });
   };
 
   $scope.message = 'Search for a zip code / candidate / organization below';

@@ -5,15 +5,19 @@ angular.module('myApp.main.candidateList', ['ui.router'])
 
   $stateProvider
     .state('myApp.main.candidateList', {
-      url: '/zip:{id}',
+      url: '/search:{input}',
       templateUrl: 'candidateList/candidateList.tpl.html',
       controller: 'CandidateListController'
     });
 })
 .controller('CandidateListController', function($scope, $stateParams, DataRequestFactory) {
   // filter candidates by zipcode input from search page
-  $scope.input = DataRequestFactory.inputValue;
-  $scope.candidates = DataRequestFactory.candList.list;
+
+  $scope.input = $stateParams.input;
+  DataRequestFactory.getData($stateParams, function(arrayOfCandidates){
+  	$scope.candidates = arrayOfCandidates;
+  })
+  
 
 });
 
