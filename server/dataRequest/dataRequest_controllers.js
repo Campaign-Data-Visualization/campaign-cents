@@ -46,13 +46,16 @@ module.exports = exports = {
       //process as zip code
       console.log('ITS A ZIP CODE');
 
-      var zip = 19143;
-      var yeat = 2012;
+      var zip = firstFiveChar;
+      var year = 2014;
+      
+      // votesmart.Candidates(zip , year, 'NULL', zipSortingFunc)
+      // .then(arrayOfCandidates){
+      //   res.send({type:'zip', arrayOfCandidates: arrayOfCandidates})
+      // };
 
-      votesmart.Candidates(19143,2014, 'NULL', zipSortingFunc);
-
-      // res.send({type:'zip', arrayOfCandidates: candidates});
-      res.send({type:'zip'});
+      // // res.send({type:'zip', arrayOfCandidates: candidates});
+      // res.send({type:'zip'});
       // <-------------QUERY THE DATADAE with the Zip ------------------>
       // connection.query('SELECT * FROM tablename', function(err, rows, fields) {
       //       if (err) throw err;
@@ -84,13 +87,18 @@ module.exports = exports = {
 
   //callback for votesmart.Candidates
   var zipSortingFunc = function(err, json) {
+    var arrayOfCandidates = [];
     if (err) throw err;
     for (var i = 0; i < json.candidateList.candidate.length; i++){
       if((json.candidateList.candidate[i].electionStage === 'General') && (json.candidateList.candidate[i].electionOffice === 'U.S. House' 
       || json.candidateList.candidate[i].electionOffice === 'U.S. Senate')){
-        console.log(json.candidateList.candidate[i]);
+        console.log("<--------about to send res------->");
+        
+        arrayOfCandidates.push(json.candidateList.candidate[i]);
       }
     }
+  res.send({type:'zip', arrayOfCandidates: candidates});
+  return arrayOfCandidates;
   }
   
 
