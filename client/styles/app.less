@@ -1,0 +1,171 @@
+@import "less/bootstrap.less";
+
+//fonts 
+
+@font-face {
+  font-family: 'ubuntuRegular';
+  src: url('fonts/ubuntu/Ubuntu-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'rockwellRegular';
+  src: url('fonts/rockwell/rockwell.ttf') format('truetype');
+}
+
+@font-family-serif: 'rockwellRegular';
+@font-family-sans-serif: 'ubuntuRegular';
+
+
+h1, h2, h3 {
+	font-family: @font-family-serif;
+	padding: 0;
+	margin: 0;
+}
+
+//colors
+
+@cc-blue-light: #0071BC;
+@cc-blue-dark: #004E70;
+@cc-gray-light: #E1E1E1;
+@cc-gray-medium: #B7B5B6;
+@cc-gray-search: #C8C7C7;
+@cc-gray-dark: #5B5A5A;
+@cc-gray-map-section: #F0F0F0;
+@cc-green: #60AF37;
+@cc-red: #AD272D;
+@cc-teal: #198E68;
+
+//general styles
+
+ul, li {
+	list-style: none;
+	text-decoration: none;
+}
+
+body {
+	background-color: @cc-gray-light;
+}
+
+section {
+	padding: 50px 0;
+}
+
+//navbar
+@navbar-height: 150px;
+
+.navbar {
+	background-color: @cc-gray-medium;
+	margin-bottom: 0;
+}
+
+.navbar-left {
+	padding: 15px 0;
+	vertical-align: middle;
+}
+
+.navbar-nav {
+	float: right;
+}
+
+
+//landing page
+
+.landing-box .box-text {
+	padding-top: 20px;
+}
+
+.landing-box h3 {
+	text-align: center;
+	padding-bottom: 20px;
+	border-bottom: 3px @cc-gray-medium solid;
+}
+
+.landing-box p {
+	font-size: 16px;
+	line-height: 25px;
+}
+
+.landing-box p.link {
+	font-size: 18px;
+	text-align: center;
+	bottom: 0;
+}
+
+.landing-box ul {
+	padding-left: 0;
+}
+
+.landing-box ul li {
+	height: 60px;
+}
+
+.landing-box ul li div {
+	padding-top: 12px;
+}
+
+.landing-box ul li img {
+	float: left;
+	padding: 10px;
+	clear: both;
+	vertical-align: middle;
+}
+
+.landing-box-involved h3, .landing-box-involved a {
+	color: @cc-blue-light;
+}
+
+.landing-box-involved p.indent {
+	margin-left: 70px;
+}
+
+.landing-box-races h3, .landing-box-races a {
+	color: @cc-teal;
+}
+
+.landing-box-watch h3, .landing-box-watch a {
+	color: @cc-green;
+}
+
+
+///////////
+
+.map-section {
+	background-color: @cc-gray-map-section;
+	height: 500px;
+}
+
+.landing-side {
+	padding-bottom: 60px;
+	text-align: center;
+}
+
+.landing-side:last-child {
+	//padding-bottom: 0;
+}
+
+.landing-side-search {
+	background-color: @cc-gray-search;
+	padding: 25px;
+
+}
+
+//fix alignment ***
+.landing-side-search label {
+ 	-moz-text-align-last: left;  
+    text-align-last: left;
+}
+
+.landing-side-search h1 {
+	margin: 0;
+	color: #000;
+}
+
+.landing-side-search input {
+	border: 3px #000 solid;
+	width:100%;
+}
+
+.landing-side-search .btn {
+	background-color: #000;
+	color: #fff;
+}
