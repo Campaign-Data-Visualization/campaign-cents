@@ -24,7 +24,8 @@ module.exports = exports = {
 
     //candidateOrganizationZipcode is the user input in string format
     console.log("<---------------inside server:-------------->")  
-    
+    console.log(req.body);
+
     if(!req.body.input){
       res.send({type:'Welcome, mr. JSON. You have arrived in serverland.'});
     }
