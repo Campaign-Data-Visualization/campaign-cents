@@ -30,7 +30,7 @@ module.exports = exports = {
       res.send({type:'Welcome, mr. JSON. You have arrived in serverland.'});
     }
 
-    var candidateOrganizationZipcode = req.body.input.input;
+    var candidateOrganizationZipcode = req.body.input;
     
 
     //<=====================================================>

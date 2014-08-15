@@ -14,7 +14,7 @@ angular.module('myApp.main.candidateList', ['ui.router'])
   // filter candidates by zipcode input from search page
 
   $scope.input = $stateParams.input;
-  DataRequestFactory.getData($stateParams, function(arrayOfCandidates){
+  DataRequestFactory.getData($stateParams.input, function(arrayOfCandidates){
   	$scope.candidates = arrayOfCandidates;
   })
   
