@@ -21,9 +21,14 @@ module.exports = exports = {
   // handles client POST request by querying database with input and
   // responding with requested data
   post: function (req, res, next) {
-    
+
     //candidateOrganizationZipcode is the user input in string format
     console.log("<---------------inside server:-------------->")  
+    
+    if(!req.body.input){
+      res.send({type:'Welcome, mr. JSON. You have arrived in serverland.'});
+    }
+
     var candidateOrganizationZipcode = req.body.input.input;
     
 
