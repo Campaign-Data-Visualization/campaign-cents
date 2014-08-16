@@ -23,16 +23,10 @@ module.exports = exports = {
   post: function (req, res, next) {
 
     //candidateOrganizationZipcode is the user input in string format
-    console.log("<---------------inside server:-------------->")  
-    console.log(req.body);
-
-    if(!req.body.input){
-      res.send({type:'Welcome, mr. JSON. You have arrived in serverland.'});
-    }
+    console.log("<---------------inside server:-------------->")
 
     var candidateOrganizationZipcode = req.body.input;
     
-
     //<=====================================================>
     //we're slicing off the first five so we don't have to deal with the hyphon in the second part of zip codes
     if(isNaN(candidateOrganizationZipcode)){
@@ -46,7 +40,7 @@ module.exports = exports = {
     if(isNaN(firstFiveChar)){
       //process as a candidate
       console.log("IT'S A CANDIDATE");
-      // <-------------QUERY THE DATADAE with the name ------>
+      // <-------------QUERY THE DATADASE with the name ------>
       res.send({type:'candidate'});
     }else{
       //process as zip code
@@ -69,6 +63,8 @@ module.exports = exports = {
       //     });
       
       //<====================================================>
+      
+      res.send({type:'zip'});
 
     }
   }
