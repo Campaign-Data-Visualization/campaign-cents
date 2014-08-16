@@ -50,12 +50,12 @@ module.exports = exports = {
       var year = 2014;
 
       //define promise as running an api call for the zip code
-      var promise = new Promise(function(resolve, reject) {
+      var $promise = Q.fcall(function(resolve, reject) {
         resolve(votesmart.Candidates(zip , year, 'NULL', zipSortingFunc));
       });
       console
       
-      promise.then(function(arrayOfCandidates){
+      $promise().then(function(arrayOfCandidates){
         res.send({type:'zip', arrayOfCandidates: arrayOfCandidates})
       });
 
