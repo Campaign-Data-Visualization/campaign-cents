@@ -56,7 +56,8 @@ module.exports = exports = {
       console
       
       $promise().then(function(arrayOfCandidates){
-        res.send({type:'zip', arrayOfCandidates: arrayOfCandidates})
+        console.log(arrayOfCandidates);
+        res.send({type:'zip' /*, arrayOfCandidates: arrayOfCandidates*/})
       });
 
       // // res.send({type:'zip', arrayOfCandidates: candidates});
@@ -99,8 +100,6 @@ module.exports = exports = {
     for (var i = 0; i < json.candidateList.candidate.length; i++){
       if((json.candidateList.candidate[i].electionStage === 'General') && (json.candidateList.candidate[i].electionOffice === 'U.S. House' 
       || json.candidateList.candidate[i].electionOffice === 'U.S. Senate')){
-        console.log("<--------about to send res------->");
-        
         arrayOfCandidates.push(json.candidateList.candidate[i]);
       }
     }
