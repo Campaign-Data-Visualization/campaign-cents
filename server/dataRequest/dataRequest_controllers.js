@@ -39,20 +39,25 @@ module.exports = exports = {
     //sort based on zip vs candidate name
     if(isNaN(firstFiveChar)){
       //process as a candidate
-      console.log("IT'S A CANDIDATE");
+      console.log("<-----------IT'S A CANDIDATE----------->");
       // <-------------QUERY THE DATADASE with the name ------>
       res.send({type:'candidate'});
     }else{
       //process as zip code
-      console.log('ITS A ZIP CODE');
+      console.log('<------------ITS A ZIP CODE---------->');
 
       var zip = firstFiveChar;
       var year = 2014;
+
+      //define promise as running an api call for the zip code
+      var promise = new Promise(function(resolve, reject) {
+        resolve(votesmart.Candidates(zip , year, 'NULL', zipSortingFunc));
+      });
+      console
       
-      // votesmart.Candidates(zip , year, 'NULL', zipSortingFunc)
-      // .then(arrayOfCandidates){
-      //   res.send({type:'zip', arrayOfCandidates: arrayOfCandidates})
-      // };
+      promise.then(function(arrayOfCandidates){
+        res.send({type:'zip', arrayOfCandidates: arrayOfCandidates})
+      });
 
       // // res.send({type:'zip', arrayOfCandidates: candidates});
       // res.send({type:'zip'});
@@ -64,7 +69,7 @@ module.exports = exports = {
       
       //<====================================================>
       
-      res.send({type:'zip'});
+      // res.send({type:'zip'});
 
     }
   }
@@ -99,9 +104,8 @@ module.exports = exports = {
         arrayOfCandidates.push(json.candidateList.candidate[i]);
       }
     }
-  res.send({type:'zip', arrayOfCandidates: candidates});
-  return arrayOfCandidates;
-  }
+    return arrayOfCandidates;
+  };
   
 
   // // <------------Alternative API Queries------------>
