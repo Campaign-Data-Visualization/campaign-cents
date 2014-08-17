@@ -53,7 +53,6 @@ module.exports = exports = {
       var $promise = Q.fcall(function(resolve, reject) {
         resolve(votesmart.Candidates(zip , year, 'NULL', zipSortingFunc));
       });
-      console
       
       $promise().then(function(arrayOfCandidates){
         console.log(arrayOfCandidates);
