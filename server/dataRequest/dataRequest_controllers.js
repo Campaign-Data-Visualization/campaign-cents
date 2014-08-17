@@ -24,7 +24,8 @@ module.exports = exports = {
 
     //candidateOrganizationZipcode is the user input in string format
     console.log("<---------------inside server:-------------->")
-
+    console.log(zipSortingFunc);
+    
     var candidateOrganizationZipcode = req.body.input;
     
     //<=====================================================>
@@ -52,9 +53,11 @@ module.exports = exports = {
       console.log('<------------About to define promise---------->');
 
       //define promise as running an api call for the zip code
-      var $promise = Q.fcall(function(resolve, reject) {
-        resolve(votesmart.Candidates(zip , year, 'NULL', zipSortingFunc));
+      var $promise = Q.fcall(function(){
+        return votesmart.Candidates(zip , year, 'NULL', zipSortingFunc);
       });
+
+      var deferred = Q.defer();
       
       console.log("<------promise defined, about to invoke---------->")
 
@@ -89,7 +92,7 @@ module.exports = exports = {
       electionYear: electionYear,
       zip4: zip4
     };
-    this.makeRequest('Candidates.getByZip', params, callback);
+    return this.makeRequest('Candidates.getByZip', params, callback);
   };
 
   console.log("This is my api key ", apiConfig);
