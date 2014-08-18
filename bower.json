@@ -7,6 +7,7 @@
     "angular-cookies": "*",
     "ngFx": "*",
     "angular-ui-router": "*",
-    "angular-bootstrap": "~0.11.0"
+    "angular-bootstrap": "~0.11.0",
+    "angularjs-google-maps": "~0.4.0"
   }
 }

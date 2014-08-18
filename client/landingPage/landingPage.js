@@ -1,5 +1,5 @@
 'use strict';
-angular.module('myApp.main.landingPage', ['ui.router'])
+angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
 
 .config(function ($stateProvider) {
   $stateProvider
@@ -11,7 +11,9 @@ angular.module('myApp.main.landingPage', ['ui.router'])
 })
 
 .controller('SearchController', function($scope, DataRequestFactory, $rootElement, $location, $q, $state){
+  $scope.$on('mapInitialized', function(event, map) {
   
+  });
   $scope.search = function(){
     // DataRequestFactory.redirectPath;
     //<------------this is for sending data to the server---->
