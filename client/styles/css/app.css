@@ -1,3 +1,36 @@
+.googft-info-window {
+   color: black;
+   background-color: white; 
+ }
+
+
+
+.map {
+  margin-top: 10%;
+}
+
+.angular-google-map-container { 
+  height: 400px; 
+}
+
+.frame{
+  margin-top: 10%;
+}
+.search-box{
+  margin-left: 10%;
+  margin-top: 20%;
+}
+
+.search {
+  width: 40%;
+  margin: auto;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 .search {
   width: 40%;
   margin: auto;

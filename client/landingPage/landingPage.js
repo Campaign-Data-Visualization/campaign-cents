@@ -14,12 +14,19 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
   $scope.$on('mapInitialized', function(event, map) {
     var layerDistricts = new google.maps.FusionTablesLayer({
           query: {
-            select: '\'Geocodable address\'',
+            select: 'col0',
             from: '1BAwVHJLmofCdgz3ewBHN_42SHqjK7VV3sfek26Fm'
           }
         });
+    var layerKochRecipients = new google.maps.FusionTablesLayer({
+        query: {
+          select: 'col10',
+          from: '1MsxVs3q68SzQ1p-lgmLFTvJgjXAvxTCCobPIsvB8'
+        }
+    });
+    
     layerDistricts.setMap(map);
-    google.maps.event.addDomListener(window, 'load', initialize);
+    layerKochRecipients.setMap(map);
   });
   
   $scope.search = function(){

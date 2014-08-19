@@ -1,21 +1,24 @@
-<div ng-controller="SearchController" class="searchPage search">  
-    <br><br><br><br><br><br><br><br><br><br>
-    <div class="row">
-      <div class="search-box">
-        <div class="well"> 
-          <div class="container-fluid">
-            <map center="[40.74, -74.18]" zoom="11" style="display:block; height:300px"/>
+<div ng-controller="SearchController" class="">  
+  <div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="map">
+         <map center="[40.74, -74.18]" zoom="11" style="display:block; height:300px"/>
             </map>
-            <center>  
-              <h2 class="headline">CampaignCents</h2>
-              <form class='form-search' role="form" ng-submit="search()">
-                <input text-angular ng-model="searchInput" type="text" class="form-control input-group"  placeholder={{message}}>
-                </input>
-                <button class="center btn btn-md btn-primary searchButton" type="submit" ui-sref="myApp.main.candidateList({input: searchInput })">Search</button>
-              </form>
-            </center>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="search-box">
+          <div class="well"> 
+            <h2 class="headline">CampaignCents</h2>
+            <form class='form-search' role="form" ng-submit="search()">
+              <input text-angular ng-model="searchInput" type="text" class="form-control input-group"  placeholder={{message}}>
+              </input>
+              <button class="center btn btn-md btn-primary searchButton" type="submit">Search</button>
+            </form>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </div>
