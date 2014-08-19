@@ -1,4 +1,4 @@
-<div ng-controller="SearchController">  
+<div ng-controller="SearchController" class="searchPage search">  
   <section class="map-section">
      <div class="container">
        <div class="row">
@@ -13,11 +13,12 @@
             <h1>71</h1>
           </div>
           <div class="landing-side landing-side-search">
-            <form class="form-inline"role="form">
+            <form class="form-inline"role="form" ng-submit="search()">
               <div class="form-group">
                 <label><h1>Find Koch Cash in Your Area</h1></label>
-                <input class="form-control">
-                <button type="submit" class="btn btn-default">GO</button>
+                <input text-angular ng-model="searchInput" type="text" class="form-control input-group"  placeholder={{message}}>
+                </input>
+                <button class=" btn btn-md btn-detault searchButton" type="submit" ui-sref="myApp.main.candidateList({input: searchInput })">GO</button>
               </div>
             </form>
           </div>
@@ -67,7 +68,6 @@
           cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
           proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>
-          <p class="link"><a href="#">View All Key Races</a></p>
           </div>
         </div>
         <div class="col-sm-4 col-xs-12 landing-box landing-box-watch">
@@ -78,7 +78,6 @@
           cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
           proident, sunt in <a href="#">culpa qui</a> officia deserunt mollit anim id est laborum.
           </p>
-          <p class="link"><a href="#">View All Organizations To Watch</a></p>
           </div>
         </div>
        </div>
