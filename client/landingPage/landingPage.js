@@ -12,18 +12,16 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
 
 .controller('SearchController', function($scope, DataRequestFactory, $rootElement, $location, $q, $state){
   $scope.$on('mapInitialized', function(event, map) {
-    var layer = new google.maps.FusionTablesLayer({
-      query: {
-        select: '\'Geocodable address\'',
-        from: '1mZ53Z70NsChnBMm-qEYmSDOvLXgrreLTkQUvvg'
-      }
-    });
-    layer.setMap(map);
+    var layerDistricts = new google.maps.FusionTablesLayer({
+          query: {
+            select: '\'Geocodable address\'',
+            from: '1BAwVHJLmofCdgz3ewBHN_42SHqjK7VV3sfek26Fm'
+          }
+        });
+    layerDistricts.setMap(map);
+    google.maps.event.addDomListener(window, 'load', initialize);
   });
-  // $scope.fusionLayer = function(map){
-  //   debugger;
- 
-  // }
+  
   $scope.search = function(){
     // DataRequestFactory.redirectPath;
     //<------------this is for sending data to the server---->
