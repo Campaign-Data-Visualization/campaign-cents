@@ -44,6 +44,7 @@ ul, li {
 
 body {
 	background-color: @cc-gray-light;
+	font-family: @font-family-sans-serif;
 }
 
 section {
@@ -55,28 +56,48 @@ section {
 }
 
 //navbar
-@navbar-height: 150px;
+@navbar-height: 120px;
 
 .navbar {
 	background-color: @cc-gray-medium;
 	margin-bottom: 0;
+	color: @cc-gray-dark;
+}
+
+.navbar-header {
+	@media (max-width: @screen-xs-max){
+		padding: 0 15px;
+	}
 }
 
 .navbar-left {
 	padding: 15px 0;
 	vertical-align: middle;
+	@media (max-width: @screen-xs-max){
+		padding-left: 15px;
+	}
+}
+
+.navbar-right {
+	float: right;
 }
 
 .navbar-nav {
 	float: right;
 }
 
+ul.navbar-nav li h4 {
+	display: inline;
+	margin-right: 30px;
+}
+
+ul.navbar-nav li:last-child h4, ul.navbar-nav li:last-child a {
+	margin-right: 0;
+	padding-right: 0;
+}
+
 
 //landing page
-
-.landing-box .box-text {
-	padding-top: 20px;
-}
 
 .landing-box h3 {
 	text-align: center;
@@ -87,17 +108,10 @@ section {
 .landing-box p {
 	font-size: 16px;
 	line-height: 25px;
-	@media (max-width: 480px) {
+	@media (max-width: @screen-xs-max) {
 		padding-bottom: 30px;
-
 	}
 }
-
-// .landing-box p.link {
-// 	font-size: 18px;
-// 	text-align: center;
-// 	bottom: 0;
-// }
 
 .landing-box ul {
 	padding-left: 0;
@@ -105,19 +119,22 @@ section {
 
 .landing-box ul li {
 	height: 60px;
+	padding-bottom: 30px;
 }
 
 .landing-box ul li div {
 	padding-top: 12px;
+	height: auto;
 }
 
 .landing-box ul li img {
 	float: left;
 	padding: 10px;
 	clear: both;
-	vertical-align: middle;
 }
-
+ul.box-text li div {
+	height: 100px;
+}
 .landing-box-involved h3, .landing-box-involved a {
 	color: @cc-blue-light;
 }
@@ -139,28 +156,42 @@ section {
 
 .map-section {
 	background-color: @cc-gray-map-section;
-	height: 500px;
+	height: 600px;
 }
 
 .landing-side {
-	padding-bottom: 60px;
 	text-align: center;
+	padding-bottom: 60px;
 }
 
-.landing-side:last-child {
-	//padding-bottom: 0;
+.landing-side-ticker h1 {
+	margin-top: 27px;
+	letter-spacing: 2px;
+	text-align: center;
+	font-family: @font-family-sans-serif;
+	color: @cc-gray-dark;
 }
+
+.landing-side-ticker h1 span, .landing-side-calendar h1 span {
+	color: @cc-blue-light;
+	height: 50px;
+}
+.landing-side-ticker h1 span {
+	//border-right: 1px solid @cc-gray-dark;
+	text-align: center;
+	background: url('../images/bg-counter.svg') repeat center;
+
+}
+
+.landing-side-ticker h1 span:first-child {
+	//border-left: 1px solid @cc-gray-dark;
+}
+
 
 .landing-side-search {
 	background-color: @cc-gray-search;
 	padding: 25px;
-
-}
-
-//fix alignment ***
-.landing-side-search label {
- 	-moz-text-align-last: left;  
-    text-align-last: left;
+	width: auto;
 }
 
 .landing-side-search h1 {
@@ -168,27 +199,45 @@ section {
 	color: #000;
 }
 
+.landing-side-calendar h1 span {
+	background-color: #fff;
+	margin-right: 5px;
+	padding: 0 10px;
+	-webkit-box-shadow: 4px 4px 1px 0px rgba(50, 50, 50, 0.62);
+	-moz-box-shadow:    4px 4px 1px 0px rgba(50, 50, 50, 0.62);
+	box-shadow:         4px 4px 1px 0px rgba(50, 50, 50, 0.62);
+}
+
 .landing-side-search input {
 	border: 3px #000 solid;
-	width:100%;
 }
 
 .landing-side-search .btn {
 	background-color: #000;
 	color: #fff;
+	margin-top: 10px;
 }
 
 //candidate sidebar 
 
+.sidebar {
+	padding: 30px 30px 30px 0;
+	@media (max-width: @screen-xs-max) {
+		padding: 30px 0;
+	}
+}
+
 .sidebar h3 {
 	color: @cc-red;
+	text-shadow: 0 1px 0 #fff;
 }
 
 ////candidate page
 
 .candidate-main {
-	background-color: #fff;
+	//background-color: #fff;
 	padding: 0;
+	margin-top: 30px;
 }
 
 //need to make bold when we buy the full font-kit
@@ -199,11 +248,12 @@ section {
 
 ul.nav-tabs {
 	border-bottom: 2px solid @cc-blue-light;
+	background: none !important;
 }
 
 ul.nav-tabs li {
 	margin-right: 5px;
-	@media (max-width: 480px) {
+	@media (max-width: @screen-xs-max) {
 		margin-right: 0;
 		float: none;
 		border-bottom: 1px solid #fff;
@@ -219,7 +269,7 @@ ul.nav-tabs li > a {
 	-moz-border-radius: 0;
 	border-radius: 0;
 	border-bottom: 1px solid @cc-blue-light;
-	@media (max-width: 480px) {
+	@media (max-width: @screen-xs-max) {
 		margin-right: 0;
 		border-bottom: 0;
 	}
@@ -238,9 +288,11 @@ ul.nav-tabs li > a {
 	border-bottom: 2px solid @cc-blue-light;
 }
 .tab-content .row {
-	margin: 0;
+	margin: -10px 0 0 0;
 	padding: 15px 0;
+	background-color: #fff;
 }
+
 
 .get-involved h3, .get-involved p a {
 	color: @cc-red;
@@ -256,8 +308,35 @@ ul.nav-tabs li > a {
 
 
 
+///////
 
+ul.candidate-list {
+	display: block;
+	padding-left: 0;
+}
 
+ul.candidate-list li {
+	position: relative;
+	border-bottom: 2px solid @cc-blue-light;
+	height: auto;
+	padding: 30px;
+}
+
+ul.candidate-list li:hover{
+	border: 4px solid @cc-green;
+}
+
+ul.candidate-list li img {
+	padding: 0 10px 0 0;
+	@media (max-width: @screen-xs-max) {
+		padding-bottom: 0 0 10px 0;
+	}
+}
+
+ul.candidate h4.chamber {
+	position: absolute;
+	bottom: 0;
+}
 
 
 
