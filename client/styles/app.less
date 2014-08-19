@@ -50,6 +50,10 @@ section {
 	padding: 50px 0;
 }
 
+.center {
+	text-align: center
+}
+
 //navbar
 @navbar-height: 150px;
 
@@ -83,13 +87,17 @@ section {
 .landing-box p {
 	font-size: 16px;
 	line-height: 25px;
+	@media (max-width: 480px) {
+		padding-bottom: 30px;
+
+	}
 }
 
-.landing-box p.link {
-	font-size: 18px;
-	text-align: center;
-	bottom: 0;
-}
+// .landing-box p.link {
+// 	font-size: 18px;
+// 	text-align: center;
+// 	bottom: 0;
+// }
 
 .landing-box ul {
 	padding-left: 0;
@@ -169,3 +177,91 @@ section {
 	background-color: #000;
 	color: #fff;
 }
+
+//candidate sidebar 
+
+.sidebar h3 {
+	color: @cc-red;
+}
+
+////candidate page
+
+.candidate-main {
+	background-color: #fff;
+	padding: 0;
+}
+
+//need to make bold when we buy the full font-kit
+.candidate-main h1, .candidate-main h2, .candidate-main h3 {
+	color: @cc-blue-light;
+}
+
+
+ul.nav-tabs {
+	border-bottom: 2px solid @cc-blue-light;
+}
+
+ul.nav-tabs li {
+	margin-right: 5px;
+	@media (max-width: 480px) {
+		margin-right: 0;
+		float: none;
+		border-bottom: 1px solid #fff;
+	}
+}
+
+ul.nav-tabs li > a {
+	background-color: @cc-gray-medium;
+	font-family: @font-family-serif;
+	color: #fff;
+	font-size: 16px;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	border-bottom: 1px solid @cc-blue-light;
+	@media (max-width: 480px) {
+		margin-right: 0;
+		border-bottom: 0;
+	}
+}
+
+.nav-tabs > li.active > a, 
+.nav-tabs > li.active > a:hover, 
+.nav-tabs > li.active > a:focus, 
+.nav-tabs > li > a:hover {
+	background-color: @cc-blue-light;
+	color: #fff;
+	border-bottom: 1px solid @cc-blue-light;
+
+}
+.show-all {
+	border-bottom: 2px solid @cc-blue-light;
+}
+.tab-content .row {
+	margin: 0;
+	padding: 15px 0;
+}
+
+.get-involved h3, .get-involved p a {
+	color: @cc-red;
+}
+
+.get-involved > div {
+	padding: 15px;
+}
+
+.get-involved > div > img {
+	padding-bottom: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

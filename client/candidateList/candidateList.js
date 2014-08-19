@@ -15,9 +15,10 @@ angular.module('myApp.main.candidateList', ['ui.router'])
 
   $scope.input = $stateParams.input;
   DataRequestFactory.getData($stateParams.input, function(arrayOfCandidates){
-  	$scope.candidates = arrayOfCandidates;
-  })
-  
 
+  	$scope.candidates = arrayOfCandidates || {house: [{name: "Marlo Longley", party: "Libertarian/KochParty"},{name: "Liam Dorpalen", party: "Democrat"}], senate: [{},{}]};
+
+
+  })
 });
 
