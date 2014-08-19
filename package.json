@@ -10,9 +10,12 @@
     "morgan": "^1.2.2",
     "mysql": "^2.4.1",
     "q": "*",
+    "request": "^2.40.0",
+    "requestify": "^0.1.16",
     "sunlight-congress-api": "^0.1.0",
     "ui-router": "0.0.1",
-    "votesmart": "0.0.3"
+    "votesmart": "0.0.3",
+    "xml2js": "^0.4.4"
   },
   "devDependencies": {
     "gulp": "*",
