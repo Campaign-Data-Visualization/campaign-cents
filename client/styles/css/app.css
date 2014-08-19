@@ -3,14 +3,10 @@
    background-color: white; 
  }
 
-
-
 .map {
+  height:350px;
   margin-top: 10%;
-}
-
-.angular-google-map-container { 
-  height: 400px; 
+  display:block; 
 }
 
 .frame{
