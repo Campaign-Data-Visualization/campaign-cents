@@ -1,62 +1,69 @@
 <div ng-controller="CandidateListController">
-	<br><br>
-	<div class="container-fluid">
-	  <div class='row row-top'>
-        <h1 class='text-center'>Zip Code {{input}}</h1>
-	  </div>
-	  <div class='row'>
-	  <div class='col-md-4'>
-	      <div class="dropdown" id='dropdown'>
-			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-			    Sort by:
-			    <span class="caret"></span>
-			  </button>
-			  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-			    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Quantity of funds</a></li>
-			    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tier of funds</a></li>
-			    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Party</a></li>
-			  </ul>
-	      </div>
-	  </div>    
-	  <div class='col-md-4'>
-	  </div>   	  
-	  <div class='col-md-4'>
-		  <nav class="navbar navbar-default" role="navigation" style="width: 300px;">
-			  <div class="container">
-		      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-8">
-		        <ul class="nav navbar-nav">
-		          <li><a href="#">All</a></li>
-		          <li><a href="#">Incumbent</a></li>
-		          <li><a href="#">Contender</a></li>
-		        </ul>
-		      </div><!-- /.navbar-collapse -->
-			  </div>
-			</nav>
-	  </div>
-    </div>
-	  <div class='row'>
-	  <div class='col-md-4'>
-		    <div class="panel panel-default panel-middle">
-		    <h3>Candidates by House</h3>
-		      <table class="table table-bordered">
-		        <tr ng-repeat="candidate in candidates.house | limitTo: 10"> 
-		          <td class="candidate-row" >{{ candidate.name }} - {{candidate.party}}</td>
-		        </tr>
-		      </table>
-		    </div>
-	  </div>
-	  <div class='col-md-4'>
-		    <div class="panel panel-default panel-middle">
-		    <h3>Candidates by Senate</h3>
-		      <table class="table table-bordered">
-		        <tr ng-repeat="candidate in candidates.senate | limitTo: 10"> 
-		          <td class="candidate-row" >{{ candidate.name }} - {{candidate.party}}</td>
-		        </tr>
-		      </table>
-		    </div>
-	  </div>
-	  </div>
-	</div>
+    <div class="container">
+      <div class="col-md-3 col-xs-12 sidebar center">
+       <h1 class='text-center'>Zip Code {{input}}</h1>
+      map image here <br/>
+        <img src="images/icon-clock.svg">
+        <h3>Every minute, the Koch brothers donate more than $2,300 to various 2014 candidates and political organizations.</h3>
+      </div> <!-- /.sidebar -->
+
+
+      <div class="col-md-9 col-xs-12 candidate-main">      
+        <ul class="nav nav-tabs" id="myTab">
+          <li class="active"><a data-target="#candidates" data-toggle="tab">Candidates</a></li>
+          <li><a data-target="#organizations" data-toggle="tab">Organizations</a></li>
+          <li><a data-target="#universities" data-toggle="tab">Universities</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="candidates">
+          <ul class="candidate-list candidate-list-senate" ng-repeat="candidate in candidates.senate | limitTo: 10" >
+			<li class="col-xs-12">	
+				<img class="col-sm-3 col-xs-12 img-responsive not-overlapped" src="http://upload.wikimedia.org/wikipedia/commons/0/08/Official_Photo_of_Senator_Jeff_Bingaman_(D-NM)_2008.jpg">
+				<h2>{{candidate.name}}</h2>
+				<!--need variable for incumbent or candidate-->				
+				<h3>{{candidate.party}}, Incumbent</h3>
+				<!-- need to pull variable for which state -->
+				<h4 class="chamber">US Senate, State of Texas</h4>
+			</li>
+          </ul>
+          <ul class="candidate-list candidate-list-house" ng-repeat="candidate in candidates.house | limitTo: 10" >
+			<li class="col-xs-12">	
+				<img class="col-sm-3 col-xs-12 img-responsive not-overlapped" src="http://upload.wikimedia.org/wikipedia/commons/0/08/Official_Photo_of_Senator_Jeff_Bingaman_(D-NM)_2008.jpg">
+				<h2>{{candidate.name}}</h2>
+				<!--need variable for incumbent or candidate-->				
+				<h3>{{candidate.party}}, Incumbent</h3>
+				<!-- need to pull variable for which state -->
+				<h4 class="chamber">US House of Representatives, State of Texas</h4>
+			</li>
+          </ul>
+ 
+           <div class="row get-involved center">
+            <div class="col-xs-12">
+              <h3>GET INVOLVED</h3>
+            </div>
+            <div class="col-sm-3 col-xs-12">
+              <img src="images/icon-camera-red.svg">
+              <p>Watch <a href="#">Koch Brothers</a> Exposed online or <a href="#">Citizen Koch</a> at a local screening</p>
+            </div>
+            <div class="col-sm-3 col-xs-12">
+              <img src="images/icon-clipboard-red.svg">
+              <p>Start an <a href="#">anti-Koch campaign</a> or petition</p>
+            </div>
+            <div class="col-sm-3 col-xs-12">
+              <img src="images/icon-people-red.svg">
+              <p>Join a local <a href="#">MoveOn Council</a></p>
+            </div>
+            <div class="col-sm-3 col-xs-12">
+              <img src="images/icon-megaphone-red.svg">
+              <p>Report a <a href="#">Koch Problem</a> in your area</p>
+            </div>
+           </div>
+
+          </div> <!-- /#candidates -->
+          <div class="tab-pane" id="organizations">Organizations</div> <!-- /#organizations -->
+          <div class="tab-pane" id="universities">Universities</div> <!-- /#universities -->
+        </div> <!-- /.tab-content -->
+
+      </div><!--  /.candidate-main -->
+  </div>
 </div>
-
-

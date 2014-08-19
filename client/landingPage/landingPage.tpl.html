@@ -1,30 +1,37 @@
 <<div ng-controller="SearchController" class="searchPage search">  
   <section class="map-section">
+     
      <div class="container">
        <div class="row">
+        
         <div class="col-sm-8 col-xs-12">
         map here
         </div>
         <div class="col-sm-4 col-xs-12">
           <div class="landing-side landing-side-ticker">
-            <h1>$023,233,324</h1>
+            <h1>$<span>023,233,324</span></h1>
           </div>
+
           <div class="landing-side landing-side-calendar">
-            <h1>71</h1>
+            <h1><span>7</span><span>1</span></h1>
           </div>
+
           <div class="landing-side landing-side-search">
-            <form class="form-inline"role="form" ng-submit="search()">
+            <form class="form-inline" role="form" ng-submit="search()">
               <div class="form-group">
                 <label><h1>Find Koch Cash in Your Area</h1></label>
-                <input text-angular ng-model="searchInput" type="text" class="form-control input-group"  placeholder={{message}}>
-                </input>
+                <input text-angular ng-model="searchInput" type="text" class="input-group col-xs-12"  placeholder={{message}}>
                 <button class=" btn btn-md btn-detault searchButton" type="submit" ui-sref="myApp.main.candidateList({input: searchInput })">GO</button>
               </div>
             </form>
           </div>
+
         </div>
+      
        </div>
+     
      </div>
+ 
   </section>
   <section>
      <div class="container">
@@ -33,25 +40,25 @@
           <h3>GET INVOLVED</h3>
           <ul class="box-text">
             <li>
-              <img src="images/icon-camera.png">
+              <img src="images/icon-camera.svg">
               <div>
-                <p class="indent">Watch <a href="#">Koch Brothers</a> Exposed online <br/>Watch <a href="#">Citizen Koch</a> at a local screening</p>
+                <p class="indent">Watch <a href="#">Koch Brothers</a> Exposed online. Watch <a href="#">Citizen Koch</a> at a local screening</p>
               </div>
             </li>
             <li>
-              <img src="images/icon-clipboard.png">
+              <img src="images/icon-clipboard.svg">
               <div>
                 <p class="indent">Start an <a href="#">anti-Koch campaign</a> or petition</p>
               </div>
             </li>
             <li>
-              <img src="images/icon-people.png">
+              <img src="images/icon-people.svg">
               <div>
                 <p class="indent">Join a local <a href="#">MoveOn Council</a></p>
               </div>
             </li>
             <li>
-              <img src="images/icon-megaphone.png">
+              <img src="images/icon-megaphone.svg">
               <div>
                 <p class="indent">Report a <a href="#">Koch Problem</a> in your area</p>
               </div>
