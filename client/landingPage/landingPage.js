@@ -15,7 +15,7 @@ angular.module('myApp.main.landingPage', ['ui.router'])
   $scope.search = function(){
     // DataRequestFactory.redirectPath;
     //<------------this is for sending data to the server---->
-  	  // var input = $scope.searchInput;
+      // var input = $scope.searchInput;
       //  console.log('This is the search input: ', $scope.searchInput);
       //  DataRequestFactory.getData(input, function(path){
       //    // $state.go(path);

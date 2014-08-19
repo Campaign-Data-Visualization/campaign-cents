@@ -3,8 +3,10 @@
 // var Note = require('./dataRequest_model.js'),
 var    Q  = require('q'),
     mysql = require('mysql'),
-    VoteSmart = require('votesmart'),
-    config = require('config');
+    config = require('config'),
+    requestify = require('requestify'),
+    request = require('request'),
+    parseString = require('xml2js').parseString;
 
 module.exports = exports = {
   get: function (req, res, next) {
@@ -21,14 +23,8 @@ module.exports = exports = {
   // handles client POST request by querying database with input and
   // responding with requested data
   post: function (req, res, next) {
-
-    //candidateOrganizationZipcode is the user input in string format
-    console.log("<---------------inside server:-------------->")
-    console.log(zipSortingFunc);
-    
     var candidateOrganizationZipcode = req.body.input;
     
-    //<=====================================================>
     //we're slicing off the first five so we don't have to deal with the hyphon in the second part of zip codes
     if(isNaN(candidateOrganizationZipcode)){
       var firstFiveChar = candidateOrganizationZipcode.slice(0,5);
@@ -36,96 +32,45 @@ module.exports = exports = {
       var firstFiveChar = candidateOrganizationZipcode
     }
 
-    // <====================================================>
     //sort based on zip vs candidate name
-    if(isNaN(firstFiveChar)){
-      //process as a candidate
+    if(isNaN(firstFiveChar)){ //process as a candidate
       console.log("<-----------IT'S A CANDIDATE----------->");
       // <-------------QUERY THE DATADASE with the name ------>
+
       res.send({type:'candidate'});
-    }else{
-      //process as zip code
+
+    }else{ //process as zip code
       console.log('<------------ITS A ZIP CODE---------->');
-
       var zip = firstFiveChar;
-      var year = 2014;
+      console.log(zip);
 
-      console.log('<------------About to define promise---------->');
+      var options = {
+        url: 'http://api.votesmart.org/Candidates.getByZip?key='+ config.votesmart.apiKey +'&zip5='+ zip,
+        agent: false,
+        headers: {
+        "User-Agent": "Mozilla/4.0 (compatible; Project Vote Smart node.js client)",
+        "Content-type": "application/x-www-form-urlencoded"}
+      }
 
-      //define promise as running an api call for the zip code
-      var $promise = Q.fcall(function(){
-        return votesmart.Candidates(zip , year, 'NULL', zipSortingFunc);
-      });
-
-      var deferred = Q.defer();
-      
-      console.log("<------promise defined, about to invoke---------->")
-
-      $promise().then(function(arrayOfCandidates){
-        console.log(arrayOfCandidates);
-        res.send({type:'zip' /*, arrayOfCandidates: arrayOfCandidates*/})
-      });
-
-      // // res.send({type:'zip', arrayOfCandidates: candidates});
-      // res.send({type:'zip'});
-      // <-------------QUERY THE DATADAE with the Zip ------------------>
-      // connection.query('SELECT * FROM tablename', function(err, rows, fields) {
-      //       if (err) throw err;
-      //       console.log('The database is: ', rows, fields);
-      //     });
-      
-      //<====================================================>
-      
-      // res.send({type:'zip'});
-
+      request(options, function (error, response, body){
+        if (!error && response.statusCode == 200){
+          parseString(body, function(err, result){
+            var arrayOfCandidates = result.candidateList.candidate
+            res.send({type:'zip', arrayOfCandidates: arrayOfCandidates});
+          })
+        }
+      })
     }
   }
 };
 
-//<<<<<<<<<<<<<<<<<<==Calling Votesmart API===>>>>>>>>>>>>
-// Load apiKey from config.json - you can replace this code // and manually set your API key here
-
-  var apiConfig = config.get('votesmart.apiKey');
-  VoteSmart.prototype.Candidates = function(zipcode, electionYear, zip4, callback){
-    var params = {
-      zip5: zipcode,
-      electionYear: electionYear,
-      zip4: zip4
-    };
-    return this.makeRequest('Candidates.getByZip', params, callback);
-  };
-
-  console.log("This is my api key ", apiConfig);
-
-  var votesmart = new VoteSmart(apiConfig);
-
-  //callback for votesmart.Candidates
-  var zipSortingFunc = function(err, json) {
-    var arrayOfCandidates = [];
-    if (err) throw err;
-    for (var i = 0; i < json.candidateList.candidate.length; i++){
-      if((json.candidateList.candidate[i].electionStage === 'General') && (json.candidateList.candidate[i].electionOffice === 'U.S. House' 
-      || json.candidateList.candidate[i].electionOffice === 'U.S. Senate')){
-        arrayOfCandidates.push(json.candidateList.candidate[i]);
-      }
-    }
-    return arrayOfCandidates;
-  };
-  
-
-  // // <------------Alternative API Queries------------>
-  // // votesmart.candidateBio('26732', function(err, json) {
-  // //   if (err) throw err;
-  // //   console.log(json);
-  // // });
-
-  // // votesmart.npat('26732', function(err, json) {
-  // //   if (err) throw err;
-  // //   // console.log(json);
-  // //   json.npat.section.forEach(function(e) {
-  // //     console.log(e);
-  // //   })
-  // // });
-
+      // for (var i = 0; i < json.candidateList.candidate.length; i++){
+      //   if((json.candidateList.candidate[i].electionStage === 'General') && (json.candidateList.candidate[i].electionOffice === 'U.S. House' 
+      //   || json.candidateList.candidate[i].electionOffice === 'U.S. Senate')){
+      //     arrayOfCandidates.push(json.candidateList.candidate[i]);
+      //   }
+      // }
+      // return arrayOfCandidates;
+ 
 
 

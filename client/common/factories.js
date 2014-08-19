@@ -8,12 +8,12 @@
     var candList = {};
     var getData = function(input, callback){
       return $http({
-      	method: 'POST',
-      	url: '/dataRequest',
-      	data: {input: input}
+        method: 'POST',
+        url: '/dataRequest',
+        data: {input: input}
       })
       .then(function(response){
-        console.log(response.data.type);
+        
 
         // if(response.data.type === 'zip'){
         //   // var list = response.data.listCandidates;
@@ -30,8 +30,10 @@
         //   path = 'myApp.main.orgProfile';
         //   callback(path);
         // }
+        console.log("<---------response received------->")
+        console.log("Response type: ", response.data.type);
         console.log(response.data.arrayOfCandidates);
-        callback(response.data.arrayOfCandidates);
+        // callback(response.data.arrayOfCandidates);
 
       })
       // .then(function(response){
