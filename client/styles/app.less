@@ -173,11 +173,19 @@ ul.box-text li div {
 	height: auto;
 }
 
-.map-sidebar {
+.map-sidebar-container {	
 	text-align: center;
 	height: auto;
-	@media (min-width: @screen-sm-min) {
+	@media (min-width: @screen-xs-max) {
 		height: 450px;
+		position: relative;
+	}
+}
+
+.map-sidebar {
+	margin-top: 30px;
+	@media (min-width: @screen-xs-max) {
+		margin-top: inherit;
 	}
 }
 
@@ -196,13 +204,11 @@ ul.box-text li div {
 	//border-right: 1px solid @cc-gray-dark;
 	text-align: center;
 	background: url('../images/bg-counter.svg') repeat center;
-
 }
 
 .map-sidebar-ticker h1 span:first-child {
 	//border-left: 1px solid @cc-gray-dark;
 }
-
 
 .map-sidebar-search {
 	background-color: @cc-gray-search;
@@ -218,6 +224,12 @@ ul.box-text li div {
 .map-sidebar-search h1 {
 	margin: 0;
 	color: #000;
+}
+
+.map-sidebar-calendar {
+	@media (min-width: @screen-sm-min) {
+		margin-top: 60px;
+	}
 }
 
 .map-sidebar-calendar h1 span {
