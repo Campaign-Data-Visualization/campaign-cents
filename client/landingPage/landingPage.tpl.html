@@ -1,22 +1,21 @@
 <div ng-controller="SearchController" class="searchPage search">  
   <section class="map-section">
-     
      <div class="container">
        <div class="row">
         
         <div class="col-sm-8 col-xs-12">
-          <map center="[39.50, -98.35]" zoom="3" style="display:block; height:300px"/>
+          <map class="map"center="[39.50, -98.35]" zoom="3">
           </map>
         </div>
+       
+
         <div class="col-sm-4 col-xs-12">
           <div class="landing-side landing-side-ticker">
             <h1>$<span>023,233,324</span></h1>
           </div>
-
           <div class="landing-side landing-side-calendar">
             <h1><span>7</span><span>1</span></h1>
           </div>
-
           <div class="landing-side landing-side-search">
             <form class="form-inline" role="form" ng-submit="search()">
               <div class="form-group">
@@ -26,13 +25,9 @@
               </div>
             </form>
           </div>
-
         </div>
-      
-       </div>
-     
+       </div> 
      </div>
- 
   </section>
   <section>
      <div class="container">
@@ -41,28 +36,20 @@
           <h3>GET INVOLVED</h3>
           <ul class="box-text">
             <li>
-              <img src="images/icon-camera.svg">
-              <div>
-                <p class="indent">Watch <a href="#">Koch Brothers</a> Exposed online. Watch <a href="#">Citizen Koch</a> at a local screening</p>
-              </div>
+              <img class="col-xs-2 col-sm-4 col-md-3" src="images/icon-camera.svg">
+                <p class="col-xs-10 col-sm-8">Watch <a href="#">Koch Brothers</a> Exposed online. Watch <a href="#">Citizen Koch</a> at a local screening</p>
             </li>
             <li>
-              <img src="images/icon-clipboard.svg">
-              <div>
-                <p class="indent">Start an <a href="#">anti-Koch campaign</a> or petition</p>
-              </div>
+              <img class="col-xs-2 col-sm-4 col-md-3" src="images/icon-clipboard.svg">
+                <p class="col-xs-10 col-sm-8">Start an <a href="#">anti-Koch campaign</a> or petition</p>
             </li>
             <li>
-              <img src="images/icon-people.svg">
-              <div>
-                <p class="indent">Join a local <a href="#">MoveOn Council</a></p>
-              </div>
+              <img class="col-xs-2 col-sm-4 col-md-3" src="images/icon-people.svg">
+                <p class="col-xs-10 col-sm-8">Join a local <a href="#">MoveOn Council</a></p>
             </li>
             <li>
-              <img src="images/icon-megaphone.svg">
-              <div>
-                <p class="indent">Report a <a href="#">Koch Problem</a> in your area</p>
-              </div>
+              <img class="col-xs-2 col-sm-4 col-md-3" src="images/icon-megaphone.svg">
+                <p class="col-xs-10 col-sm-8">Report a <a href="#">Koch Problem</a> in your area</p>
             </li>
           </ul>
 
