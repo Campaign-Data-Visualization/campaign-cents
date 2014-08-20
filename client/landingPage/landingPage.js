@@ -23,6 +23,7 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
   };
 
   $scope.$on('mapInitialized', function(event, map) {
+    // Adding test comment
     var layerDistricts = new google.maps.FusionTablesLayer({
         query: {
           select: 'col0',

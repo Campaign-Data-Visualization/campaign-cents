@@ -4,7 +4,6 @@
 var    Q  = require('q'),
     mysql = require('mysql'),
     config = require('config'),
-    requestify = require('requestify'),
     request = require('request'),
     parseString = require('xml2js').parseString;
 
