@@ -1,32 +1,28 @@
 <!-- nav bar for entire app -->
 <header>
-  <nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default" role="navigation">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <div class="navbar-left visible-xs col-xs-4">
-        <img src="images/logo.png">
-      </div>
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+      <img class="brand" href="/" src="images/logo.png">
     </div>
-      <div class="navbar-left hidden-xs">
-        <img src="images/logo.svg">
-      </div>
+
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><h4>In My District</h4>&#149;</a></li>
-        <li><a href="#"><h4>Explore</h4>&#149;</a></li>
-        <li><a href="#"><h4>About</h4>&#149;</a></li>
+        <li><a href="#"><h4>In My District</h4><span class="hidden-xs">&#149;</span></a></li>
+        <li><a href="#"><h4>Explore</h4><span class="hidden-xs">&#149;</span></a></li>
+        <li><a href="#"><h4>About</h4><span class="hidden-xs">&#149;</span></a></li>
         <li><a href="#"><h4>Get Involved</h4></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
-  </div><!-- /.container -->
+  </div><!-- /.container-fluid -->
 </nav>
 </header>
 

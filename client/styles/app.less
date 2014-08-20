@@ -64,6 +64,10 @@ section {
 	color: @cc-gray-dark;
 }
 
+.navbar .brand {
+	margin-top: 10px;
+}
+
 .navbar-header {
 	@media (max-width: @screen-xs-max){
 		padding: 0 15px;
@@ -79,7 +83,7 @@ section {
 }
 
 .navbar-right {
-	float: right;
+	//float: right;
 }
 
 .navbar-nav {
@@ -288,10 +292,10 @@ ul.nav-tabs li > a {
 
 }
 .show-all {
-	border-bottom: 2px solid @cc-blue-light;
+	border-bottom: 1px solid @cc-blue-light;
 }
 .tab-content .row {
-	margin: -10px 0 0 0;
+	margin: 0;
 	padding: 15px 0;
 	background-color: #fff;
 }
@@ -310,7 +314,6 @@ ul.nav-tabs li > a {
 }
 
 
-
 ///////
 
 ul.candidate-list {
@@ -323,6 +326,10 @@ ul.candidate-list li {
 	border-bottom: 2px solid @cc-blue-light;
 	height: auto;
 	padding: 30px;
+}
+
+ul.candidate-list {
+	margin-top: -10px;
 }
 
 ul.candidate-list li:hover{
@@ -348,12 +355,10 @@ ul.candidate h4.chamber {
    background-color: white; 
  }
 
-
-
 .map {
   //margin-top: 10%;
   display: block;
-  height: 300px;
+  height: 450px;
 }
 
 
@@ -375,15 +380,6 @@ ul.candidate h4.chamber {
 //   right: 0;
 // }
 
-// .search {
-//   width: 40%;
-//   margin: auto;
-//   position: absolute;
-//   top:0;
-//   bottom: 0;
-//   left: 0;
-//   right: 0;
-// }
 
 
 
