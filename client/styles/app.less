@@ -64,10 +64,6 @@ section {
 	color: @cc-gray-dark;
 }
 
-.navbar .brand {
-	margin-top: 10px;
-}
-
 .navbar-header {
 	@media (max-width: @screen-xs-max){
 		padding: 0 15px;
@@ -83,7 +79,7 @@ section {
 }
 
 .navbar-right {
-	//float: right;
+	float: right;
 }
 
 .navbar-nav {
@@ -122,13 +118,12 @@ ul.navbar-nav li:last-child h4, ul.navbar-nav li:last-child a {
 }
 
 .landing-box ul li {
-	//height: 60px;
-	//padding-bottom: 30px;
-	display: inline;
+	height: 60px;
+	padding-bottom: 30px;
 }
 
 .landing-box ul li div {
-	//padding-top: 12px;
+	padding-top: 12px;
 	height: auto;
 }
 
@@ -137,17 +132,15 @@ ul.navbar-nav li:last-child h4, ul.navbar-nav li:last-child a {
 	padding: 10px;
 	clear: both;
 }
-
-.box-text  {
-	margin-top: 20px;
+ul.box-text li div {
+	height: 100px;
 }
-
 .landing-box-involved h3, .landing-box-involved a {
 	color: @cc-blue-light;
 }
 
 .landing-box-involved p.indent {
-	padding-left: 70px;
+	margin-left: 70px;
 }
 
 .landing-box-races h3, .landing-box-races a {
@@ -163,7 +156,7 @@ ul.navbar-nav li:last-child h4, ul.navbar-nav li:last-child a {
 
 .map-section {
 	background-color: @cc-gray-map-section;
-	height: auto;
+	height: 600px;
 }
 
 .landing-side {
@@ -292,10 +285,10 @@ ul.nav-tabs li > a {
 
 }
 .show-all {
-	border-bottom: 1px solid @cc-blue-light;
+	border-bottom: 2px solid @cc-blue-light;
 }
 .tab-content .row {
-	margin: 0;
+	margin: -10px 0 0 0;
 	padding: 15px 0;
 	background-color: #fff;
 }
@@ -314,6 +307,7 @@ ul.nav-tabs li > a {
 }
 
 
+
 ///////
 
 ul.candidate-list {
@@ -326,10 +320,6 @@ ul.candidate-list li {
 	border-bottom: 2px solid @cc-blue-light;
 	height: auto;
 	padding: 30px;
-}
-
-ul.candidate-list {
-	margin-top: -10px;
 }
 
 ul.candidate-list li:hover{
@@ -348,37 +338,6 @@ ul.candidate h4.chamber {
 	bottom: 0;
 }
 
-////// map
-
-.googft-info-window {
-   color: black;
-   background-color: white; 
- }
-
-.map {
-  //margin-top: 10%;
-  display: block;
-  height: 450px;
-}
-
-
-.frame{
-  margin-top: 10%;
-}
-.search-box{
-  margin-left: 10%;
-  margin-top: 20%;
-}
-
-// .search {
-//   width: 40%;
-//   margin: auto;
-//   position: absolute;
-//   top:0;
-//   bottom: 0;
-//   left: 0;
-//   right: 0;
-// }
 
 
 

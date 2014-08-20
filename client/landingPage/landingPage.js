@@ -12,24 +12,6 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
 
 .controller('SearchController', function($scope, DataRequestFactory, $rootElement, $location, $q, $state){
   
-$scope.$on('mapInitialized', function(event, map) {
-  var layerDistricts = new google.maps.FusionTablesLayer({
-        query: {
-          select: 'col0',
-          from: '1BAwVHJLmofCdgz3ewBHN_42SHqjK7VV3sfek26Fm'
-        }
-      });
-  var layerKochRecipients = new google.maps.FusionTablesLayer({
-      query: {
-        select: 'col6',
-        from: '1yD-ZmXy4Lgo4DC9-HmvwxYcvcYfIDzZdNpJEKvtx'
-      }
-  });
-  
-  layerDistricts.setMap(map);
-  layerKochRecipients.setMap(map);
-});
-  
   $scope.search = function(){
     // DataRequestFactory.redirectPath;
     //<------------this is for sending data to the server---->
