@@ -24,19 +24,31 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
 
   $scope.$on('mapInitialized', function(event, map) {
     // Adding test comment
-    var layerDistricts = new google.maps.FusionTablesLayer({
-        query: {
-          select: 'col0',
-          from: '1BAwVHJLmofCdgz3ewBHN_42SHqjK7VV3sfek26Fm'
-        }
-      });
+    // var layerDistricts = new google.maps.FusionTablesLayer({
+    //     query: {
+    //       select: 'col0',
+    //       from: '1BAwVHJLmofCdgz3ewBHN_42SHqjK7VV3sfek26Fm'
+    //     }
+    //   });
+   var layerDistricts = new google.maps.FusionTablesLayer({
+      query: {
+        select: 'col0',
+        from: '1BAwVHJLmofCdgz3ewBHN_42SHqjK7VV3sfek26Fm'
+      },
+      styles: [{
+    polygonOptions: {
+      fillColor: '#F0F0F0',
+      fillOpacity: 0.5
+    }
+    }]      
+  });
     var layerKochRecipients = new google.maps.FusionTablesLayer({
       query: {
         select: 'col6',
         from: '1yD-ZmXy4Lgo4DC9-HmvwxYcvcYfIDzZdNpJEKvtx'
       }
     });
-  
+
     layerDistricts.setMap(map);
     layerKochRecipients.setMap(map);
     });
