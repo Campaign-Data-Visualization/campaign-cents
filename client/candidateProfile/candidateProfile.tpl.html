@@ -1,15 +1,12 @@
 <div ng-controller="CandidateProfileController" ng-init="loadCandidates()">
     <div class="container">
-      <div class="col-sm-3 col-xs-12 sidebar center">
-
-      map image here <br/>
-
-        <img src="images/icon-clock.png">
+      <div class="col-md-4 col-xs-12 sidebar center">
+        <img class="img-responsive visible-md visible-lg" src="images/state-fl-test.png">
+        <img class="clock" src="images/icon-clock.svg">
         <h3>Every minute, the Koch brothers donate more than $2,300 to various 2014 candidates and political organizations.</h3>
-
       </div> <!-- /.sidebar -->
-      <div class="col-sm-9 col-xs-12 candidate-main">      
-        <ul class="nav nav-tabs" id="myTab">
+      <div class="col-md-8 col-xs-12 candidate-main">      
+         <ul class="nav nav-tabs" id="myTab">
           <li class="active"><a data-target="#candidates" data-toggle="tab">Candidates</a></li>
           <li><a data-target="#organizations" data-toggle="tab">Organizations</a></li>
           <li><a data-target="#universities" data-toggle="tab">Universities</a></li>
@@ -36,17 +33,8 @@
               </div>
             <div class="col-sm-9 col-xs-12">
               <h4 class="center">Total Funding From Funder Organizations</h4>
-              
-              <!-- this is definitely very wrong but it does correctly generate shapes with right radius ... --> 
-
-            <!--   <svg id="total-funding"  ng-repeat="donor in funding.donors| orderBy: -'amount' | limitTo: 10">
-                <circle r="{{donor.amount}}"></circle>
-              </svg>
-                 -->
-               <!--  <svg>
-                  <circle cx="40" cy="60" r="30"></circle>
-               </svg> -->
-              </div>
+              <!-- data viz here -->
+            </div>
             </div>
             <div class="row">
               <div class="col-xs-12">
@@ -59,97 +47,31 @@
                 <p>{{politician.bio}}</p>
               </div>
             </div>
-           <div class="row get-involved center">
-            <div class="col-xs-12">
-              <h3>GET INVOLVED</h3>
+            <div class="row get-involved center">
+              <div class="col-xs-12">
+                <h3>GET INVOLVED</h3>
+              </div>
+              <div class="col-sm-3 col-xs-12">
+                <img src="images/icon-camera-red.svg">
+                <p>Watch <a href="#">Koch Brothers</a> Exposed online or <a href="#">Citizen Koch</a> at a local screening</p>
+              </div>
+              <div class="col-sm-3 col-xs-12">
+                <img src="images/icon-clipboard-red.svg">
+                <p>Start an <a href="#">anti-Koch campaign</a> or petition</p>
+              </div>
+              <div class="col-sm-3 col-xs-12">
+                <img src="images/icon-people-red.svg">
+                <p>Join a local <a href="#">MoveOn Council</a></p>
+              </div>
+              <div class="col-sm-3 col-xs-12">
+                <img src="images/icon-megaphone-red.svg">
+                <p>Report a <a href="#">Koch Problem</a> in your area</p>
+              </div>
             </div>
-            <div class="col-sm-3 col-xs-12">
-              <img src="images/icon-camera-red.png">
-              <p>Watch <a href="#">Koch Brothers</a> Exposed online or <a href="#">Citizen Koch</a> at a local screening</p>
-            </div>
-            <div class="col-sm-3 col-xs-12">
-              <img src="images/icon-clipboard-red.png">
-              <p>Start an <a href="#">anti-Koch campaign</a> or petition</p>
-            </div>
-            <div class="col-sm-3 col-xs-12">
-              <img src="images/icon-people-red.png">
-              <p>Join a local <a href="#">MoveOn Council</a></p>
-            </div>
-            <div class="col-sm-3 col-xs-12">
-              <img src="images/icon-megaphone-red.png">
-              <p>Report a <a href="#">Koch Problem</a> in your area</p>
-            </div>
-           </div>
-
-
           </div> <!-- /#candidates -->
           <div class="tab-pane" id="organizations">Organizations</div> <!-- /#organizations -->
           <div class="tab-pane" id="universities">Universities</div> <!-- /#universities -->
         </div> <!-- /.tab-content -->
-
-
-<!--       ////////////////
- -->          
-<!--  <div class="col-md-4">
-             <div class="row">
-              <h1 class="text-center headline"> {{candidates.results[0].first_name}} {{candidates.results[0].last_name}}  </h1>
-              <img class="img-responsive not-overlapped rounded-corners" src="http://theunitedstates.io/images/congress/450x550/{{candidates.results[0].bioguide_id}}.jpg">
-            </div>
-
-             <div class="row">
-              <h3 class="text-center headline"> Top Organization Donors </h3>
-              <div class="panel panel-default panel-middle">
-                <div class="panel-heading panel-middle">Donors by Organization</div>
-                  <table class="table">
-                    <tr ng-repeat="donor in funding.donors| orderBy: -'amount' | limitTo: 10"> 
-                      <td class="donor-row" >{{ donor.title }}</td>
-                      <td class="donor-row" >{{donor.amount}}</td> 
-                    </tr>
-                  </table>
-              </div>
-             </div>
-              <div class="row">
-              <h3 class="text-center headline"> Angular Info</h3>
-              <div class="panel panel-default panel-middle">
-                <div class="panel-heading panel-middle">Politician Details</div>
-                  <table class="table">
-                    <tr> 
-                        <td>First Name: {{candidates.results[0].first_name}}</td>
-                    </tr>
-                     <tr> 
-                        <td>Last Name: {{candidates.results[0].last_name}}</td>
-                    </tr>
-                    <tr> 
-                        <td>Party: {{candidates.results[0].party}}</td>
-                    </tr>
-                    <tr> 
-                        <td>ID: {{candidates.results[0].bioguide_id}}</td>
-                    </tr>
-                  </table>
-              </div>
-             </div>
-          </div>
-          <div class="col-md-7">
-            <h3 class="text-center headline"> Tier 1 and 2 Donors </h3>
-              <div class="panel panel-default panel-middle">
-                <div class="panel-heading">Total Funding From Funder Organizations</div>
-                  <table class="table">
-                    <tr> 
-                      <td class="donor-row" >Tier One Contributions: {{tierOne}}</td>
-                    </tr>
-                    <tr>
-                      <td class="donor-row" >Tier Two Contributions: {{tierTwo}}</td> 
-                    </tr>
-                  </table>
-              </div>
-              <div class="panel panel-default panel-middle">
-                <div class="panel-heading">Politician Information</div>
-                {{politician.bio}}
-              </div>
-              <a href="" class="take-action btn btn-lg btn-primary">Take Action!</a>
-          </div> -->
-
-
       </div><!--  /.candidate-main -->
   </div>
 </div>
