@@ -23,6 +23,7 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
   };
 
   $scope.$on('mapInitialized', function(event, map) {
+    // Adding test comment
     var layerDistricts = new google.maps.FusionTablesLayer({
         query: {
           select: 'col0',
@@ -40,7 +41,7 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
     layerKochRecipients.setMap(map);
     });
 
-  $scope.message = 'Search for a zip code / candidate / organization below';
+  $scope.message = 'Search for a zip code / candidate';
   
   //this function gets the current location of the user and saves it as $scope.position
   // $scope.getLocation = function(){
