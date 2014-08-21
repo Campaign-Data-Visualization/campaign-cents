@@ -1,8 +1,11 @@
-(function (angular){
-  'use strict';
+/**
+ * Angucomplete
+ * Autocomplete directive for AngularJS
+ * By Daryl Rowland
+ */
 
-  angular.module('myApp')
-  .directive('angucomplete', function ($parse, $http, $sce, $timeout) {
+angular.module('angucomplete', [] )
+    .directive('angucomplete', function ($parse, $http, $sce, $timeout) {
     return {
         restrict: 'EA',
         scope: {
@@ -241,6 +244,3 @@
     };
 });
 
-
-
-}(angular));
