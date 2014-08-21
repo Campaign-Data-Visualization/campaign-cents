@@ -13,12 +13,13 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
 .controller('SearchController', function($scope, DataRequestFactory, $rootElement, $location, $q, $state){
   
   $scope.search = function(){
-    console.log("search function is firing")
-    var fullInput = $scope.result;
+    console.log($scope.result)
+    var fullInput = $scope.result.originalObject.fullName;
+    console.log(fullInput)
     var firstFiveCharactersOfInput = fullInput.slice(0,5);
     if(isNaN(firstFiveCharactersOfInput)){
       console.log("candidate: ", fullInput)
-      $state.go('myApp.main.candidateProfile',{input: fullInput });
+      $state.go('myApp.main.candidateProfile',{input: fullInput, id: $scope.result.originalObject.voteSmartId });
     }else if(!isNaN(firstFiveCharactersOfInput)){
       console.log("zip: ", firstFiveCharactersOfInput);
       $state.go('myApp.main.candidateList',{input: firstFiveCharactersOfInput });
