@@ -54,7 +54,7 @@ module.exports = exports = {
       request(options, function (error, response, body){
         if (!error && response.statusCode == 200){
           parseString(body, function(err, result){
-            var arrayOfCandidates = result.candidateList.candidate
+            var arrayOfCandidates = result.candidateList.candidate;
             res.send({type:'zip', arrayOfCandidates: arrayOfCandidates});
           })
         }

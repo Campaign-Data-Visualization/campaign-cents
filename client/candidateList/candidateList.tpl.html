@@ -3,7 +3,7 @@
       <div class="col-md-4 col-xs-12 sidebar center">
         <img class="img-responsive visible-md visible-lg" src="images/state-fl-test.png">
         <img class="clock" src="images/icon-clock.svg">
-        <h3>Every minute, the Koch brothers donate more than $2,300 to various 2014 candidates and political organizations. {{candidates.data.arrayOfCandidates}}</h3>
+        <h3>Every minute, the Koch brothers donate more than $2,300 to various 2014 candidates and political organizations. </h3>
       </div> <!-- /.sidebar -->
       <div class="col-md-8 col-xs-12 candidate-main">      
         <ul class="nav nav-tabs" id="myTab">
@@ -17,12 +17,12 @@
           <div class="tab-pane active" id="candidates">
             <ul class="candidate-list candidate-list-senate" ng-repeat="candidate in candidates.data.arrayOfCandidates">
               <li class="col-xs-12">
-               <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" src="http://votesmart.org/canphoto/135705.jpg">  
-                <h2>{{candidate.ballotName}}</h2>
+               <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" src="http://votesmart.org/canphoto/{{candidate.candidateId[0]}}.jpg">  
+                <h2>{{candidate.ballotName[0]}}</h2>
                 <!--need variable for incumbent or candidate-->       
-                <h3>{{candidate.officeParties}}, Incumbent</h3>
+                <h3>{{candidate.officeParties[0]}} Party, Incumbent</h3>
                 <!-- need to pull variable for which state -->
-                <h4 class="chamber">{{candidate.electionOffice}}</h4>
+                <h4 class="chamber">{{candidate.electionOffice[0]}}, {{candidate.electionStateId[0]}}</h4>
               </li>
             </ul>
           <!-- GET INVOLVED -->
