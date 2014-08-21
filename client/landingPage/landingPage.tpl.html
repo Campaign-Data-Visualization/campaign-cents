@@ -33,9 +33,20 @@
               <div class="form-group">
                 <label><h1>Find Koch Cash in Your Area</h1></label>
                 <!-- <input text-angular ng-model="searchInput" type="text" class="input-group col-xs-12"  placeholder={{message}}> -->
-                 <autocomplete class="input-group col-xs-12" ng-model="result" attr-placeholder={{message}} click-activation="true" data="people" on-type="doSomething" on-select="doSomethingElse"></autocomplete>
-
-                 <button class=" btn btn-md btn-detault searchButton" type="submit" ng-click="search()">GO</button>
+                 
+                 <!-- <autocomplete class="input-group col-xs-12" ng-model="result" attr-placeholder={{message}} click-activation="true" data="people" on-type="doSomething" on-select="doSomethingElse"></autocomplete> -->
+                 
+                 <!-- <angucomplete id="ex1"
+                  placeholder={{message}}
+                  pause="100"
+                  selectedobject="selectedCountry"
+                  localdata="countries"
+                  searchfields="name"
+                  titlefield="FirstName,LastName"
+                  minlength="1"
+                  inputclass="form-control form-control-small"/> -->
+                  <angucomplete id="ex2" placeholder={{message}} pause="400" selectedobject="result" localdata="candidates" searchfields="firstName,lastName" titlefield="firstName,lastName" descriptionfield="info" minlength="3" inputclass="input-group col-xs-12"/>
+                   <button class=" btn btn-md btn-detault searchButton" type="submit" ng-click="search()">GO</button>
               </div>
             </form>
           </div>

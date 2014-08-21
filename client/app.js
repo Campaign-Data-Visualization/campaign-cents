@@ -4,7 +4,7 @@
     'ui.router',
     'ngFx',
     'myApp.main',
-    'autocomplete'])
+    'angucomplete'])
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/myApp/main/landingPage');
 
