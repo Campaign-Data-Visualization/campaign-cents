@@ -28,7 +28,7 @@ module.exports = exports = {
     if(isNaN(candidateOrganizationZipcode)){
       var firstFiveChar = candidateOrganizationZipcode.slice(0,5);
     }else{
-      var firstFiveChar = candidateOrganizationZipcode
+      var firstFiveChar = candidateOrganizationZipcode;
     }
 
     //sort based on zip vs candidate name
