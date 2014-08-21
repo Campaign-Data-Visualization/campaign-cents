@@ -15,27 +15,23 @@
           <div class="tab-pane active" id="candidates">
             <div class="row show-all">
               <div class="col-xs-12">
-              <!-- need to link to candidate list -->
                 <h3><span class="glyphicon glyphicon-chevron-left"></span> Show All Candidates</h3>
               </div>
               </div>
-            <div class="row">
-              <div class="col-xs-12">
-               <h2>{{candidates.results[0].first_name}} {{candidates.results[0].last_name}}</h2>
-              <!-- can we grab full party name rather than "R" and "D" ?-->
-              <!-- also here need to grab incumbent/candidate status - I have hardcoded this-->
-               <h3>{{candidates.results[0].party}}, Incumbent</h3>
+              <div class="col-xs-12 candidate-active">  
+                <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" src="http://upload.wikimedia.org/wikipedia/commons/0/08/Official_Photo_of_Senator_Jeff_Bingaman_(D-NM)_2008.jpg">
+                <h2>{{candidates.results[0].first_name}} {{candidates.results[0].last_name}}</h2>
+                <!--need variable for incumbent or candidate-->       
+                <h3>{{candidates.results[0].party}}, Incumbent</h3>
+                <!-- need to pull variable for which state -->
+                <h4 class="chamber">US Senate, State of Texas</h4>
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-3 col-xs-12">
-                <img class="img-responsive not-overlapped" src="http://theunitedstates.io/images/congress/450x550/{{candidates.results[0].bioguide_id}}.jpg">
-              </div>
-            <div class="col-sm-9 col-xs-12">
+            <div class="col-xs-12">
               <h4 class="center">Total Funding From Funder Organizations</h4>
-              <!-- data viz here -->
             </div>
-            </div>
+            </div> 
             <div class="row">
               <div class="col-xs-12">
                 <h4 class="center">Top Donors by Organization</h4>
