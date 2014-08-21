@@ -6,6 +6,7 @@
     var path =  '/candidateList';
     var inputValue = {};
     var candList = {};
+    var candidates = {};
     var getData = function(input, callback){
       return $http({
         method: 'POST',
@@ -21,23 +22,23 @@
         console.log("Response type: ", response.data.type);
         console.log(response.data.arrayOfCandidates);
 
-        var arrayOfCandidates = response.data.arrayOfCandidates;
-        return arrayOfCandidates
+        candidates.list = response.data.arrayOfCandidates;
+        return candidates;
 
         }else if(response.data.type === 'candidate'){
+
+          console.log("<---------response received------->")
+          console.log("Response type: ", response.data.type);
+          console.log(response.data.arrayOfCandidates);
     
         }
-        console.log("<---------response received------->")
-        console.log("Response type: ", response.data.type);
-        console.log(response.data.arrayOfCandidates);
 
       })
 
     };
-      return {
-        'inputValue': inputValue,
-        // 'candList': arrayOfCandidates,
-        'getData': getData
-      };
+    return {
+      'getData': getData,
+      'candList': candidates
+    };
   });
 // }(angular));
