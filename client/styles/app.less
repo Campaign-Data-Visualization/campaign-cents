@@ -15,7 +15,6 @@
 @font-family-serif: 'rockwellRegular';
 @font-family-sans-serif: 'ubuntuRegular';
 
-
 h1, h2, h3 {
 	font-family: @font-family-serif;
 	padding: 0;
@@ -55,6 +54,17 @@ section {
 	text-align: center
 }
 
+.gradient-vertical {
+background: rgba(255,255,255,1);
+background: -moz-linear-gradient(-45deg, rgba(255,255,255,1) 0%, rgba(225,225,225,1) 100%);
+background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(225,225,225,1)));
+background: -webkit-linear-gradient(-45deg, rgba(255,255,255,1) 0%, rgba(225,225,225,1) 100%);
+background: -o-linear-gradient(-45deg, rgba(255,255,255,1) 0%, rgba(225,225,225,1) 100%);
+background: -ms-linear-gradient(-45deg, rgba(255,255,255,1) 0%, rgba(225,225,225,1) 100%);
+background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(225,225,225,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e1e1e1', GradientType=1 );
+}
+
 //navbar
 @navbar-height: 120px;
 
@@ -64,17 +74,27 @@ section {
 	color: @cc-gray-dark;
 }
 
+.navbar .brand {
+	width: auto;
+}
+
+.navbar .brand img {
+	height: 150px;
+	margin-bottom: -30px
+}
+
 .navbar-header {
-	@media (max-width: @screen-xs-max){
-		padding: 0 15px;
+	padding: 0 15px;
+	@media (min-width: @screen-sm-min){
+		padding: inherit;
 	}
 }
 
 .navbar-left {
-	padding: 15px 0;
-	vertical-align: middle;
-	@media (max-width: @screen-xs-max){
-		padding-left: 15px;
+	padding-left: 15px;
+	@media (min-width: @screen-sm-min){	
+		padding: 15px 0;
+		vertical-align: middle;
 	}
 }
 
@@ -96,7 +116,6 @@ ul.navbar-nav li:last-child h4, ul.navbar-nav li:last-child a {
 	padding-right: 0;
 }
 
-
 //landing page
 
 .landing-box h3 {
@@ -108,8 +127,9 @@ ul.navbar-nav li:last-child h4, ul.navbar-nav li:last-child a {
 .landing-box p {
 	font-size: 16px;
 	line-height: 25px;
-	@media (max-width: @screen-xs-max) {
-		padding-bottom: 30px;
+	padding-bottom: 30px;
+	@media (min-width: @screen-sm-min) {
+		padding-bottom: 0;
 	}
 }
 
@@ -139,10 +159,6 @@ ul.box-text li div {
 	color: @cc-blue-light;
 }
 
-.landing-box-involved p.indent {
-	margin-left: 70px;
-}
-
 .landing-box-races h3, .landing-box-races a {
 	color: @cc-teal;
 }
@@ -151,55 +167,73 @@ ul.box-text li div {
 	color: @cc-green;
 }
 
-
 ///////////
 
 .map-section {
 	background-color: @cc-gray-map-section;
-	height: 600px;
+	height: auto;
 }
 
-.landing-side {
+.map-sidebar-container {	
 	text-align: center;
-	padding-bottom: 60px;
+	height: auto;
+	@media (min-width: @screen-xs-max) {
+		height: 450px;
+		position: relative;
+	}
 }
 
-.landing-side-ticker h1 {
-	margin-top: 27px;
+.map-sidebar {
+	margin-top: 30px;
+	@media (min-width: @screen-xs-max) {
+		margin-top: inherit;
+	}
+}
+
+.map-sidebar-ticker h1 {
 	letter-spacing: 2px;
 	text-align: center;
 	font-family: @font-family-sans-serif;
 	color: @cc-gray-dark;
 }
 
-.landing-side-ticker h1 span, .landing-side-calendar h1 span {
+.map-sidebar-ticker h1 span, .landing-side-calendar h1 span {
 	color: @cc-blue-light;
 	height: 50px;
 }
-.landing-side-ticker h1 span {
+.map-sidebar-ticker h1 span {
 	//border-right: 1px solid @cc-gray-dark;
 	text-align: center;
 	background: url('../images/bg-counter.svg') repeat center;
-
 }
 
-.landing-side-ticker h1 span:first-child {
+.map-sidebar-ticker h1 span:first-child {
 	//border-left: 1px solid @cc-gray-dark;
 }
 
-
-.landing-side-search {
+.map-sidebar-search {
 	background-color: @cc-gray-search;
 	padding: 25px;
 	width: auto;
+	position: relative;
+	@media (min-width: @screen-sm-min) {
+		position: absolute;
+		bottom: 0;
+	}
 }
 
-.landing-side-search h1 {
+.map-sidebar-search h1 {
 	margin: 0;
 	color: #000;
 }
 
-.landing-side-calendar h1 span {
+.map-sidebar-calendar {
+	@media (min-width: @screen-sm-min) {
+		margin-top: 60px;
+	}
+}
+
+.map-sidebar-calendar h1 span {
 	background-color: #fff;
 	margin-right: 5px;
 	padding: 0 10px;
@@ -208,11 +242,11 @@ ul.box-text li div {
 	box-shadow:         4px 4px 1px 0px rgba(50, 50, 50, 0.62);
 }
 
-.landing-side-search input {
+.map-sidebar-search input {
 	border: 3px #000 solid;
 }
 
-.landing-side-search .btn {
+.map-sidebar-search .btn {
 	background-color: #000;
 	color: #fff;
 	margin-top: 10px;
@@ -221,9 +255,9 @@ ul.box-text li div {
 //candidate sidebar 
 
 .sidebar {
-	padding: 30px 30px 30px 0;
-	@media (max-width: @screen-xs-max) {
-		padding: 30px 0;
+	padding: 30px 0;
+	@media (min-width: @screen-md-min) {
+		padding: 0 30px 30px 0;
 	}
 }
 
@@ -232,15 +266,23 @@ ul.box-text li div {
 	text-shadow: 0 1px 0 #fff;
 }
 
-////candidate page
-
-.candidate-main {
-	//background-color: #fff;
-	padding: 0;
-	margin-top: 30px;
+.sidebar .clock {
+	margin-bottom: 10px;
 }
 
-//need to make bold when we buy the full font-kit
+////candidate page
+
+.tab-content .row {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+
+.candidate-main {
+	margin-top: 15px;
+}
+
+//need to make bold
 .candidate-main h1, .candidate-main h2, .candidate-main h3 {
 	color: @cc-blue-light;
 }
@@ -285,14 +327,12 @@ ul.nav-tabs li > a {
 
 }
 .show-all {
-	border-bottom: 2px solid @cc-blue-light;
+	border-bottom: 1px solid @cc-blue-light;
 }
 .tab-content .row {
-	margin: -10px 0 0 0;
 	padding: 15px 0;
 	background-color: #fff;
 }
-
 
 .get-involved h3, .get-involved p a {
 	color: @cc-red;
@@ -306,13 +346,12 @@ ul.nav-tabs li > a {
 	padding-bottom: 15px;
 }
 
-
-
 ///////
 
 ul.candidate-list {
 	display: block;
 	padding-left: 0;
+	margin-top: -10px;
 }
 
 ul.candidate-list li {
@@ -337,7 +376,3 @@ ul.candidate h4.chamber {
 	position: absolute;
 	bottom: 0;
 }
-
-
-
-
