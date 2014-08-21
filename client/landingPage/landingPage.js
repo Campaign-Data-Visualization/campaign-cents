@@ -14,7 +14,7 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
   
   $scope.search = function(){
     console.log("search function is firing")
-    var fullInput = $scope.searchInput;
+    var fullInput = $scope.result;
     var firstFiveCharactersOfInput = fullInput.slice(0,5);
     if(isNaN(firstFiveCharactersOfInput)){
       console.log("candidate: ", fullInput)
@@ -63,7 +63,10 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
   //     }
   //  )}();
 
-  $scope.candidates = [{"FirstName":"Aaron","LastName":"Miller","VoteSmartID":146028},
+
+  $scope.people = ['John','Kevin', 'Liam'];
+
+$scope.candidates = [{"FirstName":"Aaron","LastName":"Miller","VoteSmartID":146028},
 {"FirstName":"Aaron","LastName":"Miller","VoteSmartID":149682},
 {"FirstName":"Aaron","LastName":"Fraser","VoteSmartID":152118},
 {"FirstName":"Aaron","LastName":"Woolf","VoteSmartID":152538},
