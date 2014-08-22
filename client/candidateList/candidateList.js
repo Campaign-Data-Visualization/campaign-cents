@@ -10,6 +10,14 @@ angular.module('myApp.main.candidateList', ['ui.router'])
       controller: 'CandidateListController'
     });
 })
+// Filters out congressman with regular expression selecting for first character of U
+.filter('filterCongress', function () {  
+  return function (candidates) {
+    return candidates.filter(function (candidate) {
+      return /U/i.test(candidate.electionOffice[0].substring(0, 1));
+    });
+  };
+})
 .controller('CandidateListController', function($scope, $stateParams, DataRequestFactory) {
   // filter candidates by zipcode input from search page
   $scope.input = $stateParams.input;
