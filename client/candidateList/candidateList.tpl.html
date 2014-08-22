@@ -1,17 +1,19 @@
 <div ng-controller="CandidateListController">
     <div class="container">
       <div class="col-md-4 col-xs-12 sidebar center">
-        <img class="img-responsive visible-md visible-lg" src="images/state-fl-test.png">
+        <div ng-repeat="candidate in candidates.data.arrayOfCandidates | filterCongress | limitTo:1">
+          <img class="img-responsive visible-md visible-lg" src="images/states/states_state-{{candidate.electionStateId[0]}}.png">
+        </div>
         <img class="clock" src="images/icon-clock.svg">
         <h3>Every minute, the Koch brothers donate more than $2,300 to various 2014 candidates and political organizations. </h3>
       </div> <!-- /.sidebar -->
       <div class="col-md-8 col-xs-12 candidate-main">      
         <ul class="nav nav-tabs" id="myTab">
+        <!-- til we add other tab sections -->
           <!-- <li class="active"><a data-target="#candidates" data-toggle="tab">Candidates</a></li> -->
 <!--           <li><a data-target="#organizations" data-toggle="tab">Organizations</a></li>
           <li><a data-target="#universities" data-toggle="tab">Universities</a></li> -->
         </ul>
-        
         <!-- Candidates List -->
        <div class="tab-content">
           <div class="tab-pane active" id="candidates">
@@ -19,9 +21,8 @@
               <li class="col-xs-12">
                <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" ng-src="http://votesmart.org/canphoto/{{candidate.candidateId[0]}}.jpg" err-src="../images/nophoto.jpeg">  
                 <h2>{{candidate.ballotName[0]}}</h2>
-                <!--need variable for incumbent or candidate-->       
-                <h3>{{candidate.officeParties[0]}} Party, Incumbent</h3>
-                <!-- need to pull variable for which state -->
+                <h3>{{candidate.officeParties[0]}} Party</h3>
+                <!-- need to add incumbent/not here -->
                 <h4 class="chamber">{{candidate.electionOffice[0]}}, {{candidate.electionStateId[0]}}</h4>
               </li>
             </ul>
