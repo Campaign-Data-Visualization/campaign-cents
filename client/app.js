@@ -3,7 +3,8 @@
   angular.module('myApp', [
     'ui.router',
     'ngFx',
-    'myApp.main'])
+    'myApp.main',
+    'autocomplete'])
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/myApp/main/landingPage');
 
