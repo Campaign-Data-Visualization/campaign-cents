@@ -28,7 +28,7 @@ module.exports = exports = {
     if(isNaN(candidateOrganizationZipcode)){
       var firstFiveChar = candidateOrganizationZipcode.slice(0,5);
     }else{
-      var firstFiveChar = candidateOrganizationZipcode
+      var firstFiveChar = candidateOrganizationZipcode;
     }
 
     //sort based on zip vs candidate name
@@ -54,7 +54,7 @@ module.exports = exports = {
       request(options, function (error, response, body){
         if (!error && response.statusCode == 200){
           parseString(body, function(err, result){
-            var arrayOfCandidates = result.candidateList.candidate
+            var arrayOfCandidates = result.candidateList.candidate;
             res.send({type:'zip', arrayOfCandidates: arrayOfCandidates});
           })
         }

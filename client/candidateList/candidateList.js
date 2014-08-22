@@ -13,11 +13,19 @@ angular.module('myApp.main.candidateList', ['ui.router'])
 .controller('CandidateListController', function($scope, $stateParams, DataRequestFactory) {
   // filter candidates by zipcode input from search page
   $scope.input = $stateParams.input;
-  $scope.candidates = {'house': [{name: "Marlo Longley", party: "Libertarian/KochParty"},{name: "Liam Dorpalen", party: "Democrat"}], 'senate': [{name: "Liam Dorpalen", party: "Democrat"},{name: "Liam Dorpalen", party: "Democrat"}]};
+  // $scope.candidates = {'house': [{name: "Marlo Longley", party: "Libertarian/KochParty"},{name: "Liam Dorpalen", party: "Democrat"}], 'senate': [{name: "Liam Dorpalen", party: "Democrat"},{name: "Liam Dorpalen", party: "Democrat"}]};
   // DataRequestFactory.getData($stateParams.input, function(arrayOfCandidates){
   //   $scope.candidates = arrayOfCandidates;
-
-  // })
-  
+  //   console.log("This is my candidates array in cand list", $scope.candidates);
+  // }) 
+  // $scope.candidates = DataRequestFactory.getData($stateParams.input, function(){
+  //   // $scope.candidates = candList;
+  //   console.log("Inside the candidates array in cand list");
+  // }); 
+  DataRequestFactory.getData($stateParams.input, function(response){
+    console.log("This is the response", response);
+    $scope.candidates = response;
+    
+  });
 });
 
