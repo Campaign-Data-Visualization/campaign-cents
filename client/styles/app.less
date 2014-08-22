@@ -1,5 +1,4 @@
 @import "less/bootstrap.less";
-
 //fonts 
 
 @font-face {
@@ -8,12 +7,19 @@
 }
 
 @font-face {
+  font-family: 'ubuntuBold';
+  src: url('fonts/ubuntu/Ubuntu-Bold.ttf') format('truetype');
+}
+
+@font-face {
   font-family: 'rockwellRegular';
   src: url('fonts/rockwell/rockwell.ttf') format('truetype');
 }
 
-@font-family-serif: 'rockwellRegular';
+
 @font-family-sans-serif: 'ubuntuRegular';
+@font-family-sans-serif-bold: 'ubuntuBold';
+@font-family-serif: 'rockwellRegular';
 
 h1, h2, h3 {
 	font-family: @font-family-serif;
@@ -72,6 +78,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	background-color: @cc-gray-medium;
 	margin-bottom: 0;
 	color: @cc-gray-dark;
+	font-family: 'ubuntuBold';
 }
 
 .navbar .brand {
@@ -147,14 +154,25 @@ ul.navbar-nav li:last-child h4, ul.navbar-nav li:last-child a {
 	height: auto;
 }
 
-.landing-box ul li img {
+.box-text {
+	padding-top: 15px;
+}
+
+ul.box-text li div {
+	height: 100px;
+}
+
+.landing-box-involved .box-text > div p {
+	margin-top: 5px;
+}
+
+.landing-box-involved img {
 	float: left;
 	padding: 10px;
 	clear: both;
 }
-ul.box-text li div {
-	height: 100px;
-}
+
+
 .landing-box-involved h3, .landing-box-involved a {
 	color: @cc-blue-light;
 }
@@ -174,6 +192,20 @@ ul.box-text li div {
 	height: auto;
 }
 
+.legend {
+	height: 35px;
+}
+.legend p {
+	position: absolute;
+	bottom: 0;
+	left: 60px;
+}
+.legend img {
+	float: left;
+	margin: 10px;
+	border: 2px solid #000;
+}
+
 .map-sidebar-container {	
 	text-align: center;
 	height: auto;
@@ -183,11 +215,22 @@ ul.box-text li div {
 	}
 }
 
+.map-sidebar-container p {
+	width: 120px;
+	margin: 0 auto;
+	text-align: center;
+}
+
 .map-sidebar {
 	margin-top: 30px;
+	text-align: center;
 	@media (min-width: @screen-xs-max) {
 		margin-top: inherit;
 	}
+}
+
+.map-sidebar h1 {
+	margin-bottom: 10px;
 }
 
 .map-sidebar-ticker h1 {
@@ -197,23 +240,23 @@ ul.box-text li div {
 	color: @cc-gray-dark;
 }
 
-.map-sidebar-ticker h1 span, .landing-side-calendar h1 span {
+.map-sidebar-ticker p {
+	width: auto;
+	text-align: center;
+}
+
+.map-sidebar-ticker h1 span, .map-sidebar-calendar h1 span {
 	color: @cc-blue-light;
 	height: 50px;
 }
 .map-sidebar-ticker h1 span {
-	//border-right: 1px solid @cc-gray-dark;
 	text-align: center;
 	background: url('../images/bg-counter.svg') repeat center;
 }
 
-.map-sidebar-ticker h1 span:first-child {
-	//border-left: 1px solid @cc-gray-dark;
-}
-
 .map-sidebar-search {
 	background-color: @cc-gray-search;
-	padding: 25px;
+	padding: 15px;
 	width: auto;
 	position: relative;
 	@media (min-width: @screen-sm-min) {
@@ -228,14 +271,33 @@ ul.box-text li div {
 }
 
 .map-sidebar-calendar {
+	margin: 0 auto;
+	width: 100px;
+	height: 80px;
+	@media (min-width: @screen-md-min) {
+		padding-top: 30px;		
+	}
 	@media (min-width: @screen-sm-min) {
-		margin-top: 60px;
+		padding-top: 40px;	
 	}
 }
 
-.map-sidebar-calendar h1 span {
-	background-color: #fff;
+.calendar-page {
+	float: left;
 	margin-right: 5px;
+}
+
+.calendar-page img {
+	margin-left: 5px;
+	margin-top: 3px;
+}
+
+// .calendar-page img:last-child {
+// 	clear: both;
+// }
+
+.calendar-page h1 span {
+	background-color: #fff;
 	padding: 0 10px;
 	-webkit-box-shadow: 4px 4px 1px 0px rgba(50, 50, 50, 0.62);
 	-moz-box-shadow:    4px 4px 1px 0px rgba(50, 50, 50, 0.62);
@@ -245,6 +307,7 @@ ul.box-text li div {
 .map-sidebar-search input {
 	border: 3px #000 solid;
 }
+
 
 .map-sidebar-search .btn {
 	background-color: #000;
@@ -329,6 +392,15 @@ ul.nav-tabs li > a {
 .show-all {
 	border-bottom: 1px solid @cc-blue-light;
 }
+
+.candidate-active {
+	padding: 30px;
+}
+
+.candidate-active img {
+	padding: 0 10px 0 0;
+}
+
 .tab-content .row {
 	padding: 15px 0;
 	background-color: #fff;
