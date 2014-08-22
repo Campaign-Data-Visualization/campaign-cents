@@ -8,12 +8,19 @@
 }
 
 @font-face {
+  font-family: 'ubuntuBold';
+  src: url('fonts/ubuntu/Ubuntu-Bold.ttf') format('truetype');
+}
+
+@font-face {
   font-family: 'rockwellRegular';
   src: url('fonts/rockwell/rockwell.ttf') format('truetype');
 }
 
-@font-family-serif: 'rockwellRegular';
+
 @font-family-sans-serif: 'ubuntuRegular';
+@font-family-sans-serif-bold: 'ubuntuBold';
+@font-family-serif: 'rockwellRegular';
 
 h1, h2, h3 {
 	font-family: @font-family-serif;
@@ -72,6 +79,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	background-color: @cc-gray-medium;
 	margin-bottom: 0;
 	color: @cc-gray-dark;
+	font-family: 'ubuntuBold';
 }
 
 .navbar .brand {
@@ -147,11 +155,6 @@ ul.navbar-nav li:last-child h4, ul.navbar-nav li:last-child a {
 	height: auto;
 }
 
-.landing-box ul li img {
-	float: left;
-	padding: 10px;
-	clear: both;
-}
 .box-text {
 	padding-top: 15px;
 }
@@ -159,6 +162,18 @@ ul.navbar-nav li:last-child h4, ul.navbar-nav li:last-child a {
 ul.box-text li div {
 	height: 100px;
 }
+
+.landing-box-involved .box-text > div p {
+	margin-top: 5px;
+}
+
+.landing-box-involved img {
+	float: left;
+	padding: 10px;
+	clear: both;
+}
+
+
 .landing-box-involved h3, .landing-box-involved a {
 	color: @cc-blue-light;
 }
