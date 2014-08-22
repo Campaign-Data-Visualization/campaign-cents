@@ -10,10 +10,11 @@ angular.module('myApp.main.candidateList', ['ui.router'])
       controller: 'CandidateListController'
     });
 })
-.filter('startsWithJ', function () {
+// Filters out congressman with regular expression selecting for first character of U
+.filter('filterCongress', function () {  
   return function (candidates) {
     return candidates.filter(function (candidate) {
-      return /J/i.test(candidate.firstName[0].substring(0, 1));
+      return /U/i.test(candidate.electionOffice[0].substring(0, 1));
     });
   };
 })
