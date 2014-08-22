@@ -1,5 +1,4 @@
 @import "less/bootstrap.less";
-
 //fonts 
 
 @font-face {
@@ -219,6 +218,7 @@ ul.box-text li div {
 .map-sidebar-container p {
 	width: 120px;
 	margin: 0 auto;
+	text-align: center;
 }
 
 .map-sidebar {
@@ -240,7 +240,12 @@ ul.box-text li div {
 	color: @cc-gray-dark;
 }
 
-.map-sidebar-ticker h1 span, .landing-side-calendar h1 span {
+.map-sidebar-ticker p {
+	width: auto;
+	text-align: center;
+}
+
+.map-sidebar-ticker h1 span, .map-sidebar-calendar h1 span {
 	color: @cc-blue-light;
 	height: 50px;
 }
@@ -273,7 +278,7 @@ ul.box-text li div {
 		padding-top: 30px;		
 	}
 	@media (min-width: @screen-sm-min) {
-		padding-top: 10px;	
+		padding-top: 40px;	
 	}
 }
 
