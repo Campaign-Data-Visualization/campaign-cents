@@ -33,7 +33,8 @@
               <div class="form-group">
                 <label><h1>Find Koch Cash in Your Area</h1></label>
                 <input text-angular ng-model="searchInput" type="text" class="input-group col-xs-12"  placeholder={{message}}>
-                <button class=" btn btn-md btn-detault searchButton" type="submit" ui-sref="myApp.main.candidateList({input: searchInput })">GO</button>
+                <!-- <button class=" btn btn-md btn-detault searchButton" type="submit" ui-sref="myApp.main.candidateList({input: searchInput })" >GO</button> -->
+                 <button class=" btn btn-md btn-detault searchButton" type="submit" ng-click="search()">GO</button>
               </div>
             </form>
           </div>

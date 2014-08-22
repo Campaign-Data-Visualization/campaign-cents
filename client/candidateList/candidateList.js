@@ -5,7 +5,7 @@ angular.module('myApp.main.candidateList', ['ui.router'])
 
   $stateProvider
     .state('myApp.main.candidateList', {
-      url: '/search:{input}',
+      url: '/candidate:{input}',
       templateUrl: 'candidateList/candidateList.tpl.html',
       controller: 'CandidateListController'
     });

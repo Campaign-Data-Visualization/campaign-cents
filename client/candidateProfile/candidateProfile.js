@@ -4,7 +4,7 @@ angular.module('myApp.main.candidateProfile', ['ui.router'])
 
   $stateProvider
     .state('myApp.main.candidateProfile', {
-      url: '/candidateProfile',
+      url: '/search:{input}',
       templateUrl: 'candidateProfile/candidateProfile.tpl.html',
       controller: 'CandidateProfileController'
     });

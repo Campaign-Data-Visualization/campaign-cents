@@ -15,7 +15,6 @@
       })
       .then(function(response){
         
-
         if(response.data.type === 'zip'){
 
         console.log("<---------response received------->")
@@ -34,7 +33,6 @@
           callback(response);
     
         }
-
       })
 
     };
