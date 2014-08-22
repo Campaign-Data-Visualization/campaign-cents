@@ -15,7 +15,7 @@
         <!-- Candidates List -->
        <div class="tab-content">
           <div class="tab-pane active" id="candidates">
-            <ul class="candidate-list candidate-list-senate" ng-repeat="candidate in candidates.data.arrayOfCandidates | limitTo: 10">
+            <ul class="candidate-list candidate-list-senate" ng-repeat="candidate in candidates.data.arrayOfCandidates | limitTo: 10 | startsWithJ">
               <li class="col-xs-12">
                <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" src="http://votesmart.org/canphoto/{{candidate.candidateId[0]}}.jpg">  
                 <h2>{{candidate.ballotName[0]}}</h2>

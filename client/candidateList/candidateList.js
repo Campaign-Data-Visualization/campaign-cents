@@ -10,6 +10,13 @@ angular.module('myApp.main.candidateList', ['ui.router'])
       controller: 'CandidateListController'
     });
 })
+.filter('startsWithJ', function () {
+  return function (candidates) {
+    return candidates.filter(function (candidate) {
+      return /J/i.test(candidate.firstName[0].substring(0, 1));
+    });
+  };
+})
 .controller('CandidateListController', function($scope, $stateParams, DataRequestFactory) {
   // filter candidates by zipcode input from search page
   $scope.input = $stateParams.input;
