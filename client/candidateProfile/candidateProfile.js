@@ -10,14 +10,14 @@ angular.module('myApp.main.candidateProfile', ['ui.router'])
     });
 })
 .controller('CandidateProfileController', function ($scope, $http) {
-  $scope.id = "26732";
-  $scope.loadCandidateBio = function(){
-    $http.get(""  + $scope.id + "&o=JSON" 
-   ).success(function (data){
-     console.log('success with get to api', data);
-     $scope.candidateBio = data;
-   }).error(function () {
-       console.log('An unexpected error ocurred!');
-   });
- };
+  // $scope.id = "26732";
+ //  $scope.loadCandidateBio = function(){
+ //    $http.get("" + $scope.id + "&o=JSON" 
+ //   ).success(function (data){
+ //     console.log('success with get to api', data);
+ //     $scope.candidateBio = data;
+ //   }).error(function () {
+ //       console.log('An unexpected error ocurred!');
+ //   });
+ // };
 });

@@ -14,7 +14,6 @@
         data: {input: input}
       })
       .then(function(response){
-        
         if(response.data.type === 'zip'){
 
         console.log("<---------response received------->")
@@ -28,13 +27,10 @@
         }else if(response.data.type === 'candidate'){
 
           console.log("<---------response received------->")
-          console.log("Response type: ", response.data.type);
-          console.log(response.data.arrayOfCandidates);
+          console.log("Response type: ", response.data);
           callback(response);
-    
         }
       })
-
     };
     return {
       'getData': getData,
