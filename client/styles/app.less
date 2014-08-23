@@ -1,10 +1,21 @@
 @import "less/bootstrap.less";
 
-//fonts 
+//glyphicons 
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('fonts/glyphicons-halflings-regular.eot');
+  src: url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('fonts/glyphicons-halflings-regular.woff') format('woff'), url('fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
 
+//fonts 
 @font-face {
   font-family: 'ubuntuRegular';
   src: url('fonts/ubuntu/Ubuntu-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'ubuntuBold';
+  src: url('fonts/ubuntu/Ubuntu-Bold.ttf') format('truetype');
 }
 
 @font-face {
@@ -12,8 +23,10 @@
   src: url('fonts/rockwell/rockwell.ttf') format('truetype');
 }
 
-@font-family-serif: 'rockwellRegular';
+
 @font-family-sans-serif: 'ubuntuRegular';
+@font-family-sans-serif-bold: 'ubuntuBold';
+@font-family-serif: 'rockwellRegular';
 
 h1, h2, h3 {
 	font-family: @font-family-serif;
@@ -72,6 +85,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 	background-color: @cc-gray-medium;
 	margin-bottom: 0;
 	color: @cc-gray-dark;
+	font-family: 'ubuntuBold';
 }
 
 .navbar .brand {
@@ -147,11 +161,6 @@ ul.navbar-nav li:last-child h4, ul.navbar-nav li:last-child a {
 	height: auto;
 }
 
-.landing-box ul li img {
-	float: left;
-	padding: 10px;
-	clear: both;
-}
 .box-text {
 	padding-top: 15px;
 }
@@ -159,6 +168,18 @@ ul.navbar-nav li:last-child h4, ul.navbar-nav li:last-child a {
 ul.box-text li div {
 	height: 100px;
 }
+
+.landing-box-involved .box-text > div p {
+	margin-top: 5px;
+}
+
+.landing-box-involved img {
+	float: left;
+	padding: 10px;
+	clear: both;
+}
+
+
 .landing-box-involved h3, .landing-box-involved a {
 	color: @cc-blue-light;
 }
@@ -204,6 +225,7 @@ ul.box-text li div {
 .map-sidebar-container p {
 	width: 120px;
 	margin: 0 auto;
+	text-align: center;
 }
 
 .map-sidebar {
@@ -225,7 +247,12 @@ ul.box-text li div {
 	color: @cc-gray-dark;
 }
 
-.map-sidebar-ticker h1 span, .landing-side-calendar h1 span {
+.map-sidebar-ticker p {
+	width: auto;
+	text-align: center;
+}
+
+.map-sidebar-ticker h1 span, .map-sidebar-calendar h1 span {
 	color: @cc-blue-light;
 	height: 50px;
 }
@@ -258,7 +285,7 @@ ul.box-text li div {
 		padding-top: 30px;		
 	}
 	@media (min-width: @screen-sm-min) {
-		padding-top: 10px;	
+		padding-top: 40px;	
 	}
 }
 
@@ -392,6 +419,7 @@ ul.nav-tabs li > a {
 
 .get-involved > div {
 	padding: 15px;
+	text-align: center;
 }
 
 .get-involved > div > img {
@@ -413,6 +441,10 @@ ul.candidate-list li {
 	padding: 30px;
 }
 
+// ul.candidate-list li:first-child {
+// 	border-top: 2px solid @cc-blue-light;
+// }
+
 ul.candidate-list li:hover{
 	border: 4px solid @cc-green;
 }
@@ -427,4 +459,20 @@ ul.candidate-list li img {
 ul.candidate h4.chamber {
 	position: absolute;
 	bottom: 0;
+}
+
+////pages
+
+.page {
+	background-color: #fff;
+	padding: 30px;
+}
+
+.page h1 {
+	border-bottom: 2px solid @cc-blue-light;
+	margin-bottom: 30px;
+}
+
+.page h1, .page h2 {
+	color: @cc-blue-light;
 }
