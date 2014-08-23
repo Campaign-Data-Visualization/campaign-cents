@@ -16,22 +16,23 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
 
   
   $scope.search = function(){
-    console.log($scope.result)
-    var fullInput = $scope.result.originalObject.fullName;
-    console.log(fullInput)
-    var firstFiveCharactersOfInput = fullInput.slice(0,5);
-    if(isNaN(firstFiveCharactersOfInput)){
-      console.log("candidate: ", fullInput)
-      $state.go('myApp.main.candidateProfile',{input: fullInput, id: $scope.result.originalObject.voteSmartId });
-    }else if(!isNaN(firstFiveCharactersOfInput)){
+    // console.log($scope.result)
+    // var fullInput = $scope.result.originalObject.fullName;
+    // var zipInput = $scope.zipresult.originalObject.zip;
+
+    if($scope.result){
+      var firstFiveCharactersOfInput = $scope.result.originalObject.fullName.slice(0,5);
+      console.log("candidate: ", $scope.result.originalObject.fullName)
+      $state.go('myApp.main.candidateProfile',{input: $scope.result.originalObject.fullName, id: $scope.result.originalObject.voteSmartId });
+    }else if($scope.zipresult){
       console.log("zip: ", firstFiveCharactersOfInput);
-      $state.go('myApp.main.candidateList',{input: firstFiveCharactersOfInput });
+        $state.go('myApp.main.candidateList',{input: $scope.zipresult.originalObject.zip });
     }else{
       $scope.message = "No results found";
       }
     }
 
-  $scope.$on('mapInitialized', function(event, map) {
+  $scope.$on('mapInitialized', function(event, map){
     var layerDistricts = new google.maps.FusionTablesLayer({
       query: {
         select: 'col0',
@@ -43465,7 +43466,6 @@ $scope.candidates = [
 {voteSmartId:144588,firstName:"John",lastName:"Campbell",info:"Not Available",fullName:"John Campbell",photoURL:"http://votesmart.org/canphoto/144588.jpg"},
 {voteSmartId:144975,firstName:"Quin",lastName:"Hillyer",info:"Not Available",fullName:"Quin Hillyer",photoURL:"http://votesmart.org/canphoto/144975.jpg"},
 {voteSmartId:147442,firstName:"Kevin",lastName:"Mccarthy",info:"Not Available",fullName:"Kevin Mccarthy",photoURL:"http://votesmart.org/canphoto/147442.jpg"},
-{voteSmartId:148199,firstName:"Tim",lastName:"Scott",info:"Not Available",fullName:"Tim Scott",photoURL:"http://votesmart.org/canphoto/148199.jpg"}
-]
+{voteSmartId:148199,firstName:"Tim",lastName:"Scott",info:"Not Available",fullName:"Tim Scott",photoURL:"http://votesmart.org/canphoto/148199.jpg"}];
 
 });
