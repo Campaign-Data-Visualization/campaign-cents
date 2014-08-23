@@ -1,6 +1,13 @@
 @import "less/bootstrap.less";
-//fonts 
 
+//glyphicons 
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('fonts/glyphicons-halflings-regular.eot');
+  src: url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('fonts/glyphicons-halflings-regular.woff') format('woff'), url('fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+
+//fonts 
 @font-face {
   font-family: 'ubuntuRegular';
   src: url('fonts/ubuntu/Ubuntu-Regular.ttf') format('truetype');
@@ -412,6 +419,7 @@ ul.nav-tabs li > a {
 
 .get-involved > div {
 	padding: 15px;
+	text-align: center;
 }
 
 .get-involved > div > img {
@@ -433,6 +441,10 @@ ul.candidate-list li {
 	padding: 30px;
 }
 
+// ul.candidate-list li:first-child {
+// 	border-top: 2px solid @cc-blue-light;
+// }
+
 ul.candidate-list li:hover{
 	border: 4px solid @cc-green;
 }
@@ -447,4 +459,20 @@ ul.candidate-list li img {
 ul.candidate h4.chamber {
 	position: absolute;
 	bottom: 0;
+}
+
+////pages
+
+.page {
+	background-color: #fff;
+	padding: 30px;
+}
+
+.page h1 {
+	border-bottom: 2px solid @cc-blue-light;
+	margin-bottom: 30px;
+}
+
+.page h1, .page h2 {
+	color: @cc-blue-light;
 }
