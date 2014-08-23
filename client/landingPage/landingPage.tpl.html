@@ -33,8 +33,11 @@
               <div class="form-group">
                 <label><h1>Find Koch Cash in Your Area</h1></label>
                 <!-- <input text-angular ng-model="searchInput" type="text" class="input-group col-xs-12"  placeholder={{message}}> -->
-                  <angucomplete id="ex2" placeholder={{message}} pause="400" selectedobject="result" localdata="candidates" searchfields="firstName,lastName,fullName" titlefield="fullName" descriptionfield="info" minlength="1" inputclass="input-group col-xs-12" imagefield="photoURL"/>
-                   <button class=" btn btn-md btn-detault searchButton" type="submit" ng-click="search()">GO</button>
+                  <angucomplete ng-hide="{{zipsearchshow}}"  zipsearchshow="zipsearchshow" id="ex2" placeholder="candidate search" pause="50" selectedobject="result" localdata="candidates" searchfields="firstName,lastName,fullName" titlefield="fullName" descriptionfield="info" minlength="1" inputclass="input-group col-xs-12" imagefield="photoURL"/>
+
+                  <angucomplete ng-show="{{zipsearchshow}}" zipsearchshow="zipsearchshow" id="ex2" placeholder="zip search" pause="50" selectedobject="result" localdata="zipcodes" searchfields="zip" titlefield="zip" descriptionfield="zip,state" minlength="1" inputclass="input-group col-xs-12"/>
+
+                  <button class=" btn btn-md btn-detault searchButton" type="submit" ng-click="search()">GO</button>
               </div>
             </form>
           </div>
