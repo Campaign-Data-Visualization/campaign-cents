@@ -1,7 +1,8 @@
-<div ng-controller="CandidateProfileController" ng-init="loadCandidates()">
+<div ng-controller="CandidateProfileController" ng-init="loadCandidateBio()">
     <div class="container">
+
       <div class="col-md-4 col-xs-12 sidebar center">
-        <img class="img-responsive visible-md visible-lg" src="images/state-fl-test.png">
+        <img class="img-responsive visible-md visible-lg" ng-src="images/states/states_state-{{candidateBio.bio.office.stateId}}.png">
         <img class="clock" src="images/icon-clock.svg">
         <h3>Every minute, the Koch brothers donate more than $2,300 to various 2014 candidates and political organizations.</h3>
       </div> <!-- /.sidebar -->
@@ -18,13 +19,16 @@
                 <h3><span class="glyphicon glyphicon-chevron-left"></span> Show All Candidates</h3>
               </div>
               </div>
-              <div class="col-xs-12 candidate-active">  
-                <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" src="http://upload.wikimedia.org/wikipedia/commons/0/08/Official_Photo_of_Senator_Jeff_Bingaman_(D-NM)_2008.jpg">
-                <h2>{{candidates.results[0].first_name}} {{candidates.results[0].last_name}}</h2>
+              <div class="row">
+              <div class="col-xs-12">  
+                <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" ng-src="http://votesmart.org/canphoto/{{candidateBio.bio.candidate.candidateId}}.jpg" err-src="../images/nophoto.jpeg">
+                <h2>{{candidateBio.bio.candidate.preferredName}} {{candidateBio.bio.candidate.lastName}}</h2>
                 <!--need variable for incumbent or candidate-->       
-                <h3>{{candidates.results[0].party}}, Incumbent</h3>
+                <h3>{{candidateBio.bio.office.parties}} Party</h3>
                 <!-- need to pull variable for which state -->
-                <h4 class="chamber">US Senate, State of Texas</h4>
+                <h4>{{candidateBio.bio.office.title}} ( {{candidateBio.bio.office.stateId}} )</h4>
+                <h4>First Elected: {{candidateBio.bio.office.firstElect}}</h4>
+                <h4>Next Election: {{candidateBio.bio.office.nextElect}}</h4>
               </div>
             </div>
             <div class="row">
@@ -38,9 +42,14 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-xs-12">
-                <h4 class="center">About {{candidates.results[0].first_name}} {{candidates.results[0].last_name}}</h4>
-                <p>{{politician.bio}}</p>
+              <div class="col-xs-12 candidate-about">
+                <h4 class="center">About Candidate</h4>
+                <p><span class="bold">Birthdate:</span> {{candidateBio.bio.candidate.birthDate}}</p>
+                <p><span class="bold">Birthplace:</span> {{candidateBio.bio.candidate.birthPlace}}</p>
+                <p><span class="bold">Home city:</span> {{candidateBio.bio.candidate.homeCity}} {{candidateBio.bio.family.homeState}} </p>
+                <p><span class="bold">Education:</span> {{candidateBio.bio.candidate.education}}</p>
+                <p><span class="bold">Profession:</span> {{candidateBio.bio.candidate.profession}}</p>
+                <!-- <p>{{politician.bio}}</p> -->
               </div>
             </div>
             <div class="row get-involved">
