@@ -22,14 +22,10 @@ module.exports = exports = {
   // handles client POST request by querying database with input and
   // responding with requested data
   post: function (req, res, next) {
-<<<<<<< HEAD
     var type;
     var candidateOrganizationZipcode = req.body.input;
     var options;
     
-=======
-    var candidateOrganizationZipcode = req.body.input; 
->>>>>>> Refactored server and factory to make API calls from server with Votesmart ID passed in with letter A on landing page input box
     //we're slicing off the first five so we don't have to deal with the hyphon in the second part of zip codes
     if(isNaN(candidateOrganizationZipcode)){
       var candId = candidateOrganizationZipcode;
@@ -39,7 +35,6 @@ module.exports = exports = {
     }
     if(candId){ //process as a candidate
       console.log("<-----------IT'S A CANDIDATE----------->");
-<<<<<<< HEAD
       type = "candidate";
       var id = candidateOrganizationZipcode;
       options = {
@@ -68,7 +63,11 @@ module.exports = exports = {
       var zip = firstFiveChar;
       options = {
 =======
+=======
+      console.log("this is my votesmart id in the server", candId);
+>>>>>>> Data flows through candidate profile
       var candidateId = candId.slice(1);
+      console.log("After removing the A", candidateId);
 
       // <-------------QUERY THE DATADASE with the name ------>
        var options = {
@@ -88,7 +87,7 @@ module.exports = exports = {
         }
       })
     }
-    if(zipCode){
+    else if(zipCode){
      //process as zip code
       console.log('<------------ITS A ZIP CODE---------->');
       var zip = zipCode;
