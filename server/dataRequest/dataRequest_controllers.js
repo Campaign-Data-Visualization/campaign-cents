@@ -22,20 +22,24 @@ module.exports = exports = {
   // handles client POST request by querying database with input and
   // responding with requested data
   post: function (req, res, next) {
+<<<<<<< HEAD
     var type;
     var candidateOrganizationZipcode = req.body.input;
     var options;
     
+=======
+    var candidateOrganizationZipcode = req.body.input; 
+>>>>>>> Refactored server and factory to make API calls from server with Votesmart ID passed in with letter A on landing page input box
     //we're slicing off the first five so we don't have to deal with the hyphon in the second part of zip codes
     if(isNaN(candidateOrganizationZipcode)){
-      var firstFiveChar = candidateOrganizationZipcode.slice(0,5);
-    }else{
-      var firstFiveChar = candidateOrganizationZipcode;
-    }
+      var candId = candidateOrganizationZipcode;
 
-    //sort based on zip vs candidate name
-    if(isNaN(firstFiveChar)){ //process as a candidate
+    }else{
+      var zipCode = candidateOrganizationZipcode.slice(0,5);
+    }
+    if(candId){ //process as a candidate
       console.log("<-----------IT'S A CANDIDATE----------->");
+<<<<<<< HEAD
       type = "candidate";
       var id = candidateOrganizationZipcode;
       options = {
@@ -63,6 +67,35 @@ module.exports = exports = {
       type = 'zip';
       var zip = firstFiveChar;
       options = {
+=======
+      var candidateId = candId.slice(1);
+
+      // <-------------QUERY THE DATADASE with the name ------>
+       var options = {
+        url: 'http://api.votesmart.org/CandidateBio.getBio?key='+ config.votesmart.apiKey +'&candidateId='+ candidateId,
+        agent: false,
+        headers: {
+        "User-Agent": "Mozilla/4.0 (compatible; Project Vote Smart node.js client)",
+        "Content-type": "application/x-www-form-urlencoded"}
+      }
+        request(options, function (error, response, body){
+        if (!error && response.statusCode == 200){
+          parseString(body, function(err, result){
+            var candidateBio = result;
+            console.log(candidateBio, "I am finding the candidate in the server");
+            res.send({type:'candidate', candidateBio: candidateBio});
+          })
+        }
+      })
+    }
+    if(zipCode){
+     //process as zip code
+      console.log('<------------ITS A ZIP CODE---------->');
+      var zip = zipCode;
+      console.log("This is my zipcode in the server", zip);
+
+      var options = {
+>>>>>>> Refactored server and factory to make API calls from server with Votesmart ID passed in with letter A on landing page input box
         url: 'http://api.votesmart.org/Candidates.getByZip?key='+ config.votesmart.apiKey +'&zip5='+ zip,
         agent: false,
         headers: {
@@ -81,8 +114,14 @@ module.exports = exports = {
         }
       });
     }
+<<<<<<< HEAD
   
 
+=======
+    else {
+      console.log("There was a problem parsing the zip or candidate id");
+    }
+>>>>>>> Refactored server and factory to make API calls from server with Votesmart ID passed in with letter A on landing page input box
   }
 };
 
