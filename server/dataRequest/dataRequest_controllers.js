@@ -60,12 +60,12 @@ module.exports = exports = {
       type = 'zip';
       var zip = zipCode;
       // console.log("this is my votesmart id in the server", candId);
-      var candidateId = candId.slice(1);
+      // var candidateId = candId.slice(1);
       // console.log("After removing the A", candidateId);
 
       // <-------------QUERY THE DATADASE with the name ------>
        var options = {
-        url: 'http://api.votesmart.org/CandidateBio.getBio?key='+ config.votesmart.apiKey +'&candidateId='+ candidateId,
+        url: 'http://api.votesmart.org/Candidates.getByZip?key='+ config.votesmart.apiKey +'&zip5='+ zip,
         agent: false,
         headers: {
         "User-Agent": "Mozilla/4.0 (compatible; Project Vote Smart node.js client)",
@@ -74,9 +74,9 @@ module.exports = exports = {
         request(options, function (error, response, body){
         if (!error && response.statusCode == 200){
           parseString(body, function(err, result){
-            var candidateBio = result;
-            console.log(candidateBio, "I am finding the candidate in the server");
-            res.send({type:'candidate', candidateBio: candidateBio});
+            var candidates = result;
+            console.log(candidates, "I am finding the candidate list in the server");
+            res.send({type:'zip', candidates: candidates});
           })
         }
       })

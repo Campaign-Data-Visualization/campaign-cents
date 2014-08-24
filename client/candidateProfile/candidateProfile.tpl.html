@@ -5,7 +5,8 @@
         <img class="img-responsive visible-md visible-lg" ng-src="images/states/states_state-{{candidateBio.bio.office.stateId}}.png">
         <img class="clock" src="images/icon-clock.svg">
         <h3>Every minute, the Koch brothers donate more than $2,300 to various 2014 candidates and political organizations.</h3>
-        {{candidateBio.data.candidateBio.bio.candidate}}
+        {{candidateBio.data.candidateInfo.bio.candidate[0].firstName}}  <!-- THis is the format -->
+        {{candidateBio.candidateBio.bio.candidate}}
       </div> <!-- /.sidebar -->
       <div class="col-md-8 col-xs-12 candidate-main">      
          <ul class="nav nav-tabs" id="myTab">
