@@ -5,7 +5,7 @@ angular.module('myApp.main.candidateList', ['ui.router'])
 
   $stateProvider
     .state('myApp.main.candidateList', {
-      url: '/search:{input}',
+      url: '/zip:{input}',
       templateUrl: 'candidateList/candidateList.tpl.html',
       controller: 'CandidateListController'
     });
@@ -50,6 +50,7 @@ angular.module('myApp.main.candidateList', ['ui.router'])
   DataRequestFactory.getData($stateParams.input, function(response){
     console.log("This is the response", response);
     $scope.candidates = response;
+    console.log("this is the 0th element of candidates", $scope.candidates);
     
   });
 

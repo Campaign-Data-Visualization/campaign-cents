@@ -3,7 +3,8 @@
   angular.module('myApp', [
     'ui.router',
     'ngFx',
-    'myApp.main'])
+    'myApp.main',
+    'angucomplete'])
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/myApp/main/landingPage');
 
