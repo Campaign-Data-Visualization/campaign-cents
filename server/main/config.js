@@ -79,17 +79,17 @@ connection.connect(function(err) {
 });
 
 
-connection.query("select * from candidates", function(err, rows, fields){
-  if (err) throw err;
-  console.log('<===========The database is SELECT-ing from the candidates table ==============>');
-  console.log(rows, fields);
-});
-
-// connection.query("drop table candidates", function(err, rows, fields){
+// connection.query("select * from candidates", function(err, rows, fields){
 //   if (err) throw err;
-//   console.log('<=========== The database is dropping the candidates table ==============>');
+//   console.log('<===========The database is SELECT-ing from the candidates table ==============>');
 //   console.log(rows, fields);
 // });
+
+connection.query("drop table candidates", function(err, rows, fields){
+  if (err) throw err;
+  console.log('<=========== The database is dropping the candidates table ==============>');
+  console.log(rows, fields);
+});
 
 // connection.query("create table candidates (voteSmartId integer(10), firstName varchar(100), lastName varchar(100), firstNameLastName varchar(200), party varchar(100), state varchar(10), office varchar(100), 2014contrib integer(10), since2000contrib integer(10))", function(err, rows, fields){
 //   if (err) throw err;
