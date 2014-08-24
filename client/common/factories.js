@@ -7,6 +7,7 @@
     var inputValue = {};
     var candList = {};
     var candidates = {};
+    var candBio = {};
     var getData = function(input, callback){
       return $http({
         method: 'POST',
@@ -14,12 +15,12 @@
         data: {input: input}
       })
       .then(function(response){
-        
         if(response.data.type === 'zip'){
 
         console.log("<---------response received------->")
-        console.log("Response type: ", response.data.type);
+        console.log("Response type should be Zip: ", response.data.type);
         console.log(response.data.arrayOfCandidates);
+        console.log("here are the properties of response.data", response.data);
 
         candidates.list = response.data.arrayOfCandidates;
         callback(response);
@@ -28,17 +29,17 @@
         }else if(response.data.type === 'candidate'){
 
           console.log("<---------response received------->")
-          console.log("Response type: ", response.data.type);
-          console.log(response.data.arrayOfCandidates);
+          console.log("Response type should be candidate: ", response.data.type);
+          candBio.bio = response.data.candidateBio;
+          console.log("Here the candidate Bio is on an object to be returned", candBio.bio);
           callback(response);
-    
         }
       })
-
     };
     return {
       'getData': getData,
-      'candList': candidates
+      'candList': candidates,
+      'candBio': candBio
     };
   });
 // }(angular));

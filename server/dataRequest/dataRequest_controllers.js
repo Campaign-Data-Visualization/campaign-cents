@@ -28,16 +28,14 @@ module.exports = exports = {
     
     //we're slicing off the first five so we don't have to deal with the hyphon in the second part of zip codes
     if(isNaN(candidateOrganizationZipcode)){
-      var firstFiveChar = candidateOrganizationZipcode.slice(0,5);
+      var candId = candidateOrganizationZipcode;
     }else{
-      var firstFiveChar = candidateOrganizationZipcode;
+      var zipCode = candidateOrganizationZipcode.slice(0,5);
     }
-
-    //sort based on zip vs candidate name
-    if(isNaN(firstFiveChar)){ //process as a candidate
-      console.log("<-----------IT'S A CANDIDATE----------->");
+    if(candId){ //process as a candidate
+      var id = candidateOrganizationZipcode.slice(1);
+      console.log("<-----------IT'S A CANDIDATE----------->", id);
       type = "candidate";
-      var id = candidateOrganizationZipcode;
       options = {
         url: 'http://api.votesmart.org/CandidateBio.getBio?key='+ config.votesmart.apiKey +'&candidateId='+ id,
         agent: false,
@@ -50,39 +48,41 @@ module.exports = exports = {
       request(options, function (error, response, body){
         if (!error && response.statusCode == 200){
           parseString(body, function(err, result){
-            console.log(result)
-            var candidateInfo = result.candidateList.candidate;
-            res.send({type: type, candidateInfo: candidateInfo});
+            console.log("---------------------api result for c profile-------------------")
+            console.dir(result)
+            // var candidateInfo = result.candidateList.candidate;
+            res.send({type: type, candidateInfo: result});
           })
         }
       });
-
-
-    }else{ //process as zip code
+    }else if (zipCode){ //process as zip code
       console.log('<------------ITS A ZIP CODE---------->');
       type = 'zip';
-      var zip = firstFiveChar;
-      options = {
+      var zip = zipCode;
+      // console.log("this is my votesmart id in the server", candId);
+      // var candidateId = candId.slice(1);
+      // console.log("After removing the A", candidateId);
+
+      // <-------------QUERY THE DATADASE with the name ------>
+       var options = {
         url: 'http://api.votesmart.org/Candidates.getByZip?key='+ config.votesmart.apiKey +'&zip5='+ zip,
         agent: false,
         headers: {
         "User-Agent": "Mozilla/4.0 (compatible; Project Vote Smart node.js client)",
         "Content-type": "application/x-www-form-urlencoded"}
       }
-
-    //send the response
-      request(options, function (error, response, body){
+        request(options, function (error, response, body){
         if (!error && response.statusCode == 200){
           parseString(body, function(err, result){
-            var arrayOfCandidates = result.candidateList.candidate;
-
-            res.send({type: type, arrayOfCandidates: arrayOfCandidates});
+            var candidates = result;
+            console.log(candidates, "I am finding the candidate list in the server");
+            res.send({type:'zip', candidates: candidates});
           })
         }
-      });
+      })
+    }else {
+      console.log("There was a problem parsing the zip or candidate id");
     }
-  
-
   }
 };
 

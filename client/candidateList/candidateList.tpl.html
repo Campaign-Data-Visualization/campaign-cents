@@ -1,11 +1,11 @@
 <div ng-controller="CandidateListController">
     <div class="container">
-      <div class="col-md-4 col-xs-12 sidebar center">
-        <div ng-repeat="candidate in candidates.data.arrayOfCandidates | filterCongress | limitTo:1">
-          <img class="img-responsive visible-md visible-lg" src="images/states/states_state-{{candidate.electionStateId[0]}}.png">
-        </div>
+      <!-- Start Sidebar -->
+      <div class="col-md-4 col-xs-12 sidebar center">  
+          <img class="img-responsive visible-md visible-lg" ng-src="images/states/states_state-{{candidates.data.arrayOfCandidates[0].electionStateId[0]}}.png" >
         <img class="clock" src="images/icon-clock.svg">
         <h3>Every minute, the Koch brothers donate more than $2,300 to various 2014 candidates and political organizations. </h3>
+        {{candidates.data.candidates.candidateList.candidate[0]}}
       </div> <!-- /.sidebar -->
       <div class="col-md-8 col-xs-12 candidate-main">      
         <ul class="nav nav-tabs" id="myTab">
@@ -16,7 +16,7 @@
         <!-- Candidates List -->
        <div class="tab-content">
           <div class="tab-pane active" id="candidates">
-            <ul class="candidate-list candidate-list-senate" ng-repeat="candidate in candidates.data.arrayOfCandidates | filterCongress">
+            <ul class="candidate-list candidate-list-senate" ng-repeat="candidate in candidates.data.candidates.candidateList.candidate | filterCongress">
               <li class="col-xs-12">
                <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" ng-src="http://votesmart.org/canphoto/{{candidate.candidateId[0]}}.jpg" err-src="../images/nophoto.jpeg">  
                 <h2>{{candidate.ballotName[0]}}</h2>
