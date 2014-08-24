@@ -79,11 +79,11 @@ connection.connect(function(err) {
 });
 
 
-// connection.query("select * from koch", function(err, rows, fields){
-//   if (err) throw err;
-//   console.log('<===========The database is SELECT-ing from koch table ==============>');
-//   console.log(rows, fields);
-// });
+connection.query("select * from koch", function(err, rows, fields){
+  if (err) throw err;
+  console.log('<===========The database is SELECT-ing from koch table ==============>');
+  console.log(rows, fields);
+});
 
 // connection.query("drop table koch", function(err, rows, fields){
 //   if (err) throw err;
