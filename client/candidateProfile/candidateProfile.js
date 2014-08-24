@@ -4,12 +4,7 @@ angular.module('myApp.main.candidateProfile', ['ui.router'])
 
   $stateProvider
     .state('myApp.main.candidateProfile', {
-<<<<<<< HEAD
       url: '/name:{input}/id:{id}',
-=======
-      // url: '/search:{input}',
-      url: '/candidateProfile:{input}',
->>>>>>> Data flows through candidate profile
       templateUrl: 'candidateProfile/candidateProfile.tpl.html',
       controller: 'CandidateProfileController'
     });
@@ -26,7 +21,9 @@ angular.module('myApp.main.candidateProfile', ['ui.router'])
  //       console.log('An unexpected error ocurred!');
  //   });
  // };
-  DataRequestFactory.getData($stateParams.input, function(response){
+
+  var mutatedCandidateID = "a"+$stateParams.id;
+  DataRequestFactory.getData(mutatedCandidateID, function(response){
     console.log("This is the response in the factory", response);
     $scope.candidateBio = response;
     console.log("In the factory should show candidateBio object", $scope.candidateBio); 
