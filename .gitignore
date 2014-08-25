@@ -1,6 +1,10 @@
+.DS_Store
+client/.DS_Store
 config/
 client/config.js
 node_modules/
 _DS_Store
 DS_Store
 .DS_Store
+client/.DS_Store
+
