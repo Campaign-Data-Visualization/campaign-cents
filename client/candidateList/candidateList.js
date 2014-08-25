@@ -48,7 +48,7 @@ angular.module('myApp.main.candidateList', ['ui.router'])
   //   console.log("Inside the candidates array in cand list");
   // }); 
   DataRequestFactory.getData($stateParams.input, function(response){
-    console.log("This is the response", response);
+    console.log("This is the response in the candidate list controller", response);
     $scope.candidates = response;
     console.log("this is the 0th element of candidates", $scope.candidates);
     

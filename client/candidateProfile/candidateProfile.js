@@ -25,7 +25,7 @@ angular.module('myApp.main.candidateProfile', ['ui.router'])
   var mutatedCandidateID = "a"+$stateParams.id;
   DataRequestFactory.getData(mutatedCandidateID, function(response){
     console.log("This is the response in the factory", response);
-    $scope.candidateBio = response;
+    $scope.candidateBio = response.data.candidateInfo.bio;
     console.log("In the factory should show candidateBio object", $scope.candidateBio); 
   });
 

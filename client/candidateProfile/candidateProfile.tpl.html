@@ -1,12 +1,9 @@
 <div ng-controller="CandidateProfileController">
     <div class="container">
       <div class="col-md-4 col-xs-12 sidebar center">
-        {{candidateBio}}
-        <img class="img-responsive visible-md visible-lg" ng-src="images/states/states_state-{{candidateBio.bio.office.stateId}}.png">
+        <img class="img-responsive visible-md visible-lg" ng-src="images/states/states_state-{{candidateBio.office[0].stateId[0]}}.png">
         <img class="clock" src="images/icon-clock.svg">
         <h3>Every minute, the Koch brothers donate more than $2,300 to various 2014 candidates and political organizations.</h3>
-        {{candidateBio.data.candidateInfo.bio.candidate[0].firstName}}  <!-- THis is the format -->
-        {{candidateBio.candidateBio.bio.candidate}}
       </div> <!-- /.sidebar -->
       <div class="col-md-8 col-xs-12 candidate-main">      
          <ul class="nav nav-tabs" id="myTab">
@@ -23,14 +20,14 @@
               </div>
               <div class="row">
               <div class="col-xs-12">  
-                <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" ng-src="http://votesmart.org/canphoto/{{candidateBio.data.candidateBio.bio.candidate[0].candidateId[0]}}.jpg" err-src="../images/nophoto.jpeg">
-                <h2>{{candidateBio.data.candidateBio.bio.candidate[0].preferredName[0]}} {{candidateBio.bio.candidate.lastName}}</h2>
+                <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" ng-src="http://votesmart.org/canphoto/{{candidateBio.candidate[0].candidateId[0]}}.jpg" err-src="../images/nophoto.jpeg">
+                <h2>{{candidateBio.candidate[0].preferredName[0]}} {{candidateBio.candidate[0].lastName[0]}}</h2>
                 <!--need variable for incumbent or candidate-->       
-                <h3>{{candidateBio.data.candidateBio.bio.office.parties}} Party</h3>
+                <h3>{{candidateBio.office[0].parties[0]}} Party</h3>
                 <!-- need to pull variable for which state -->
-                <h4>{{candidateBio.data.candidateBio.bio.office.title}} ( {{candidateBio.data.candidateBio.bio.office.stateId}} )</h4>
-                <h4>First Elected: {{candidateBio.data.candidateBio.bio.office.firstElect}}</h4>
-                <h4>Next Election: {{candidateBio.data.candidateBio.bio.office.nextElect}}</h4>
+                <h4>{{candidateBio.office[0].title[0]}} ( {{candidateBio.office[0].stateId[0]}} )</h4>
+                <h4>First Elected: {{candidateBio.office[0].firstElect[0]}}</h4>
+                <h4>Next Election: {{candidateBio.office[0].nextElect[0]}}</h4>
               </div>
             </div>
             <div class="row">
@@ -46,11 +43,11 @@
             <div class="row">
               <div class="col-xs-12 candidate-about">
                 <h4 class="center">About Candidate</h4>
-                <p><span class="bold">Birthdate:</span> {{candidateBio.bio.candidate.birthDate}}</p>
-                <p><span class="bold">Birthplace:</span> {{candidateBio.bio.candidate.birthPlace}}</p>
-                <p><span class="bold">Home city:</span> {{candidateBio.bio.candidate.homeCity}} {{candidateBio.bio.family.homeState}} </p>
-                <p><span class="bold">Education:</span> {{candidateBio.bio.candidate.education}}</p>
-                <p><span class="bold">Profession:</span> {{candidateBio.bio.candidate.profession}}</p>
+                <p><span class="bold">Birthdate:</span> {{candidateBio.candidate[0].birthDate[0]}}</p>
+                <p><span class="bold">Birthplace:</span> {{candidateBio.candidate[0].birthPlace[0]}}</p>
+                <p><span class="bold">Home city:</span> {{candidateBio.candidate[0].homeCity[0]}} {{candidateBio.family[0].homeState[0]}} </p>
+                <p><span class="bold">Education:</span> {{candidateBio.candidate[0].education[0]}}</p>
+                <p><span class="bold">Profession:</span> {{candidateBio.candidate[0].profession[0]}}</p>
                 <!-- <p>{{politician.bio}}</p> -->
               </div>
             </div>
