@@ -17,7 +17,7 @@
           <div class="tab-pane active" id="candidates">
             <ul class="candidate-list candidate-list-senate" ng-repeat="candidate in candidates.data.candidates.candidateList.candidate | filterCongress">
               <li class="col-xs-12">
-               <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" ng-src="http://votesmart.org/canphoto/{{candidate.candidateId[0]}}.jpg" err-src="../images/nophoto.jpeg">  
+               <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" ng-src="http://votesmart.org/canphoto/{{candidate.candidateId[0]}}.jpg" err-src="../images/profile-blank.jpg">  
                 <h2>{{candidate.ballotName[0]}}</h2>
                 <h3>{{candidate.officeParties[0]}} Party</h3>
                 <!-- need to add incumbent/not here -->
