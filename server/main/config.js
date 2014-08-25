@@ -78,12 +78,11 @@ connection.connect(function(err) {
   console.log('<======================connected to DB as id ' + connection.threadId);
 });
 
-
-// connection.query("select * from candidates", function(err, rows, fields){
-//   if (err) throw err;
-//   console.log('<===========The database is SELECT-ing from the candidates table ==============>');
-//   console.log(rows, fields);
-// });
+connection.query("select 2014contrib, since2000contrib from candidates where voteSmartId = 37676", function(err, rows, fields){
+  if (err) throw err;
+  console.log('<===========The database is SELECT-ing from the candidates table ==============>');
+  console.log(rows, fields);
+});
 
 // connection.query("drop table candidates", function(err, rows, fields){
 //   if (err) throw err;
