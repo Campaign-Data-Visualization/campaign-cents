@@ -79,11 +79,11 @@ connection.connect(function(err) {
 });
 
 
-connection.query("select * from candidates", function(err, rows, fields){
-  if (err) throw err;
-  console.log('<===========The database is SELECT-ing from the candidates table ==============>');
-  console.log(rows, fields);
-});
+// connection.query("select * from candidates", function(err, rows, fields){
+//   if (err) throw err;
+//   console.log('<===========The database is SELECT-ing from the candidates table ==============>');
+//   console.log(rows, fields);
+// });
 
 // connection.query("drop table candidates", function(err, rows, fields){
 //   if (err) throw err;
