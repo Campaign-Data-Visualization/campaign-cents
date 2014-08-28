@@ -151,7 +151,7 @@ module.exports = exports = {
       console.log('<------------ITS A ZIP CODE---------->');
       type = 'zip';
       var zip = zipCode;
-      deferredRequest({url: "http://congress.api.sunlightfoundation.com/districts/locate?apikey=3d31e77632dee1932263856761f7494b&zip="+zip}).then(function(data) { 
+      deferredRequest({url: "http://congress.api.sunlightfoundation.com/districts/locate?apikey="+config.sunlight.apiKey+"&zip="+zip}).then(function(data) { 
         console.dir(data.count);
         if (data.results) { 
           var districts = [];
