@@ -10,6 +10,7 @@ angular.module('myApp.main.candidateList', ['ui.router'])
       controller: 'CandidateListController'
     });
 })
+/*
 // Filters out congressman with regular expression selecting for first character of U
 .filter('filterCongress', function () {  
   return function (candidates) {
@@ -18,6 +19,7 @@ angular.module('myApp.main.candidateList', ['ui.router'])
     });
   };
 })
+*/
 .directive('errSrc', function() {
   return {
     link: function(scope, element, attrs) {
@@ -34,19 +36,14 @@ angular.module('myApp.main.candidateList', ['ui.router'])
     }
   }
 })
-.controller('CandidateListController', function($scope, $stateParams, DataRequestFactory) {
+.controller('CandidateListController', function($scope, $stateParams, DataRequestFactory, $state) {
   // filter candidates by zipcode input from search page
   $scope.input = $stateParams.input;
-  // $scope.candidates = {'house': [{name: "Marlo Longley", party: "Libertarian/KochParty"},{name: "Liam Dorpalen", party: "Democrat"}], 'senate': [{name: "Liam Dorpalen", party: "Democrat"},{name: "Liam Dorpalen", party: "Democrat"}]};
-  // DataRequestFactory.getData($stateParams.input, function(arrayOfCandidates){
-  //   $scope.candidates = arrayOfCandidates;
 
-  //   console.log("This is my candidates array in cand list", $scope.candidates);
-  // }) 
-  // $scope.candidates = DataRequestFactory.getData($stateParams.input, function(){
-  //   // $scope.candidates = candList;
-  //   console.log("Inside the candidates array in cand list");
-  // }); 
+  $scope.select = function(id) { 
+    $state.go('myApp.main.candidateProfile', {id:id});
+  }
+
   DataRequestFactory.getData($stateParams.input, function(response){
     console.log("This is the response in the candidate list controller", response);
     $scope.candidates = response;

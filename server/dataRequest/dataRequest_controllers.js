@@ -7,7 +7,99 @@ var    Q  = require('q'),
     request = require('request'),
     parseString = require('xml2js').parseString;
 
+var connection = mysql.createConnection({
+  host     : process.env.host || 'localhost',
+  user     : process.env.user || 'root',
+  password : process.env.password || '',
+  database : process.env.database || 'testdb'
+});
+
+
+
+var dbConnect = function() {
+	var deferred = Q.defer();
+	connection.connect(function(err) {
+		if (err) {
+			console.error('error connecting: ' + err.stack);
+			deferred.reject();
+		} else {
+			console.log('<======================connected to DB as id ' + connection.threadId);
+			deferred.resolve();
+		}
+	});
+	return deferred.promise;
+}
+
+var doQuery = function(query, args) { 
+	var deferred = Q.defer();
+
+	if (!connection.threadId) { 
+		console.log('not connected');
+		dbConnect().then(function() { 
+			doQuery(query, args).then(function(rows) { 
+				deferred.resolve(rows);
+			});
+		});
+	} else { 
+		console.log("Running query "+query+ " with args "+args);
+
+		connection.query(query, args, function(err, rows, field) { 
+		   if (err) throw err;
+			//console.log(rows.affectedRows);
+			deferred.resolve(rows);
+		});
+	}
+
+	return deferred.promise;
+}
+
+var deferredRequest = function(options) { 
+	options.agent = false;
+	options.headers = {
+		"User-Agent": "Mozilla/4.0 (compatible; Project Vote Smart node.js client)",
+		"Content-type": "application/x-www-form-urlencoded"
+	};
+
+	var deferred = Q.defer();
+	//console.log('looking up '+options.url);
+	request(options, function (error, response, body){
+		if (!error && response.statusCode == 200){
+      var contentType = response.headers['content-type'];
+      if (contentType.match(/xml/)) { 
+        parseString(body, function(err, result) { 
+          if (! err) { 
+            deferred.resolve(result);
+          } else { 
+            throw err;
+          }
+        });
+      } else {
+        deferred.resolve(JSON.parse(body));
+      }
+		} else { 
+			throw err;
+		}
+	});
+	return deferred.promise;
+}
+
 module.exports = exports = {
+  search: function(req, res, next) { 
+    var value = req.params.value;
+    var limit = 8;
+    console.log('Searching for '+value);
+
+    if (isNaN(value)) { 
+      doQuery("select voteSmartId as id, firstNameLastName as label, photoURL as image, concat(state, if(district, concat('-', district), '')) as detail, 'c' as type from candidates where firstNameLastName like ? limit "+limit, ['%'+value+'%']).then(function(results) { 
+        res.json(results);
+      });
+    } else { 
+      doQuery("select zip as id, zip as label, concat(city, ', ', state) as detail, 'z' as type from zipcode where zip like ? limit "+limit, [value+'%']).then(function(results) { 
+        res.json(results);
+      });
+    }
+  },
+
   get: function (req, res, next) {
     var $promise = Q.nbind(Note.find, Note);
     $promise()
@@ -59,6 +151,24 @@ module.exports = exports = {
       console.log('<------------ITS A ZIP CODE---------->');
       type = 'zip';
       var zip = zipCode;
+      deferredRequest({url: "http://congress.api.sunlightfoundation.com/districts/locate?apikey=3d31e77632dee1932263856761f7494b&zip="+zip}).then(function(data) { 
+        console.dir(data.count);
+        if (data.results) { 
+          var districts = [];
+          var state = '';
+          data.results.forEach(function(district) { 
+            state = district.state;
+            districts.push(district.district);
+          });
+
+          doQuery("select * from candidates where state = ? and (office = 'U.S. Senate' or district in (?))", [state, districts]).then(function(results) {
+            res.send({type:'zip', candidates: results});
+            //console.log(results);
+          });
+        }
+      });
+      /*
+      //
       // console.log("this is my votesmart id in the server", candId);
       // var candidateId = candId.slice(1);
       // console.log("After removing the A", candidateId);
@@ -80,6 +190,7 @@ module.exports = exports = {
           })
         }
       })
+      */
     }else {
       console.log("There was a problem parsing the zip or candidate id");
     }

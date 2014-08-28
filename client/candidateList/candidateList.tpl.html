@@ -2,7 +2,7 @@
     <div class="container">
       <!-- Start Sidebar -->
       <div class="col-md-4 col-xs-12 sidebar center">  
-          <img class="img-responsive visible-md visible-lg" ng-src="images/states/states_state-{{ candidates.data.candidates.candidateList.candidate[0].electionStateId[0]}}.png" >
+        <img class="img-responsive visible-md visible-lg" ng-src="images/states/states_state-{{ candidates.data.candidates[0].state | lowercase}}.png" >
         <img class="clock" src="images/icon-clock.svg">
         <h3>Every minute, the Koch brothers donate more than $2,300 to various 2014 candidates and political organizations. </h3>
       </div> <!-- /.sidebar -->
@@ -15,13 +15,13 @@
         <!-- Candidates List -->
        <div class="tab-content">
           <div class="tab-pane active" id="candidates">
-            <ul class="candidate-list candidate-list-senate" ng-repeat="candidate in candidates.data.candidates.candidateList.candidate | filterCongress">
-              <li class="col-xs-12">
-               <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" ng-src="http://votesmart.org/canphoto/{{candidate.candidateId[0]}}.jpg" err-src="../images/profile-blank.jpg">  
-                <h2>{{candidate.ballotName[0]}}</h2>
-                <h3>{{candidate.officeParties[0]}} Party</h3>
+            <ul class="candidate-list candidate-list-senate">
+              <li ng-click='select(candidate.voteSmartId)' class="col-xs-12" ng-repeat="candidate in candidates.data.candidates">
+               <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" ng-src="http://votesmart.org/canphoto/{{candidate.voteSmartId}}.jpg" err-src="../images/profile-blank.jpg">  
+                <h2>{{candidate.firstNameLastName}}</h2>
+                <h3>{{candidate.party}} Party</h3>
                 <!-- need to add incumbent/not here -->
-                <h4 class="chamber">{{candidate.electionOffice[0]}}, {{candidate.electionStateId[0]}}</h4>
+                <h4 class="chamber">{{candidate.office}}, {{candidate.state}}<span ng-if="candidate.district != ''">-{{candidate.district}}</span></h4>
               </li>
             </ul>
           <!-- GET INVOLVED -->

@@ -1,10 +1,11 @@
 (function (angular) {
   'use strict';
   angular.module('myApp', [
+    'ui.bootstrap',
     'ui.router',
     'ngFx',
     'myApp.main',
-    'angucomplete'])
+    ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/myApp/main/landingPage');
 

@@ -10,16 +10,31 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
     });
 })
 
-.controller('SearchController', function($scope, DataRequestFactory, $rootElement, $location, $q, $state){
+.controller('SearchController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state){
 
     $scope.zipsearchshow = false;
+  $scope.searchValue = '';
+  $scope.loadingSearch = false;
 
-  
-  $scope.search = function(){
+  $scope.search = function(value){
+    return $http.get('/dataRequest/search/'+value).then(function(res) { 
+      console.log(res.data);
+      return res.data;
+    });
+    console.log(value);
     // console.log($scope.result)
     // var fullInput = $scope.result.originalObject.fullName;
     // var zipInput = $scope.zipresult.originalObject.zip;
+  }
 
+  $scope.select = function(item, model, label) { 
+    if (item.type == 'c') { 
+      $state.go('myApp.main.candidateProfile', {id:item.id,});
+    } else {
+      $state.go('myApp.main.candidateList', {input:item.id});
+    }
+  }
+  /*
     if($scope.result){
       var firstFiveCharactersOfInput = $scope.result.originalObject.fullName.slice(0,5);
       console.log("candidate: ", $scope.result.originalObject.fullName)
@@ -31,7 +46,7 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
       $scope.message = "No results found";
       }
     }
-
+*/
   $scope.$on('mapInitialized', function(event, map){
     var layerDistricts = new google.maps.FusionTablesLayer({
       query: {
