@@ -7,11 +7,11 @@
     'myApp.main',
     ])
   .config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/myApp/main/landingPage');
+    $urlRouterProvider.otherwise('');
 
     $stateProvider
       .state('myApp', {
-        url: '/myApp',
+        url: '',
         abstract: true,
         template: '<ui-view></ui-view>'
       });

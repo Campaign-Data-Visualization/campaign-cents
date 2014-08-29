@@ -4,7 +4,7 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
 .config(function ($stateProvider) {
   $stateProvider
     .state('myApp.main.landingPage', {
-      url: '/landingPage',
+      url: '',
       templateUrl: 'landingPage/landingPage.tpl.html',
       controller: 'SearchController'
     });

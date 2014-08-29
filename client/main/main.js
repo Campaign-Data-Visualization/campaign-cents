@@ -4,7 +4,7 @@
   .config(function ($stateProvider) {
     $stateProvider
       .state('myApp.main', {
-        url: '/main',
+        url: '',
         abstract: true,
         templateUrl: 'main/main.tpl.html'
       });
