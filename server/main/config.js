@@ -69,7 +69,7 @@ var connection = mysql.createConnection({
   database : process.env.database || 'testdb'
 });
 
-
+/*
 connection.connect(function(err) {
   if (err) {
     console.error('error connecting: ' + err.stack);
@@ -77,6 +77,7 @@ connection.connect(function(err) {
   }
   console.log('<======================connected to DB as id ' + connection.threadId);
 });
+*/
 
 // connection.query("select 2014contrib, since2000contrib from candidates where voteSmartId = 3217", function(err, rows, fields){
 //   if (err) throw err;
