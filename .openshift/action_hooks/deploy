@@ -1,0 +1,2 @@
+mkdir config
+cp $OPENSHIFT_DATA_DIR/default.json config/
