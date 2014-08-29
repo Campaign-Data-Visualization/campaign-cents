@@ -1,7 +1,7 @@
 {
   "name": "package",
   "version": "0.0.0",
-  "main": "serer.js",
+  "main": "server.js",
   "dependencies": {
     "body-parser": "*",
     "config": "^1.0.2",
