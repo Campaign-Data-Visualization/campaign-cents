@@ -1,4 +1,5 @@
 echo "setting up config file";
+cd $OPENSHIFT_REPO_DIR;
 echo `pwd`;
 mkdir config;
 cp $OPENSHIFT_DATA_DIR/default.json config/;
