@@ -5,53 +5,8 @@ var    Q  = require('q'),
     mysql = require('mysql'),
     config = require('config'),
     request = require('request'),
-    parseString = require('xml2js').parseString;
-
-var connection = mysql.createConnection({
-  host     : process.env.host || 'localhost',
-  user     : process.env.user || 'root',
-  password : process.env.password || '',
-  database : process.env.database || 'testdb'
-});
-
-
-
-var dbConnect = function() {
-	var deferred = Q.defer();
-	connection.connect(function(err) {
-		if (err) {
-			console.error('error connecting: ' + err.stack);
-			deferred.reject();
-		} else {
-			console.log('<======================connected to DB as id ' + connection.threadId);
-			deferred.resolve();
-		}
-	});
-	return deferred.promise;
-}
-
-var doQuery = function(query, args) { 
-	var deferred = Q.defer();
-
-	if (!connection.threadId) { 
-		console.log('not connected');
-		dbConnect().then(function() { 
-			doQuery(query, args).then(function(rows) { 
-				deferred.resolve(rows);
-			});
-		});
-	} else { 
-		console.log("Running query "+query+ " with args "+args);
-
-		connection.query(query, args, function(err, rows, field) { 
-		   if (err) throw err;
-			//console.log(rows.affectedRows);
-			deferred.resolve(rows);
-		});
-	}
-
-	return deferred.promise;
-}
+    parseString = require('xml2js').parseString,
+	db = require('../database.js');
 
 var deferredRequest = function(options) { 
 	options.agent = false;
@@ -90,11 +45,11 @@ module.exports = exports = {
     console.log('Searching for '+value);
 
     if (isNaN(value)) { 
-      doQuery("select voteSmartId as id, firstNameLastName as label, photoURL as image, concat(state, if(district, concat('-', district), '')) as detail, 'c' as type from candidates where firstNameLastName like ? limit "+limit, ['%'+value+'%']).then(function(results) { 
+      db.doQuery("select voteSmartId as id, firstNameLastName as label, photoURL as image, concat(state, if(district, concat('-', district), '')) as detail, 'c' as type from candidates where firstNameLastName like ? limit "+limit, ['%'+value+'%']).then(function(results) { 
         res.json(results);
       });
     } else { 
-      doQuery("select zip as id, zip as label, concat(city, ', ', state) as detail, 'z' as type from zipcode where zip like ? limit "+limit, [value+'%']).then(function(results) { 
+      db.doQuery("select zip as id, zip as label, concat(city, ', ', state) as detail, 'z' as type from zipcode where zip like ? limit "+limit, [value+'%']).then(function(results) { 
         res.json(results);
       });
     }
@@ -161,7 +116,7 @@ module.exports = exports = {
             districts.push(district.district);
           });
 
-          doQuery("select * from candidates where state = ? and (office = 'U.S. Senate' or district in (?))", [state, districts]).then(function(results) {
+          db.doQuery("select * from candidates where state = ? and (office = 'U.S. Senate' or district in (?))", [state, districts]).then(function(results) {
             res.send({type:'zip', candidates: results});
             //console.log(results);
           });

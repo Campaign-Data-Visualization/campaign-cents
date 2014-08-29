@@ -5,11 +5,9 @@ var mysql       = require('mysql'),
     bodyParser  = require('body-parser'),
     middle      = require('./middleware'),
     api         = require("sunlight-congress-api"),
-    VoteSmart = require('votesmart'),
-    config = require('config');
-
-
-
+    VoteSmart   = require('votesmart'),
+    config      = require('config'),
+	db          = require('../database');
 /*
  * Include all your global env variables here.
 */
@@ -61,14 +59,6 @@ module.exports = exports = function (app, express, routers) {
 
 
 
-// <<<<<<==========  Create MySQL connection =============>>>>>>>>
-
-var connection = mysql.createConnection({
-  host     : process.env.host || 'localhost',
-  user     : process.env.user || 'root',
-  password : process.env.password || '',
-  database : process.env.database || 'testdb'
-});
 
 /*
 connection.connect(function(err) {
