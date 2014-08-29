@@ -1,2 +1,4 @@
-mkdir config
-cp $OPENSHIFT_DATA_DIR/default.json config/
+echo "setting up config file";
+echo `pwd`;
+mkdir config;
+cp $OPENSHIFT_DATA_DIR/default.json config/;
