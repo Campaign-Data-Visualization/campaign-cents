@@ -2,7 +2,7 @@
 client/.DS_Store
 config/
 client/config.js
-node_modules/
+//node_modules/
 _DS_Store
 DS_Store
 *.swp
