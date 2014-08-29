@@ -15,6 +15,7 @@ var mysql       = require('mysql'),
 */
 module.exports = exports = function (app, express, routers) {
   app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 9000);
+  app.set('ip', process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1');
   app.set('base url', process.env.URL || 'http://localhost');
   app.use(morgan('dev'));
   app.use(bodyParser.json());
