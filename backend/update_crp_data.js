@@ -3,10 +3,10 @@
 var Q  = require('q'),
     config = require('config'),
     parseString = require('xml2js').parseString,
-    db = require('../database.js'),
+    db = require('../server/database.js'),
     exec = require('child_process').exec;
 
-var datadir = "server/main/data/";
+var datadir = "backend/data/";
  
 var files = ['IFG_PAC2Cand_Data', 'IFG_IndivData', 'IFG_Outside_Data', 'IFG_PAC2Cand_Data', 'IFG_PAC2Cmte_Data', 'IFG_Outside_Cand_Expends', 'IFG_527_Data'];
 

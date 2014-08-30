@@ -4,9 +4,9 @@
 var Q  = require('q'),
     config = require('config'),
     exec = require('child_process').exec,
-    db = require('../database.js');
+    db = require('../server/database.js');
 
-var datadir = "server/main/data/";
+var datadir = "backend/data/";
 
 var promises = [];
 
