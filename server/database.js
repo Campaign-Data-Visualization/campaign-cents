@@ -1,43 +1,64 @@
 "use strict";
 
 var mysql = require('mysql'),
-Q = require('q');
+    request = require('request'),
+    parseString = require('xml2js').parseString,
+    Q = require('q');
+
 // <<<<<<==========  Create MySQL connection =============>>>>>>>>
 
-var connection = mysql.createConnection({
-  host     : process.env.OPENSHIFT_MYSQL_DB_HOST || 'localhost',
+var connection_config = {
+  host     : process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1',
   user     : process.env.OPENSHIFT_MYSQL_DB_USERNAME || 'root',
   password : process.env.OPENSHIFT_MYSQL_DB_PASSWORD || '',
-  port : process.env.OPENSHIFT_MYSQL_DB_PORT || '',
+  port : process.env.OPENSHIFT_MYSQL_DB_PORT || null,
   database : process.env.database || 'kochtracker'
-});
+}
 
+var pool = mysql.createPool(connection_config);
 
-var dbConnect = function() {
-	var deferred = Q.defer();
-	if (!connection.threadId) { 
-		connection.connect(function(err) {
-			if (err) {
-				console.error('error connecting: ' + err.stack);
-				deferred.reject();
-			} else {
-				console.log('<======================connected to DB as id ' + connection.threadId);
-				deferred.resolve();
-			}
-		});
-	} else {
-		deferred.resolve();
-	}
-	return deferred.promise;
+/*
+function handleDisconnect(connection) {
+  connection.on('error', function(err) {
+    if (!err.fatal) {
+      return;
+    }
+
+    if (err.code !== 'PROTOCOL_CONNECTION_LOST') {
+      throw err;
+    }
+
+    console.log('Re-connecting lost connection: ' + err.stack);
+
+    //connection = mysql.createConnection(connection.config);
+    handleDisconnect(connection);
+    connection.connect();
+  });
+}*/
+
+exports.dbClose = function(callback) { 
+	pool.end(callback);
 }
 
 exports.doQuery = function(query, args) { 
 	var deferred = Q.defer();
+  
+  pool.getConnection(function(err, connection) { 
+		//console.log("Running query "+query+ " with args "+args);
 
+		connection.query(query, args, function(err, rows, field) { 
+		   if (err) throw err;
+			//console.log(rows.affectedRows);
+      connection.release();
+			deferred.resolve(rows);
+		});
+  });
+
+/*
 	if (!connection.threadId) { 
 		console.log('not connected');
 		dbConnect().then(function() { 
-			doQuery(query, args).then(function(rows) { 
+			exports.doQuery(query, args).then(function(rows) { 
 				deferred.resolve(rows);
 			});
 		});
@@ -50,8 +71,43 @@ exports.doQuery = function(query, args) {
 			deferred.resolve(rows);
 		});
 	}
-
+*/
 	return deferred.promise;
 }
 
-dbConnect();
+exports.deferredRequest = function(options) { 
+	options.agent = false;
+	options.headers = {
+		"User-Agent": "Mozilla/4.0 (compatible; Project Vote Smart node.js client)",
+		"Content-type": "application/x-www-form-urlencoded"
+	};
+
+	var deferred = Q.defer();
+	//console.log('looking up '+options.url);
+	request(options, function (error, response, body){
+		if (!error && response.statusCode == 200){
+      var contentType = response.headers['content-type'];
+      if (contentType.match(/xml/)) { 
+        parseString(body, function(err, result) { 
+          if (! err) { 
+            deferred.resolve(result);
+          } else { 
+            throw err;
+          }
+        });
+      } else {
+        deferred.resolve(JSON.parse(body));
+      }
+		} else { 
+			throw err;
+		}
+	});
+	return deferred.promise;
+}
+
+exports.exit = function(code) { 
+	console.log("exiting with code "+code);
+	exports.dbClose(function(err) { 
+		process.exit(code);
+	});
+}

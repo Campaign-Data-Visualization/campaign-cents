@@ -1,105 +1,46 @@
 "use strict";
 
-var    Q  = require('q'),
-    mysql = require('mysql'),
+
+var Q  = require('q'),
     config = require('config'),
-    request = require('request'),
-    parseString = require('xml2js').parseString;
+    exec = require('child_process').exec,
+    db = require('../database.js');
 
-var connection = mysql.createConnection({
-  host     : process.env.host || 'localhost',
-  user     : process.env.user || 'root',
-  password : process.env.password || '',
-  database : process.env.database || 'testdb'
-});
-
-
-/*
-connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
-});
-*/
+var datadir = "server/main/data/";
 
 var promises = [];
 
-var dbConnect = function() {
-	var deferred = Q.defer();
-	connection.connect(function(err) {
-		if (err) {
-			console.error('error connecting: ' + err.stack);
-			deferred.reject();
-		} else {
-			console.log('<======================connected to DB as id ' + connection.threadId);
-			deferred.resolve();
-		}
-	});
-	return deferred.promise;
-}
+console.log("refreshing CRP IDS");
 
-var doQuery = function(query, args) { 
-	var deferred = Q.defer();
-
-	if (!connection.threadId) { 
-		console.log('not connected');
-		dbConnect().then(function() { 
-			doQuery(query, args).then(function(rows) { 
-				deferred.resolve(rows);
-			});
-		});
-	} else { 
-		//console.log("Running query "+query+ " with args "+args);
-
-		connection.query(query, args, function(err, rows, field) { 
-		   if (err) throw err;
-			//console.log(rows.affectedRows);
-			deferred.resolve(rows);
-		});
-	}
-
-	return deferred.promise;
-}
-
-var deferredRequest = function(options) { 
-	options.agent = false;
-	options.headers = {
-		"User-Agent": "Mozilla/4.0 (compatible; Project Vote Smart node.js client)",
-		"Content-type": "application/x-www-form-urlencoded"
-	};
-
-	var deferred = Q.defer();
-	//console.log('looking up '+options.url);
-	request(options, function (error, response, body){
-		if (!error && response.statusCode == 200){
-			parseString(body, function(err, result) { 
-				if (! err) { 
-					deferred.resolve(result);
-				} else { 
-					throw err;
-				}
-			});
-		} else { 
-			throw err;
-		}
-	});
-	return deferred.promise;
-}
-
-doQuery("delete from candidates").then(function() { 
-	//doQuery("select state from states where state = 'AK'").then(function(rows) { 
-	doQuery("select state from states").then(function(rows) { 
-		var promises = [];
-
-		rows.forEach(function(state) { 
-			var promise = fetchVoteSmartCandidates(state.state);
-			promises.push(promise);
-		});
-
-		Q.all(promises).done(exit);
-	});
+db.doQuery("drop table if exists CRP_IDs", function() { 
+  exec("wget http://www.opensecrets.org/downloads/crp/CRP_IDs.xls -O "+datadir+"CRP_IDS.xls", function() { 
+    exec('unoconv -v -f csv '+datadir+'CRP_IDS.xls', function() {
+      exec('tail -n +14 '+datadir+'CRP_IDS.csv | csvsql --db mysql://root:@/kochtracker --insert --tables CRP_IDS', function(res, one, two) { 
+        updateCandidates();
+      });
+    });
+  });
 });
+
+var updateCandidates = function() { 
+  db.doQuery("delete from candidates").then(function() { 
+    //db.doQuery("select state from states where state = 'VT'").then(function(rows) { 
+    db.doQuery("select state from states").then(function(rows) { 
+      var promises = [];
+
+      rows.forEach(function(state) { 
+        var promise = fetchVoteSmartCandidates(state.state);
+        promises.push(promise);
+      });
+
+      Q.all(promises).done(function() {
+        db.doQuery("update candidates a join CRP_IDS b on substring_index(lastName, ' ', -1) = substring_index(CRPNAME, ',', 1) and state = substring(distidrunfor, 1, 2) and (district = '' or  lpad(district, 2, '0') = substring(distidrunfor, 3, 2)) set a.crpid = cid where crpid = ''").then(function() { 
+          db.exit();
+        });
+      });
+    });
+  });
+}
 
 var fetchVoteSmartCandidates = function(state) {
 	console.log('processing '+ state);
@@ -107,36 +48,44 @@ var fetchVoteSmartCandidates = function(state) {
 	
 	//This is a little cumbersome, but we need to fetch records for senators of previous senate classes, as they don't show up for the current cycle
 	Q.all([
-		deferredRequest({url: 'http://api.votesmart.org/Candidates.getByOfficeTypeState?key='+ config.votesmart.apiKey +'&stateId='+ state+'&officeTypeId=C'}),
-		deferredRequest({url: 'http://api.votesmart.org/Candidates.getByOfficeState?key='+config.votesmart.apiKey+'&stateId='+state+'&officeId=6&&electionYear=2012'}),
-		deferredRequest({url: 'http://api.votesmart.org/Candidates.getByOfficeState?key='+config.votesmart.apiKey+'&stateId='+state+'&officeId=6&&electionYear=2010'}),
-		deferredRequest({url: 'http://api.votesmart.org/Candidates.getByOfficeState?key='+config.votesmart.apiKey+'&stateId='+state+'&officeId=6&&electionYear=2008'}),
+		db.deferredRequest({url: 'http://api.votesmart.org/Candidates.getByOfficeTypeState?key='+ config.votesmart.apiKey +'&stateId='+ state+'&officeTypeId=C'}),
+		db.deferredRequest({url: 'http://api.votesmart.org/Candidates.getByOfficeState?key='+config.votesmart.apiKey+'&stateId='+state+'&officeId=6&&electionYear=2012'}),
+		db.deferredRequest({url: 'http://api.votesmart.org/Candidates.getByOfficeState?key='+config.votesmart.apiKey+'&stateId='+state+'&officeId=6&&electionYear=2010'}),
+		db.deferredRequest({url: 'http://api.votesmart.org/Candidates.getByOfficeState?key='+config.votesmart.apiKey+'&stateId='+state+'&officeId=6&&electionYear=2008'}),
 	]).done(function(results) { 
 		var candidatePromises= [];
 
 		results.forEach(function(result) { 
 			if (result.candidateList) { 
 				result.candidateList.candidate.forEach(function(candidate) { 
-					if (candidate.electionStatus == 'Running' || (candidate.officeName == 'U.S. Senate' && candidate.officeStatus == 'active')) { 
+					candidate.party = candidate.electionParties.toString().match(/repub/i) ? 'Republican' : (candidate.electionParties.toString().match(/democ/i) ? 'Democratic' : 'Independent');
+					if ((candidate.electionStatus == 'Running' || (candidate.officeName == 'U.S. Senate' && candidate.officeStatus == 'active')) && (candidate.party != 'Independent' || (candidate.electionStateId == 'VT' && candidate.lastName == 'Sanders'))) { 
 						var candidate_promise = Q.defer();
-						deferredRequest({url: 'http://api.votesmart.org/CandidateBio.getBio?key='+ config.votesmart.apiKey +'&candidateId='+ candidate.candidateId}).then(function(data) {
-							var canBio = data.bio.candidate[0];
+						db.deferredRequest({url: 'http://api.votesmart.org/CandidateBio.getBio?key='+ config.votesmart.apiKey +'&candidateId='+ candidate.candidateId}).then(function(data) {
 							var can = {};
+
+							var canBio = data.bio.candidate[0];
+              var canOffice = {};
+              if (data.bio.office) { 
+                canOffice = data.bio.office[0];
+                can.photoURL = canBio.photo;
+                can.CRPId = canBio.crpId;
+              
+              };
+
 							can.voteSmartId = candidate.candidateId;
 							can.firstNameLastName = candidate.ballotName;
 							can.firstName = candidate.firstName;
 							can.lastName = candidate.lastName;
-							can.party = candidate.electionParties;
+							can.party = candidate.party;
 							can.state = candidate.electionStateId;
 							can.office = candidate.electionOffice;
 							can.district = candidate.electionDistrictName == 'At-Large' ? 0 : candidate.electionDistrictName;
 							can.incumbent = candidate.officeStatus == 'active' && candidate.electionOffice.toString() == candidate.officeName.toString()
-							can.photoURL = canBio.photo;
-							can.CRPId = canBio.crpId;
-							doQuery("insert ignore into candidates set ?", can).then(function(data) { 
+
+							db.doQuery("insert ignore into candidates set ?", can).then(function(data) { 
 								candidate_promise.resolve();
 							});
-						
 						});
 						candidatePromises.push(candidate_promise.promise);
 					}
@@ -152,11 +101,4 @@ var fetchVoteSmartCandidates = function(state) {
 	});
 
 	return deferred.promise;
-}
-
-var exit = function(code) { 
-	console.log("exiting with code "+code);
-	connection.end(function(err) { 
-		process.exit(code);
-	});
 }

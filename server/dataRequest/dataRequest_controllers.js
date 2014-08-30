@@ -8,36 +8,6 @@ var    Q  = require('q'),
     parseString = require('xml2js').parseString,
 	db = require('../database.js');
 
-var deferredRequest = function(options) { 
-	options.agent = false;
-	options.headers = {
-		"User-Agent": "Mozilla/4.0 (compatible; Project Vote Smart node.js client)",
-		"Content-type": "application/x-www-form-urlencoded"
-	};
-
-	var deferred = Q.defer();
-	//console.log('looking up '+options.url);
-	request(options, function (error, response, body){
-		if (!error && response.statusCode == 200){
-      var contentType = response.headers['content-type'];
-      if (contentType.match(/xml/)) { 
-        parseString(body, function(err, result) { 
-          if (! err) { 
-            deferred.resolve(result);
-          } else { 
-            throw err;
-          }
-        });
-      } else {
-        deferred.resolve(JSON.parse(body));
-      }
-		} else { 
-			throw err;
-		}
-	});
-	return deferred.promise;
-}
-
 module.exports = exports = {
   search: function(req, res, next) { 
     var value = req.params.value;
@@ -106,7 +76,7 @@ module.exports = exports = {
       console.log('<------------ITS A ZIP CODE---------->');
       type = 'zip';
       var zip = zipCode;
-      deferredRequest({url: "http://congress.api.sunlightfoundation.com/districts/locate?apikey="+config.sunlight.apiKey+"&zip="+zip}).then(function(data) { 
+      db.deferredRequest({url: "http://congress.api.sunlightfoundation.com/districts/locate?apikey="+config.sunlight.apiKey+"&zip="+zip}).then(function(data) { 
         console.dir(data.count);
         if (data.results) { 
           var districts = [];
@@ -116,10 +86,14 @@ module.exports = exports = {
             districts.push(district.district);
           });
 
-          db.doQuery("select * from candidates where state = ? and (office = 'U.S. Senate' or district in (?))", [state, districts]).then(function(results) {
-            res.send({type:'zip', candidates: results});
-            //console.log(results);
-          });
+          if (districts[0]) { 
+            db.doQuery("select * from candidates where state = ? and (office = 'U.S. Senate' or district in (?))", [state, districts]).then(function(results) {
+              res.send({type:'zip', candidates: results});
+              //console.log(results);
+            });
+          } else { 
+            console.log('bad zip'+zip);
+          }
         }
       });
       /*
