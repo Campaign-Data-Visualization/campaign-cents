@@ -4,6 +4,6 @@ echo `pwd`;
 mkdir config;
 cp $OPENSHIFT_DATA_DIR/default.json config/;
 echo "Updating schema...";
-mysql kochtracker < backend/sql/candidates.sql
-mysql kochtracker < backend/sql/states.sql
-mysql kochtracker < backend/sql/zipcodes.sql
+mysql -u "$OPENSHIFT_DB_USERNAME" --password="$OPENSHIFT_DB_PASSWORD" -h "$OPENSHIFT_DB_HOST" kochtracker < backend/sql/candidates.sql
+mysql -u "$OPENSHIFT_DB_USERNAME" --password="$OPENSHIFT_DB_PASSWORD" -h "$OPENSHIFT_DB_HOST" kochtracker < backend/sql/states.sql
+mysql -u "$OPENSHIFT_DB_USERNAME" --password="$OPENSHIFT_DB_PASSWORD" -h "$OPENSHIFT_DB_HOST" kochtracker < backend/sql/zipcodes.sql
