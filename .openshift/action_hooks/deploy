@@ -3,3 +3,7 @@ cd $OPENSHIFT_REPO_DIR;
 echo `pwd`;
 mkdir config;
 cp $OPENSHIFT_DATA_DIR/default.json config/;
+echo "Updating schema...";
+mysql kochtracker < backend/sql/candidates.sql
+mysql kochtracker < backend/sql/states.sql
+mysql kochtracker < backend/sql/zipcodes.sql
