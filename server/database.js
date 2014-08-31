@@ -43,35 +43,23 @@ exports.dbClose = function(callback) {
 exports.doQuery = function(query, args) { 
 	var deferred = Q.defer();
   
+  //console.log("Running query "+query+ " with args "+args);
   pool.getConnection(function(err, connection) { 
-		//console.log("Running query "+query+ " with args "+args);
-
-		connection.query(query, args, function(err, rows, field) { 
-		   if (err) throw err;
-			//console.log(rows.affectedRows);
-      connection.release();
-			deferred.resolve(rows);
-		});
+    if (err) { 
+        console.log("can't get db connection");
+        deferred.reject(err);
+    } else { 
+      connection.query(query, args, function(err, rows, field) { 
+        connection.release();
+         if (err) {
+          deferred.reject(err);
+        } else { 
+          //console.log(rows.affectedRows);
+          deferred.resolve(rows);
+        }
+      });
+    }
   });
-
-/*
-	if (!connection.threadId) { 
-		console.log('not connected');
-		dbConnect().then(function() { 
-			exports.doQuery(query, args).then(function(rows) { 
-				deferred.resolve(rows);
-			});
-		});
-	} else { 
-		//console.log("Running query "+query+ " with args "+args);
-
-		connection.query(query, args, function(err, rows, field) { 
-		   if (err) throw err;
-			//console.log(rows.affectedRows);
-			deferred.resolve(rows);
-		});
-	}
-*/
 	return deferred.promise;
 }
 
@@ -92,14 +80,14 @@ exports.deferredRequest = function(options) {
           if (! err) { 
             deferred.resolve(result);
           } else { 
-            throw err;
+            deferred.reject(result);
           }
         });
       } else {
         deferred.resolve(JSON.parse(body));
       }
 		} else { 
-			throw err;
+		  deferred.reject(err);
 		}
 	});
 	return deferred.promise;

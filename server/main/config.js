@@ -7,7 +7,8 @@ var mysql       = require('mysql'),
     api         = require("sunlight-congress-api"),
     VoteSmart   = require('votesmart'),
     config      = require('config'),
-	db          = require('../database');
+    db          = require('../database');
+
 /*
  * Include all your global env variables here.
 */

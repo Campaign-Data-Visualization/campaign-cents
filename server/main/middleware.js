@@ -15,9 +15,10 @@ module.exports = exports = {
 
   handleError: function (err, req, res, next) {
     if (err) {
-      res.send(err, 500);
+      res.status(500).send({error: err.message, errorType: err.name });
     }
   },
+
   cors: function (req, res, next) {
     res.header('Access-Controll-Allow-Origin', '*');
     res.header('Access-Controll-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
