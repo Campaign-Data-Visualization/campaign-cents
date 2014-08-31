@@ -1,7 +1,7 @@
 'use strict';
-angular.module('myApp')
+var app = angular.module('myApp')
 
-.factory('DataRequestFactory', function($http){
+app.factory('DataRequestFactory', function($http, $messages){
   var getData = function(route, input, callback){
     return $http({
       method: 'GET',
@@ -9,13 +9,25 @@ angular.module('myApp')
       //data: {input: input}
     })
     .then(function(response){
-      if (callback) { 
-        callback(response.data.data);
+      if (response.data.error) { 
+        handleError(response);
       } else { 
-        return response.data.data;
+        if (callback) { 
+          callback(response.data.data);
+        } else { 
+          return response.data.data;
+        }
       }
-    })
+    }, 
+    handleError)
   };
+
+  var handleError = function(response) {
+      if(response.data && response.data.error) { 
+        $messages.error(response.data.error);
+      }
+  };
+
   return {
     'getData': getData,
   };
