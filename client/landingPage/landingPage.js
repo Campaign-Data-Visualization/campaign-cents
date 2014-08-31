@@ -24,7 +24,7 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
 
   $scope.select = function(item, model, label) { 
     var route = item.type == 'c' ? 'candidateProfile' : 'candidateList';
-    $state.go('myApp.main.'+route, {input:item.id,});
+    $state.go('myApp.main.candidatesView.'+route, {input:item.id,state:item.state});
   }
 
   $scope.$on('mapInitialized', function(event, map){

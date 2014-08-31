@@ -14,11 +14,11 @@ module.exports = exports = {
     console.log('Searching for '+value);
 
     if (isNaN(value)) { 
-      db.doQuery("select voteSmartId as id, firstNameLastName as label, photoURL as image, concat(state, if(district, concat('-', district), '')) as detail, 'c' as type from candidates where firstNameLastName like ? limit "+limit, ['%'+value+'%']).then(function(results) { 
+      db.doQuery("select voteSmartId as id, state, firstNameLastName as label, photoURL as image, concat(state, if(district, concat('-', district), '')) as detail, 'c' as type from candidates where firstNameLastName like ? limit "+limit, ['%'+value+'%']).then(function(results) { 
         res.send({type:'candidates', data:results});
       });
     } else { 
-      db.doQuery("select zip as id, zip as label, concat(city, ', ', state) as detail, 'z' as type from zipcode where zip like ? limit "+limit, [value+'%']).then(function(results) { 
+      db.doQuery("select zip as id, state, zip as label, concat(city, ', ', state) as detail, 'z' as type from zipcode where zip like ? limit "+limit, [value+'%']).then(function(results) { 
         res.send({type:'zips', data:results});
       });
     }

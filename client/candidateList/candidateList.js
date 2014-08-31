@@ -1,11 +1,11 @@
 'use strict';
-angular.module('myApp.main.candidateList', ['ui.router'])
+angular.module('myApp.main.candidatesView.candidateList', ['ui.router'])
 
 .config(function ($stateProvider) {
 
   $stateProvider
-    .state('myApp.main.candidateList', {
-      url: '/zip:{input}',
+    .state('myApp.main.candidatesView.candidateList', {
+      url: '/zip/:input',
       templateUrl: 'candidateList/candidateList.tpl.html',
       controller: 'CandidateListController'
     });
@@ -37,7 +37,8 @@ angular.module('myApp.main.candidateList', ['ui.router'])
   }
 })
 .controller('CandidateListController', function($scope, $stateParams, DataRequestFactory, $state) {
-  DataRequestFactory.getData('zip', $stateParams.input, function(response){
+  $scope.viewparams.zip = $stateParams.input;
+  DataRequestFactory.getData('zip', $scope.viewparams.zip, function(response){
     $scope.candidates = response;
   });
 });
