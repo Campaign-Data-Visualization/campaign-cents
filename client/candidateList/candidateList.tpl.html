@@ -21,7 +21,9 @@
                 <h2>{{candidate.firstNameLastName}}</h2>
                 <h3>{{candidate.party}} Party</h3>
                 <!-- need to add incumbent/not here -->
-                <h4 class="chamber">{{candidate.office}}, {{candidate.state}}<span ng-if="candidate.district != ''">-{{candidate.district}}</span></h4>
+                <h4 class="chamber">{{candidate.office}}, {{candidate.state}}<span ng-if="candidate.district != ''">-{{candidate.district}}</span> - <span class='incumbent'>{{candidate.incumbent ? 'Incumbent' : 'Challenger'}}</span></h4>
+                <h4>${{candidate.2014contrib | number}} this cycle</h4>
+                <h4>${{candidate.since2000contrib | number}} since 2000</h4>
               </li>
             </ul>
           <!-- GET INVOLVED -->

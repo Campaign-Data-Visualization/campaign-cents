@@ -77,8 +77,7 @@ module.exports = exports = {
       type = 'zip';
       var zip = zipCode;
       db.deferredRequest({url: "http://congress.api.sunlightfoundation.com/districts/locate?apikey="+config.sunlight.apiKey+"&zip="+zip}).then(function(data) { 
-        console.dir(data.count);
-        if (data.results) { 
+        if (data.results && data.count) { 
           var districts = [];
           var state = '';
           data.results.forEach(function(district) { 
@@ -86,14 +85,13 @@ module.exports = exports = {
             districts.push(district.district);
           });
 
-          if (districts[0]) { 
-            db.doQuery("select * from candidates where state = ? and (office = 'U.S. Senate' or district in (?))", [state, districts]).then(function(results) {
-              res.send({type:'zip', candidates: results});
-              //console.log(results);
-            });
-          } else { 
-            console.log('bad zip'+zip);
-          }
+          db.doQuery("select * from candidates where state = ? and (office = 'U.S. Senate' or district in (?)) order by district", [state, districts]).then(function(results) {
+            res.send({type:'zip', candidates: results});
+            //console.log(results);
+          });
+
+        } else { 
+          console.log('bad zip'+zip);
         }
       });
       /*

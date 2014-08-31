@@ -67,3 +67,4 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
   //     }
   //  )}();
 
+});
