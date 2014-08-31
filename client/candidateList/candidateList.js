@@ -37,19 +37,8 @@ angular.module('myApp.main.candidateList', ['ui.router'])
   }
 })
 .controller('CandidateListController', function($scope, $stateParams, DataRequestFactory, $state) {
-  // filter candidates by zipcode input from search page
-  $scope.input = $stateParams.input;
-
-  $scope.select = function(id) { 
-    $state.go('myApp.main.candidateProfile', {id:id});
-  }
-
-  DataRequestFactory.getData($stateParams.input, function(response){
-    console.log("This is the response in the candidate list controller", response);
+  DataRequestFactory.getData('zip', $stateParams.input, function(response){
     $scope.candidates = response;
-    console.log("this is the 0th element of candidates", $scope.candidates);
-    
   });
-
 });
 

@@ -17,20 +17,14 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
   $scope.loadingSearch = false;
 
   $scope.search = function(value){
-    return $http.get('/dataRequest/search/'+value).then(function(res) { 
-      return res.data;
-    });
-    // console.log($scope.result)
-    // var fullInput = $scope.result.originalObject.fullName;
-    // var zipInput = $scope.zipresult.originalObject.zip;
+    return DataRequestFactory.getData('search', value).then(function(res) { 
+      return res;
+     });
   }
 
   $scope.select = function(item, model, label) { 
-    if (item.type == 'c') { 
-      $state.go('myApp.main.candidateProfile', {id:item.id,});
-    } else {
-      $state.go('myApp.main.candidateList', {input:item.id});
-    }
+    var route = item.type == 'c' ? 'candidateProfile' : 'candidateList';
+    $state.go('myApp.main.'+route, {input:item.id,});
   }
 
   $scope.$on('mapInitialized', function(event, map){

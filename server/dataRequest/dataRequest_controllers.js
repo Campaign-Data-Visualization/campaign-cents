@@ -15,11 +15,11 @@ module.exports = exports = {
 
     if (isNaN(value)) { 
       db.doQuery("select voteSmartId as id, firstNameLastName as label, photoURL as image, concat(state, if(district, concat('-', district), '')) as detail, 'c' as type from candidates where firstNameLastName like ? limit "+limit, ['%'+value+'%']).then(function(results) { 
-        res.json(results);
+        res.send({type:'candidates', data:results});
       });
     } else { 
       db.doQuery("select zip as id, zip as label, concat(city, ', ', state) as detail, 'z' as type from zipcode where zip like ? limit "+limit, [value+'%']).then(function(results) { 
-        res.json(results);
+        res.send({type:'zips', data:results});
       });
     }
   },
@@ -37,7 +37,7 @@ module.exports = exports = {
         });
 
         db.doQuery("select * from candidates where  state = ? and (office = 'U.S. Senate' or district in (?)) order by district", [state, districts]).then(function(results) {
-          res.send({type:'zip', candidates: results});
+          res.send({type:'zip', data: results});
           //console.log(results);
         }, next);
 
@@ -53,7 +53,7 @@ module.exports = exports = {
 
     db.deferredRequest({url: 'http://api.votesmart.org/CandidateBio.getBio?key='+ config.votesmart.apiKey +'&candidateId='+ candidateId}).then(function(data) {
       if (! data.error) { 
-        res.send({type: 'candidate', candidateInfo: data});
+        res.send({type: 'candidate', data: data});
       } else {
         next(new Error("Invalid Candidate ID"));
       }
