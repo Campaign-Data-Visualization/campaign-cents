@@ -31,7 +31,7 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
     var layerDistricts = new google.maps.FusionTablesLayer({
       query: {
         select: 'col0',
-        from: '1BAwVHJLmofCdgz3ewBHN_42SHqjK7VV3sfek26Fm'
+        from: '1FA02SqJieosxH8tlUN7tfRw86knPdhmxGPJW2uU2'
       },
       styles: [{
         polygonOptions: {
@@ -43,7 +43,7 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
     var layerKochRecipients = new google.maps.FusionTablesLayer({
       query: {
         select: 'col6',
-        from: '1yD-ZmXy4Lgo4DC9-HmvwxYcvcYfIDzZdNpJEKvtx'
+        from: '1AgSd7ptS2hw-KuiXAjvJVS-_G1mrEeJGLCp7gcJX'
       }
     });
 
