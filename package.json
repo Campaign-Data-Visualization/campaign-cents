@@ -20,6 +20,7 @@
     "gulp": "*",
     "gulp-bower": "*",
     "tiny-lr": "*",
+    "node-geocoder': '*',
     "gulp-jshint": "*",
     "gulp-notify": "*",
     "gulp-livereload": "*",

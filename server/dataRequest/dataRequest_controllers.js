@@ -59,5 +59,16 @@ module.exports = exports = {
       }
     }, next);
   },
+
+  lookupMapData: function(req, res, next) { 
+    var mapType = req.params.mapType;
+    var results = {type:'markers', data: {}};
+    if (mapType == 'candidates') {
+      db.doQuery("select voteSmartId as id, firstNameLastName as title, format(since2000contrib, 0) as amount, lat, lng from candidates where since2000contrib != 0 and lat != 0 and lng != 0").then(function(data) {
+        results.data = data;
+        res.send(results);
+      })
+    }
+  }
 };
 

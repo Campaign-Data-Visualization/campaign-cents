@@ -9,4 +9,6 @@ module.exports = exports = function(router){
 
   router.route('/candidate/:candidateId').get(controller.lookupCandidate);
 
+  router.route('/map/:mapType').get(controller.lookupMapData)
+
 };

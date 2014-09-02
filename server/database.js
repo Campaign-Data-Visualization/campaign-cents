@@ -37,11 +37,11 @@ function handleDisconnect(connection) {
 }*/
 
 exports.dbClose = function(callback) { 
-	pool.end(callback);
+  pool.end(callback);
 }
 
 exports.doQuery = function(query, args) { 
-	var deferred = Q.defer();
+  var deferred = Q.defer();
   
   //console.log("Running query "+query+ " with args "+args);
   pool.getConnection(function(err, connection) { 
@@ -60,20 +60,20 @@ exports.doQuery = function(query, args) {
       });
     }
   });
-	return deferred.promise;
+  return deferred.promise;
 }
 
 exports.deferredRequest = function(options) { 
-	options.agent = false;
-	options.headers = {
-		"User-Agent": "Mozilla/4.0 (compatible; Project Vote Smart node.js client)",
-		"Content-type": "application/x-www-form-urlencoded"
-	};
+  options.agent = false;
+  options.headers = {
+    "User-Agent": "Mozilla/4.0 (compatible; Project Vote Smart node.js client)",
+    "Content-type": "application/x-www-form-urlencoded"
+  };
 
-	var deferred = Q.defer();
-	//console.log('looking up '+options.url);
-	request(options, function (error, response, body){
-		if (!error && response.statusCode == 200){
+  var deferred = Q.defer();
+  //console.log('looking up '+options.url);
+  request(options, function (error, response, body){
+    if (!error && response.statusCode == 200){
       var contentType = response.headers['content-type'];
       if (contentType.match(/xml/)) { 
         parseString(body, function(err, result) { 
@@ -86,16 +86,16 @@ exports.deferredRequest = function(options) {
       } else {
         deferred.resolve(JSON.parse(body));
       }
-		} else { 
-		  deferred.reject(err);
-		}
-	});
-	return deferred.promise;
+    } else { 
+      deferred.reject(err);
+    }
+  });
+  return deferred.promise;
 }
 
 exports.exit = function(code) { 
-	console.log("exiting with code "+code);
-	exports.dbClose(function(err) { 
-		process.exit(code);
-	});
+  console.log("exiting with code "+code);
+  exports.dbClose(function(err) { 
+    process.exit(code);
+  });
 }
