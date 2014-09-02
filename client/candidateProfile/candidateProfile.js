@@ -11,6 +11,7 @@ angular.module('myApp.main.candidatesView.candidateProfile', ['ui.router'])
 })
 .controller('CandidateProfileController', function($scope, $stateParams, DataRequestFactory) {
   $scope.candidateId = $stateParams.input;
+  $scope.candidateBio = {};
   $scope.loading = 1;
 
   DataRequestFactory.getData('candidate', $scope.candidateId).then(
