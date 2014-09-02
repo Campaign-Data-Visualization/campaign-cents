@@ -12,7 +12,7 @@ app.service('$messages', function($rootScope) {
 
 	service.error = function(message) { 
 		console.log('Error: '+message);
-    service.addMessage("We're sorry, an error occurred: "+message, 'danger');
+   		service.addMessage("We're sorry, an error occurred: "+message, 'danger');
 	}
 	
 	service.getMessages = function() { 
@@ -31,5 +31,3 @@ app.service('$messages', function($rootScope) {
 		service.clearMessages();
 	});
 });
-
-

@@ -1,4 +1,6 @@
-<div class='candidate-profile'>
+<loading loading="loading"/>
+
+<div ng-hide='loading' class='candidate-profile'>
   <div ng-if='viewparams.zip' class="row show-all">
     <div class="col-xs-12">
       <h3 ui-sref='myApp.main.candidatesView.candidateList({input:viewparams.zip})'><span class="glyphicon glyphicon-chevron-left"></span> Show All Candidates</h3>
@@ -35,27 +37,6 @@
       <p><span class="bold">Education:</span> {{candidateBio.candidate[0].education[0]}}</p>
       <p><span class="bold">Profession:</span> {{candidateBio.candidate[0].profession[0]}}</p>
       <!-- <p>{{politician.bio}}</p> -->
-    </div>
-  </div>
-  <div class="row get-involved">
-    <div class="col-xs-12">
-      <h3>GET INVOLVED</h3>
-    </div>
-    <div class="col-sm-3 col-xs-12">
-      <img src="images/icon-camera-red.svg">
-      <p>Watch <a href="#">Koch Brothers Exposed</a> online or <a href="#">Citizen Koch</a> at a local screening</p>
-    </div>
-    <div class="col-sm-3 col-xs-12">
-      <img src="images/icon-clipboard-red.svg">
-      <p>Start an <a href="#">anti-Koch campaign</a> or petition</p>
-    </div>
-    <div class="col-sm-3 col-xs-12">
-      <img src="images/icon-people-red.svg">
-      <p>Join a local <a href="#">MoveOn Council</a></p>
-    </div>
-    <div class="col-sm-3 col-xs-12">
-      <img src="images/icon-megaphone-red.svg">
-      <p>Report a <a href="#">Koch Problem</a> in your area</p>
     </div>
   </div>
 </div>

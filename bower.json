@@ -7,6 +7,7 @@
     "angular-cookies": "*",
     "ngFx": "*",
     "angular-ui-router": "*",
+    "angular-resource": "*",
     "angular-bootstrap": "~0.11.0"
   }
 }

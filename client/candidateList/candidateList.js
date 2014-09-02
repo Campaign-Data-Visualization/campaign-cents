@@ -10,16 +10,6 @@ angular.module('myApp.main.candidatesView.candidateList', ['ui.router'])
       controller: 'CandidateListController'
     });
 })
-/*
-// Filters out congressman with regular expression selecting for first character of U
-.filter('filterCongress', function () {  
-  return function (candidates) {
-    return candidates.filter(function (candidate) {
-      return /U/i.test(candidate.electionOffice[0].substring(0, 1));
-    });
-  };
-})
-*/
 .directive('errSrc', function() {
   return {
     link: function(scope, element, attrs) {
@@ -37,9 +27,14 @@ angular.module('myApp.main.candidatesView.candidateList', ['ui.router'])
   }
 })
 .controller('CandidateListController', function($scope, $stateParams, DataRequestFactory, $state) {
+  $scope.candidates = [];
+  $scope.loading = 1;
   $scope.viewparams.zip = $stateParams.input;
-  DataRequestFactory.getData('zip', $scope.viewparams.zip, function(response){
+
+  DataRequestFactory.getData('zip', $scope.viewparams.zip).then(function(response){
+    $scope.loading = 0;
     $scope.candidates = response;
+  }, function(err) {
+    $scope.loading = 0;
   });
 });
-

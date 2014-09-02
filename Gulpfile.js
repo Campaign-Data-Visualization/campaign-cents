@@ -26,7 +26,7 @@ gulp.task('html', function () {
   return gulp.src(paths.views)
     .pipe(plumber())
     .pipe(refresh(client))
-    .pipe(notify({message: 'Views refreshed'}));
+    //.pipe(notify({message: 'Views refreshed'}));
 });
 
 gulp.task('lint', function () {
@@ -35,7 +35,7 @@ gulp.task('lint', function () {
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(refresh(client))
-    .pipe(notify({message: 'Lint done'}));
+    //.pipe(notify({message: 'Lint done'}));
 });
 
 gulp.task('serve', function () {

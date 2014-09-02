@@ -12,3 +12,13 @@ app.directive('messages', function($messages) {
 		}
 	}
 });
+
+app.directive('loading', function() {
+	return {
+		restrict: 'E',
+		scope: {
+      		loading: '=',
+    	},
+		template: "<div ng-show='loading' class='loading-image'>[Insert loading image here]</div>",
+	};
+});
