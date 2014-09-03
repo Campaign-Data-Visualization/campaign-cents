@@ -48,15 +48,23 @@ module.exports = exports = {
 
   },
 
-  lookupCandidate: function(req, res, next) { 
+  lookupCandidateBio: function(req, res, next) { 
     var candidateId = req.params.candidateId;
 
     db.deferredRequest({url: 'http://api.votesmart.org/CandidateBio.getBio?key='+ config.votesmart.apiKey +'&candidateId='+ candidateId}).then(function(data) {
       if (! data.error) { 
-        res.send({type: 'candidate', data: data});
+        res.send({type: 'candidateBio', data: data});
       } else {
         next(new Error("Invalid Candidate ID"));
       }
+    }, next);
+  },
+
+  lookupCandidate: function(req, res, next) {
+    var candidateId = req.params.candidateId;
+
+    db.doQuery("select * from candidates where voteSmartId = ?", [candidateId]).then(function(data) {
+      res.send({type: 'candidateProfile', data:data[0]})
     }, next);
   },
 

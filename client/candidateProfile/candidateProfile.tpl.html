@@ -1,6 +1,6 @@
-<loading loading="loading"/>
+<loading loading="profileLoading"/>
 
-<div ng-hide='loading' class='candidate-profile'>
+<div ng-hide='profileLoading' class='candidate-profile'>
   <div ng-if='viewparams.zip' class="row show-all">
     <div class="col-xs-12">
       <h3 ui-sref='myApp.main.candidatesView.candidateList({input:viewparams.zip})'><span class="glyphicon glyphicon-chevron-left"></span> Show All Candidates</h3>
@@ -8,19 +8,20 @@
   </div>
   <div class="row">
     <div class="col-xs-12">  
-      <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" ng-src="http://votesmart.org/canphoto/{{candidateBio.candidate[0].candidateId[0]}}.jpg" err-src="../images/profile-blank.jpg">
-      <h2>{{candidateBio.candidate[0].preferredName[0]}} {{candidateBio.candidate[0].lastName[0]}}</h2>
+      <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" ng-src="{{candidateProfile.photoURL || '../images/profile-blank.jpg'}}" err-src="../images/profile-blank.jpg">
+      <h2>{{candidateProfile.firstName}} {{candidateProfile.lastName}}</h2>
       <!--need variable for incumbent or candidate-->       
-      <h3>{{candidateBio.office[0].parties[0]}} Party</h3>
+      <h3>{{candidateProfile.party}} Party</h3>
       <!-- need to pull variable for which state -->
-      <h4>{{candidateBio.office[0].title[0]}} ( {{candidateBio.office[0].stateId[0]}} )</h4>
-      <h4>First Elected: {{candidateBio.office[0].firstElect[0]}}</h4>
-      <h4>Next Election: {{candidateBio.office[0].nextElect[0]}}</h4>
+      <h4>{{candidateProfile.office}} <span class='candidate-state'>( {{candidateProfile.state}}<span class='candidate-district' ng-if="candidateProfile.district != ''">-{{candidateProfile.district}}</span> )</span></h4>
+      <h4 ng-if='! bioLoading && candidateBio.office[0].firstElect[0]'>First Elected: {{candidateBio.office[0].firstElect[0]}}</h4>
+      <h4 ng-if='! bioLoading && candidateBio.office[0].nextElect[0]'>Next Election: {{candidateBio.office[0].nextElect[0]}}</h4>
     </div>
   </div>
   <div class="row">
   <div class="col-xs-12">
     <h4 class="center">Total Funding From Funder Organizations</h4>
+      ${{candidateProfile.2014contrib | number}} this cycle
   </div>
   </div> 
   <div class="row">
@@ -29,13 +30,16 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12 candidate-about">
+    <div class="col-xs-12 candidate-about" ng-if='bioLoading'>
+      <loading loading='bioLoading'/>
+    </div>
+    <div class="col-xs-12 candidate-about" ng-if='!bioLoading'>
       <h4 class="center">About Candidate</h4>
-      <p><span class="bold">Birthdate:</span> {{candidateBio.candidate[0].birthDate[0]}}</p>
-      <p><span class="bold">Birthplace:</span> {{candidateBio.candidate[0].birthPlace[0]}}</p>
-      <p><span class="bold">Home city:</span> {{candidateBio.candidate[0].homeCity[0]}} {{candidateBio.family[0].homeState[0]}} </p>
-      <p><span class="bold">Education:</span> {{candidateBio.candidate[0].education[0]}}</p>
-      <p><span class="bold">Profession:</span> {{candidateBio.candidate[0].profession[0]}}</p>
+      <p ng-if='candidateBio.candidate[0].birthDate[0]'><span class="bold">Birthdate:</span> {{candidateBio.candidate[0].birthDate[0]}}</p>
+      <p ng-if='candidateBio.candidate[0].birthPlace[0]'><span class="bold">Birthplace:</span> {{candidateBio.candidate[0].birthPlace[0]}}</p>
+      <p ng-if='candidateBio.candidate[0].homeCity[0]'><span class="bold">Home city:</span> {{candidateBio.candidate[0].homeCity[0]}} {{candidateBio.candidate[0].homeState[0]}} </p>
+      <p ng-if='candidateBio.candidate[0].education[0]'><span class="bold">Education:</span> {{candidateBio.candidate[0].education[0]}}</p>
+      <p ng-if='candidateBio.candidate[0].profession[0]'><span class="bold">Profession:</span> {{candidateBio.candidate[0].profession[0]}}</p>
       <!-- <p>{{politician.bio}}</p> -->
     </div>
   </div>

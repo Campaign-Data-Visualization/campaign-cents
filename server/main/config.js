@@ -19,6 +19,8 @@ module.exports = exports = function (app, express, routers) {
   app.use(morgan('dev'));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
+  //simulate latency
+  //app.use(function(req,res,next){setTimeout(next,1000)});
   app.use(middle.cors);
   app.use(express.static(__dirname + '/../../client'));
   app.use('/dataRequest', routers.DataRequestRouter);
