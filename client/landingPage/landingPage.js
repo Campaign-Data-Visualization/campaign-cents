@@ -62,7 +62,7 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
     var layerDistricts = new google.maps.FusionTablesLayer({
       query: {
         select: 'col0',
-        from: '1FA02SqJieosxH8tlUN7tfRw86knPdhmxGPJW2uU2'
+        from: '1Z90J8WgY8rdB_TCNS_EynPye4CazNoZK4XfENz_z'
       },
       styles: [{
         polygonOptions: {
