@@ -6,26 +6,11 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
     .state('myApp.main.landingPage', {
       url: '',
       templateUrl: 'landingPage/landingPage.tpl.html',
-      controller: 'SearchController'
+      controller: 'LandingPageController'
     });
 })
 
-.controller('SearchController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state){
-
-  $scope.zipsearchshow = false;
-  $scope.searchValue = '';
-  $scope.loadingSearch = false;
-
-  $scope.search = function(value){
-    return DataRequestFactory.getData('search', value).then(function(res) { 
-      return res;
-     });
-  }
-
-  $scope.select = function(item, model, label) { 
-    var route = item.type == 'c' ? 'candidateProfile' : 'candidateList';
-    $state.go('myApp.main.candidatesView.'+route, {input:item.id,state:item.state});
-  }
+.controller('LandingPageController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state){
 
   $scope.$on('mapInitialized', function(event, map){
     $scope.infoWindow = new google.maps.InfoWindow(); 
