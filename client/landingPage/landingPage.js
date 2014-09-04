@@ -69,7 +69,9 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
           fillColor: '#F0F0F0',
           fillOpacity: 0.5
         }
-      }]      
+      }],      
+      clickable: false,
+      suppressInfoWindows: true      
     });
     /*var layerKochRecipients = new google.maps.FusionTablesLayer({
       query: {
