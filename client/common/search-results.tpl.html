@@ -3,7 +3,7 @@
   <div ng-if="match.model.err == 'error'">An error occured with this search.</div>
 
   <div ng-if="! match.model.err">
-    <img ng-if='match.model.image' ng-src='{{match.model.image}}' class=''/>
+    <img ng-if='match.model.image' ng-src='{{match.model.image}}' err-src="/images/profile-blank.jpg" class=''/>
     <span bind-html-unsafe="match.model.label | typeaheadHighlight:query"></span>
     <span class='search-details'>({{match.model.detail}})</span>
   </div>

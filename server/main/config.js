@@ -4,8 +4,6 @@ var mysql       = require('mysql'),
     morgan      = require('morgan'),
     bodyParser  = require('body-parser'),
     middle      = require('./middleware'),
-    api         = require("sunlight-congress-api"),
-    VoteSmart   = require('votesmart'),
     config      = require('config'),
     db          = require('../database');
 
