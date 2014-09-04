@@ -7,7 +7,7 @@
     'myApp.main',
     ])
   .config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('');
+    $urlRouterProvider.otherwise('/notFound');
 
     $stateProvider
       .state('myApp', {

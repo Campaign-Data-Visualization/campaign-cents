@@ -26,6 +26,7 @@ module.exports = exports = function (app, express, routers) {
   app.use('/dataRequest', routers.DataRequestRouter);
   app.use(middle.logError);
   app.use(middle.handleError);
+  app.use(middle.fourohfour);
 };
 
 //This DB section is commented out to deploy. 
