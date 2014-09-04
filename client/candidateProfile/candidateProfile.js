@@ -35,6 +35,4 @@ angular.module('myApp.main.candidatesView.candidateProfile', ['ui.router'])
       $scope.profileLoading = 0;
     }
   );
-
-
 });

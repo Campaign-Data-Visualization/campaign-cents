@@ -24,7 +24,7 @@ var convertFiles = function() {
         exec('csvsql '+datadir+file+'.csv --db mysql://root:@/kochtracker --insert < /dev/tty', function(res) { 
           //console.log(res)
           deferred.resolve();
-        });
+        }, logError);
       });
     });
     promises.push(deferred.promise);
@@ -43,21 +43,17 @@ var updateContribs = function() {
   db.doQuery("delete from koch_contribs").then(function() {
 
     db.doQuery("insert into koch_contribs select cid, ultorg, pacid, date, amount, '', 'pac_to_can', fecrecno, 'f', cycle from IFG_PAC2Cand_Data join candidates on cid = crpid").then(function() {
-    console.log('one')
       db.doQuery("insert into koch_contribs select recipid, if(ultorg != '', ultorg, if(orgname != '', orgname, fecoccemp)), contribid, date, amount, '', 'individual', fectransid, 'f', cycle from IFG_IndivData join candidates on recipid = crpid").then(function() {
-        console.log('one')
         db.doQuery("insert into koch_contribs select cid, if(ultorg != '', ultorg, pacshort), '', date, amount, '', 'outside_cand', id, if(crpsuppopp = 'S', 'f', 'a'), cycle from IFG_Outside_Cand_Expends join candidates on cid = crpid").then(function() {
-          console.log('one')
           db.doQuery("insert into koch_contribs select b.crpid, if(ultorg != '', ultorg, a.pacshort), filerid, date, amount, '', 'pac_to_com', fecrecno, 'f', cycle from IFG_PAC2Cmte_Data a join leadership_pacs b on recipid = cmteid and b.crpid != ''").then(function() {
-            console.log('one')
             db.doQuery("update koch_contribs a join koch_orgs b on donor_name = org_name set a.koch_tier = b.tier").then(function() {
               console.log('<=====Contribs Updated');
               deferred.resolve();
-            });
-          });
-        });
-      });
-    }, function(err) { console.log(err)});
+            }, logError);
+          }, logError);
+        }, logError);
+      }, logError);
+    }, logError);
   });
   return deferred.promise;
 };
@@ -77,7 +73,9 @@ var updateCandidateAmounts = function() {
   return deferred.promise;
 };
 
-
+var logError = function(err) { 
+  console.log(err);
+}
 /* I'm giving up on updating the fusion tables - too much of a headache, and it turns out there's no way to automate the geocode. I'm moving to just pulling the markers from our own table
 var updateFusionTables = function() {
   console.log('<=====Updating Fusion Tables');

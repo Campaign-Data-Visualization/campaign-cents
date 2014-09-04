@@ -13,8 +13,11 @@ module.exports = exports = {
     var limit = 8;
     console.log('Searching for '+value);
 
-    if (isNaN(value)) { 
-      db.doQuery("select voteSmartId as id, state, firstNameLastName as label, photoURL as image, concat(state, if(district, concat('-', district), '')) as detail, 'c' as type from candidates where firstNameLastName like ? limit "+limit, ['%'+value+'%']).then(function(results) { 
+    if (isNaN(value)) {
+      value = value.replace(/\.|\,/g, ' ');
+      value = value.replace(/ /g, "%");
+
+      db.doQuery("select voteSmartId as id, state, nameLastFirst as label, photoURL as image, concat(state, if(district, concat('-', district), '')) as detail, 'c' as type from candidates where nameSearch like ? limit "+limit, ['%'+value+'%']).then(function(results) { 
         res.send({type:'candidates', data:results});
       });
     } else { 
@@ -36,7 +39,7 @@ module.exports = exports = {
           districts.push(district.district);
         });
 
-        db.doQuery("select * from candidates where  state = ? and (office = 'U.S. Senate' or district in (?)) order by district", [state, districts]).then(function(results) {
+        db.doQuery("select * from candidates where state = ? and (office = 'U.S. Senate' or district in (?)) order by district", [state, districts]).then(function(results) {
           res.send({type:'zip', data: results});
           //console.log(results);
         }, next);
@@ -72,7 +75,7 @@ module.exports = exports = {
     var mapType = req.params.mapType;
     var results = {type:'markers', data: {}};
     if (mapType == 'candidates') {
-      db.doQuery("select voteSmartId as id, firstNameLastName as title, format(since2000contrib, 0) as amount, lat, lng from candidates where since2000contrib != 0 and lat != 0 and lng != 0").then(function(data) {
+      db.doQuery("select voteSmartId as id, nameFirstLast as title, format(since2000contrib, 0) as amount, lat, lng from candidates where since2000contrib != 0 and lat != 0 and lng != 0").then(function(data) {
         results.data = data;
         res.send(results);
       })
