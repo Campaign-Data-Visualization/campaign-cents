@@ -7,3 +7,4 @@ echo "Updating schema...";
 mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" kochtracker < backend/sql/candidates.sql
 mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" kochtracker < backend/sql/states.sql
 mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" kochtracker < backend/sql/zipcodes.sql
+mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" kochtracker < backend/sql/koch_contribs.sql
