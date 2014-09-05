@@ -42,13 +42,15 @@ var updateContribs = function() {
 
   db.doQuery("delete from koch_contribs").then(function() {
 
-    db.doQuery("insert into koch_contribs select cid, ultorg, pacid, date, amount, '', 'pac_to_can', fecrecno, 'f', cycle from IFG_PAC2Cand_Data join candidates on cid = crpid").then(function() {
-      db.doQuery("insert into koch_contribs select recipid, if(ultorg != '', ultorg, if(orgname != '', orgname, fecoccemp)), contribid, date, amount, '', 'individual', fectransid, 'f', cycle from IFG_IndivData join candidates on recipid = crpid").then(function() {
-        db.doQuery("insert into koch_contribs select cid, if(ultorg != '', ultorg, pacshort), '', date, amount, '', 'outside_cand', id, if(crpsuppopp = 'S', 'f', 'a'), cycle from IFG_Outside_Cand_Expends join candidates on cid = crpid").then(function() {
-          db.doQuery("insert into koch_contribs select b.crpid, if(ultorg != '', ultorg, a.pacshort), filerid, date, amount, '', 'pac_to_com', fecrecno, 'f', cycle from IFG_PAC2Cmte_Data a join leadership_pacs b on recipid = cmteid and b.crpid != ''").then(function() {
+    db.doQuery("insert into koch_contribs select cid, ultorg, pacid, date, amount, '', 'pac_to_can', fecrecno, 'f', cycle, null from IFG_PAC2Cand_Data join candidates on cid = crpid").then(function() {
+      db.doQuery("insert into koch_contribs select recipid, if(ultorg != '', ultorg, if(orgname != '', orgname, fecoccemp)), contribid, date, amount, '', 'individual', fectransid, 'f', cycle, null from IFG_IndivData join candidates on recipid = crpid").then(function() {
+        db.doQuery("insert into koch_contribs select cid, if(ultorg != '', ultorg, pacshort), '', date, amount, '', 'outside_cand', id, if(crpsuppopp = 'S', 'f', 'a'), cycle, null from IFG_Outside_Cand_Expends join candidates on cid = crpid").then(function() {
+          db.doQuery("insert into koch_contribs select b.crpid, if(ultorg != '', ultorg, a.pacshort), filerid, date, amount, '', 'pac_to_com', fecrecno, 'f', cycle, null from IFG_PAC2Cmte_Data a join leadership_pacs b on recipid = cmteid and b.crpid != ''").then(function() {
             db.doQuery("update koch_contribs a join koch_orgs b on donor_name = org_name set a.koch_tier = b.tier").then(function() {
-              console.log('<=====Contribs Updated');
-              deferred.resolve();
+              db.doQuery("update koch_contribs a join candidates b using (crpid) set a.voteSmartId = b.voteSmartId").then(function() {
+                console.log('<=====Contribs Updated');
+                deferred.resolve();
+              }, logError);
             }, logError);
           }, logError);
         }, logError);
