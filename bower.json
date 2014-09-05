@@ -8,6 +8,7 @@
     "ngFx": "*",
     "angular-ui-router": "*",
     "angular-resource": "*",
-    "angular-bootstrap": "~0.11.0"
+    "angular-bootstrap": "~0.11.0",
+    "d3": "*"
   }
 }

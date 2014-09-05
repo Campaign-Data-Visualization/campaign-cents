@@ -8,9 +8,9 @@
   </div>
   <div class="row">
     <div class="col-xs-12">  
-      <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" ng-src="candidateProfile.photoURL" err-src="/images/profile-blank.jpg">
+      <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" ng-src="{{candidateProfile.photoURL}}" err-src="/images/profile-blank.jpg">
       <h2>{{candidateProfile.nameFirstLast}}</h2>
-      <h3>{{candidateProfile.party}} Party</h3>
+      <h3>{{candidateProfile.party}} Party, {{candidateProfile.electionStatus}}</h3>
       <h4>{{candidate.electionstatus}}</h4>
       <!-- need to pull variable for which state -->
       <h4>{{candidateProfile.office}} <span class='candidate-state'>( {{candidateProfile.state}}<span class='candidate-district' ng-if="candidateProfile.district != ''">-{{candidateProfile.district}}</span> )</span></h4>
@@ -19,14 +19,15 @@
     </div>
   </div>
   <div class="row">
-  <div class="col-xs-12">
+  <div ng-if='!profileLoading' class="col-xs-12">
     <h4 class="center">Total Funding From Funder Organizations</h4>
-      ${{candidateProfile.2014contrib | number}} this cycle
+      <bubble-chart data='totals'/>
   </div>
   </div> 
   <div class="row">
-    <div class="col-xs-12">
+    <div ng-if='!profileLoading' class="col-xs-12">
       <h4 class="center">Top Donors by Organization</h4>
+      {{topDonors}}
     </div>
   </div>
   <div class="row">

@@ -15,6 +15,8 @@ angular.module('myApp.main.candidatesView.candidateProfile', ['ui.router'])
   $scope.candidateBio = {};
   $scope.profileLoading = 1;
   $scope.bioLoading = 1;
+  $scope.totals = [];
+  $scope.topDonors = {};
 
   DataRequestFactory.getData('candidate', $scope.candidateId+'/bio').then(
     function(response){
@@ -30,6 +32,10 @@ angular.module('myApp.main.candidatesView.candidateProfile', ['ui.router'])
     function(response){
       $scope.profileLoading = 0;
       $scope.candidateProfile= response;
+      $scope.totals = $scope.candidateProfile.data.totals;
+      $scope.topDonors = $scope.candidateProfile.data.top_donors;
+
+      
     },
     function(response){
       $scope.profileLoading = 0;
