@@ -27,7 +27,7 @@ app.service('$messages', function($rootScope) {
 		service.messages = [];
 	}
 	
-	$rootScope.$on( "$routeChangeStart", function(event, next, current) {
+	$rootScope.$on("$stateChangeStart", function(event, next, current) {
 		service.clearMessages();
 	});
 });
