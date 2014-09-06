@@ -23,6 +23,52 @@ app.directive('loading', function() {
   };
 });
 
+app.directive('staticMap', function($window, DataRequestFactory) {
+	return {
+	  restrict: 'E',
+	  scope: true,
+	  template: "<div class='static-map'><svg width='780' height='450'></svg></div>",
+	  link: function(scope, elem, attrs){
+		  var d3 = $window.d3;
+      var rawSvg=elem.find('svg');
+      var svg = d3.select(rawSvg[0]);
+      var width = rawSvg.attr("width");
+      var height = rawSvg.attr("height");
+      var projection = d3.geo.albersUsa()
+      	.scale(920)
+      	.translate([width / 2, height / 2])
+      var path = d3.geo.path().projection(projection)
+      
+      d3.json("/lib/us-states.json", function(json) {
+    		svg.append("defs").append("path")
+					.attr("id", "land")
+					.datum(topojson.feature(json, json.objects.states))
+					.attr("d", path)
+
+	 			svg.append("path")
+					.attr("class", "state-boundaries")
+					.datum(topojson.feature(json, json.objects.states))
+					.attr("d", path)
+					.attr('fill-opacity', '0')
+					.attr("stroke", '#333');
+			});
+    	
+    	DataRequestFactory.getData('map', 'candidates').then(function(data) {
+				var group = svg.append('g')
+					.attr('class', 'map-markers')
+
+				var markers = group.selectAll('.marker').data(data)
+				markers.enter().append("circle")
+					.attr("r",3)
+					.attr("transform", function(d) {return "translate(" + projection([d.lng,d.lat]) + ")";})
+					.attr('fill', 'orange');
+
+      });
+
+    }
+  }
+})
+
 app.directive('barChart', function($window) {
 	return {
 	  restrict: 'E',

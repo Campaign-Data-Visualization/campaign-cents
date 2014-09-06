@@ -13,6 +13,7 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
 .controller('LandingPageController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state){
   $scope.dayOne = 0;
   $scope.dayTwo = 0;
+  $scope.mapData;
   var today = new Date();
   var election = new Date('11/4/2014');
   var days = Math.ceil((election - today)/1000/3600/24).toString();
@@ -25,14 +26,13 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
       $scope.dayOne = -1;
     }
   }
-  //console.log(days);
 
-  $scope.$on('mapInitialized', function(event, map){
-    $scope.infoWindow = new google.maps.InfoWindow(); 
+  //$scope.$on('mapInitialized', function(event, map){
+    //$scope.infoWindow = new google.maps.InfoWindow(); 
     
-    DataRequestFactory.getData('map', 'candidates').then(function(data) {
-      $scope.markers = [];
-      data.forEach(function(can) {
+
+      //$scope.markers = [];
+     /* data.forEach(function(can) {
         var loc = new google.maps.LatLng(can.lat, can.lng);
         var marker = new google.maps.Marker({
           id: can.id,
@@ -48,6 +48,7 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
           },
           map: $scope.map
         });
+        /*
         google.maps.event.addListener(marker, 'click', function() {
           $scope.infoWindow.close();
           $scope.infoWindow.setContent(
@@ -55,11 +56,11 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
             "<h3>"+marker.title+"</h3>"+
             "<div style='clear: both'>$"+can.amount+ " from Koch since 2000</div>"
           );
-          $scope.infoWindow.open($scope.map, marker)
-        });  
-      })
-    });
-    var layerDistricts = new google.maps.FusionTablesLayer({
+          $scope.infoWindow.open($scope.map, marker)*/
+        //});  
+      //})
+    //});
+   /* var layerDistricts = new google.maps.FusionTablesLayer({
       query: {
         select: 'col0',
         from: '1Z90J8WgY8rdB_TCNS_EynPye4CazNoZK4XfENz_z'
@@ -80,9 +81,9 @@ angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
       }
     });*/
 
-    layerDistricts.setMap(map);
+    //layerDistricts.setMap(map);
     //layerKochRecipients.setMap(map);
-    });
+    //});
 
   //this function gets the current location of the user and saves it as $scope.position
   // $scope.getLocation = function(){

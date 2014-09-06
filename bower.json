@@ -9,6 +9,7 @@
     "angular-ui-router": "*",
     "angular-resource": "*",
     "angular-bootstrap": "~0.11.0",
-    "d3": "*"
+    "d3": "*",
+    "topojson": "*"
   }
 }
