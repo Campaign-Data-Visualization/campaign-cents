@@ -970,8 +970,17 @@ span.bold{font-family:ubuntuBold}
 .page h1{border-bottom:2px solid #0071bc;margin-bottom:30px}
 .page h1,.page h2{color:#0071bc}
 g.tick line{stroke:#999;stroke-width:1px}
-g.tick text,g.amounts text{font-family:ubuntuRegular;font-weight:bold;font-size:16px}
+g.tick text,g.amounts text,g.labels text{font-family:ubuntuRegular;font-weight:bold;font-size:16px}
 g.amounts text.amount-shadow{filter:url('#glow');fill:#333}
 g.amounts text.amount{fill:#fff}
 g.tick text{fill:#666}
 g .domain{display:none}
+.bubble{stroke:#fff;stroke-width:2px}
+.bubble-0{fill:#69ac2a}
+.bubble-1{fill:#2e8c64}
+.bubble-2{fill:#007389}
+.bubble-3{fill:#00516e}
+.label-0,.bar-0,.key-0{fill:#8a262e}
+.label-1,.bar-1,.key-1{fill:#ae272d}
+.label-2,.bar-2,.key-2{fill:#cf4e27}
+.label-3,.bar-3,.key-3{fill:#f27523}
