@@ -75,38 +75,48 @@ app.directive('staticMap', function($window, DataRequestFactory) {
 					.attr('r', 5)
       });
 
-      d3.select(window).on('resize', resize);
+    	scope.$on('windowResize', resize)
     	
     	function resize() {
-    	    width = parseInt(d3.select('#map').style('width'));
-    	    height = width * .6;
+  	    width = parseInt(d3.select('#map').style('width'));
+  	    height = width * .6;
 
-    	    // update projection
-    	    projection
-  	        .translate([width / 2, height / 2])
-  	        .scale(width * 1.3);
+  	    // update projection
+  	    projection
+	        .translate([width / 2, height / 2])
+	        .scale(width * 1.3);
 
-    	    // resize the map container
-    	    svg
-  	        .style('width', width + 'px')
-  	        .style('height', height + 'px');
+  	    // resize the map container
+  	    svg
+	        .style('width', width + 'px')
+	        .style('height', height + 'px');
 
-    	    // resize the map
-    	    svg.selectAll('.state-boundaries').attr('d', path);
-    	    svg.selectAll('.marker').attr("transform", function(d) {return "translate(" + projection([d.lng,d.lat]) + ")";})
-
+  	    // resize the map
+  	    svg.selectAll('.state-boundaries').attr('d', path);
+  	    svg.selectAll('.marker').attr("transform", function(d) {return "translate(" + projection([d.lng,d.lat]) + ")";})
     	}
     }
   }
 })
 
+app.directive('resize', function($window) {
+  return {
+    link: function(scope) {
+      angular.element($window).on('resize', function(e) {
+        // Namespacing events with name of directive + event to avoid collisions
+        scope.$broadcast('windowResize');
+      });
+    }
+  }
+});
+
 app.directive('barChart', function($window) {
 	return {
-	  restrict: 'E',
+	  restrict: 'A',
 	  scope: {
 	    data: '='
 	  },
-	  template: "<div class='bar-chart'><svg width='640' height='150'></svg></div>",
+	  template: "<div class='bar-chart'><svg></svg></div>",
 	  link: function(scope, elem, attrs){
 	      
       var maxRadius = 65;
@@ -118,10 +128,62 @@ app.directive('barChart', function($window) {
       var d3 = $window.d3;
       var rawSvg=elem.find('svg');
       var svg = d3.select(rawSvg[0]);
-      var width = rawSvg.attr("width");
-      var height = rawSvg.attr("height");
-      var barHeight = height - 20;
-      
+   
+   		var width, height, barHeight, oldWidth;
+
+      var init = function() { 
+	      oldWidth = width;
+	      width = elem.width();
+	      height = width * .4
+	      barHeight = height - 20;
+
+	      svg.style({
+	      	width: width,
+	      	height: height
+	      })
+	    }
+     
+      scope.$watch('data', function() {
+    		init();
+    		drawBarChart();
+      });
+
+      scope.$on('windowResize', resize)
+      //d3.select(window).on('resize', resize);
+    	
+    	function resize() {
+    		init();
+    		if (oldWidth == width) { return; }
+
+    		xScale = d3.scale.ordinal()
+    			.rangeRoundBands([0, width-200], .2)
+    			.domain(scope.data.map(function(d) { return d.name}))
+    		
+    		yScale = d3.scale.linear()
+    		  .domain([0, d3.max(scope.data, function(d) { return d.amount; })])
+    		  .range([barHeight, 0]);
+
+    		svg.selectAll('.bar')
+	    		.attr({
+	    			'x': function(d, i) { return xScale(d.name); },
+	    			'width': xScale.rangeBand(),
+						'height': function(d) { return barHeight - yScale(d.amount)},
+			  		'y' : function(d) { return yScale(d.amount); },
+			  	})
+
+		  	svg.selectAll('.label')
+			  	.attr({
+			  		'x': function(d, i) { return xScale(d.name) + xScale.rangeBand()/2; },
+			  		'y' : function(d) { return yScale(barHeight) + 18; },
+			  		'width': xScale.rangeBand(),
+			  	})
+
+			  svg.selectAll('.key')
+			  	.attr({transform: 'translate('+(width-215)+', 20)'});
+
+			  svg.selectAll('.key-item')
+			  	.attr('transform', function(d, i) { return 'translate(0, '+ i*30+')'; })
+    	}
       //scope.data[3].amount=200000;
       //scope.data[3].name='Young Americans for Liberty'
 
@@ -156,106 +218,102 @@ app.directive('barChart', function($window) {
           .attr("class", "bar-group")
           .attr("transform", "translate(0,"+0+")")
 
-         var bars = barGroup.selectAll(".bar").data(scope.data)
+       	var bars = barGroup.selectAll(".bar").data(scope.data)
 
-         bars.enter().append('svg:rect')
-         	.attr({
-         		'x': function(d, i) { return xScale(d.name); },
-         		'y' : barHeight,
-         		'width': xScale.rangeBand(),
-         		'height': 0,
-         		'fill': 'red',
-         		'class': function(d, i) { return 'bar bar-'+i; }
-         	})
+       	bars.enter().append('svg:rect')
+	       	.attr({
+	       		'x': function(d, i) { return xScale(d.name); },
+	       		'y' : barHeight,
+	       		'width': xScale.rangeBand(),
+	       		'height': 0,
+	       		'fill': 'red',
+	       		'class': function(d, i) { return 'bar bar-'+i; }
+	       	})
 
-         	bars.transition()
-         		.delay(function(d, i) { return i * 200; })
-         		.duration(500)
-         		.attr({
-         			'height': function(d) { return barHeight - yScale(d.amount)},
-	         		'y' : function(d) { return yScale(d.amount); },
-         		})
+       	bars.transition()
+       		.delay(function(d, i) { return i * 200; })
+       		.duration(500)
+       		.attr({
+       			'height': function(d) { return barHeight - yScale(d.amount)},
+         		'y' : function(d) { return yScale(d.amount); },
+       		})
 
-         	var labelGroup = svg.append("svg:g")
-         		.attr('class', 'labels')
+       	var labelGroup = svg.append("svg:g")
+       		.attr('class', 'labels')
 
-       		var labels = labelGroup.selectAll('.label').data(scope.data)
+     		var labels = labelGroup.selectAll('.label').data(scope.data)
 
-       		labels.enter().append('svg:text')
-       			.attr({
-       				'x': function(d, i) { return xScale(d.name) + xScale.rangeBand()/2; },
-       				'y' : function(d) { return yScale(barHeight) + 18; },
-       				'width': xScale.rangeBand(),
-       				'class': function(d, i) {return 'label label-'+ i; },
-       				'text-anchor': 'middle',
-       			})
+     		labels.enter().append('svg:text')
+     			.attr({
+     				'x': function(d, i) { return xScale(d.name) + xScale.rangeBand()/2; },
+     				'y' : function(d) { return yScale(barHeight) + 18; },
+     				'width': xScale.rangeBand(),
+     				'class': function(d, i) {return 'label label-'+ i; },
+     				'text-anchor': 'middle',
+     			})
 
-       		labels.transition()	
-   					.delay(function(d, i) { return i * 200; })
-       			.duration(500)
-          	.tween('text', function(d) { 
-	            var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d.amount);
-	            return function(t) { 
-	              this.textContent = amountText(d, i(t));
-	            }
-          	})	
+     		labels.transition()	
+ 					.delay(function(d, i) { return i * 200; })
+     			.duration(500)
+        	.tween('text', function(d) { 
+            var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d.amount);
+            return function(t) { 
+              this.textContent = amountText(d, i(t));
+            }
+        	})	
 
-          var keyGroup = svg.append('svg:g')
-          	.attr({
-          		'class':'key',
-          		transform: 'translate('+(width-215)+', 20)',
-          	})
+        var keyGroup = svg.append('svg:g')
+        	.attr({
+        		'class':'key',
+        		transform: 'translate('+(width-215)+', 20)',
+        	})
 
 
-          var keyItems = keyGroup.selectAll('.key-item').data(scope.data, function(d) { return d.name})
-          keyItems.enter().append('svg:g')
-          	.attr({
-          		'class':'key-item',
-   						'transform': function(d, i) { return 'translate('+(width-420)+', '+ (i*30)+')'; },
-          	})
+        var keyItems = keyGroup.selectAll('.key-item').data(scope.data, function(d) { return d.name})
+        keyItems.enter().append('svg:g')
+        	.attr({
+        		'class':'key-item',
+ 						'transform': function(d, i) { return 'translate('+(width-420)+', '+ (i*30)+')'; },
+        	})
 
-         keyItems.transition()
+        keyItems.transition()
          	.ease('elastic')
           .delay(function(d, i) { return i * 200; })
          	.duration(500)
          	.attr('transform', function(d, i) { return 'translate(0, '+ i*30+')'; })
        
-         	keyItems.append('rect')
-         		.attr({
-         			'class': function(d, i) { return 'key-swatch key-'+i; },
-         			width: 20,
-         			height: 20,
-         			x: 0,
-         			y: -20,
-     				})
+       	keyItems.append('rect')
+       		.attr({
+       			'class': function(d, i) { return 'key-swatch key-'+i; },
+       			width: 20,
+       			height: 20,
+       			x: 0,
+       			y: -20,
+   				})
 
-          keyItems.append('svg:text')
-          	.attr({
-          		'class': 'key-text',
-          		//'width': 150,
-          		'x': 25,
-          		'y': -9,
-          		'dominant-baseline': 'middle'
-          	})
-          	.text(function(d) { return d.name})
-
+        keyItems.append('svg:text')
+        	.attr({
+        		'class': 'key-text',
+        		//'width': 150,
+        		'x': 25,
+        		'y': -9,
+        		'dominant-baseline': 'middle'
+        	})
+        	.text(function(d) { return d.name})
       }
-
-      drawBarChart();
     }
   }
 });
 
-
 app.directive('bubbleChart', function($window) {
   return {
-    restrict: 'E',
+    restrict: 'A',
     scope: {
       data: '='
     },
     template: "<div class='bubble-chart'>"+
     	"<div class='bubble-label'>2014 Spending <span tooltip='Tier 1 organizations consist of: •    Koch-owned business, such as Koch Industries and Flint Hills resources •    Political organizations with very close ties to the Kochs, i.e. they founded the company or sit on the board. Examples include Americans for Prosperity and Club for Growth •    Koch-owned or founded think tanks, such as the Cato Institute. Not many donations from these are included in our data. •    Any organization to which the Koch brothers have donated over one million dollars since 2008 Tier 2 organizations consist of: •    Any organization that receives considerable funding from the Koch brothers that totals less than one million dollars.'>[?]</span></div>"+
-    	"<svg width='640' height='190'>"+
+    	"<svg>"+
     	"<filter id='glow' x='-30%' y='-30%' width='160%' height='160%'><feGaussianBlur stdDeviation='1 1' result='glow'/><feMerge><feMergeNode in='glow'/><feMergeNode in='glow'/><feMergeNode in='glow'/></feMerge></filter>"+
     	"</svg></div>",
     link: function(scope, elem, attrs){
@@ -272,10 +330,59 @@ app.directive('bubbleChart', function($window) {
       var rawSvg=elem.find('svg');
       var svg = d3.select(rawSvg[0]);
 
+   		var width, height, barHeight, oldWidth;
+
+      var init = function() { 
+	      oldWidth = width;
+	      width = elem.width();
+	      height = width * .4
+	      barHeight = height - 20;
+
+	      svg.style({
+	      	width: width,
+	      	height: height
+	      })
+	    }
+     
+      scope.$watch('data', function() {
+    		init();
+    		drawBubbleChart();
+      });
+
+      scope.$on('windowResize', resize)
+      	
+    	function resize() {
+    		init();
+    		if (oldWidth == width) { return; }
+
+        xScale = d3.scale.linear()
+          .domain([0, 3])
+          .range([maxRadius, width - maxRadius]);
+       
+        zScale = d3.scale.sqrt()
+	        .domain([0, d3.max(scope.data, function(d) { return d; })])
+	        .range([0, 65]);
+
+        svg.selectAll("circle")
+        	.attr({
+      			cx: function(d, i) { return xScale(i); },
+						r: function(d) { return zScale(d); }
+					})
+
+				svg.selectAll('.amount')
+					.attr('x',function(d, i) { return xScale(i); })
+
+				svg.selectAll('.amount-shadow')
+					.attr('x',function(d, i) { return xScale(i); })	
+				
+				svg.select('.axis')
+					.call(xAxisGen.scale(xScale))
+    	}
+
       function setChartParameters(){
         xScale = d3.scale.linear()
           .domain([0, 3])
-          .range([maxRadius, rawSvg.attr("width") - maxRadius]);
+          .range([maxRadius, width - maxRadius]);
        
         zScale = d3.scale.sqrt()
 	        .domain([0, d3.max(scope.data, function(d) { return d; })])
@@ -300,7 +407,6 @@ app.directive('bubbleChart', function($window) {
 		  		}
 		  		return val;
 				}
-
        }
     
       function drawBubbleChart() {
@@ -352,7 +458,6 @@ app.directive('bubbleChart', function($window) {
         amounts_group.selectAll('text').transition()
           .duration(1000)
           //.delay(function(d, i) { return (i > 3 ? i-3 : i) * 200; })
-          .attr('width',function(d) { return zScale(d) * 2; })
           .tween('text', function(d) { 
             var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d);
             return function(t) { 
@@ -360,8 +465,6 @@ app.directive('bubbleChart', function($window) {
             }
           })
       } 
-      drawBubbleChart();
-
    }
  }
 })
