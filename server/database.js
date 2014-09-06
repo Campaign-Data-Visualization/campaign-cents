@@ -87,7 +87,7 @@ exports.deferredRequest = function(options) {
         deferred.resolve(JSON.parse(body));
       }
     } else { 
-      deferred.reject(err);
+      deferred.reject(error);
     }
   });
   return deferred.promise;
