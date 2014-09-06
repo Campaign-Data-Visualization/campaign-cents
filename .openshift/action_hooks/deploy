@@ -1,8 +1,10 @@
 echo "setting up config file";
 cd $OPENSHIFT_REPO_DIR;
 echo `pwd`;
-mkdir config;
+mkdir -p config;
+mkdir -p $OPENSHIFT_DEPLOYMENTS_DIR/current/config/;
 cp $OPENSHIFT_DATA_DIR/default.json config/;
+cp $OPENSHIFT_DATA_DIR/default.json $OPENSHIFT_DEPLOYMENTS_DIR/current/config/
 echo "Updating schema...";
 mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" kochtracker < backend/sql/candidates.sql
 mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" kochtracker < backend/sql/states.sql
