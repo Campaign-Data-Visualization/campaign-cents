@@ -25,22 +25,27 @@ app.directive('loading', function() {
 
 app.directive('staticMap', function($window, DataRequestFactory) {
 	return {
-	  restrict: 'E',
+	  restrict: 'A',
 	  scope: true,
-	  template: "<div class='static-map'><svg width='780' height='450'></svg></div>",
+	  template: "<div class='static-map'><svg></svg></div>",
 	  link: function(scope, elem, attrs){
 		  var d3 = $window.d3;
       var rawSvg=elem.find('svg');
       var svg = d3.select(rawSvg[0]);
-      var width = rawSvg.attr("width");
-      var height = rawSvg.attr("height");
+      var width = elem.width();
+      var height = width * .6
+      
+      svg.style({
+      	width: width,
+      	height: height
+      })
+
       var projection = d3.geo.albersUsa()
-      	.scale(930)
+      	.scale(width*1.3) //not sure why I need to augment the scale...
       	.translate([width / 2, height / 2])
       var path = d3.geo.path().projection(projection)
       
       d3.json("/lib/us-states.json", function(json) {
-	 			console.log(json.objects.usa.geometries[18])
 	 			var states = svg.append('g').attr('class', 'states').selectAll('.state-boundaries').data(json.objects.usa.geometries)
 	 			states.enter().append("path")
 					.attr("class", function(d) { return "state-boundaries state-"+d.id; })
@@ -59,7 +64,8 @@ app.directive('staticMap', function($window, DataRequestFactory) {
 					.attr("r",0)
 					.attr("transform", function(d) {return "translate(" + projection([d.lng,d.lat]) + ")";})
 					.attr('fill-opacity', .8)
-					.attr('fill', 'red');
+					.attr('fill', 'red')
+					.attr('class', 'marker');
 
 				markers.transition()
 					.duration(700)
@@ -69,6 +75,27 @@ app.directive('staticMap', function($window, DataRequestFactory) {
 					.attr('r', 5)
       });
 
+      d3.select(window).on('resize', resize);
+    	
+    	function resize() {
+    	    width = parseInt(d3.select('#map').style('width'));
+    	    height = width * .6;
+
+    	    // update projection
+    	    projection
+  	        .translate([width / 2, height / 2])
+  	        .scale(width * 1.3);
+
+    	    // resize the map container
+    	    svg
+  	        .style('width', width + 'px')
+  	        .style('height', height + 'px');
+
+    	    // resize the map
+    	    svg.selectAll('.state-boundaries').attr('d', path);
+    	    svg.selectAll('.marker').attr("transform", function(d) {return "translate(" + projection([d.lng,d.lat]) + ")";})
+
+    	}
     }
   }
 })
@@ -97,7 +124,6 @@ app.directive('barChart', function($window) {
       
       //scope.data[3].amount=200000;
       //scope.data[3].name='Young Americans for Liberty'
-
 
       function setChartParameters(){
         xScale = d3.scale.ordinal()
