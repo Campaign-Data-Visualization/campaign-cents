@@ -35,19 +35,16 @@ app.directive('staticMap', function($window, DataRequestFactory) {
       var width = rawSvg.attr("width");
       var height = rawSvg.attr("height");
       var projection = d3.geo.albersUsa()
-      	.scale(920)
+      	.scale(930)
       	.translate([width / 2, height / 2])
       var path = d3.geo.path().projection(projection)
       
       d3.json("/lib/us-states.json", function(json) {
-    		svg.append("defs").append("path")
-					.attr("id", "land")
-					.datum(topojson.feature(json, json.objects.states))
-					.attr("d", path)
-
-	 			svg.append("path")
-					.attr("class", "state-boundaries")
-					.datum(topojson.feature(json, json.objects.states))
+	 			console.log(json.objects.usa.geometries[18])
+	 			var states = svg.append('g').attr('class', 'states').selectAll('.state-boundaries').data(json.objects.usa.geometries)
+	 			states.enter().append("path")
+					.attr("class", function(d) { return "state-boundaries state-"+d.id; })
+					.datum(function(d, i){ return topojson.feature(json, json.objects.usa.geometries[i]) })
 					.attr("d", path)
 					.attr('fill-opacity', '0')
 					.attr("stroke", '#333');
@@ -59,10 +56,17 @@ app.directive('staticMap', function($window, DataRequestFactory) {
 
 				var markers = group.selectAll('.marker').data(data)
 				markers.enter().append("circle")
-					.attr("r",3)
+					.attr("r",0)
 					.attr("transform", function(d) {return "translate(" + projection([d.lng,d.lat]) + ")";})
-					.attr('fill', 'orange');
+					.attr('fill-opacity', .8)
+					.attr('fill', 'red');
 
+				markers.transition()
+					.duration(700)
+					.ease('bounce')
+					.delay(function(d, i) { return i * 3; })
+					.attr('fill', 'orange')
+					.attr('r', 5)
       });
 
     }
