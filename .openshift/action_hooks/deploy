@@ -5,6 +5,9 @@ mkdir -p config;
 mkdir -p $OPENSHIFT_DEPLOYMENTS_DIR/current/repo/config/;
 cp $OPENSHIFT_DATA_DIR/default.json config/;
 cp $OPENSHIFT_DATA_DIR/default.json $OPENSHIFT_DEPLOYMENTS_DIR/current/repo/config/;
+mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" kochtracker -B -e "select config from config limit 1" | sed -n "2p"  | sed -e "s/\\\n/\n/g" | sed -e "s/\\\t/\t/g"
+ > $OPENSHIFT_DEPLOYMENTS_DIR/current/repo/config/default.json
+
 echo "Updating schema...";
 mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" kochtracker < backend/sql/candidates.sql
 mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" kochtracker < backend/sql/states.sql
