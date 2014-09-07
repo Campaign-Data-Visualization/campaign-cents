@@ -1,0 +1,6 @@
+if [ -e "$OPENSHIFT_DATA_DIR/default.json" ]
+then 
+  echo "Importing config into database";
+  config=$(<$OPENSHIFT_DATA_DIR/default.json)
+  mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" kochtracker -e "update config set config = '$config'";
+fi
