@@ -1,5 +1,5 @@
-mkdir -p $OPENSHIFT_DATA_DIR/config;
-mkdir -p $OPENSHIFT_DEPLOYMENTS_DIR/current/config/;
-cp $OPENSHIFT_DATA_DIR/default.json config/;
-cp $OPENSHIFT_DATA_DIR/default.json $OPENSHIFT_DEPLOYMENTS_DIR/current/config/;
+mkdir -p $OPENSHIFT_REPO_DIR/config;
+mkdir -p $OPENSHIFT_DEPLOYMENTS_DIR/current/repo/config/;
+cp $OPENSHIFT_DATA_DIR/default.json $OPENSHIFT_REPO_DIR/config/;
+cp $OPENSHIFT_DATA_DIR/default.json $OPENSHIFT_DEPLOYMENTS_DIR/current/repo/config/;
 
