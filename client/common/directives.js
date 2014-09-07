@@ -35,7 +35,7 @@ app.directive('staticMap', function($window, DataRequestFactory) {
       var width = elem.width();
       var height = width * .6
       
-      svg.style({
+      svg.attr({
       	width: width,
       	height: height
       })
@@ -137,7 +137,7 @@ app.directive('barChart', function($window) {
 	      height = width * .4
 	      barHeight = height - 20;
 
-	      svg.style({
+	      svg.attr({
 	      	width: width,
 	      	height: height
 	      })
@@ -338,7 +338,7 @@ app.directive('bubbleChart', function($window) {
 	      height = width * .4
 	      barHeight = height - 20;
 
-	      svg.style({
+	      svg.attr({
 	      	width: width,
 	      	height: height
 	      })
