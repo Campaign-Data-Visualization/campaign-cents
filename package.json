@@ -11,7 +11,8 @@
     "q": "*",
     "request": "^2.40.0",
     "ui-router": "0.0.1",
-    "xml2js": "^0.4.4"
+    "xml2js": "^0.4.4",
+    "http-auth": "*"
   },
   "devDependencies": {
     "gulp": "*",

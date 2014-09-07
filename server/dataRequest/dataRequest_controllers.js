@@ -87,8 +87,12 @@ module.exports = exports = {
       db.doQuery("select voteSmartId as id, nameFirstLast as title, format(since2000contrib, 0) as amount, lat, lng from candidates where since2000contrib != 0 and lat != 0 and lng != 0").then(function(data) {
         results.data = data;
         res.send(results);
-      })
+      }, next)
     }
+  },
+
+  admin: function(req, res, next) {
+    res.send({type: 'admin', data: 'ok'})
   }
 };
 

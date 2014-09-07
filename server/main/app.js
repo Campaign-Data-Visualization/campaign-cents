@@ -8,7 +8,7 @@ routers.DataRequestRouter = DataRequestRouter;
 
 require('./config.js')(app, express, routers);
 
-require('../dataRequest/dataRequest_routes.js')(DataRequestRouter);
+require('../dataRequest/dataRequest_routes.js')(DataRequestRouter, app);
 
 
 module.exports = exports = app;
