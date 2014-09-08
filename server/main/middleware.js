@@ -39,9 +39,9 @@ module.exports = exports = {
   },
 
   cors: function (req, res, next) {
-    res.header('Access-Controll-Allow-Origin', '*');
-    res.header('Access-Controll-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
-    res.header('Access-Controll-Allow-Header', 'Content-type, Authorization');
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Header', 'Content-type, Authorization, X-Requested-With');
 
     if (req.method === 'Options') {
       res.send(200);
