@@ -1,0 +1,33 @@
+<div class="searchPage search">  
+  <section class="map-section">
+     <div class="container">
+       <div class="row">
+       <style>
+           .map>div {
+               position: relative;
+               padding-bottom: 75%; // This is the aspect ratio
+               height: 0;
+               overflow: hidden;
+           }
+           .map>div iframe {
+               position: absolute;
+               top: 0;
+               left: 0;
+               width: 100% !important;
+               height: 100% !important;
+           }
+       </style>
+        <div class="col-sm-8 col-xs-12 map-main">
+          <div class='google-maps' style='display:block; height: 500px;'>
+            <map id='map' center="[39.50, -98.35]" zoom="3" style=""> </map>
+          </div>
+          <div class='map-control'>
+            <div ng-repeat='(type, layer) in layers' ng-click='toggleLayer(type)'>
+              <label class="checkbox inline"> <input type='checkbox' checked='{{layer.visible}}'>{{layer.label}}</label>
+            </div>
+          </div>
+        </div>
+       </div>
+     </div>
+  </section>
+</div> <!-- /.page -->
