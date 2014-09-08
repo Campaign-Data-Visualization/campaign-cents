@@ -14,6 +14,8 @@ module.exports = exports = function(router, app){
 
   router.route('/map/:mapType').get(controller.lookupMapData)
 
+  router.route('/assets/:action/:state').get(controller.lookupAssets)
+
   router.route('/admin/:action').get(app.basicAuth, controller.admin)
 
 

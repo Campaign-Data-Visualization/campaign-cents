@@ -27,6 +27,7 @@ angular.module('myApp.main.candidatesView.candidateList', ['ui.router'])
   }
 })
 .controller('CandidateListController', function($scope, $stateParams, DataRequestFactory, $state) {
+
   $scope.candidates = [];
   $scope.loading = 1;
   $scope.viewparams.zip = $stateParams.input;

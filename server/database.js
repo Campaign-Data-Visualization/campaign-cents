@@ -3,7 +3,8 @@
 var mysql = require('mysql'),
     request = require('request'),
     parseString = require('xml2js').parseString,
-    Q = require('q');
+    Q = require('q'),
+    mysqlUtilities = require('mysql-utilities');
 
 // <<<<<<==========  Create MySQL connection =============>>>>>>>>
 
@@ -40,7 +41,7 @@ exports.dbClose = function(callback) {
   pool.end(callback);
 }
 
-exports.doQuery = function(query, args) { 
+exports.query = function(method, query, args) { 
   var deferred = Q.defer();
   
   //console.log("Running query "+query+ " with args "+args);
@@ -49,7 +50,10 @@ exports.doQuery = function(query, args) {
         console.log("can't get db connection");
         deferred.reject(err);
     } else { 
-      connection.query(query, args, function(err, rows, field) { 
+      if (method != 'query') {
+        mysqlUtilities.upgrade(connection);
+      }
+      connection[method](query, args, function(err, rows, field) { 
         connection.release();
          if (err) {
           deferred.reject(err);
@@ -61,6 +65,10 @@ exports.doQuery = function(query, args) {
     }
   });
   return deferred.promise;
+}
+
+exports.doQuery = function(query, args) {
+  return exports.query('query', query, args);
 }
 
 exports.deferredRequest = function(options) { 

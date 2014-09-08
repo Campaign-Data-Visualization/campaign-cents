@@ -12,9 +12,18 @@ angular.module('myApp.main.candidatesView', ['ui.router'])
     })
 })
 
-.controller('CandidatesViewController', function($scope, $stateParams, DataRequestFactory, $state) {
+.controller('CandidatesViewController', function($scope, $stateParams, DataRequestFactory, $state, $sce) {
+  $scope.layers = {};
   $scope.viewparams = {
     state: $stateParams.state,
     zip: ''
   };
+
+  DataRequestFactory.getData('assets', 'state/'+$scope.viewparams.state).then(function(data) {
+    $scope.layers = data;
+  })
+
+  $scope.safeHTML = function(string) {
+    return $sce.trustAsHtml(string);
+  }
 });

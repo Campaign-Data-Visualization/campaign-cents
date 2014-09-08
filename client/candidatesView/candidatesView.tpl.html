@@ -8,9 +8,9 @@
       </div> <!-- /.sidebar -->
       <div class="col-md-8 col-xs-12 candidate-main">      
         <ul class="nav nav-tabs" id="myTab">
-          <!-- <li class="active"><a data-target="#candidates" data-toggle="tab">Candidates</a></li>
-          <li><a data-target="#organizations" data-toggle="tab">Organizations</a></li>
-          <li><a data-target="#universities" data-toggle="tab">Universities</a></li> -->
+          <li class="active"><a data-target="#candidates" data-toggle="tab">Candidates</a></li>
+          <li ng-if='layers.assets'><a data-target="#organizations" data-toggle="tab">Organizations</a></li>
+          <li ng-if='layers.campus'><a data-target="#universities" data-toggle="tab">Universities</a></li>
         </ul>
         <!-- Candidates List -->
        <div class="tab-content">
@@ -39,8 +39,23 @@
             </div>
            </div>
           </div> <!-- /#candidates -->
-          <div class="tab-pane" id="organizations">Organizations</div> <!-- /#organizations -->
-          <div class="tab-pane" id="universities">Universities</div> <!-- /#universities -->
+          <div class="tab-pane" id="organizations">
+          <h3>Organizations</h3>
+            <div ng-repeat='asset in layers.assets'>
+              <h4>{{asset.title}}</h4>
+              <h5 ng-if='asset.city'>{{asset.city}}, {{viewparams.state}}</h5> 
+              <p ng-bind-html='safeHTML(asset.description)'></p>
+            </div>
+          </div>
+          <div class="tab-pane" id="universities">
+            <h3>Universities</h3>
+              <div ng-repeat='asset in layers.campus'>
+                <h4>{{asset.title}}</h4>
+                <h5 ng-if='asset.city'>{{asset.city}}, {{viewparams.state}}</h5> 
+                <p ng-bind-html='safeHTML(asset.description)'></p>
+              </div>
+
+          </div> 
         </div> <!-- /.tab-content -->
       </div><!--  /.candidate-main -->
   </div>

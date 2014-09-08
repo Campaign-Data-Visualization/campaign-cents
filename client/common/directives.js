@@ -55,7 +55,7 @@ app.directive('staticMap', function($window, DataRequestFactory) {
 					.attr("stroke", '#333');
 			});
     	
-    	DataRequestFactory.getData('map', 'candidates').then(function(data) {
+    	DataRequestFactory.getData('map', 'summary').then(function(data) {
 				var group = svg.append('g')
 					.attr('class', 'map-markers')
 

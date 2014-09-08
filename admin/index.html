@@ -15,17 +15,28 @@
           <h1>KochTracker Admin Tool</h1>
         </div>
         <div class='panel-body'>
-          <p class='row'>
+          <div messages id='messages'></div>
+          <div class='row'>
             Use the button below to load data from the google docs and maps into the KochTracker website.
-          </p>
-          <p class='row text-center'>
-            <button ng-click='updateData()' class='btn btn-default btn-lg'>Update the Data!</button>
-          </p>
-          <p class='row'>
+          </div>
+          <div class='row'>
+            <div ng-if='success' class='alert alert-success col-lg-offset-5 col-lg-2 text-left'>
+              <h4>Success!</h4>
+              Updated:
+              <ul>
+                <li ng-repeat='(key, count) in counts'>{{count}} {{key|uppercase}}</li>
+              </ul>
+            </div>
+          </div>
+          <div class='row text-center'>
+            <button ng-hide='progress' ng-click='updateData()' class='btn btn-default btn-lg'>Update the Data!</button>
+            {{data}}
+          </div>
+          <div class='row'>
             <p class='col-lg-offset-3 col-lg-6 text-center'>
-              <progressbar class="progress-striped" value="progress" type="warning">{{progress}}%</progressbar>
+              <progressbar ng-show='progress' class="progress-striped active" animate='true' value="progress">{{message}}</progressbar>
              </p>
-          </p>
+          </div>
         </div>
       </div>
     </div>
@@ -35,7 +46,10 @@
     <script src="app.js"></script>
     <script src="/common/factories.js"></script>
     <script src="/common/services.js"></script>
+    <script src="/common/directives.js"></script>
+
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 
     </body>
 </html>
