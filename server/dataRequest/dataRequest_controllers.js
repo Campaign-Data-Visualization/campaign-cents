@@ -20,11 +20,11 @@ module.exports = exports = {
 
       db.doQuery("select voteSmartId as id, state, nameLastFirst as label, photoURL as image, concat(state, if(district, concat('-', district), '')) as detail, 'c' as type from candidates where nameSearch like ? limit "+limit, ['%'+value+'%']).then(function(results) { 
         res.send({type:'candidates', data:results});
-      });
+      }, next);
     } else { 
       db.doQuery("select zip as id, state, zip as label, concat(city, ', ', state) as detail, 'z' as type from zipcode where zip like ? limit "+limit, [value+'%']).then(function(results) { 
         res.send({type:'zips', data:results});
-      });
+      }, next);
     }
   },
 
@@ -47,8 +47,7 @@ module.exports = exports = {
       } else { 
         next(new Error("Invalid Zipcode"));
       }
-    }, next(new Error("Unable to contact zipcode lookup service")));
-
+    }, function(err) { next(new Error("Unable to contact zipcode lookup service")) });
   },
 
   lookupCandidateBio: function(req, res, next) { 
@@ -60,7 +59,7 @@ module.exports = exports = {
       } else {
         next(new Error("Invalid Candidate ID"));
       }
-    }, next);
+    }, function(err) { next(new Error("Unable to contact candidate biography lookup service")) });
   },
 
   lookupCandidate: function(req, res, next) {
