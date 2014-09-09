@@ -16,21 +16,30 @@
         </div>
         <div class='panel-body'>
           <div messages id='messages'></div>
-          <div class='row'>
-            Use the button below to load data from the google docs and maps into the KochTracker website.
+          <div class='row col-lg-offset-3 col-lg-6 well '>
+            This will load data from the google docs and maps into the KochTracker website. Use the select box below to choose which data to update (or leave to 'All Data'), then press the 'Update the Data!' button.
           </div>
           <div class='row'>
-            <div ng-if='success' class='alert alert-success col-lg-offset-5 col-lg-2 text-left'>
+            <div ng-if='success' class='alert alert-success col-lg-offset-4 col-lg-4 text-left'>
               <h4>Success!</h4>
               Updated:
               <ul>
-                <li ng-repeat='(key, count) in counts'>{{count}} {{key|uppercase}}</li>
+                <li ng-repeat='(key, count) in counts'>{{count}} {{key}}</li>
               </ul>
             </div>
           </div>
-          <div class='row text-center'>
-            <button ng-hide='progress' ng-click='updateData()' class='btn btn-default btn-lg'>Update the Data!</button>
-            {{data}}
+          <div ng-hide='progress' class='row text-center'>
+            <div class='col-lg-offset-4 col-lg-4 form-group text-left'>
+             <label class="control-label">Choose data to update</label>
+
+              <select ng-model='whichData' class='form-control'>
+                <option selected value='all'>All Data Sources</option>
+                <option ng-repeat='datatype in dataTypes' value='{{datatype.action}}'>{{datatype.niceName}}</option>
+              </select>
+            </div>
+            <p class='col-lg-12'>
+              <button ng-hide='progress' ng-click='updateAllData()' class='btn btn-primary btn-lg '>Update the Data!</button>
+            </p>         
           </div>
           <div class='row'>
             <p class='col-lg-offset-3 col-lg-6 text-center'>

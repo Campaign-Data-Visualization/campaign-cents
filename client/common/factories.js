@@ -19,6 +19,15 @@ app.factory('DataRequestFactory', function($http, $messages, $q){
     }, 
     handleError)
   };
+  
+  var getAdmin = function(route, input) {
+    return $http({
+      method: 'GET',
+      url: '/adminRequest/'+route+'/'+input,
+    }).then(function(response) {
+      return response.data.data;
+    }, handleError);
+  };
 
   var handleError = function(response) {
     console.log('err1');
@@ -30,6 +39,7 @@ app.factory('DataRequestFactory', function($http, $messages, $q){
 
   return {
     'getData': getData,
+    'getAdmin': getAdmin,
   };
 });
 
