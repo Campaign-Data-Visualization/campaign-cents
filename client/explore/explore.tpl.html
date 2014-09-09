@@ -19,11 +19,11 @@
        </style>
         <div class="col-sm-8 col-xs-12 map-main">
           <div class='google-maps' style='display:block; height: 500px;'>
-            <map id='map' center="[39.50, -98.35]" zoom="3" style=""> </map>
+            <map id='map' center="[39.50, -98.35]" zoom="3" style="" map-type-control='false' street-view-control='false'> </map>
           </div>
           <div class='map-control'>
-            <div ng-repeat='(type, layer) in layers' ng-click='toggleLayer(type)'>
-              <label class="checkbox inline"> <input type='checkbox' checked='{{layer.visible}}'>{{layer.label}}</label>
+            <div ng-repeat='(type, layer) in layers' >
+              <label class="checkbox inline"> <input ng-change='toggleLayer(type)' ng-model='layer.visible' type='checkbox'>{{layer.label}}</label>
             </div>
           </div>
         </div>

@@ -12,11 +12,13 @@ module.exports = exports = function(router, app){
   //I have no idea why router.route('/candidate/:candidateId/bio') doesn't work
   router.route('/candidate/:candidateId/:bio').get(controller.lookupCandidateBio);
 
-  router.route('/map/:mapType').get(controller.lookupMapData)
+  router.route('/map/:mapType').get(controller.lookupMapData);
 
-  router.route('/assets/:action/:state').get(controller.lookupAssets)
+  router.route('/assets/:action/:state').get(controller.lookupAssets);
 
-  router.route('/admin/:action').get(app.basicAuth, controller.admin)
+  router.route('/states/:state').get(controller.lookupStates);
+
+  router.route('/admin/:action').get(app.basicAuth, controller.admin);
 
 
 };

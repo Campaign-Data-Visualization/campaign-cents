@@ -10,10 +10,10 @@ angular.module('myApp.main.explore', ['ui.router', 'ngMap'])
     });
 })
 
-.controller('ExploreController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state){
-
-  $scope.mapData;
+.controller('ExploreController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
+  $scope.state = $stateParams.state;
   $scope.makers = {};
+  $scope.boundaries = {};
   $scope.layers = {
     'candidate': {
       fillColor: 'orange',
@@ -35,8 +35,14 @@ angular.module('myApp.main.explore', ['ui.router', 'ngMap'])
     },
   }
 
+  if ($scope.state) {
+    DataRequestFactory.getData("states", $scope.state).then(function(data){
+      $scope.boundaries = data[0];
+    })
+  }
+
   $scope.toggleLayer = function(layer) {
-    var visible = $scope.layers[layer].visible = ! $scope.layers[layer].visible;
+    var visible = $scope.layers[layer].visible;
     angular.forEach($scope.layers[layer].markers, function(m){
       m.setVisible(visible);
     })
@@ -61,6 +67,13 @@ angular.module('myApp.main.explore', ['ui.router', 'ngMap'])
   }
   
   $scope.$on('mapInitialized', function(event, map){
+    $scope.$watch("boundaries.ne_lat", function(n, o) { 
+      if ($scope.boundaries.ne_lat) {
+        var bounds = new google.maps.LatLngBounds(new google.maps.LatLng($scope.boundaries.sw_lat, $scope.boundaries.sw_lng), new google.maps.LatLng($scope.boundaries.ne_lat, $scope.boundaries.ne_lng));
+        $scope.map.fitBounds(bounds);
+      }
+    })
+
     $scope.infoWindow = new google.maps.InfoWindow(); 
       DataRequestFactory.getData('map', 'layers').then(function(data) {
         data.forEach(function(item) {
