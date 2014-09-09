@@ -984,3 +984,5 @@ g .domain{display:none}
 .label-1,.bar-1,.key-1{fill:#ae272d}
 .label-2,.bar-2,.key-2{fill:#cf4e27}
 .label-3,.bar-3,.key-3{fill:#f27523}
+.state-boundaries{cursor:pointer;fill:#33f;fill-opacity:0;stroke:#333;stroke-width:1}
+.state-boundaries.selected{transition:stroke-width .4s ease;stroke:#ad272d;stroke-width:5}

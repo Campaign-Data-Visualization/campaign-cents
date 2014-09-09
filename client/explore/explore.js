@@ -88,7 +88,7 @@ angular.module('myApp.main.explore', ['ui.router', 'ngMap'])
               fillColor: $scope.layers[item.layer].fillColor,
               fillOpacity: 1,
               strokeColor: 'black',
-              strokeWeight: '1'
+              strokeWeight: 1
             },
             map: $scope.map,
           });

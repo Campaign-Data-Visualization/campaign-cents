@@ -23,7 +23,7 @@ app.directive('loading', function() {
   };
 });
 
-app.directive('staticMap', function($window, DataRequestFactory) {
+app.directive('staticMap', function($window, DataRequestFactory, $state) {
 	return {
 	  restrict: 'A',
 	  scope: true,
@@ -34,7 +34,8 @@ app.directive('staticMap', function($window, DataRequestFactory) {
       var svg = d3.select(rawSvg[0]);
       var width = elem.width();
       var height = width * .6
-      
+      var current_state = '';
+
       svg.attr({
       	width: width,
       	height: height
@@ -51,8 +52,25 @@ app.directive('staticMap', function($window, DataRequestFactory) {
 					.attr("class", function(d) { return "state-boundaries state-"+d.id; })
 					.datum(function(d, i){ return topojson.feature(json, json.objects.usa.geometries[i]) })
 					.attr("d", path)
-					.attr('fill-opacity', '0')
-					.attr("stroke", '#333');
+					.style('pointer-events','all')
+					.on('mouseenter', function(d) {
+						var selected =  d3.selectAll('.state-boundaries.selected');
+						angular.forEach(selected, function(s) {
+							if ($(s)) {
+								d3.selectAll(s).classed('selected', false)
+							}
+						})
+						d3.select(this).classed('selected', true);
+					})
+					.on('mouseleave', function(d) {
+						if (d3.event.toElement.tagName != 'circle'){
+							d3.select(this).classed('selected', false)
+						}
+					})
+					.on('click', function(d) {
+						console.log(d);
+						$state.go('myApp.main.explore', {state:d.id});
+					})
 			});
     	
     	DataRequestFactory.getData('map', 'summary').then(function(data) {
