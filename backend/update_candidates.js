@@ -18,7 +18,6 @@ var promises = [];
 
 console.log("refreshing CRP IDS");
 
-/*
 db.doQuery("drop table if exists CRP_IDs", function() { 
   exec("wget http://www.opensecrets.org/downloads/crp/CRP_IDs.xls -O "+datadir+"CRP_IDS.xls", function() { 
     exec('unoconv -v -f csv '+datadir+'CRP_IDS.xls', function() {
@@ -28,7 +27,7 @@ db.doQuery("drop table if exists CRP_IDs", function() {
     });
   });
 });
-*/
+
 var updateCandidates = function() { 
   db.doQuery("delete from candidates").then(function() { 
     db.doQuery("select state from states").then(function(rows) { 
