@@ -23,6 +23,81 @@ app.directive('loading', function() {
   };
 });
 
+app.directive('insetMap', function($window, $state) {
+	return {
+	  restrict: 'A',
+	  scope: {
+	  	state: '='
+	  },
+	  template: "<div class='inset-map'><svg></svg></div>",
+	  link: function(scope, elem, attrs){
+		  var d3 = $window.d3;
+      var rawSvg=elem.find('svg');
+      var svg = d3.select(rawSvg[0]);
+      var width = elem.width();
+      var height = width * .6
+      var current_state = '';
+
+      svg.attr({
+      	width: width,
+      	height: height
+      })
+      
+      var projection = d3.geo.albersUsa()
+      	.scale(1)
+      	.translate([0,0])
+    	
+    	var path = d3.geo.path().projection(projection);
+
+      d3.json("/lib/us-states.json", function(json) {
+      	var boundary = $.grep(json.objects.usa.geometries, function(e){ return e.id == scope.state;})[0];
+	      var bounds = path.bounds(topojson.feature(json,boundary)),
+					dx = bounds[1][0] - bounds[0][0],
+					dy = bounds[1][1] - bounds[0][1],
+					x = (bounds[0][0] + bounds[1][0]) / 2,
+					y = (bounds[0][1] + bounds[1][1]) / 2,
+					scale = .9 / Math.max(dx / width, dy / height),
+					translate = [width / 2 - scale * x, height / 2 - scale * y];
+				
+				projection.scale(scale).translate(translate);
+
+	 			var states = svg.append('g').attr('class', 'states').selectAll('.state-boundaries').data(json.objects.usa.geometries)
+	 			states.enter().append("path")
+					.attr("class", function(d) { 
+						var selected = d.id == scope.state ? ' selected ': '';
+						return selected+"state-boundaries state-"+d.id; 
+					})
+					.datum(function(d, i){ return topojson.feature(json, json.objects.usa.geometries[i]) })
+					.attr("d", path)
+	      
+				$('.states')[0].appendChild($('.state-'+scope.state)[0]);
+			});
+    	svg.on('click', function() {
+    		$state.go('myApp.main.explore', {state:scope.state});
+    	})
+    	
+    	function resize() {
+  	    width = parseInt(d3.select('#map').style('width'));
+  	    height = width * .6;
+
+  	    // update projection
+  	    projection
+	        .translate([width / 2, height / 2])
+	        .scale(width * 1.3);
+
+  	    // resize the map container
+  	    svg
+	        .style('width', width + 'px')
+	        .style('height', height + 'px');
+
+  	    // resize the map
+  	    svg.selectAll('.state-boundaries').attr('d', path);
+    	}
+    }
+  }
+})
+
+
 app.directive('staticMap', function($window, DataRequestFactory, $state) {
 	return {
 	  restrict: 'A',
@@ -68,7 +143,6 @@ app.directive('staticMap', function($window, DataRequestFactory, $state) {
 						}
 					})
 					.on('click', function(d) {
-						console.log(d);
 						$state.go('myApp.main.explore', {state:d.id});
 					})
 			});

@@ -2,7 +2,9 @@
     <div class="container">
       <!-- Start Sidebar -->
       <div class="col-md-4 col-xs-12 sidebar center">  
-        <img class="img-responsive visible-md visible-lg" ng-src="images/states/states_state-{{viewparams.state| lowercase}}.png" >
+        <div id='map' inset-map state='viewparams.state'/>
+
+        <!--<img class="img-responsive visible-md visible-lg" ng-src="images/states/states_state-{{viewparams.state| lowercase}}.png" >-->
         <img class="clock" src="images/icon-clock.svg">
         <h3>Every minute, the Koch brothers donate more than $2,300 to various 2014 candidates and political organizations. </h3>
       </div> <!-- /.sidebar -->
