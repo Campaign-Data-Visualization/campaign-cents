@@ -8,4 +8,4 @@ DS_Store
 *.swo
 backend/data/*
 .vimrc
-node_modules/http-auth
+node_modules/edit-google-spreadsheet/*
