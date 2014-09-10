@@ -5,6 +5,7 @@
     'ui.router',
     'ngFx',
     'myApp.main',
+    'countTo'
     ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/notFound');
