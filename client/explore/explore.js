@@ -65,8 +65,23 @@ angular.module('myApp.main.explore', ['ui.router', 'ngMap'])
     $scope.infoWindow.setContent(content);
     $scope.infoWindow.open($scope.map, marker);
   }
+
+  $scope.topoJson;
+  $.getJSON("lib/us-states.json", function(data) { $scope.topoJson = data; })
   
   $scope.$on('mapInitialized', function(event, map){
+    console.log('bsssng!')
+
+    $scope.$watch('topoJson', function() {
+      if ($scope.topoJson) {
+        console.log('bing!')
+        var state_boundary = $.grep($scope.topoJson.objects.usa.geometries, function(i) { return i.id == $scope.state;});
+        var geoJsonObject = topojson.feature($scope.topoJson, state_boundary[0]);
+        console.log(geoJsonObject);
+        map.data.addGeoJson(geoJsonObject);
+        map.data.setStyle({fillColor: '#fff', 'fillOpacity':.2, strokeColor:'#0071BC'})
+      }
+    })
     $scope.$watch("boundaries.ne_lat", function(n, o) { 
       if ($scope.boundaries.ne_lat) {
         var bounds = new google.maps.LatLngBounds(new google.maps.LatLng($scope.boundaries.sw_lat, $scope.boundaries.sw_lng), new google.maps.LatLng($scope.boundaries.ne_lat, $scope.boundaries.ne_lng));
