@@ -73,7 +73,7 @@ app.directive('insetMap', function($window, $state) {
 				$('.states')[0].appendChild($('.state-'+scope.state)[0]);
 			});
     	svg.on('click', function() {
-    		$state.go('myApp.main.explore', {state:scope.state});
+    		$state.go('myApp.main.explore.map', {state:scope.state});
     	})
     	
     	function resize() {
@@ -143,7 +143,7 @@ app.directive('staticMap', function($window, DataRequestFactory, $state) {
 						}
 					})
 					.on('click', function(d) {
-						$state.go('myApp.main.explore', {state:d.id});
+						$state.go('myApp.main.explore.map', {state:d.id});
 					})
 			});
     	

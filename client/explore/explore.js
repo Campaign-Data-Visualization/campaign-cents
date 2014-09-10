@@ -4,13 +4,48 @@ angular.module('myApp.main.explore', ['ui.router', 'ngMap'])
 .config(function ($stateProvider) {
   $stateProvider
     .state('myApp.main.explore', {
-      url: '/explore/:state',
+      url: '/explore',
+      abstract: true,
       templateUrl: 'explore/explore.tpl.html',
-      controller: 'ExploreController'
-    });
+    })
+    .state('myApp.main.explore.landing', {
+      url: '',
+      templateUrl: 'explore/explore.landing.tpl.html',
+    })
+    .state('myApp.main.explore.map', {
+      url: '/map/:state',
+      templateUrl: 'explore/explore.map.tpl.html',
+      controller: 'ExploreMapController'
+    })
+    .state('myApp.main.explore.voices', {
+      url: '/VictimsVoices',
+      templateUrl: 'explore/explore.voices.tpl.html',
+      controller: 'ExploreVoicesController'
+    })
+    .state('myApp.main.explore.offenders', {
+      url: '/WorstOffenders',
+      templateUrl: 'explore/explore.offenders.tpl.html',
+      controller: 'ExploreOffendersController'
+    })
+    .state('myApp.main.explore.candidates', {
+      url: '/KochCandidates',
+      templateUrl: 'explore/explore.candidates.tpl.html',
+      controller: 'ExploreCandidatesController'
+    })
+    .state('myApp.main.explore.orgs', {
+      url: '/OrgsToWatch',
+      templateUrl: 'explore/explore.orgs.tpl.html',
+      controller: 'ExploreOrgsController'
+    })
+    .state('myApp.main.explore.races', {
+      url: '/KeyRaces',
+      templateUrl: 'explore/explore.races.tpl.html',
+      controller: 'ExploreRacesController'
+    })
 })
 
-.controller('ExploreController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
+.controller('ExploreMapController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
+  console.log('map control');
   $scope.state = $stateParams.state;
   $scope.makers = {};
   $scope.boundaries = {};
@@ -150,4 +185,21 @@ angular.module('myApp.main.explore', ['ui.router', 'ngMap'])
   //     }
   //  )}();
 
-});
+})
+
+.controller('ExploreVoicesController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
+})
+
+.controller('ExploreOffendersController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
+})
+
+.controller('ExploreCandidatesController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
+})
+
+.controller('ExploreOrgsController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
+})
+
+.controller('ExploreRacesController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
+})
+
+
