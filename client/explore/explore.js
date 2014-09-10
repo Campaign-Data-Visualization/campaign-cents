@@ -70,6 +70,8 @@ angular.module('myApp.main.explore', ['ui.router', 'ngMap'])
     },
   }
 
+  $scope.mapStyle = [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-100},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-100},{"lightness":40}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-10},{"lightness":30}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-60},{"lightness":10}]},{"featureType":"landscape.natural","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-60},{"lightness":60}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"},{"saturation":-100},{"lightness":60}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"},{"saturation":-100},{"lightness":60}]}]
+  
   if ($scope.state) {
     DataRequestFactory.getData("states", $scope.state).then(function(data){
       $scope.boundaries = data[0];
@@ -105,16 +107,16 @@ angular.module('myApp.main.explore', ['ui.router', 'ngMap'])
   $.getJSON("lib/us-states.json", function(data) { $scope.topoJson = data; })
   
   $scope.$on('mapInitialized', function(event, map){
-    console.log('bsssng!')
-
     $scope.$watch('topoJson', function() {
       if ($scope.topoJson) {
-        console.log('bing!')
         var state_boundary = $.grep($scope.topoJson.objects.usa.geometries, function(i) { return i.id == $scope.state;});
         var geoJsonObject = topojson.feature($scope.topoJson, state_boundary[0]);
-        console.log(geoJsonObject);
         map.data.addGeoJson(geoJsonObject);
-        map.data.setStyle({fillColor: '#fff', 'fillOpacity':.2, strokeColor:'#0071BC'})
+        map.data.setStyle({
+         // fillColor: '#fff', 
+          'fillOpacity':0, 
+          strokeColor:'#0071BC'
+        })
       }
     })
     $scope.$watch("boundaries.ne_lat", function(n, o) { 
