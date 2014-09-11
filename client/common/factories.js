@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('myApp')
+var app = angular.module('kochTracker')
 
 app.factory('DataRequestFactory', function($http, $messages, $q){
 

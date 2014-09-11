@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('myApp', [ 'ui.bootstrap', 'ui.router' ])
+var app = angular.module('kochTracker', [ 'ui.bootstrap', 'ui.router', 'kochTracker' ])
   .controller('adminController',  function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $messages, $timeout){
     $scope.success = 0;
     $scope.progress = 0;

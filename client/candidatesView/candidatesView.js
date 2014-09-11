@@ -1,10 +1,10 @@
 'use strict';
-angular.module('myApp.main.candidatesView', ['ui.router'])
+angular.module('kochTracker.candidatesView', ['ui.router'])
 
 .config(function ($stateProvider) {
 
   $stateProvider
-    .state('myApp.main.candidatesView', {
+    .state('kochTracker.candidatesView', {
       url: '/:state',
       abstract: true,
       templateUrl: 'candidatesView/candidatesView.tpl.html',

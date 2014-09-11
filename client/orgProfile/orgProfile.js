@@ -1,10 +1,10 @@
 'use strict';
-angular.module('myApp.main.orgProfile', ['ui.router'])
+angular.module('kochTracker.orgProfile', ['ui.router'])
 
 .config(function ($stateProvider) {
 
   $stateProvider
-    .state('myApp.main.orgProfile', {
+    .state('kochTracker.orgProfile', {
       url: '/orgProfile',
       templateUrl: 'orgProfile/orgProfile.tpl.html',
       controller: 'OrgProfileController'

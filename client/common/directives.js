@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('myApp')
+var app = angular.module('kochTracker')
 
 app.directive('messages', function($messages) {
   return {
@@ -73,7 +73,7 @@ app.directive('insetMap', function($window, $state) {
 				$('.states')[0].appendChild($('.state-'+scope.state)[0]);
 			});
     	svg.on('click', function() {
-    		$state.go('myApp.main.explore.map', {state:scope.state});
+    		$state.go('kochTracker.explore.map', {state:scope.state});
     	})
     	
     	function resize() {
@@ -143,7 +143,7 @@ app.directive('staticMap', function($window, DataRequestFactory, $state) {
 						}
 					})
 					.on('click', function(d) {
-						$state.go('myApp.main.explore.map', {state:d.id});
+						$state.go('kochTracker.explore.map', {state:d.id});
 					})
 			});
     	
@@ -594,7 +594,7 @@ app.directive('searchBox', function(DataRequestFactory, $state) {
           return; 
         } else {
           var route = item.type == 'c' ? 'candidateProfile' : 'candidateList';
-          $state.go('myApp.main.candidatesView.'+route, {input:item.id,state:item.state});
+          $state.go('kochTracker.candidatesView.'+route, {input:item.id,state:item.state});
         }
       }
     }

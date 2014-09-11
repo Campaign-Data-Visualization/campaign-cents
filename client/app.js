@@ -1,22 +1,36 @@
 (function (angular) {
   'use strict';
-  angular.module('myApp', [
+  angular.module('kochTracker', [
     'ui.bootstrap',
     'ui.router',
     'ngFx',
-    'myApp.main',
-    'countTo'
+    'countTo',
+    'ui.router', 
+    'kochTracker.explore',
+    'kochTracker.landingPage',
+    'kochTracker.staticPages',
+    'kochTracker.candidatesView',
+    'kochTracker.candidatesView.candidateList',
+    'kochTracker.orgProfile',
+    'kochTracker.candidatesView.candidateProfile'
     ])
-  .config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/notFound');
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+    $locationProvider.html5Mode(true).hashPrefix('#');
 
     $stateProvider
-      .state('myApp', {
+      .state('kochTracker', {
         url: '',
         abstract: true,
-        template: '<ui-view></ui-view>'
+        templateUrl: 'app.tpl.html'
       });
-  });
+
+      //This is some crazy stuff cuz when I reload the page, it adds a / to everything
+      $urlRouterProvider.when(/\/$|\/\?$/, function($match) {
+        return $match.input.replace(/\/$/, '');
+      })
+      $urlRouterProvider.otherwise('/notFound');
+
+  })
 }(angular));
 
 

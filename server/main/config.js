@@ -29,10 +29,10 @@ module.exports = exports = function (app, express, routers) {
   //app.use(function(req,res,next){setTimeout(next,1000)});
   app.use(middle.cors);
   app.use(express.static(__dirname + '/../../client'));
-  app.use('/dataRequest', routers.DataRequestRouter);
-  app.use(app.basicAuth);
-  app.use('/adminRequest', routers.AdminRouter);
   app.use('/admin', express.static(__dirname + '/../../admin'));
+  app.use('/dataRequest', routers.DataRequestRouter);
+  app.use('/adminRequest', routers.AdminRouter);
+  //app.use('/admin', express.static(__dirname + '/../../admin'));
   app.use(middle.logError);
   app.use(middle.handleError);
   app.use(middle.fourohfour);

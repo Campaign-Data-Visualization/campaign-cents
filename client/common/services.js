@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('myApp')
+var app = angular.module('kochTracker')
 
 app.service('$messages', function($rootScope) {
 	var service = this;

@@ -1,10 +1,10 @@
 'use strict';
-angular.module('myApp.main.landingPage', ['ui.router', 'ngMap'])
+angular.module('kochTracker.landingPage', ['ui.router', 'ngMap'])
 
 .config(function ($stateProvider) {
   $stateProvider
-    .state('myApp.main.landingPage', {
-      url: '',
+    .state('kochTracker.landingPage', {
+      url: '/',
       templateUrl: 'landingPage/landingPage.tpl.html',
       controller: 'LandingPageController'
     });

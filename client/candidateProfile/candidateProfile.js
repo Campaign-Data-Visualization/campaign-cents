@@ -1,9 +1,9 @@
 'use strict';
-angular.module('myApp.main.candidatesView.candidateProfile', ['ui.router'])
+angular.module('kochTracker.candidatesView.candidateProfile', ['ui.router'])
 .config(function ($stateProvider) {
 
   $stateProvider
-    .state('myApp.main.candidatesView.candidateProfile', {
+    .state('kochTracker.candidatesView.candidateProfile', {
       url: '/candidate/:input',
       templateUrl: 'candidateProfile/candidateProfile.tpl.html',
       controller: 'CandidateProfileController'

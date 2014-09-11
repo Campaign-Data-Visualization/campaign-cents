@@ -1,43 +1,43 @@
 'use strict';
-angular.module('myApp.main.explore', ['ui.router', 'ngMap'])
+angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
 
 .config(function ($stateProvider) {
   $stateProvider
-    .state('myApp.main.explore', {
+    .state('kochTracker.explore', {
       url: '/explore',
       abstract: true,
       templateUrl: 'explore/explore.tpl.html',
     })
-    .state('myApp.main.explore.landing', {
+    .state('kochTracker.explore.landing', {
       url: '',
       templateUrl: 'explore/explore.landing.tpl.html',
     })
-    .state('myApp.main.explore.map', {
+    .state('kochTracker.explore.map', {
       url: '/map/:state',
       templateUrl: 'explore/explore.map.tpl.html',
       controller: 'ExploreMapController'
     })
-    .state('myApp.main.explore.voices', {
+    .state('kochTracker.explore.voices', {
       url: '/VictimsVoices',
       templateUrl: 'explore/explore.voices.tpl.html',
       controller: 'ExploreVoicesController'
     })
-    .state('myApp.main.explore.offenders', {
+    .state('kochTracker.explore.offenders', {
       url: '/WorstOffenders',
       templateUrl: 'explore/explore.offenders.tpl.html',
       controller: 'ExploreOffendersController'
     })
-    .state('myApp.main.explore.candidates', {
+    .state('kochTracker.explore.candidates', {
       url: '/KochCandidates',
       templateUrl: 'explore/explore.candidates.tpl.html',
       controller: 'ExploreCandidatesController'
     })
-    .state('myApp.main.explore.orgs', {
+    .state('kochTracker.explore.orgs', {
       url: '/OrgsToWatch',
       templateUrl: 'explore/explore.orgs.tpl.html',
       controller: 'ExploreOrgsController'
     })
-    .state('myApp.main.explore.races', {
+    .state('kochTracker.explore.races', {
       url: '/KeyRaces',
       templateUrl: 'explore/explore.races.tpl.html',
       controller: 'ExploreRacesController'
