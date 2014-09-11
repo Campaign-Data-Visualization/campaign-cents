@@ -26,4 +26,36 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
   $scope.safeHTML = function(string) {
     return $sce.trustAsHtml(string);
   }
-});
+})
+
+.directive('kochFact', function(DataRequestFactory) {
+  return {
+    restrict: 'A',
+    scope: true,
+    template: "<img ng-class='fact.detail|lowercase' ng-src='images/icon-{{fact.detail|lowercase}}.svg'>"+
+      "<h3 ng-bind-html='fact.description|safehtml'></h3>",
+    link: function(scope, element, attribs) {
+      scope.fact = {};
+      DataRequestFactory.getData('fetch', 'facts/random').then(function(data) {
+        scope.fact = data[0];
+      })
+    }
+  }
+})
+
+.directive('worstOffender', function(DataRequestFactory) {
+  return {
+    restrict: 'A',
+    scope: true,
+    template: "<h3>Worst Offender"+
+      "<img width='20px' ng-src='{{offender.photoURL}}'>"+
+      "<h4>{{offender.nameFirstLast}}</h4>"+
+      "<p ng-bind-html='offender.description|safehtml'></p>",
+    link: function(scope, element, attribs) {
+      scope.offender = {};
+      DataRequestFactory.getData('fetch', 'offenders/random').then(function(data) {
+        scope.offender = data[0];
+      })
+    }
+  }
+})
