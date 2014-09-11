@@ -8,7 +8,7 @@ module.exports = exports = {
   fourohfour: function(req, res, next){
     // redirect to angular frontend
     if (req.accepts('html')) {
-      res.sendfile('index.html', { root: __dirname + '/../../client'});
+      res.sendFile('index.html', { root: __dirname + '/../../client'});
       return;
     }
     res.status(404);
