@@ -1,4 +1,8 @@
 <div>
 	<h2>Koch Candidates</h2>
+  <div ng-repeat='candidate in candidates'>
+    <h3>{{candidate.nameFirstLast}}</h3>
+    ${{candidate.since2000contrib | number}}
+  </div>
 
 </div>

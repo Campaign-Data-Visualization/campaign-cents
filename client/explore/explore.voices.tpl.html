@@ -1,4 +1,10 @@
 <div>
 	<h2>Victim's Voices</h2>
-
+  <div ng-repeat = 'voice in voices'>
+    <p>
+      "<span ng-bind-html='voice.description | safehtml'></span>"
+    </p>
+    <h4 ng-bind-html='voice.title | safehtml'></h4>
+    <h5 ng-bind-html='voice.detail | safehtml'></h5>
+  </div>
 </div>

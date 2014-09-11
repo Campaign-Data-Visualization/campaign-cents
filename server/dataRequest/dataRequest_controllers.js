@@ -120,5 +120,41 @@ module.exports = exports = {
     }, next)
   },
 
+  lookupData: function(req, res, next) {
+    var dataType = req.params.dataType;
+    var limit  = '';
+    var order = '';
+    var types = {
+      voices: {
+        query: "content where type='voices' and published = 1",
+        order: ''
+      }, 
+      offenders: {
+        query: "candidates a join content b on detail = votesmartid where type = 'offenders' and published = 1",
+        order: 'since2000contrib desc'
+      },
+      facts: {
+        query: "content where type = 'facts' and published = 1"
+      },
+      kochCandidates: {
+        query: "candidates where since2000contrib != 0 ",
+        order: 'since2000contrib desc'
+      }
+    }
+   
+    if (! types[dataType]) { next(new Error("invalid data type"))}
+
+    if (req.params.random == 'random') {
+      limit = ' limit 1';
+      order = ' order by rand() ';
+    } else if (types[dataType].order) {
+      order = ' order by '+types[dataType].order;
+    }
+
+    db.doQuery("select * from "+types[dataType].query +order+limit).then(function(data) { 
+      res.send({type:dataType, data:data});
+    }, next)
+  },
+
 };
 

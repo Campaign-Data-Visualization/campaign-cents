@@ -18,4 +18,6 @@ module.exports = exports = function(router, app){
 
   router.route('/states/:state').get(controller.lookupStates);
 
+  router.route('/fetch/:dataType/:random').get(controller.lookupData);
+
 };

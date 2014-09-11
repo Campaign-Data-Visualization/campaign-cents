@@ -190,12 +190,24 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
 })
 
 .controller('ExploreVoicesController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
+  $scope.voices = {};
+  DataRequestFactory.getData('fetch', 'voices/all').then(function(data) {
+    $scope.voices = data;
+  });
 })
 
 .controller('ExploreOffendersController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
+  $scope.offenders = {};
+  DataRequestFactory.getData('fetch', 'offenders/all').then(function(data) {
+    $scope.offenders = data;
+  });
 })
 
 .controller('ExploreCandidatesController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
+  $scope.candidates = {};
+  DataRequestFactory.getData('fetch', 'kochCandidates/all').then(function(data) {
+    $scope.candidates = data;
+  });
 })
 
 .controller('ExploreOrgsController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
@@ -203,5 +215,3 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
 
 .controller('ExploreRacesController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
 })
-
-

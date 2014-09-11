@@ -1,4 +1,8 @@
 <div>
 	<h2>Worst Offenders</h2>
-
+  <div ng-repeat='candidate in offenders'>
+    <h3>{{candidate.nameFirstLast}}</h3>
+    ${{candidate.since2000contrib | number}}
+    <p ng-bind-html='candidate.description | safehtml'>
+  </div>
 </div>
