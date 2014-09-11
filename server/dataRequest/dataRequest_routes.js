@@ -18,7 +18,4 @@ module.exports = exports = function(router, app){
 
   router.route('/states/:state').get(controller.lookupStates);
 
-  router.route('/admin/:action').get(app.basicAuth, controller.admin);
-
-
 };
