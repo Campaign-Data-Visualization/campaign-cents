@@ -10,5 +10,5 @@
 echo "Updating schema...";
 for t in candidates states zipcodes koch_contribs koch_orgs
 do
-  mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" kochtracker < $OPENSHIFT_REPO_DIR/backend/sql/$i.sql
+  mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" kochtracker < $OPENSHIFT_REPO_DIR/backend/sql/$t.sql
 done
