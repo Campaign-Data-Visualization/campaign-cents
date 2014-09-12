@@ -35,7 +35,7 @@ CREATE TABLE `koch_orgs` (
 
 LOCK TABLES `koch_orgs` WRITE;
 /*!40000 ALTER TABLE `koch_orgs` DISABLE KEYS */;
-INSERT INTO `koch_orgs` VALUES ('60 Plus Assn',1),('American Commitment',1),('American Future Fund',1),('Americans for Tax Reform',1),('Club for Growth',1),('Freedom Works PAC',0),('Heritage Action for America',1),('Heritage Foundation',1),('Koch Fertilizer',0),('Koch Industries',1),('McKinley Inc',0),('National Taxpayers Union',1),('Republican Jewish Coalition',2),('Right to Life',2),('Wesley Medical Center',0),('Young Americans for Liberty',1);
+INSERT INTO `koch_orgs` VALUES ('60 Plus Assn',1),('American Commitment',1),('American Future Fund',1),('Americans for Tax Reform',1),('Club for Growth',1),('Freedom Works PAC',1),('Heritage Action for America',1),('Heritage Foundation',1),('Koch Fertilizer',1),('Koch Industries',1),('McKinley Inc',2),('National Taxpayers Union',1),('Republican Jewish Coalition',2),('Right to Life',2),('Wesley Medical Center',2),('Young Americans for Liberty',1);
 /*!40000 ALTER TABLE `koch_orgs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -48,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-09-11 16:59:46
+-- Dump completed on 2014-09-12  3:12:04

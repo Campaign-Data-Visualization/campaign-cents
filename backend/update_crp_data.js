@@ -8,7 +8,7 @@ var Q  = require('q'),
 
 var datadir = "backend/data/";
  
-var files = ['IFG_PAC2Cand_Data', 'IFG_IndivData', 'IFG_Outside_Data', 'IFG_PAC2Cand_Data', 'IFG_PAC2Cmte_Data', 'IFG_Outside_Cand_Expends', 'IFG_527_Data'];
+var files = ['IFG_PAC2Cand_Data', 'IFG_IndivData', 'IFG_Outside_Data', 'IFG_PAC2Cmte_Data', 'IFG_Outside_Cand_Expends', 'IFG_527_Data'];
 
 var convertFiles = function() {
   console.log('<=====Updating Files');
