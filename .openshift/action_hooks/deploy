@@ -8,7 +8,7 @@
 #mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" kochtracker -B -e "select config from config limit 1" | sed -n "2p"  | sed -e "s/\\\n/\n/g" | sed -e "s/\\\t/\t/g" > $OPENSHIFT_DEPLOYMENTS_DIR/current/repo/config/default.json
 
 echo "Updating schema...";
-for t in candidates states zipcodes koch_contribs koch_orgs
+for t in candidates states zipcode koch_contribs koch_orgs
 do
   mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" kochtracker < $OPENSHIFT_REPO_DIR/backend/sql/$t.sql
 done
