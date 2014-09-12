@@ -120,9 +120,11 @@ app.directive('staticMap', function($window, DataRequestFactory, $state) {
       	.scale(width*1.3) //not sure why I need to augment the scale...
       	.translate([width / 2, height / 2])
       var path = d3.geo.path().projection(projection)
-      
+      var state_group = svg.append('g').attr('class', 'states');
+      var marker_group = svg.append('g').attr('class', 'map-markers')
+
       d3.json("/lib/us-states.json", function(json) {
-	 			var states = svg.append('g').attr('class', 'states').selectAll('.state-boundaries').data(json.objects.usa.geometries)
+	 			var states = state_group.selectAll('.state-boundaries').data(json.objects.usa.geometries,  function(d) { return d.id; })
 	 			states.enter().append("path")
 					.attr("class", function(d) { return "state-boundaries state-"+d.id; })
 					.datum(function(d, i){ return topojson.feature(json, json.objects.usa.geometries[i]) })
@@ -135,10 +137,12 @@ app.directive('staticMap', function($window, DataRequestFactory, $state) {
 								d3.selectAll(s).classed('selected', false)
 							}
 						})
+						states.sort(function(a, b) { if (a.id == d.id) { return 1; }})
 						d3.select(this).classed('selected', true);
 					})
 					.on('mouseleave', function(d) {
-						if (d3.event.toElement.tagName != 'circle'){
+						if (! d3.event.relatedTarget || d3.event.relatedTarget.tagName != 'circle'){
+							console.log(d3.event)
 							d3.select(this).classed('selected', false)
 						}
 					})
@@ -148,16 +152,16 @@ app.directive('staticMap', function($window, DataRequestFactory, $state) {
 			});
     	
     	DataRequestFactory.getData('map', 'summary').then(function(data) {
-				var group = svg.append('g')
-					.attr('class', 'map-markers')
-
-				var markers = group.selectAll('.marker').data(data)
+				var markers = marker_group.selectAll('.marker').data(data)
 				markers.enter().append("circle")
 					.attr("r",0)
 					.attr("transform", function(d) {return "translate(" + projection([d.lng,d.lat]) + ")";})
 					.attr('fill-opacity', .8)
 					.attr('fill', 'red')
-					.attr('class', 'marker');
+					.attr('class', 'marker')
+					.on('click', function(d) {
+						$state.go('kochTracker.explore.map', {state:d.state});
+					})
 
 				markers.transition()
 					.duration(700)

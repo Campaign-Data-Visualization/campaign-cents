@@ -98,7 +98,7 @@ module.exports = exports = {
     var mapType = req.params.mapType;
     var results = {type:'markers', data: {}};
     if (mapType == 'summary') {
-      db.doQuery("select lat, lng, 'candidate' as type from candidates where since2000contrib != 0 and lat != 0 and lng != 0 union select lat, lng, layer from koch_assets where country = 'us'").then(function(data) {
+      db.doQuery("select lat, lng, 'candidate' as type, state from candidates where since2000contrib != 0 and lat != 0 and lng != 0 union select lat, lng, layer, state from koch_assets where country = 'us'").then(function(data) {
         results.data = data;
         res.send(results);
       }, next)
