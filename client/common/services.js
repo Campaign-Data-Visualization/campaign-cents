@@ -4,6 +4,7 @@ var app = angular.module('kochTracker')
 app.service('$messages', function($rootScope) {
 	var service = this;
 	service.messages = [];
+	service.modal = false;
 
 	service.addMessage = function(message, type) {
 		var type = type || 'info';
@@ -25,6 +26,7 @@ app.service('$messages', function($rootScope) {
 
 	service.clearMessages = function() { 
 		service.messages = [];
+		service.modal = false;
 	}
 	
 	$rootScope.$on("$stateChangeStart", function(event, next, current) {

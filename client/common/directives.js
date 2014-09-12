@@ -4,11 +4,14 @@ var app = angular.module('kochTracker')
 app.directive('messages', function($messages) {
   return {
     restrict: 'A',
-    scope: true,
-    template: "<alert class='message' type='{{message.type}}' close='close($index)' ng-repeat='message in messageService.messages'><div>{{message.message}}</div>",
+    scope: {
+    	modal: '=?',
+    },
+    template: "<div ng-if='modal == messageService.modal'><alert class='message' type='{{message.type}}' close='close($index)' ng-repeat='message in messageService.messages'><div>{{message.message}}</div></alert></div>",
     link: function(scope, element, attribs) { 
       scope.messageService = $messages;
       scope.close = $messages.deleteMessage;
+      scope.modal = scope.modal || false;
     }
   }
 });

@@ -215,3 +215,42 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
 
 .controller('ExploreRacesController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
 })
+
+.directive('shareStoryForm', function(DataRequestFactory, $state, $messages) {
+  return {
+    restrict: 'A',
+    scope: true,
+    templateUrl: "/explore/explore.shareStoryForm.tpl.html",
+    link: function(scope, elem, attrs){
+      scope.formData = {
+        name: '',
+        email: '',
+        city: '',
+        state: '',
+        story: '', 
+      }
+      
+      scope.invalid = false;
+      scope.success = false;
+      scope.loading = false;
+
+      scope.share = function() {
+        $messages.clearMessages();
+        $messages.modal = true;
+        scope.invalid = scope.shareStory.$invalid;
+        if (! scope.invalid) {
+          scope.loading = true;
+          DataRequestFactory.postData('shareStory', scope.formData).then(function(data){
+            scope.loading = false;
+            if (data == 'Success') {
+              scope.success = true;
+              $messages.modal = false;
+            }
+          }, function(e) { 
+            scope.loading = false;
+          })
+        }
+      }
+    }
+  }
+});

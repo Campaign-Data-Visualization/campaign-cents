@@ -29,6 +29,16 @@ app.factory('DataRequestFactory', function($http, $messages, $q){
     }, handleError);
   };
 
+  var postData = function(route, data) {
+    return $http({
+      method: 'POST',
+      url: '/dataRequest/'+route,
+      data: data
+    }).then(function(response) {
+      return response.data.data;
+    }, handleError);
+  };
+
   var handleError = function(response) {
     console.log('err1');
     if(response.data && response.data.error) { 
@@ -40,6 +50,7 @@ app.factory('DataRequestFactory', function($http, $messages, $q){
   return {
     'getData': getData,
     'getAdmin': getAdmin,
+    'postData': postData,
   };
 });
 

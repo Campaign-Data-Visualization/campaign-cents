@@ -1,5 +1,7 @@
 <div>
 	<h2>Victim's Voices</h2>
+  <button class='btn btn-default' onclick="$('#share-story-modal').modal('show');">Share your story</button>
+  <div share-story-form/>
   <div ng-repeat = 'voice in voices'>
     <p>
       "<span ng-bind-html='voice.description | safehtml'></span>"

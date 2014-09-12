@@ -5,7 +5,16 @@ var Q  = require('q'),
     config = require('config'),
     request = require('request'),
     parseString = require('xml2js').parseString,
-    db = require('../database.js');
+    db = require('../database.js'),
+    nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: config.google.contactEmail,
+        pass: config.google.contactEmailPassword
+    }
+});
 
 module.exports = exports = {
   search: function(req, res, next) { 
@@ -142,7 +151,7 @@ module.exports = exports = {
       }
     }
    
-    if (! types[dataType]) { next(new Error("invalid data type"))}
+    if (! types[dataType]) { return next(new Error("invalid data type"))}
 
     if (req.params.random == 'random') {
       limit = ' limit 1';
@@ -156,5 +165,49 @@ module.exports = exports = {
     }, next)
   },
 
+  shareStory: function(req, res, next) {
+    var fields = ['name', 'email', 'city', 'state', 'story'];
+    var d = new Date();
+    var utc = d.getTime() - (d.getTimezoneOffset() * 60000);
+    var date = new Date(utc + (3600000*7)).toLocaleString();
+    var mailOptions = {
+        from: 'Greg Michalec <gregmichalec@gmail.com>', // sender address
+        to: 'greg@primate.net', // list of receivers
+        subject: "Victim's Voices Submission", // Subject line
+    };
+    var body = "A new Victim's Voice entry was submitted on "+date+"\n\n";
+    var error;
+
+    fields.forEach(function(field) {
+      var f = req.body[field];
+      if (! f) {
+        error = field +" can not be blank";
+      } else if ( (f.length > 50 && field != 'story') || f.length > 1000 ) {
+        error = field +" is too long";
+      } else if (field == 'email' && ! f.match(/.+@.+\..+/i)) {
+        error = "email is invaild";
+      } else {
+        if (field != 'story') { 
+          body += field+': '+f+'\n';
+        } else { 
+          body += 'story:\n\n'+f;
+        }
+      }
+    })
+    if (error) { 
+      return next(new Error(error));
+    }
+    
+    mailOptions.text = body;
+
+    transporter.sendMail(mailOptions, function(error, info){
+      if(error){
+        console.log(error);
+        next(new Error("There was a problem sending your submission. Please try again later."))
+      }else{
+        res.send({type:'success', data: 'Success'});
+      }
+    });
+  },
 };
 

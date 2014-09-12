@@ -20,4 +20,6 @@ module.exports = exports = function(router, app){
 
   router.route('/fetch/:dataType/:random').get(controller.lookupData);
 
+  router.route('/shareStory').post(controller.shareStory);
+
 };
