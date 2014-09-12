@@ -6,6 +6,7 @@ var gulp    = require('gulp'),
     notify  = require('gulp-notify'),
     plumber = require('gulp-plumber'),
     client  = require('tiny-lr')(),
+    run  = require('gulp-run'),
     nodemon = require('gulp-nodemon'),
     lr_port = 35728;
 
@@ -57,6 +58,19 @@ gulp.task('watch', function () {
   gulp.watch(paths.views, ['html']);
   gulp.watch(paths.scripts, ['lint']);
 });
+
+gulp.task('database', function() {
+  var dir = 'backend/sql/'
+  var tables = ['candidates', 'koch_contribs', 'koch_orgs', 'leadership_pacs', 'states', 'zipcode'];
+  var live_tables = ['content', 'koch_assets'];
+
+  tables.forEach(function(t) { 
+    console.log("Dumping "+t+" table...");
+    run('mysqldump -u root kochtracker '+t+' > '+dir+t+'.sql').exec()
+  });
+  console.log("Dumping schema....");
+  run('mysqldump -d -u root kochtracker '+tables.join(' ') +' '+ live_tables.join(' ')+ '> '+dir+'schema.sql' ).exec()
+})
 
 gulp.task('build', build);
 

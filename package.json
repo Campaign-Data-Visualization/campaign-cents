@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "gulp": "*",
+    "gulp-run": "*",
     "gulp-bower": "*",
     "tiny-lr": "*",
     "node-geocoder": "*",
