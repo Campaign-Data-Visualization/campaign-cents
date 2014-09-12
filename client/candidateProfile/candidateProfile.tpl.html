@@ -24,8 +24,8 @@
       <div bubble-chart data='totals'/>
   </div>
   </div> 
-  <div class="row">
-    <div ng-if='!profileLoading' class="col-xs-12">
+  <div ng-if='!profileLoading && candidateProfile.since2000contrib' class="row">
+    <div class="col-xs-12">
       <h4 class="center">Top Donors by Organization</h4>
         <div bar-chart data='topDonors'/>
     </div>
