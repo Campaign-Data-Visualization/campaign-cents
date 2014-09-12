@@ -142,7 +142,6 @@ app.directive('staticMap', function($window, DataRequestFactory, $state) {
 					})
 					.on('mouseleave', function(d) {
 						if (! d3.event.relatedTarget || d3.event.relatedTarget.tagName != 'circle'){
-							console.log(d3.event)
 							d3.select(this).classed('selected', false)
 						}
 					})
