@@ -5,10 +5,6 @@
         <div class="col-sm-8 col-xs-12 map-main">
           <div id='map' static-map data='mapData'/>
           <!--<map center="[39.50, -98.35]" zoom="3" style="display:block; height:450px"> </map>-->
-          <div class="legend">
-            <img src="images/map-legend-lg.png">
-            <p>Breadth of Koch Influence</p>
-          </div>
         </div>
         <div class="col-sm-4 col-xs-12 map-sidebar-container">
           <div class="map-sidebar map-sidebar-ticker hidden-xs">
@@ -16,36 +12,32 @@
             <p>Koch Spending Thus Far in 2014 Elections</p>
           </div>          
           <div ng-if='dayOne >= 0' class="map-sidebar map-sidebar-calendar hidden-xs">
-            <div class="calendar-page">
-              <img src="images/icon-pin.png">
-              <h1><span>{{dayOne}}</span></h1>
-            </div>
-            <div class="calendar-page">
-              <img src="images/icon-pin.png">
-              <h1><span>{{dayTwo}}</span></h1>
-            </div>
+            <h1><span>{{dayOne}}</span></h1>
+            <h1><span>{{dayTwo}}</span></h1>
+            <p>Days Til Election</p>
           </div>
-          <p class="hidden-xs">Days Til Election</p>
           <div class="map-sidebar map-sidebar-search">
             <form class="form-inline" role="form" ng-submit="search()">
               <div class="form-group">
                 <label><h1>Find Koch Cash in Your Area</h1></label>
-
                 <search-box/>
               </div>
             </form>
+            <div class="legend">
+              <img src="images/map-legend-lg.png">
+              <p>Breadth of Koch Influence</p>
+            </div>
           </div>
+
         </div>
        </div>
      </div>
   </section>
-  <section>
+  <section class="landing-section">
      <div class="container">
        <div class="row">
           <div class="col-xs-12 col-sm-4 landing-box landing-box-involved">
-            <!-- <div class="col-xs-12"> -->
               <h3>GET INVOLVED</h3>
-            <!-- </div> -->
             <div class="box-text">
             <div class="col-xs-12">
               <img src="images/icon-camera.svg">
@@ -75,6 +67,7 @@
           proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>
           </div>
+          <h4><a href="#">View All Key Races</a></h4>
         </div>
         <div class="col-sm-4 col-xs-12 landing-box landing-box-watch">
           <h3>ORGs TO WATCH</h3>
@@ -85,6 +78,7 @@
           proident, sunt in <a href="#">culpa qui</a> officia deserunt mollit anim id est laborum.
           </p>
           </div>
+          <h4><a href="#">View All Organizations to Watch</a></h4>
         </div>
        </div>
      </div>
