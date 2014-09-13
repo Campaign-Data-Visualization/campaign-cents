@@ -2,6 +2,7 @@
 client/.DS_Store
 /config
 client/config.js
+client/common/factories.js
 _DS_Store
 DS_Store
 *.swp
