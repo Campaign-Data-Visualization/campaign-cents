@@ -9,4 +9,3 @@ DS_Store
 *.swo
 backend/data/*
 .vimrc
-node_modules/edit-google-spreadsheet/*

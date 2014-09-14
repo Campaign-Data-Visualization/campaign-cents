@@ -8,13 +8,7 @@ var Q  = require('q'),
     db = require('../database.js'),
     nodemailer = require('nodemailer');
 
-var transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        user: config.google.contactEmail,
-        pass: config.google.contactEmailPassword
-    }
-});
+var transporter;
 
 module.exports = exports = {
   search: function(req, res, next) { 
@@ -177,6 +171,15 @@ module.exports = exports = {
     };
     var body = "A new Victim's Voice entry was submitted on "+date+"\n\n";
     var error;
+    if (! transporter) { 
+      transporter = nodemailer.createTransport({
+          service: 'Gmail',
+          auth: {
+              user: config.google.contactEmail,
+              pass: config.google.contactEmailPassword
+          }
+      });
+    }
 
     fields.forEach(function(field) {
       var f = req.body[field];
