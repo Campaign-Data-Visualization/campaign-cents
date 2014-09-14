@@ -16,10 +16,11 @@ angular.module('kochTracker.landingPage', ['ui.router', 'ngMap'])
   $scope.kochTotal = 0;
   $scope.prevKochTotal = 0;
   $scope.duration = 2;
+  $scope.tickerPopup = "Based off a stated goal made June 14th, 2014, to aggregate and distribute $500 million for upcoming Senate campaigns.<br/>Source: <a target='_new' href='http://www.thenation.com/article/180267/exclusive-behind-koch-brothers-secret-billionaire-summit'>The Nation - 6/17/14</a>"
 
   var today = new Date();
   var election = new Date('11/4/2014');
-  var beginning = new Date('1/1/2014');
+  var beginning = new Date('6/14/2014');
   var perDay = 5000000 / (election - beginning);
 
   var days = Math.ceil((election - today)/1000/3600/24).toString();

@@ -410,11 +410,13 @@ app.directive('bubbleChart', function($window) {
       data: '='
     },
     template: "<div class='bubble-chart'>"+
-    	"<div class='bubble-label'>2014 Spending <span tooltip='Tier 1 organizations consist of: •    Koch-owned business, such as Koch Industries and Flint Hills resources •    Political organizations with very close ties to the Kochs, i.e. they founded the company or sit on the board. Examples include Americans for Prosperity and Club for Growth •    Koch-owned or founded think tanks, such as the Cato Institute. Not many donations from these are included in our data. •    Any organization to which the Koch brothers have donated over one million dollars since 2008 Tier 2 organizations consist of: •    Any organization that receives considerable funding from the Koch brothers that totals less than one million dollars.'>[?]</span></div>"+
+    	"<div class='bubble-label'>2014 Spending <span info-popup content='{{popupContent}}'></span></div>"+
     	"<svg>"+
     	"<filter id='glow' x='-30%' y='-30%' width='160%' height='160%'><feGaussianBlur stdDeviation='1 1' result='glow'/><feMerge><feMergeNode in='glow'/><feMergeNode in='glow'/><feMergeNode in='glow'/></feMerge></filter>"+
     	"</svg></div>",
     link: function(scope, elem, attrs){
+    	scope.popupContent = "<b>Tier 1 organizations</b> consist of Koch-owned businesses, political organizations with very close ties to the Kochs, Koch-owned or founded think tanks, and any organization to which the Koch brothers have donated over one million dollars since 2008 "+
+    		"<p><b>Tier 2 organizations</b> consist of any organization that receives considerable funding from the Koch brothers that totals less than one million dollars.</p>";
       
       var maxRadius = 65;
       var yValue = maxRadius + 30 + 25;
@@ -606,3 +608,43 @@ app.directive('searchBox', function(DataRequestFactory, $state) {
     }
   };
 });
+
+app.directive('infoPopup', function() {
+	return {
+	  restrict: "A",
+	  scope: { content: "@"},
+	  template: 
+	  	"<button class='glyphicon glyphicon-question-sign info-popup' popover-placement='top' popover-append-to-body='true' popover-trigger='focus' popover-html-unsafe='{{content}}'/>",
+	  link: function(scope, element, attr) {
+	  	element.bind('mouseover', function(e) { 
+	  		element.find('button').focus();
+	  	})
+	  }
+	}
+})
+
+app.directive("popoverHtmlUnsafePopup", function () {
+  return {
+    restrict: "EA",
+    replace: true,
+    scope: { title: "@", content: "@", placement: "@", animation: "&", isOpen: "&" },
+    template: 
+    "<div class='popover {{placement}}' ng-class='{ in: isOpen(), fade: animation() }'>"+
+    "  <div class='arrow'></div>"+
+    "  <div class='popover-inner'>"+
+    "      <h3 class='popover-title' ng-bind='title' ng-show='title'></h3>"+
+    "      <div class='popover-content' bind-html-unsafe='content'></div>"+
+    "  </div>"+
+    "</div>",
+		link: function(scope, element, attr) {
+	  	$('body').bind('keydown', function (e) {
+	  		if (e.keyCode == '27')
+	  		$('.info-popup').blur();
+	  	})
+	  }
+ 	}
+})
+
+.directive("popoverHtmlUnsafe", [ "$tooltip", function ($tooltip) {
+  return $tooltip("popoverHtmlUnsafe", "popover", "click");
+}]);

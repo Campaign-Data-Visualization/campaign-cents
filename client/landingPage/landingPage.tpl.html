@@ -4,12 +4,14 @@
        <div class="row">
         <div class="col-sm-8 col-xs-12 map-main">
           <div id='map' static-map data='mapData'/>
-          <!--<map center="[39.50, -98.35]" zoom="3" style="display:block; height:450px"> </map>-->
         </div>
         <div class="col-sm-4 col-xs-12 map-sidebar-container">
           <div class="map-sidebar map-sidebar-ticker hidden-xs">
             <h1>$<span class="odometer" id="odometer" count-to='{{kochTotal}}' value='{{prevKochTotal}}' duration='{{duration}}'></span></h1>
-            <p>Koch Spending Thus Far in 2014 Elections</p>
+            <p>
+              Koch Spending Thus Far in 2014 Elections
+              <span info-popup content='{{tickerPopup}}'/>
+            </p>
           </div>          
           <div ng-if='dayOne >= 0' class="map-sidebar map-sidebar-calendar hidden-xs">
             <h1><span>{{dayOne}}</span></h1>
