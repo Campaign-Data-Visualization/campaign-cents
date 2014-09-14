@@ -8,6 +8,19 @@
 #mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" kochtracker -B -e "select config from config limit 1" | sed -n "2p"  | sed -e "s/\\\n/\n/g" | sed -e "s/\\\t/\t/g" > $OPENSHIFT_DEPLOYMENTS_DIR/current/repo/config/default.json
 : ${database:="kochtracker"};
 
+p="--- node_modules/edit-google-spreadsheet/lib/util.js	2014-09-14 00:21:05.083247808 -0700
++++ util.js	2014-09-14 00:02:23.027279718 -0700
+@@ -28,5 +28,6 @@
+     });
+   }
+   //get value
++  return cell.inputValue;
+   return exports.num(cell.$t);
+ };"
+
+echo "patching google spreadsheet module"
+echo "$p" | patch node_modules/edit-google-spreadsheet/lib/util.js;
+
 echo "Updating schema $database ...";
 for t in candidates states zipcode koch_contribs koch_orgs
 do
