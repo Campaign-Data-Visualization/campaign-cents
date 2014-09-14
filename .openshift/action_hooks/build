@@ -1,2 +1,3 @@
 echo "Build script"
+echo `pwd`
 npm rebuild edit-google-spreadsheet
