@@ -7,7 +7,7 @@ app.factory('DataRequestFactory', function($http, $messages, $q){
 
     return $http({
       method: 'GET',
-      url: 'http://www.kochtracker.com/dataRequest/'+route+'/'+input,
+      url: '/dataRequest/'+route+'/'+input,
       //data: {input: input}
     })
     .then(function(response){
