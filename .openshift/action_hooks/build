@@ -1,3 +1,4 @@
 echo "Build script"
 echo `pwd`
+cd app-root/runtime/repo/
 npm rebuild edit-google-spreadsheet
