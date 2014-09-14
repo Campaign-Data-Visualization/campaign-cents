@@ -19,7 +19,7 @@ p="--- node_modules/edit-google-spreadsheet/lib/util.js	2014-09-14 00:21:05.0832
  };"
 
 echo "patching google spreadsheet module"
-echo "$p" | patch node_modules/edit-google-spreadsheet/lib/util.js;
+echo "$p" | patch $OPENSHIFT_REPO_DIR/node_modules/edit-google-spreadsheet/lib/util.js;
 
 echo "Updating schema $database ...";
 for t in candidates states zipcode koch_contribs koch_orgs

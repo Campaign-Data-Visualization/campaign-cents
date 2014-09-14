@@ -1,2 +1,0 @@
-echo "Pre-Build script"
-npm -v -f rebuild edit-google-spreadsheet
