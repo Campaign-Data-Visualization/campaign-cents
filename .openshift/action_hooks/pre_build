@@ -1,2 +1,2 @@
-echo "Build script"
+echo "Pre-Build script"
 npm rebuild edit-google-spreadsheet
