@@ -76,10 +76,6 @@ body {
 	font-family: @font-family-sans-serif-bold;
 }
 
-.navbar .brand {
-	width: 400px;
-}
-
 .navbar .brand img {
 	height: 150px;
 	margin-bottom: -30px
@@ -102,6 +98,10 @@ body {
 
 .navbar-right {
 	float: right;
+	margin-top: 50px;
+	@media (min-width: @screen-md-min) {
+	margin-top: 50px;
+}
 }
 
 .navbar-nav {
@@ -110,7 +110,14 @@ body {
 
 ul.navbar-nav li h4 {
 	display: inline;
-	margin-right: 30px;
+	margin: 0 5px;
+	@media (min-width: @screen-md-min) {	
+		margin: 0 30px;
+	}
+}
+
+.nav>li>a {
+	padding: 0;
 }
 
 ul.navbar-nav li:last-child h4, ul.navbar-nav li:last-child a {
@@ -434,10 +441,6 @@ ul.candidate-list li {
 	padding: 30px;
 }
 
-// ul.candidate-list li:first-child {
-// 	border-top: 2px solid @cc-blue-light;
-// }
-
 ul.candidate-list li:hover{
 	border: 4px solid @cc-green;
 }
@@ -560,11 +563,81 @@ g .domain { display: none;}
 	stroke:@cc-red;
 }
 
-//Hack to make button look like icon
-.info-popup {
-	background: none !important;
+//explore
+.tentacle-title {
+	background-image: url('../images/tentacle.png');
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+//victims voices
+
+.explore h2 {
+	text-align: center;
+	height: 85px;
+	padding-top: 20px;
+	text-shadow: 0 1px 0 #fff;
+	margin-bottom: 20px;
+}
+
+.explore h1 {
 	color: @cc-blue-light;
-	border: none !important;
-	padding: 0px;
-	margin: 0px;
+	text-shadow: 0 1px 0 #fff;
+	font-family: @font-family-sans-serif;
+	text-align: left;
+	@media (min-width: @screen-sm-min) {
+		//text-align: right;
+	}
+}
+
+#join-convo {
+	background-color: #D5D5D5;
+	padding: 20px;
+}
+
+.tile {
+	background-color: #D5D5D5;
+	height: auto;
+	margin: 20px 0;
+	padding: 20px;
+}
+
+.tile-column:first-child {
+	@media (min-width: @screen-sm-min) {
+		padding-left: 0;
+	}	
+}
+
+.tile-column:last-child {
+	@media (min-width: @screen-sm-min) {
+		padding-right: 0;
+	}
+}
+
+.join-convo-form input,.share-story-form input, .share-story-form select, .share-story-form textarea {
+	border: 2px #000 solid;
+	border-radius: 0;
+}
+
+.join-convo-form input {
+	height: 70px;
+}
+
+.join-convo-form button, .share-story-form .share-story-submit button {
+	height: 70px;
+	background-color: #000;
+	color: #fff;
+	border-radius: 0;
+} 
+
+
+///modal styles
+
+.modal-header {
+	background-color: #D5d5d5
+}
+#share-story-modal .modal-title {
+	color: @cc-blue-light;
+	text-shadow: 0 1px 0 #fff;
+	font-family: @font-family-sans-serif;
 }
