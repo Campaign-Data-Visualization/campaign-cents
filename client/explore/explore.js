@@ -216,41 +216,54 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
 .controller('ExploreRacesController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
 })
 
-.directive('shareStoryForm', function(DataRequestFactory, $state, $messages) {
+.directive('shareStoryButton', function(DataRequestFactory, $modal, $messages) {
   return {
     restrict: 'A',
+    replace:true,
     scope: true,
-    templateUrl: "/explore/explore.shareStoryForm.tpl.html",
+    template: "<button class='btn btn-default' ng-click='showForm()'>Share your story</button>",
     link: function(scope, elem, attrs){
-      scope.formData = {
-        name: '',
-        email: '',
-        city: '',
-        state: '',
-        story: '', 
-      }
-      
-      scope.invalid = false;
-      scope.success = false;
-      scope.loading = false;
-
-      scope.share = function() {
-        $messages.clearMessages();
-        $messages.modal = true;
-        scope.invalid = scope.shareStory.$invalid;
-        if (! scope.invalid) {
-          scope.loading = true;
-          DataRequestFactory.postData('shareStory', scope.formData).then(function(data){
-            scope.loading = false;
-            if (data == 'Success') {
-              scope.success = true;
-              $messages.modal = false;
+      scope.showForm = function() {
+        var modalInstance = $modal.open({
+          windowClass: 'share-story-modal share-story-form',
+          templateUrl: "/explore/explore.shareStoryForm.tpl.html",
+          controller: function($scope, $modalInstance){
+            $scope.forms = {};
+            $scope.formData = {
+              name: '',
+              email: '',
+              city: '',
+              state: '',
+              story: '', 
             }
-          }, function(e) { 
-            scope.loading = false;
-          })
-        }
+            $scope.close = function() {
+              $modalInstance.close();
+            }
+            $scope.invalid = false;
+            $scope.success = false;
+            $scope.loading = false;
+
+            $scope.share = function() {
+              $messages.clearMessages();
+              $messages.modal = true;
+
+              $scope.invalid = $scope.forms.shareStory.$invalid;
+              if (! $scope.invalid) {
+                $scope.loading = true;
+                DataRequestFactory.postData('shareStory', $scope.formData).then(function(data){
+                  $scope.loading = false;
+                  if (data == 'Success') {
+                    $scope.success = true;
+                    $messages.modal = false;
+                  }
+                }, function(e) { 
+                  $scope.loading = false;
+                })
+              }
+            }
+          }
+        });
       }
     }
   }
-});
+})

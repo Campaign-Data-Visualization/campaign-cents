@@ -1,9 +1,9 @@
-<div class='share-story-form'>
+<!-- <div class='share-story-form'>
   <div id='share-story-modal' class="modal fade">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content"> -->
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <button type="button" class="close" ng-click='close()'><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
           <h4 class="modal-title">Share Your Story</h4>
           <p ng-if='invalid' class='alert-danger alert'>We're sorry, but there is something wrong in the form below. Please correct the error and try posting again.</p>
           <div modal='true' messages id='modal-messages'></div>
@@ -11,35 +11,35 @@
         <div class="modal-body">
           <div ng-show='success' class='alert-success alert'>
             <h3>Thank you for submitting!</h3>
-            <button class='btn btn-default' data-dismiss="modal">Close</button>
+            <button class='btn btn-default' ng-click="close()">Close</button>
           </div>
           <loading loading="loading"/>
-          <form ng-show='! success && ! loading' class="form-horizontal" role="form" name='shareStory' ng-submit='share()'>
-            <div class="form-group" ng-class="{ 'has-error': shareStory.story.$invalid && ( shareStory.story.$dirty || invalid )}">
+          <form ng-show='! success && ! loading' class="form-horizontal" role="form" name='forms.shareStory' ng-submit='share()'>
+            <div class="form-group" ng-class="{ 'has-error': forms.shareStory.story.$invalid && ( forms.shareStory.story.$dirty || invalid )}">
               <label for="inputStory" class="col-sm-2 control-label">Story</label>
               <div class="col-sm-10">
                 <textarea class="form-control" id="inputStory" rows="10" maxlength='1000' name='story' ng-model='formData.story' required placeholder="Share your story..." ></textarea>
                 <span class="help-block">{{1000-formData.story.length}} characters remaining...</span>
-                <p class="help-block" ng-if="invalid && shareStory.name.$error.required">Please enter your story.</p>
+                <p class="help-block" ng-if="invalid && forms.shareStory.name.$error.required">Please enter your story.</p>
               </div>
             </div>
             <hr/>
             <h4>Additional Required Info</h4>
-            <div class="form-group" ng-class="{ 'has-error': shareStory.name.$invalid &&  ( shareStory.name.$dirty || invalid) }">
+            <div class="form-group" ng-class="{ 'has-error': forms.shareStory.name.$invalid &&  ( forms.shareStory.name.$dirty || invalid) }">
               <label for="inputName" class="col-sm-2 control-label">Name</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="inputName" maxlength="50" name='name' ng-model='formData.name' required placeholder="Name" >
-                <p class="help-block" ng-if="invalid && shareStory.name.$error.required">Please enter your name.</p>
+                <p class="help-block" ng-if="invalid && forms.shareStory.name.$error.required">Please enter your name.</p>
               </div>
             </div>
-            <div class="form-group" ng-class="{ 'has-error': shareStory.city.$invalid && ( shareStory.city.$dirty || invalid) }">
+            <div class="form-group" ng-class="{ 'has-error': forms.shareStory.city.$invalid && ( forms.shareStory.city.$dirty || invalid) }">
               <label for="inputCity" class="col-sm-2 control-label">City</label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" id="inputCity" maxlength="50" name='city' ng-model='formData.city' required placeholder="City" >
-                <p class="help-block" ng-if="invalid && shareStory.city.$error.required">Please enter your city.</p>
+                <p class="help-block" ng-if="invalid && forms.shareStory.city.$error.required">Please enter your city.</p>
               </div>
             </div>
-            <div class="form-group" ng-class="{ 'has-error': shareStory.state.$invalid && ( shareStory.state.$dirty || invalid) }">
+            <div class="form-group" ng-class="{ 'has-error': forms.shareStory.state.$invalid && ( forms.shareStory.state.$dirty || invalid) }">
               <label for="inputPassword3" class="col-sm-2 control-label">State</label>
               <div class="col-sm-10">
                 <select class='form-control' name='state' ng-model='formData.state' required id='inputState'>
@@ -48,15 +48,15 @@
                   <option>MI</option>
                   <option>NY</option>
                 </select>
-                <p class="help-block" ng-if="invalid && shareStory.state.$error.required">Please enter your state.</p>
+                <p class="help-block" ng-if="invalid && forms.shareStory.state.$error.required">Please enter your state.</p>
               </div>
             </div>
-            <div class="form-group" ng-class="{ 'has-error': shareStory.email.$invalid && ( shareStory.email.$dirty || invalid ) }">
+            <div class="form-group" ng-class="{ 'has-error': forms.shareStory.email.$invalid && ( forms.shareStory.email.$dirty || invalid ) }">
               <label for="inputEmail" class="col-sm-2 control-label">Email</label>
               <div class="col-sm-10">
                 <input type="email" class="form-control" id="inputEmail" email name='email' ng-model='formData.email' required placeholder="Email" >
-                <p class="help-block" ng-if="invalid && shareStory.email.$error.required">Please enter your email.</p>
-                <p class="help-block" ng-if="invalid && shareStory.email.$error.email">The email address entered is invalid.</p>
+                <p class="help-block" ng-if="invalid && forms.shareStory.email.$error.required">Please enter your email.</p>
+                <p class="help-block" ng-if="invalid && forms.shareStory.email.$error.email">The email address entered is invalid.</p>
               </div>
             </div>
 
@@ -67,7 +67,7 @@
             </div>
           </form>
         </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+<!--       </div>/.modal-dialog
+    </div>/.modal
   </div>
-</div>
+</div> -->
