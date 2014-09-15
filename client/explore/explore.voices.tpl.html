@@ -5,21 +5,15 @@
 
 <div class="row" id="join-convo">
   <h1 class="col-sm-6 col-xs-12">Join the Conversation</h1>
-<!--   <button class='btn btn-default' onclick="$('#share-story-modal').modal('show');">Share your story</button> -->
-<!--   <div class="form-inline join-convo-form col-sm-6 col-xs-12">
-    <input name="search" id="search"/>
-    <button class='btn btn-default' onclick="$('#share-story-modal').modal('show');">POST</button>
-</div> -->
 <div class="col-sm-6 col-xs-12">
     <div class="join-convo-form input-group ">
       <input type="text" class="form-control">
       <span class="input-group-btn">
-        <button class="btn btn-default btn-lg" type="submit" onclick="$('#share-story-modal').modal('show');">POST</button>
+         <span share-story-button/>
       </span>
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
   <div share-story-form/>
->>>>>>> trying again with victims voices page
   <div ng-repeat = 'voice in voices'>
     <p>
       "<span ng-bind-html='voice.description | safehtml'></span>"
