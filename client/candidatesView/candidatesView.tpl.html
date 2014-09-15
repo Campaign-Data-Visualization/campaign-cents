@@ -24,7 +24,7 @@
           <div ng-repeat='asset in layers.assets'>
             <h4>{{asset.title}}</h4>
             <h5 ng-if='asset.city'>{{asset.city}}, {{viewparams.state}}</h5> 
-            <p ng-bind-html='safeHTML(asset.description)'></p>
+            <p ng-bind-html='asset.description | safehtml'></p>
           </div>
         </div>
         <div class="tab-pane" id="universities">
@@ -32,12 +32,15 @@
             <div ng-repeat='asset in layers.campus'>
               <h4>{{asset.title}}</h4>
               <h5 ng-if='asset.city'>{{asset.city}}, {{viewparams.state}}</h5> 
-              <p ng-bind-html='safeHTML(asset.description)'></p>
+              <p ng-bind-html='asset.description | safehtml'></p>
             </div>
         </div> 
       </div> <!-- /.tab-content -->
       <!-- GET INVOLVED -->
       <div class="row get-involved">
+        <div ng-if='dayOne >= 0' class='election-countdown-tag'>
+          Days Until the Election <span>{{dayOne}}{{dayTwo}}</span>
+        </div>
         <div class="col-xs-12">
           <h3>GET INVOLVED</h3>
         </div>

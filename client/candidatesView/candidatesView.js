@@ -14,6 +14,8 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
 
 .controller('CandidatesViewController', function($scope, $stateParams, DataRequestFactory, $state, $sce) {
   $scope.layers = {};
+  $scope.dayOne = 0;
+  $scope.dayTwo = 0;
   $scope.viewparams = {
     state: $stateParams.state,
     zip: ''
@@ -23,9 +25,19 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
     $scope.layers = data;
   })
 
-  $scope.safeHTML = function(string) {
-    return $sce.trustAsHtml(string);
+  var today = new Date();
+  var election = new Date('11/4/2014');
+  var days = Math.ceil((election - today)/1000/3600/24).toString();
+
+  if (days > 0) {
+    $scope.dayOne = days > 9 ? days[0] : 0;
+    $scope.dayTwo = days > 9 ? days[1] : days[0];
+  } else {
+    if (days < 0 ) {
+      $scope.dayOne = -1;
+    }
   }
+
 })
 
 .directive('kochFact', function(DataRequestFactory) {
