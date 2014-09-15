@@ -46,7 +46,7 @@ app.directive('insetMap', function($window, $state) {
       	height: height
       })
       
-      var projection = d3.geo.albersUsa()
+      var projection = d3.geo.mercator()
       	.scale(1)
       	.translate([0,0])
     	
@@ -57,9 +57,9 @@ app.directive('insetMap', function($window, $state) {
 	      var bounds = path.bounds(topojson.feature(json,boundary)),
 					dx = bounds[1][0] - bounds[0][0],
 					dy = bounds[1][1] - bounds[0][1],
-					x = (bounds[0][0] + bounds[1][0]) / 2,
+					x = scope.state == 'AK' ? -2.7 : (bounds[0][0] + bounds[1][0]) / 2,
 					y = (bounds[0][1] + bounds[1][1]) / 2,
-					scale = .9 / Math.max(dx / width, dy / height),
+					scale = scope.state == 'AK' ? 270 : .95 / Math.max(dx / width, dy / height),
 					translate = [width / 2 - scale * x, height / 2 - scale * y];
 				
 				projection.scale(scale).translate(translate);
