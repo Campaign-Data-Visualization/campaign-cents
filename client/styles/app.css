@@ -1006,6 +1006,7 @@ g .domain{display:none}
 .join-convo-form input,.share-story-form input,.share-story-form select,.share-story-form textarea{border:2px #000 solid;border-radius:0}
 .join-convo-form input{height:70px}
 .join-convo-form button,.modal-body button{height:70px;background-color:#000;color:#fff;border-radius:0}
+ul.bulleted,ul.bulleted li,li.bulleted{list-style:initial;text-decoration:initial}
 .modal-header{background-color:#d5d5d5}
 h4.modal-title{color:#0071bc;text-shadow:0 1px 0 #fff;font-family:'ubuntuRegular'}
 .info-popup{color:#0071bc;background:none !important;border:none !important;padding:0;margin:0}
