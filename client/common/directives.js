@@ -1,13 +1,13 @@
 'use strict';
 var app = angular.module('kochTracker')
 
-app.directive('messages', function($messages) {
+app.directive('messages', function($messages, $filter) {
   return {
     restrict: 'A',
     scope: {
     	modal: '=?',
     },
-    template: "<div ng-if='modal == messageService.modal'><alert class='message' type='{{message.type}}' close='close($index)' ng-repeat='message in messageService.messages'><div>{{message.message}}</div></alert></div>",
+    template: "<div ng-if='modal == messageService.modal'><alert class='message' type='{{message.type}}' close='close($index)' ng-repeat='message in messageService.messages'><div ng-bind-html='message.message | safehtml'></div></alert></div>",
     link: function(scope, element, attribs) { 
       scope.messageService = $messages;
       scope.close = $messages.deleteMessage;

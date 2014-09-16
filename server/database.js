@@ -63,6 +63,8 @@ exports.query = function(method, query, args) {
       connection[method](query, args, function(err, rows, field) { 
         connection.release();
          if (err) {
+          console.log("Error running query "+query+ " with args "+args);
+          console.log(err);
           deferred.reject(err);
         } else { 
           //console.log(rows.affectedRows);
