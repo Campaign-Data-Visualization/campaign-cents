@@ -18,16 +18,17 @@
             <h1><span>{{dayTwo}}</span></h1>
             <p>Days Til Election</p>
           </div>
-          <div class="map-sidebar map-sidebar-search">
-            <form class="form-inline" role="form" ng-submit="search()">
-              <div class="form-group">
+          <div class="map-sidebar map-sidebar-search col-xs-12">
+            <!-- <form class="" role="form" ng-submit="search()"> -->
+              <div class="input-group col-xs-12" ng-submit="search()">
                 <label><h1>Find Koch Cash in Your Area</h1></label>
                 <search-box/>
               </div>
-            </form>
+            <!-- </form> -->
             <div class="legend">
               <img src="images/map-legend-lg.png">
-              <p>Breadth of Koch Influence</p>
+              <p>Koch Influence</p>
+              <span info-popup content='{{calendarPopup}}'/>
             </div>
           </div>
 
