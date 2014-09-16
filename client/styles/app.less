@@ -637,7 +637,9 @@ ul#map-layers {
 }
 
 ul#map-layers h4 {
-	display: inline
+	@media (min-width: @screen-sm-min) {
+		display: inline;
+	}
 }
 
 ul#map-layers li {
@@ -648,7 +650,7 @@ ul#map-layers li {
 	background-color: #fff;
 }
 
-ul#map-layers li label {
+ul#map-layers li p {
 	display: inline;
 	margin-left: -8px;
 	padding: 0 5px
@@ -674,6 +676,7 @@ ul#map-layers li:last-of-type span {
 ul#map-layers li input {
 	margin: 3px;
 }
+
 
 #join-convo h1 {
 	background-color: #D5D5D5;
