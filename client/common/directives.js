@@ -214,91 +214,55 @@ app.directive('barChartNew', function($window) {
 	  scope: {
 	    data: '='
 	  },
-	  template: "<div class='bar-chart'><input type='radio' ng-model='time' value='total'><input type='radio' ng-model='time' value='current'><input type='radio' ng-model='time' value='previous'><svg></svg></div>",
+	  template: "<div class='bar-chart text-center'><div class='bar-chart-control'>"+
+	  	"<label class='radio-inline'><input type='radio' ng-model='time' value='total'>Total</label>"+
+	  	"<label class='radio-inline'><input type='radio' ng-model='time' value='current'>2014 Cycle</label>"+
+	  	"<label class='radio-inline'><input type='radio' ng-model='time' value='previous'>Prior Years</label>"+
+	  	"</div><svg></svg></div>",
 	  link: function(scope, elem, attrs){
 	  	
 	  	scope.time = 'total';
+	  	//scope.data[0].total = 15000000;
 	      
-      var maxRadius = 65;
-      var yValue = maxRadius + 30 + 25;
-      
-      var pathClass="path";
-      var xScale, yScale, xAxisGen, yAxisGen, zScale, amountText, commas, wrap;
-
       var d3 = $window.d3;
       var rawSvg=elem.find('svg');
       var svg = d3.select(rawSvg[0]);
    
-   		var width, height, barHeight, oldWidth, barWidth;
+   		var width, height, oldWidth, barWidth, xScale, amountText, commas, wrap;
 
-      var init = function() { 
+    	var exitDuration = 200,
+    		transformDuration = 500,
+    		barHeight = 50,
+    		barMargin = 5,
+    		keyWidth = 140,
+    		keyMargin = 10,
+    		labelWidth = 100,
+    		labelMargin = 5;
+
+      var init = function() {
 	      oldWidth = width;
 	      width = elem.width();
-	      height = (scope.data.length+1)*40+60;
-	      barHeight = height - 20,
-	      barWidth = width - 210;
+	      height = (scope.data.length)*barHeight;
+	      barWidth = width - keyWidth - labelWidth;
 
 	      svg.attr({
 	      	width: width,
 	      	height: height
 	      })
-
-	      svg.append("svg:g")
-	        .attr("class", "bar-group")
-	        .attr("transform", "translate(0,"+0+")")
-
-
 	    }
 
-      scope.$watch('data', function() {
-    		init();
-    		drawBarChart();
-      });
+      svg.append("svg:g")
+        .attr("class", "bar-group")
+        .attr("transform", "translate("+keyWidth+",0)")
 
-      scope.$on('windowResize', resize)
-      //d3.select(window).on('resize', resize);
-    	
-    	function resize() {
-    		init();
-    		if (oldWidth == width) { return; }
+      svg.append("svg:g")
+      	.attr('class', 'labels')
+        .attr("transform", "translate("+keyWidth+",0)")
 
-    		yScale = d3.scale.ordinal()
-    			.rangeRoundBands([0, height-200], .2)
-    			.domain(scope.data.map(function(d) { return d.name}))
-    		
-    		xScale = d3.scale.linear()
-    		  .domain([0, d3.max(scope.data, function(d) { return d[scope.time]; })])
-    		  .range([barWidth, 0]);
+     	svg.append('svg:g')
+      	.attr('class', 'key')
 
-    		svg.selectAll('.bar')
-	    		.attr({
-	    			'x': function(d, i) { return xScale(d.name); },
-	    			'width': xScale.rangeBand(),
-						'height': function(d) { return barHeight - yScale(d[scope.time])},
-			  		'y' : function(d) { return yScale(d[scope.time]); },
-			  	})
-
-		  	svg.selectAll('.label')
-			  	.attr({
-			  		'x': function(d, i) { return xScale(d.name) + xScale.rangeBand()/2; },
-			  		'y' : function(d) { return yScale(barHeight) + 18; },
-			  		'width': xScale.rangeBand(),
-			  	})
-
-			  svg.selectAll('.key')
-			  	.attr({transform: 'translate('+(width-215)+', 20)'});
-
-			  svg.selectAll('.key-item')
-			  	.attr('transform', function(d, i) { return 'translate(0, '+ i*30+')'; })
-    	}
-      //scope.data[3].amount=200000;
-      //scope.data[3].name='Young Americans for Liberty'
-
-      function setChartParameters(){
-      	yScale = d3.scale.ordinal()
-      		.rangeRoundBands([0, height], .2)
-      		.domain(scope.data.filter(function(d) { return d[scope.time] != 0; }).map(function(d) { return d.name}))
-      	
+      function setChartParameters() {
       	xScale = d3.scale.linear()
       	  .domain([0, d3.max(scope.data, function(d) { return d[scope.time]; })])
       	  .range([0, barWidth]);
@@ -338,129 +302,114 @@ app.directive('barChartNew', function($window) {
 				    }
 				  });
 				}
-
        }
 
       function drawBarChart() {
 
       	setChartParameters();
 
+      	var filteredData = scope.data.filter(function(d) { return d[scope.time] != 0; });
+      	var dataKey = function(d) { return d.name; }
 
-       	var bars = svg.select('.bar-group').selectAll(".bar").data(scope.data.filter(function(d) { return d[scope.time] != 0; }))
+      	//BARS
+       	var bars = svg.select('.bar-group').selectAll(".bar").data(filteredData, dataKey)
 
        	bars.enter().append('svg:rect')
 	       	.attr({
-	       		'y': function(d, i) { return yScale(d.name); },
-	       		'x' : 130,
+	       		'y': function(d, i) { return barHeight * i; },
+	       		'x' : 0,
 	       		'width': 0,
-	       		'height': yScale.rangeBand(),
+	       		'height': barHeight - barMargin,
 	       		'fill': 'red',
 	       		'class': function(d, i) { return 'bar bar-'+i; }
 	       	})
 
        	bars.transition()
-       		.delay(function(d, i) { return i * 200; })
-       		.duration(500)
+	       	.delay(!bars.exit().empty()*exitDuration)
+       		.duration(transformDuration)
        		.attr({
        			'width': function(d) { return xScale(d[scope.time])},
-       			'y': function(d, i) { return yScale(d.name); },
-
-         		//'y' : function(d) { return yScale(d[scope.time]); },
+	       		'y': function(d, i) { return barHeight * i; },
        		})
 
-       	bars.exit().remove();
+       	bars.exit().transition()
+       		.duration(exitDuration)
+       		.attr({
+       			width: 0,
+       		})
+	       	.style('opacity','0')
+	       	.remove();
 
-       	var labelGroup = svg.append("svg:g")
-       		.attr('class', 'labels')
-       		.attr("transform", "translate(0,"+0+")")
-
-
-     		var labels = labelGroup.selectAll('.label').data(scope.data)
+	      //LABELS
+     		var labels = svg.select('.labels').selectAll('.label').data(filteredData, dataKey)
 
      		labels.enter().append('svg:text')
      			.attr({
-     				'x': 140,
-     				'y' : function(d, i) { return yScale(d.name) + (yScale.rangeBand()/2);},
-     				//'width': xScale.rangeBand(),
-     				'class': function(d, i) {return 'label label-'+ i; },
+     				x: labelMargin,
+	       		y: function(d, i) { return (barHeight * i) + ((barHeight- barMargin)/2); },
+     				class: function(d, i) {return 'label label-'+ i; },
      				'dominant-baseline': 'middle',
-
-     				height: yScale.rangeBand()
-     				//'text-anchor': 'middle',
+     				height: barHeight -barMargin
      			})
+	       	.style('opacity','0')
 
      		labels.transition()	
-
- 					.delay(function(d, i) { return i * 200; })
-     			.duration(500)
-     			.attr('x', function(d) { return xScale(d[scope.time]) + 140})
-
+	       	.delay(!labels.exit().empty()*exitDuration)
+     			.duration(transformDuration)
+     			.attr({
+     				x: function(d) { return xScale(d[scope.time]) +labelMargin},
+	       		y: function(d, i) { return (barHeight * i) + ((barHeight-barMargin)/2); },
+	       	})
         	.tween('text', function(d) { 
             var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d[scope.time]);
             return function(t) { 
               this.textContent = amountText(d, i(t));
             }
-        	})	
-
-        var keyGroup = svg.append('svg:g')
-        	.attr({
-        		class:'key',
-        		transform: 'translate(0, 00)',
         	})
+	       	.style('opacity','1')
 
-        	/*keyGroup.append('svg:rect').attr({
-        		x:0,
-        		y:0,
-        		fill: 'purple',
-        		width: 120,
-        		height: height
-        	})*/
+      	labels.exit().transition()
+      		.duration(exitDuration)
+      		.attr({
+      			x: labelMargin,
+      		})
+	       	.style('opacity','0')
+    	  	.remove();
 
-        var keyItems = keyGroup.selectAll('.key-item').data(scope.data, function(d) { return d.name})
+	      //KEY
+
+        var keyItems = svg.select('.key').selectAll('.key-item').data(filteredData, dataKey);
+
         keyItems.enter().append('svg:g')
         	.attr({
         		'class':'key-item',
  						'transform': function(d, i) {
- 							return 'translate(120, '+ (yScale(d.name))+')'; },
+ 							return 'translate('+(keyWidth-keyMargin)+', '+ (barHeight * i)+')'; },
         	})
-/*
+       		.style('opacity','0')
+        	.append('svg:text')
+        		.attr({
+        			'class': 'key-text',
+        			'y': (barHeight-barMargin)/2,
+        			'dominant-baseline': 'middle',
+        			'text-anchor': 'end',
+        			'width': keyWidth-keyMargin,
+        			'height': barHeight -barMargin,
+        			dy: '0em'
+        		})
+        		.text(function(d) { return d.name})
+        		.call(wrap, keyWidth-keyMargin)
+
         keyItems.transition()
-         	.ease('elastic')
-          .delay(function(d, i) { return i * 200; })
-         	.duration(500)
-         	.attr('transform', function(d, i) { return 'translate(0, '+ i*30+')'; })
-       
-       	keyItems.append('rect')
-       		.attr({
-       			'class': function(d, i) { return 'key-swatch key-'+i; },
-       			width: 20,
-       			height: 20,
-       			x: 0,
-       			y: -20,
-   				})
-*/			/*keyItems.append('svg:rect')
-					.attr({
-						fill: 'green',
-						x: -120,
-						y: 0,
-						width: 120,
-						height: yScale.rangeBand()
-					})*/
-        keyItems.append('svg:text')
-        	.attr({
-        		'class': 'key-text',
-        		//'width': 150,
-        		//'x': 25,
-        		'y': yScale.rangeBand()/2,
-        		'dominant-baseline': 'middle',
-        		'text-anchor': 'end',
-        		'width': '120',
-        		//'vertical-align': 'middle',
-        		'height': yScale.rangeBand(),
-        		dy: '0em'
-        	})
-        	.text(function(d) { return d.name})
-        	.call(wrap, '120')
+	       	.delay(!keyItems.exit().empty()*exitDuration)
+         	.duration(transformDuration)
+         	.attr('transform', function(d, i) { return 'translate('+(keyWidth-keyMargin)+', '+ (barHeight * i)+')'; })
+       		.style('opacity','1')
+
+        keyItems.exit().transition()
+	        .duration(exitDuration)
+		      .style('opacity','0')
+	        .remove()
         	
       }
 
@@ -469,201 +418,36 @@ app.directive('barChartNew', function($window) {
       		drawBarChart();
       	}
       })
-    }
-  }
-});
 
-app.directive('barChart', function($window) {
-	return {
-	  restrict: 'A',
-	  scope: {
-	    data: '='
-	  },
-	  template: "<div class='bar-chart'><svg></svg></div>",
-	  link: function(scope, elem, attrs){
-	      
-      var maxRadius = 65;
-      var yValue = maxRadius + 30 + 25;
-      
-      var pathClass="path";
-      var xScale, yScale, xAxisGen, yAxisGen, zScale, amountText, commas;
-
-      var d3 = $window.d3;
-      var rawSvg=elem.find('svg');
-      var svg = d3.select(rawSvg[0]);
-   
-   		var width, height, barHeight, oldWidth;
-
-      var init = function() { 
-	      oldWidth = width;
-	      width = elem.width();
-	      height = width * .4
-	      barHeight = height - 20;
-
-	      svg.attr({
-	      	width: width,
-	      	height: height
-	      })
-	    }
-     
       scope.$watch('data', function() {
     		init();
     		drawBarChart();
       });
 
       scope.$on('windowResize', resize)
-      //d3.select(window).on('resize', resize);
     	
     	function resize() {
     		init();
+
     		if (oldWidth == width) { return; }
 
-    		xScale = d3.scale.ordinal()
-    			.rangeRoundBands([0, width-200], .2)
-    			.domain(scope.data.map(function(d) { return d.name}))
-    		
-    		yScale = d3.scale.linear()
-    		  .domain([0, d3.max(scope.data, function(d) { return d.amount; })])
-    		  .range([barHeight, 0]);
+    		xScale = d3.scale.linear()
+    		  .domain([0, d3.max(scope.data, function(d) { return d[scope.time]; })])
+    		  .range([0, barWidth]);
 
     		svg.selectAll('.bar')
 	    		.attr({
-	    			'x': function(d, i) { return xScale(d.name); },
-	    			'width': xScale.rangeBand(),
-						'height': function(d) { return barHeight - yScale(d.amount)},
-			  		'y' : function(d) { return yScale(d.amount); },
+       			'width': function(d) { return xScale(d[scope.time])},
+	       		'y': function(d, i) { return barHeight * i; },
 			  	})
 
 		  	svg.selectAll('.label')
 			  	.attr({
-			  		'x': function(d, i) { return xScale(d.name) + xScale.rangeBand()/2; },
-			  		'y' : function(d) { return yScale(barHeight) + 18; },
-			  		'width': xScale.rangeBand(),
+     				x: function(d) { return xScale(d[scope.time]) +labelMargin},
+	       		y: function(d, i) { return (barHeight * i) + ((barHeight-barMargin)/2); },
 			  	})
 
-			  svg.selectAll('.key')
-			  	.attr({transform: 'translate('+(width-215)+', 20)'});
-
-			  svg.selectAll('.key-item')
-			  	.attr('transform', function(d, i) { return 'translate(0, '+ i*30+')'; })
     	}
-      //scope.data[3].amount=200000;
-      //scope.data[3].name='Young Americans for Liberty'
-
-      function setChartParameters(){
-        xScale = d3.scale.ordinal()
-        	.rangeRoundBands([0, width-200], .2)
-        	.domain(scope.data.map(function(d) { return d.name}))
-       
-        yScale = d3.scale.linear()
-          .domain([0, d3.max(scope.data, function(d) { return d.amount; })])
-          .range([barHeight, 0]);
-
-        amountText = function(d, value) { 
-          var text = '';
-          return '$' + commas(Math.floor(value));
-        }
-
-		    commas = function(val){
-		  		while (/(\d+)(\d{3})/.test(val.toString())){
-		    		val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
-		  		}
-		  		return val;
-				}
-
-       }
-
-      function drawBarChart() {
-
-      	setChartParameters();
-
-        var barGroup = svg.append("svg:g")
-          .attr("class", "bar-group")
-          .attr("transform", "translate(0,"+0+")")
-
-       	var bars = barGroup.selectAll(".bar").data(scope.data)
-
-       	bars.enter().append('svg:rect')
-	       	.attr({
-	       		'x': function(d, i) { return xScale(d.name); },
-	       		'y' : barHeight,
-	       		'width': xScale.rangeBand(),
-	       		'height': 0,
-	       		'fill': 'red',
-	       		'class': function(d, i) { return 'bar bar-'+i; }
-	       	})
-
-       	bars.transition()
-       		.delay(function(d, i) { return i * 200; })
-       		.duration(500)
-       		.attr({
-       			'height': function(d) { return barHeight - yScale(d.amount)},
-         		'y' : function(d) { return yScale(d.amount); },
-       		})
-
-       	var labelGroup = svg.append("svg:g")
-       		.attr('class', 'labels')
-
-     		var labels = labelGroup.selectAll('.label').data(scope.data)
-
-     		labels.enter().append('svg:text')
-     			.attr({
-     				'x': function(d, i) { return xScale(d.name) + xScale.rangeBand()/2; },
-     				'y' : function(d) { return yScale(barHeight) + 18; },
-     				'width': xScale.rangeBand(),
-     				'class': function(d, i) {return 'label label-'+ i; },
-     				'text-anchor': 'middle',
-     			})
-
-     		labels.transition()	
- 					.delay(function(d, i) { return i * 200; })
-     			.duration(500)
-        	.tween('text', function(d) { 
-            var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d.amount);
-            return function(t) { 
-              this.textContent = amountText(d, i(t));
-            }
-        	})	
-
-        var keyGroup = svg.append('svg:g')
-        	.attr({
-        		'class':'key',
-        		transform: 'translate('+(width-215)+', 20)',
-        	})
-
-
-        var keyItems = keyGroup.selectAll('.key-item').data(scope.data, function(d) { return d.name})
-        keyItems.enter().append('svg:g')
-        	.attr({
-        		'class':'key-item',
- 						'transform': function(d, i) { return 'translate('+(width-420)+', '+ (i*30)+')'; },
-        	})
-
-        keyItems.transition()
-         	.ease('elastic')
-          .delay(function(d, i) { return i * 200; })
-         	.duration(500)
-         	.attr('transform', function(d, i) { return 'translate(0, '+ i*30+')'; })
-       
-       	keyItems.append('rect')
-       		.attr({
-       			'class': function(d, i) { return 'key-swatch key-'+i; },
-       			width: 20,
-       			height: 20,
-       			x: 0,
-       			y: -20,
-   				})
-
-        keyItems.append('svg:text')
-        	.attr({
-        		'class': 'key-text',
-        		//'width': 150,
-        		'x': 25,
-        		'y': -9,
-        		'dominant-baseline': 'middle'
-        	})
-        	.text(function(d) { return d.name})
-      }
     }
   }
 });
@@ -688,7 +472,6 @@ app.directive('bubbleChart', function($window) {
       
       var labels =  ["Tier One", 'Tier Two', 'Prior Years', 'Lifetime Total'];
 
-      var pathClass="path";
       var xScale, yScale, xAxisGen, yAxisGen, zScale, amountText, commas;
 
       var d3 = $window.d3;
