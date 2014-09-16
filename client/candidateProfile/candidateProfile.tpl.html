@@ -27,6 +27,12 @@
   <div ng-if='!profileLoading && candidateProfile.since2000contrib' class="row">
     <div class="col-xs-12">
       <h4 class="center">Top Donors by Organization</h4>
+        <div bar-chart-new data='donors'/>
+    </div>
+  </div>
+  <div ng-if='!profileLoading && candidateProfile.since2000contrib' class="row">
+    <div class="col-xs-12">
+      <h4 class="center">Top Donors by Organization</h4>
         <div bar-chart data='topDonors'/>
     </div>
   </div>

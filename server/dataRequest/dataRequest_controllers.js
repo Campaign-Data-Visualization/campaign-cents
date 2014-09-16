@@ -72,9 +72,12 @@ module.exports = exports = {
         profile.data = { 
           'totals': Object.keys(data[0]).map(function(v) { return data[0][v];}) //convert to array
         }
-        db.doQuery("select donor_name as name, sum(amount) as amount from koch_contribs b where votesmartid = ? and for_against = 'f' group by donor_name order by sum(amount) desc limit 4", [candidateId]).then(function(data) {
-          profile.data.top_donors = data;
-          res.send({type: 'candidateProfile', data:profile})
+        db.doQuery("select donor_name as name, koch_tier, sum(amount) as total, sum(if(cycle = 2014, amount, 0)) as current, sum(if(cycle = 2014, 0, amount)) as previous from koch_contribs b where votesmartid = ? and for_against = 'f' group by donor_name order by sum(amount) desc", [candidateId]).then(function(data) {
+          profile.data.donors = data;
+          db.doQuery("select donor_name as name, sum(amount) as amount from koch_contribs b where votesmartid = ? and for_against = 'f' group by donor_name order by sum(amount) desc", [candidateId]).then(function(data) {
+            profile.data.top_donors = data;
+            res.send({type: 'candidateProfile', data:profile})
+          }, next);
         }, next);
       }, next);
     }, next);

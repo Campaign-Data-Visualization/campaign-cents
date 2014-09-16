@@ -17,6 +17,7 @@ angular.module('kochTracker.candidatesView.candidateProfile', ['ui.router'])
   $scope.bioLoading = 1;
   $scope.totals = [];
   $scope.topDonors = {};
+  $scope.donors = {};
 
   DataRequestFactory.getData('candidate', $scope.candidateId+'/bio').then(
     function(response){
@@ -34,6 +35,7 @@ angular.module('kochTracker.candidatesView.candidateProfile', ['ui.router'])
       $scope.candidateProfile= response;
       $scope.totals = $scope.candidateProfile.data.totals;
       $scope.topDonors = $scope.candidateProfile.data.top_donors;
+      $scope.donors = $scope.candidateProfile.data.donors;
 
       
     },
