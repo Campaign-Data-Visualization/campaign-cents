@@ -2,6 +2,7 @@
 var app = angular.module('kochTracker', [ 'ui.bootstrap', 'ui.router', 'kochTracker' ])
   .controller('adminController',  function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $messages, $timeout){
     $scope.success = 0;
+    $scope.fail = 1;
     $scope.progress = 0;
     $scope.message = "";
     $scope.counts = {};
@@ -13,6 +14,7 @@ var app = angular.module('kochTracker', [ 'ui.bootstrap', 'ui.router', 'kochTrac
       {action: 'voices', method: 'adminSheet', niceName: "Victim's Voices"},
       {action: 'offenders', method: 'adminSheet', niceName: "Worst Offenders"},
       {action: 'facts', method: 'adminSheet', niceName: "Koch Facts"},
+      {action: 'realtime', method: 'adminSheet', niceName: "Realtime Contributions"},
     ]
 
     $scope.updateAllData = function() {
@@ -24,16 +26,18 @@ var app = angular.module('kochTracker', [ 'ui.bootstrap', 'ui.router', 'kochTrac
           return $scope.updateData(dataType).then(function(data) {
             res.push(data);
             return res;
-          })
-        })
+          }, handleError)
+        }, handleError)
       }, $q.when([]));
 
       chain.then(function(res) {
         $scope.progress = 100;
         $timeout(function() {
           $scope.progress = 0;
-          $scope.success = 1;
-        }, 1000)
+          if (! $scope.error) {
+            $scope.success = 1;
+          }
+        }, 300)
       })
     }
     
@@ -46,12 +50,17 @@ var app = angular.module('kochTracker', [ 'ui.bootstrap', 'ui.router', 'kochTrac
       return DataRequestFactory.getAdmin(dataType.method, dataType.action).then(function(data) {
         $scope.counts[dataType.niceName] = data;
         $scope.progress += (100-10)/$scope.dataTypes.length;
-      }, reset);
+      }, handleError);
     }
 
+    var handleError = function(err) {
+      reset();
+      $scope.error = 1;
+    }
     var reset = function() {
       $scope.counts = {};
       $scope.progress = 0;
+      $scope.error = 0;
       $scope.success = 0;
     }
   });

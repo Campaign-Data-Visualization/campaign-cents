@@ -40,9 +40,10 @@ app.factory('DataRequestFactory', function($http, $messages, $q){
   };
 
   var handleError = function(response) {
-    console.log('err1');
     if(response.data && response.data.error) { 
       $messages.error(response.data.error);
+    } else {
+      $messages.error('Unable to complete request');
     }
     return $q.reject(response);
   };

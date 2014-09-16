@@ -165,8 +165,8 @@ module.exports = exports = {
     var utc = d.getTime() - (d.getTimezoneOffset() * 60000);
     var date = new Date(utc + (3600000*7)).toLocaleString();
     var mailOptions = {
-        from: 'Greg Michalec <gregmichalec@gmail.com>', // sender address
-        to: 'greg@primate.net', // list of receivers
+        from: config.google.contactEmail, // sender address
+        to: config.google.contactEmail, // list of receivers
         subject: "Victim's Voices Submission", // Subject line
     };
     var body = "A new Victim's Voice entry was submitted on "+date+"\n\n";

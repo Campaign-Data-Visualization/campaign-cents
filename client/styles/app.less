@@ -76,10 +76,6 @@ body {
 	font-family: @font-family-sans-serif-bold;
 }
 
-.navbar .brand {
-	width: 400px;
-}
-
 .navbar .brand img {
 	height: 150px;
 	margin-bottom: -30px
@@ -102,6 +98,10 @@ body {
 
 .navbar-right {
 	float: right;
+	margin-top: 50px;
+	@media (min-width: @screen-md-min) {
+	margin-top: 50px;
+}
 }
 
 .navbar-nav {
@@ -110,7 +110,14 @@ body {
 
 ul.navbar-nav li h4 {
 	display: inline;
-	margin-right: 30px;
+	margin: 0 5px;
+	@media (min-width: @screen-md-min) {	
+		margin: 0 30px;
+	}
+}
+
+.nav>li>a {
+	padding: 0;
 }
 
 ul.navbar-nav li:last-child h4, ul.navbar-nav li:last-child a {
@@ -264,7 +271,7 @@ ul.box-text li div {
 }
 
 .map-sidebar-calendar h1 span:first-child {
-	padding-right: 3px;
+	padding-right: 6px;
 }
 
 .map-sidebar-calendar h1 span:last-child {
@@ -345,11 +352,9 @@ ul.box-text li div {
 	margin-top: 15px;
 }
 
-//need to make bold
 .candidate-main h1, .candidate-main h2, .candidate-main h3 {
 	color: @cc-blue-light;
 }
-
 
 ul.nav-tabs {
 	border-bottom: 2px solid @cc-blue-light;
@@ -358,6 +363,8 @@ ul.nav-tabs {
 
 ul.nav-tabs li {
 	margin-right: 5px;
+	padding: 10px;
+	background-color: @cc-blue-light;
 	@media (max-width: @screen-xs-max) {
 		margin-right: 0;
 		float: none;
@@ -384,6 +391,7 @@ ul.nav-tabs li > a {
 .nav-tabs > li.active > a:hover, 
 .nav-tabs > li.active > a:focus, 
 .nav-tabs > li > a:hover {
+	border: 0;
 	background-color: @cc-blue-light;
 	color: #fff;
 	border-bottom: 1px solid @cc-blue-light;
@@ -393,27 +401,28 @@ ul.nav-tabs li > a {
 	border-bottom: 1px solid @cc-blue-light;
 }
 
-#candidates .row {
-	padding: 30px;
+.tab-content .row,   {
+	padding: 15px 0;
 }
 
-#candidates .row img {
+
+.tab-content .row img {
 	padding: 0 10px 0 0;
 }
 
-.tab-content .row {
-	padding: 15px 0;
+.tab-content, .get-involved {
 	background-color: #fff;
 }
+
 
 .get-involved h3, .get-involved p a {
 	color: @cc-red;
 }
 
 .get-involved > div {
-	padding: 15px;
 	text-align: center;
 }
+
 
 .get-involved > div > img {
 	padding-bottom: 15px;
@@ -425,7 +434,7 @@ ul.candidate-list {
 	display: block;
 	padding-left: 0;
 	margin-top: -10px;
-}
+	background-color: #fff;}
 
 ul.candidate-list li {
 	position: relative;
@@ -433,10 +442,6 @@ ul.candidate-list li {
 	height: auto;
 	padding: 30px;
 }
-
-// ul.candidate-list li:first-child {
-// 	border-top: 2px solid @cc-blue-light;
-// }
 
 ul.candidate-list li:hover{
 	border: 4px solid @cc-green;
@@ -451,6 +456,19 @@ ul.candidate-list li img {
 
 span.bold {
 	font-family: ubuntuBold;
+}
+
+h3.election-countdown-tag {
+	border: 3px @cc-red solid;
+	width: auto;
+	margin: 15px 0 15px 0;
+	color: #000;
+	padding: 5px;
+	text-align: center;
+}
+
+.get-involved > div > h3 {
+	padding: 30px 0;
 }
 
 ////pages
@@ -544,6 +562,11 @@ g .domain { display: none;}
 	cursor: pointer;
 }
 
+.inset-map {
+	padding: 20px;
+	margin: 0 auto;
+}
+
 .inset-map .state-boundaries {
 	stroke: #333;
 	stroke-opacity: .4;
@@ -558,4 +581,98 @@ g .domain { display: none;}
 
 .inset-map .state-boundaries.selected:hover {
 	stroke:@cc-red;
+}
+
+//explore
+.tentacle-title {
+	background-image: url('../images/tentacle.png');
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+//victims voices
+
+.explore h2 {
+	text-align: center;
+	height: 85px;
+	padding-top: 20px;
+	text-shadow: 0 1px 0 #fff;
+	margin-bottom: 20px;
+}
+
+.explore h1 {
+	color: @cc-blue-light;
+	text-shadow: 0 1px 0 #fff;
+	font-family: @font-family-sans-serif;
+	text-align: left;
+	@media (min-width: @screen-sm-min) {
+		//text-align: right;
+	}
+}
+
+#join-convo {
+	background-color: #D5D5D5;
+	padding: 20px;
+}
+
+#join-convo h1 {
+	background-color: #D5D5D5;
+	padding: 20px;
+}
+
+.tile {
+	background-color: #D5D5D5;
+	height: auto;
+	margin: 20px 0;
+	padding: 20px;
+}
+
+.tile-column:first-child {
+	@media (min-width: @screen-sm-min) {
+		padding-left: 0;
+	}	
+}
+
+.tile-column:last-child {
+	@media (min-width: @screen-sm-min) {
+		padding-right: 0;
+	}
+}
+
+.join-convo-form input,.share-story-form input, .share-story-form select, .share-story-form textarea {
+	border: 2px #000 solid;
+	border-radius: 0;
+}
+
+.join-convo-form input {
+	height: 70px;
+}
+
+.join-convo-form button, .modal-body button {
+	height: 70px;
+	background-color: #000;
+	color: #fff;
+	border-radius: 0;
+} 
+
+
+///modal styles
+
+.modal-header {
+	background-color: #D5d5d5
+}
+
+h4.modal-title {
+	color: @cc-blue-light;
+	text-shadow: 0 1px 0 #fff;
+	font-family: @font-family-sans-serif;
+}
+
+//Hack to make button look like icon
+.info-popup {
+	color: @cc-blue-light;
+	background: none !important;
+	border: none !important;
+	padding: 0px;
+	margin: 0px;
 }
