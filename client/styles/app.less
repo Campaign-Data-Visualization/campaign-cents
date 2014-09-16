@@ -271,7 +271,7 @@ ul.box-text li div {
 }
 
 .map-sidebar-calendar h1 span:first-child {
-	padding-right: 3px;
+	padding-right: 6px;
 }
 
 .map-sidebar-calendar h1 span:last-child {
@@ -352,11 +352,9 @@ ul.box-text li div {
 	margin-top: 15px;
 }
 
-//need to make bold
 .candidate-main h1, .candidate-main h2, .candidate-main h3 {
 	color: @cc-blue-light;
 }
-
 
 ul.nav-tabs {
 	border-bottom: 2px solid @cc-blue-light;
@@ -365,6 +363,8 @@ ul.nav-tabs {
 
 ul.nav-tabs li {
 	margin-right: 5px;
+	padding: 10px;
+	background-color: @cc-blue-light;
 	@media (max-width: @screen-xs-max) {
 		margin-right: 0;
 		float: none;
@@ -391,6 +391,7 @@ ul.nav-tabs li > a {
 .nav-tabs > li.active > a:hover, 
 .nav-tabs > li.active > a:focus, 
 .nav-tabs > li > a:hover {
+	border: 0;
 	background-color: @cc-blue-light;
 	color: #fff;
 	border-bottom: 1px solid @cc-blue-light;
@@ -400,27 +401,28 @@ ul.nav-tabs li > a {
 	border-bottom: 1px solid @cc-blue-light;
 }
 
-#candidates .row {
-	padding: 30px;
+.tab-content .row,   {
+	padding: 15px 0;
 }
 
-#candidates .row img {
+
+.tab-content .row img {
 	padding: 0 10px 0 0;
 }
 
-.tab-content .row {
-	padding: 15px 0;
+.tab-content, .get-involved {
 	background-color: #fff;
 }
+
 
 .get-involved h3, .get-involved p a {
 	color: @cc-red;
 }
 
 .get-involved > div {
-	padding: 15px;
 	text-align: center;
 }
+
 
 .get-involved > div > img {
 	padding-bottom: 15px;
@@ -432,7 +434,7 @@ ul.candidate-list {
 	display: block;
 	padding-left: 0;
 	margin-top: -10px;
-}
+	background-color: #fff;}
 
 ul.candidate-list li {
 	position: relative;
@@ -454,6 +456,19 @@ ul.candidate-list li img {
 
 span.bold {
 	font-family: ubuntuBold;
+}
+
+h3.election-countdown-tag {
+	border: 3px @cc-red solid;
+	width: auto;
+	margin: 15px 0 15px 0;
+	color: #000;
+	padding: 5px;
+	text-align: center;
+}
+
+.get-involved > div > h3 {
+	padding: 30px 0;
 }
 
 ////pages
@@ -547,6 +562,11 @@ g .domain { display: none;}
 	cursor: pointer;
 }
 
+.inset-map {
+	padding: 20px;
+	margin: 0 auto;
+}
+
 .inset-map .state-boundaries {
 	stroke: #333;
 	stroke-opacity: .4;
@@ -595,6 +615,11 @@ g .domain { display: none;}
 	padding: 20px;
 }
 
+#join-convo h1 {
+	background-color: #D5D5D5;
+	padding: 20px;
+}
+
 .tile {
 	background-color: #D5D5D5;
 	height: auto;
@@ -623,7 +648,7 @@ g .domain { display: none;}
 	height: 70px;
 }
 
-.join-convo-form button, .share-story-form .share-story-submit button {
+.join-convo-form button, .modal-body button {
 	height: 70px;
 	background-color: #000;
 	color: #fff;
@@ -636,8 +661,11 @@ g .domain { display: none;}
 .modal-header {
 	background-color: #D5d5d5
 }
-.share-story-modal .modal-title {
+
+h4.modal-title {
 	color: @cc-blue-light;
 	text-shadow: 0 1px 0 #fff;
 	font-family: @font-family-sans-serif;
 }
+
+
