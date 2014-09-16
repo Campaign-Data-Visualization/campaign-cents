@@ -12,18 +12,23 @@
     width: 100% !important;
     height: 100% !important;
   }
+  .google-maps {
+    margin-bottom: 100px;
+    border: 2px #D5D5D5 solid;
+  }
 </style>
 
 <div class="row tentacle-title">
-  <h2 >National Map</h2>
+  <h2>National Map</h2>
 </div>
-<div class="row" >
+<div class="row">
   <ul id="map-layers">
     <h4>Display Options:</h4>
     <li ng-repeat='(type, layer) in layers' class="map-layer-option">
-      <label class='radio-inline'><input ng-change='toggleLayer(type)' ng-model='layer.visible' type='checkbox' />{{layer.label}}</label><span></span>
+      <p><input ng-change='toggleLayer(type)' ng-model='layer.visible' type='checkbox'>{{layer.label}}</p><span></span>
     </li>
   </ul>
+  </div>
 </div>
 <div class='google-maps' style='display:block; height: 500px;'>
   <map id='map' center="[39.50, -98.35]" zoom="3" styles="{{mapStyle}}" map-type-control='false' street-view-control='false'> 
