@@ -658,16 +658,21 @@ app.directive('searchBox', function(DataRequestFactory, $state) {
   };
 });
 
-app.directive('infoPopup', function() {
+app.directive('infoPopup', function($state) {
 	return {
 	  restrict: "A",
-	  scope: { content: "@"},
+	  scope: { 
+	  	content: "@",
+	  	link: "@"
+		},
 	  template: 
-	  	"<button class='glyphicon glyphicon-question-sign info-popup' popover-placement='top' popover-append-to-body='true' popover-trigger='focus' popover-html-unsafe='{{content}}'/>",
+	  	"<span ng-click='go()' class='glyphicon glyphicon-question-sign info-popup' popover-placement='top' popover-append-to-body='true' popover-trigger='mouseenter' popover-html-unsafe='{{content}}'/>",
 	  link: function(scope, element, attr) {
-	  	element.bind('mouseover', function(e) { 
-	  		element.find('button').focus();
-	  	})
+	  	scope.go = function() {
+	  		if (scope.link) {
+		  		$state.go(scope.link);
+		  	}
+	  	}
 	  }
 	}
 })
@@ -686,10 +691,6 @@ app.directive("popoverHtmlUnsafePopup", function () {
     "  </div>"+
     "</div>",
 		link: function(scope, element, attr) {
-	  	$('body').bind('keydown', function (e) {
-	  		if (e.keyCode == '27')
-	  		$('.info-popup').blur();
-	  	})
 	  }
  	}
 })
