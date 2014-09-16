@@ -960,6 +960,7 @@ ul.nav-tabs li>a{background-color:#b7b5b6;font-family:'rockwellRegular';color:#f
 .tab-content .row img{padding:0 10px 0 0}
 .tab-content,.get-involved{background-color:#fff}
 .get-involved h3,.get-involved p a{color:#ad272d}
+.get-involved{margin-left:0;margin-right:0;padding:15px 0}
 .get-involved>div{text-align:center}
 .get-involved>div>img{padding-bottom:15px}
 ul.candidate-list{display:block;padding-left:0;margin-top:-10px;background-color:#fff}
