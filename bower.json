@@ -10,6 +10,7 @@
     "angular-resource": "*",
     "angular-bootstrap": "~0.11.0",
     "d3": "*",
-    "topojson": "*"
+    "topojson": "*",
+    "angulartics": "*"
   }
 }

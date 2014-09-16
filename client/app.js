@@ -6,6 +6,8 @@
     'ngFx',
     'countTo',
     'ui.router', 
+    'angulartics',
+    'angulartics.google.analytics',
     'kochTracker.explore',
     'kochTracker.landingPage',
     'kochTracker.staticPages',
