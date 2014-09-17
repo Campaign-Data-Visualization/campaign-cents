@@ -3,12 +3,10 @@
             <div class="row">
             <ul class="candidate-list candidate-list-senate">
               <li ui-sref='kochTracker.candidatesView.candidateProfile({input:candidate.voteSmartId})' class="col-xs-12" ng-repeat="candidate in candidates">
-               <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" ng-src="http://votesmart.org/canphoto/{{candidate.voteSmartId}}.jpg" err-src="../images/profile-blank.jpg">  
-                <h2>{{candidate.nameFirstLast}}</h2>
-                <h3>{{candidate.party}} Party</h3>
-                <h4 class="chamber">{{candidate.office}}, {{candidate.state}}<span ng-if="candidate.district != ''">-{{candidate.district}}</span> - <span class='incumbent'>{{candidate.electionStatus}}</span></h4>
-                <h4>${{candidate.2014contrib | number}} this cycle</h4>
-                <h4>${{candidate.since2000contrib | number}} since 2000</h4>
+               <img class="candidate-photo" ng-src="http://votesmart.org/canphoto/{{candidate.voteSmartId}}.jpg" err-src="../images/profile-blank.jpg">  
+                <h3>{{candidate.nameFirstLast}}</h3>
+                <h4 class="chamber">{{candidate.office}}, {{candidate.state}}<span ng-if="candidate.district != ''">-{{candidate.district}}</span></h4>
+                <p>{{candidate.party}} Party - {{candidate.electionStatus}}</p>
               </li>
             </ul>
-</div>
+        </div>
