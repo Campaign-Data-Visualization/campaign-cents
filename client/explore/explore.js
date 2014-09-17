@@ -141,30 +141,48 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
     })
 
     $scope.infoWindow = new google.maps.InfoWindow(); 
-      DataRequestFactory.getData('map', 'layers').then(function(data) {
-        data.forEach(function(item) {
-          var loc = new google.maps.LatLng(item.lat, item.lng);
-          var marker = new google.maps.Marker({
-            id: item.id,
-            title: item.title,
-            position: loc,
-            icon: {
-              path: google.maps.SymbolPath.CIRCLE,
-              scale: 4,
-              fillColor: $scope.layers[item.layer].fillColor,
-              fillOpacity: 1,
-              strokeColor: 'black',
-              strokeWeight: 1
-            },
-            map: $scope.map,
-          });
-          $scope.layers[item.layer].markers.push(marker);
-          google.maps.event.addListener(marker, 'click', function() {
-            $scope.showInfoWindow(marker, item);
-          });  
+
+    DataRequestFactory.getData('map', 'layers').then(function(data) {
+      data.forEach(function(item) {
+        var loc = new google.maps.LatLng(item.lat, item.lng);
+        var marker = new google.maps.Marker({
+          id: item.id,
+          tooltip: item.title,
+          position: loc,
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 4,
+            fillColor: $scope.layers[item.layer].fillColor,
+            fillOpacity: 1,
+            strokeColor: 'black',
+            strokeWeight: 1
+          },
+          map: $scope.map,
         });
-      })
-    });
+        $scope.layers[item.layer].markers.push(marker);
+
+        google.maps.event.addListener(marker, 'click', function() {
+          $scope.showInfoWindow(marker, item);
+        });
+        google.maps.event.addListener(marker, 'mouseover', function () {
+            var offset =  $('.google-maps').offset();
+            var point = fromLatLngToPoint(marker.getPosition(), map);
+            $('#marker-tooltip').html(marker.tooltip).css({ 'left': point.x+offset.left, 'top': point.y+offset.top, 'backgroundColor': marker.icon.fillColor }).show();
+        });
+        google.maps.event.addListener(marker, 'mouseout', function () {
+            $('#marker-tooltip').hide();
+        });
+      });
+    })
+  });
+
+  var fromLatLngToPoint = function(latLng, map) {
+    var topRight = map.getProjection().fromLatLngToPoint(map.getBounds().getNorthEast());
+    var bottomLeft = map.getProjection().fromLatLngToPoint(map.getBounds().getSouthWest());
+    var scale = Math.pow(2, map.getZoom());
+    var worldPoint = map.getProjection().fromLatLngToPoint(latLng);
+    return new google.maps.Point((worldPoint.x - bottomLeft.x) * scale, (worldPoint.y - topRight.y) * scale);
+  }
     /*var layerDistricts = new google.maps.FusionTablesLayer({
       query: {
         select: 'col0',
