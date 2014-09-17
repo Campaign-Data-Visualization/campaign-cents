@@ -196,23 +196,12 @@ ul.box-text li div {
 }
 
 
-///search box
-// .search-box { margin-top: 10px; }
-// .search-result img { height: 35px; }
-// .search-result { cursor: pointer; }
-// .search-details { font-size: .8em; }
-
-
 ///////////
-
-.map-main {
-	margin-top: -30px;
-}
 
 .map-section {
 	background-color: @cc-gray-map-section;
 	height: auto;
-	padding: 70px 0;
+	padding: 40px 0 20px 0;
 }
 
 .map-sidebar-container {	
@@ -221,17 +210,22 @@ ul.box-text li div {
 	@media (min-width: @screen-xs-max) {
 		height: 450px;
 		position: relative;
+		margin-top: 10px;
 	}
-}
-.map-sidebar-container h1 {
-	color: @cc-blue-light;
+	@media (min-width: @screen-sm-min) {
+		margin-bottom: 40px
+	}
+	@media (min-width: @screen-lg-min) {
+		margin-bottom: 0;
+	}
 }
 
-.map-sidebar {
-	text-align: center;
-	@media (min-width: @screen-xs-max) {
-		margin-top: inherit;
-	}
+.map-main {
+	margin-top: -15px;
+}
+
+.map-sidebar-container h1 {
+	color: @cc-blue-light;
 }
 
 .map-sidebar-ticker h1 {
@@ -260,14 +254,15 @@ ul.box-text li div {
 	background-position: center;
 	height: 68px;
 	width: 105px;
-	margin: 20px auto 50px auto;
+	margin: 0 auto 50px auto;
 	padding-top: 20px;
 }
 
 .map-sidebar-calendar h1 {
 	display: inline;
 	vertical-align: middle;
-	font: @font-family-serif;
+	font-family: 'Rokkitt', serif;
+	font-size: 40px;
 }
 
 .map-sidebar-calendar h1 span {
@@ -287,22 +282,27 @@ ul.box-text li div {
 	@media (min-width: @screen-sm-min) {
 		margin-top: 0;
 	}
-
 }
 .map-sidebar-search .input-group {
 	background-color: @cc-gray-search;
-	text-align: left;
-	width: auto;
-	padding: 10px;
+	padding: 30px;
+	margin: 0 auto;
 }
+
 
 .map-sidebar-search .form-control, .map-sidebar-search .btn, .map-sidebar-search input {
 	border-radius: 0;
 }
 
-.map-sidebar-search h1 {
+.map-sidebar-search .input-group label h2 {
+	text-align: left;
 	color: #000;
 	font-family: @font-family-serif;
+}
+
+.map-sidebar-search label {
+	padding-bottom: 20px;
+
 }
 
 .map-sidebar-search input {
@@ -317,7 +317,7 @@ ul.box-text li div {
 
 .legend {
 	height: 35px;
-	margin-top: 30px;
+	margin-top: 15px;
 }
 .legend p {
 	float: left;
