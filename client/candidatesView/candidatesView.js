@@ -44,8 +44,8 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
   return {
     restrict: 'A',
     scope: true,
-    template: "<h3>Kock Fact</h3>"+
-      "<h3 ng-bind-html='fact.description|safehtml'></h3>",
+    template: "<h3>Koch Fact</h3>"+
+      "<p ng-bind-html='fact.description|safehtml'></p>",
     link: function(scope, element, attribs) {
       scope.fact = {};
       DataRequestFactory.getData('fetch', 'facts/random').then(function(data) {
