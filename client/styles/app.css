@@ -990,7 +990,7 @@ g .domain{display:none}
 .state-boundaries.selected{transition:stroke-width .2s ease;stroke:#ad272d;stroke-width:3}
 .static-map .marker{cursor:pointer}
 .inset-map{padding:20px;margin:0 auto}
-.inset-map .state-boundaries{stroke:#333;stroke-opacity:.4}
+.inset-map .state-boundaries{stroke:#333;stroke-opacity:.4;fill-opacity:0}
 .inset-map .state-boundaries.selected{stroke:#0071bc;stroke-opacity:1;fill-opacity:1;fill:#fff}
 .inset-map .state-boundaries.selected:hover{stroke:#ad272d}
 .tentacle-title{height:120px}
