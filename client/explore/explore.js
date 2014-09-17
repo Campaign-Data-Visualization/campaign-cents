@@ -228,6 +228,10 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
 })
 
 .controller('ExploreRacesController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
+  $scope.races = {};
+  DataRequestFactory.getData('fetch', 'races/all').then(function(data) {
+    $scope.races = data;
+  });
 })
 
 .directive('shareStoryButton', function(DataRequestFactory, $modal, $messages) {
