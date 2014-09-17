@@ -6,3 +6,10 @@ app.filter('safehtml', function($sce) {
         return $sce.trustAsHtml(val);
     };
 });
+
+app.filter('counter', function($sce, $filter) {
+    return function(val) {
+        var num = $filter('number')(val, 0);
+        return '<span>'+(num.split("").join('</span><span>'))+'</span>'
+    };
+});
