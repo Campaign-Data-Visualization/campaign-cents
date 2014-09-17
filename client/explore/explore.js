@@ -45,33 +45,45 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
 })
 
 .controller('ExploreMapController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams, $templateCache, $compile, $filter){
-  console.log('map control');
   $scope.state = $stateParams.state;
   $scope.makers = {};
   $scope.boundaries = {};
   $scope.layers = {
     'candidate': {
-      fillColor: 'orange',
+      fillColor: '#FBA839',
       visible: true,
       markers: [],
       label: 'Candidates'
     },
-    'campus': {
-      fillColor: 'green',
-      visible: true,
-      markers: [],
-      label: 'Campuses'
-    },
     'assets': {
-      fillColor: 'blue',
+      fillColor: '#D64B2F',
       visible: true,
       markers: [],
       label: 'Assets'
     },
+    'campus': {
+      fillColor: '#F87234',
+      visible: true,
+      markers: [],
+      label: 'Campuses'
+    },
+    'involved': {
+      fillColor: '#89272b',
+      visible: true,
+      markers: [],
+      label: 'Get Involved'
+    },
+    'interest': {
+      fillColor: '#000',
+      visible: true,
+      markers: [],
+      label: 'Points of Interest'
+    },
   }
 
-  $scope.template;
+  $scope.layersOrder = ['candidate', 'assets', 'campus', 'involved', 'interest'];
 
+  $scope.template;
 
   $http.get('explore/explore.infoWindow.tpl.html', {cache: true}).success(function(html) {
     $templateCache.put('explore.infoWindow.tpl.html', html)

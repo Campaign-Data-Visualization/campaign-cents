@@ -24,8 +24,8 @@
 <div class="row">
   <ul id="map-layers">
     <h4>Display Options:</h4>
-    <li ng-repeat='(type, layer) in layers' class="map-layer-option">
-      <p><input ng-change='toggleLayer(type)' ng-model='layer.visible' type='checkbox'>{{layer.label}}</p><span></span>
+    <li ng-repeat='type in layersOrder' class="map-layer-option" ng-class="type">
+      <p><input ng-change='toggleLayer(type)' ng-model='layers[type].visible' type='checkbox'>{{layers[type].label}}</p><span></span>
     </li>
   </ul>
   </div>

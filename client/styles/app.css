@@ -1003,9 +1003,11 @@ ul#map-layers{text-align:center}
 ul#map-layers li{display:inline;margin:15px;width:auto;padding:7px;background-color:#fff}
 ul#map-layers li p{display:inline;margin-left:-8px;padding:0 5px}
 ul#map-layers li span{padding:7px;margin-right:-20px}
-ul#map-layers li:first-of-type span{background-color:#fba839}
-ul#map-layers li:nth-of-type(2) span{background-color:#f87234}
-ul#map-layers li:last-of-type span{background-color:#d64b2f}
+ul#map-layers li.candidate span{background-color:#fba839}
+ul#map-layers li.campus span{background-color:#f87234}
+ul#map-layers li.assets span{background-color:#d64b2f}
+ul#map-layers li.involved span{background-color:#89272b}
+ul#map-layers li.interest span{background-color:#000}
 ul#map-layers li input{margin:3px}
 #join-convo h1{background-color:#d5d5d5;padding:20px}
 .map-layers>div{display:inline}
