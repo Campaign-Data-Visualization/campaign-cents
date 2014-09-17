@@ -38,7 +38,7 @@ app.directive('insetMap', function($window, $state) {
       var rawSvg=elem.find('svg');
       var svg = d3.select(rawSvg[0]);
       var width = elem.width();
-      var height = width * .6
+      var height = width * .7;
       var current_state = '';
 
       svg.attr({
@@ -59,7 +59,7 @@ app.directive('insetMap', function($window, $state) {
           dy = bounds[1][1] - bounds[0][1],
           x = scope.state == 'AK' ? -2.7 : (bounds[0][0] + bounds[1][0]) / 2,
           y = (bounds[0][1] + bounds[1][1]) / 2,
-          scale = scope.state == 'AK' ? 270 : .95 / Math.max(dx / width, dy / height),
+          scale = scope.state == 'AK' ? 270 : .8 / Math.max(dx / width, dy / height),
           translate = [width / 2 - scale * x, height / 2 - scale * y];
         
         projection.scale(scale).translate(translate);
