@@ -139,6 +139,9 @@ module.exports = exports = {
       facts: {
         query: "content where type = 'facts' and published = 1"
       },
+      races: {
+        query: "content where type = 'races' and published = 1"
+      },
       kochCandidates: {
         query: "candidates where since2000contrib != 0 ",
         order: 'since2000contrib desc'

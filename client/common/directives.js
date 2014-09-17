@@ -164,6 +164,14 @@ app.directive('staticMap', function($window, DataRequestFactory, $state) {
           .on('click', function(d) {
             $state.go('kochTracker.explore.map', {state:d.state});
           })
+          .on('mouseenter', function(d) {
+             d3.selectAll('.state-'+d.state).classed('selected', true)
+          })
+          .on('mouseleave', function(d) {
+            if (! d3.event.relatedTarget || ( d3.event.relatedTarget.tagName != 'path' && d3.event.relatedTarget.tagName != 'circle')){
+             d3.selectAll('.state-boundaries.selected').classed('selected', false)
+            }
+          })
 
         markers.transition()
           .duration(700)

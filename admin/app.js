@@ -12,8 +12,9 @@ var app = angular.module('kochTracker', [ 'ui.bootstrap', 'ui.router', 'kochTrac
       {action: 'campus', method: 'adminMap', niceName: 'Campuses'},
       {action: 'assets', method: 'adminMap', niceName: 'Assets'},
       {action: 'voices', method: 'adminSheet', niceName: "Victim's Voices"},
-      {action: 'offenders', method: 'adminSheet', niceName: "Worst Offenders"},
+      {action: 'offenders', method: 'adminSheet', niceName: "Koch Heads"},
       {action: 'facts', method: 'adminSheet', niceName: "Koch Facts"},
+      {action: 'races', method: 'adminSheet', niceName: "Key Races"},
       {action: 'realtime', method: 'adminSheet', niceName: "Realtime Contributions"},
     ]
 

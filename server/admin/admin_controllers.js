@@ -38,6 +38,12 @@ module.exports = exports = {
         columnDef: ['voteSmartId', 'null', 'amount', 'date', 'donor_name', 'published'],
         table: 'koch_contribs'
       },
+      'races': {
+        sheetId: 'ooogrp6',
+        descField: 2,
+        columnDef: ['title', 'description', 'published'],
+        table: 'content'
+      },
     }
     var count = 0;
     var dataChanged = 0;

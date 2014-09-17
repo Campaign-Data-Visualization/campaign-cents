@@ -1,13 +1,35 @@
-<div>
+<!-- <div> -->
   <div class="container">
     <!-- Start Sidebar -->
-    <div class="col-md-4 col-xs-12 sidebar center">  
-      <div id='map' inset-map state='viewparams.state'/>
+    <div class="col-md-4 col-xs-12 sidebar">  
+      
+    
 
-      <!--<img class="img-responsive visible-md visible-lg" ng-src="images/states/states_state-{{viewparams.state| lowercase}}.png" >-->
-      <div class='koch-fact' koch-fact/>
-      <div class='worst-offender' worst-offender/>
+      <div class="col-xs-12">
+        <div id='map' inset-map state='viewparams.state'/>
+      </div>
+      <div class="col-xs-12 sidebar-tile">
+        <div class='koch-fact' koch-fact/>
+      </div>
+      <div class="col-xs-12 sidebar-tile">
+        <div class='worst-offender' worst-offender/>
+      </div>
+       <div class="col-xs-12 sidebar-tile">
+        Victims Voices
+      </div>
+      
+      
+    
+
+
     </div> <!-- /.sidebar -->
+
+
+
+
+
+
+
     <div class="col-md-8 col-xs-12 candidate-main">      
       <tabset>
         <tab heading='Candidates'>
@@ -40,8 +62,10 @@
       <!-- GET INVOLVED -->
       <div class="row get-involved">
         <!-- <div ng-if='dayOne >= 0' class='election-countdown-tag'> -->
-         <h3 ng-if='dayOne >= 0' class='election-countdown-tag'>Days Until the Election: <span>{{dayOne}}{{dayTwo}}</span></h3>
+         <div class="col-xs-12">
+         <h3 ng-if='dayOne >= 0' class='election-countdown-tag'>Days Until the Election:<span>{{dayOne}}{{dayTwo}}</span></h3>
         <!-- </div> -->
+        </div>
         <div class="col-xs-12">
           <h3>GET INVOLVED</h3>
         </div>
@@ -64,4 +88,4 @@
       </div>
     </div><!--  /.candidate-main -->
   </div>
-</div>
+<!-- </div> -->
