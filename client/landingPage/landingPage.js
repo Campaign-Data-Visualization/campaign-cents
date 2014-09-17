@@ -36,10 +36,21 @@ angular.module('kochTracker.landingPage', ['ui.router', 'ngMap'])
   }
 
   var updateTotal = function(first) {
-    var today = new Date();
+
     $scope.prevKochTotal = $scope.kochTotal;
-    $scope.kochTotal = Math.ceil(perDay * (today - beginning));
+    var today = new Date();
+    var num = Math.ceil(perDay * (today - beginning));
+    if(! first) { 
+      $scope.duration = 0; 
+    } else {
+      $timeout(function() {
+        $scope.prevKochTotal = $scope.kochTotal;
+      }, 2000)
+    }
+      $scope.kochTotal = num;
+
     $timeout(updateTotal, 2500);
+
   }
   updateTotal(true);
 
