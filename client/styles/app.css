@@ -973,7 +973,7 @@ h3.election-countdown-tag{border:3px #ad272d solid;width:auto;margin:15px 0 15px
 .page h1,.page h2{color:#0071bc}
 g.tick line{stroke:#999;stroke-width:1px}
 g.tick text,g.amounts text,g.labels text{font-family:ubuntuRegular;font-weight:bold;font-size:16px}
-g.amounts text.amount-shadow{filter:url('#glow');fill:#333}
+g.amounts text.amount-shadow{fill:#333}
 g.amounts text.amount{fill:#fff}
 g.tick text{fill:#666}
 g .domain{display:none}
@@ -982,6 +982,8 @@ g .domain{display:none}
 .bubble-1{fill:#2e8c64}
 .bubble-2{fill:#007389}
 .bubble-3{fill:#00516e}
+.bubble-label{font-family:ubuntuRegular;font-size:16px;padding:0 5%;color:#666}
+.bubble-label>span{border-bottom:1px solid #999;display:block}
 .label-0,.bar-0,.key-0{fill:#8a262e}
 .label-1,.bar-1,.key-1{fill:#ae272d}
 .label-2,.bar-2,.key-2{fill:#cf4e27}

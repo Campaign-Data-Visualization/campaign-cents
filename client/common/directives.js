@@ -454,9 +454,18 @@ app.directive('bubbleChart', function($window) {
       data: '='
     },
     template: "<div class='bubble-chart'>"+
-      "<div class='bubble-label'>2014 Spending <span info-popup content='{{popupContent}}'></span></div>"+
-      "<svg>"+
-      "<filter id='glow' x='-30%' y='-30%' width='160%' height='160%'><feGaussianBlur stdDeviation='1 1' result='glow'/><feMerge><feMergeNode in='glow'/><feMergeNode in='glow'/><feMergeNode in='glow'/></feMerge></filter>"+
+      "<div class='bubble-label col-xs-6 text-center'><span>2014 Cycle Funding <span info-popup content='{{popupContent}}'></span></span></div>"+
+      "<div class='bubble-label col-xs-6 text-center'><span>Prior Year Funding <span info-popup content='{{popupContent}}'></span></span></div>"+
+      "<svg><defs>"+
+        "<filter id='glow' x='-30%' y='-30%' width='160%' height='160%'>"+
+          "<feGaussianBlur stdDeviation='1 1' result='glow'/>"+
+          "<feMerge>"+
+            "<feMergeNode in='glow' />"+
+            "<feMergeNode in='glow' />"+
+            "<feMergeNode in='glow' />"+
+          "</feMerge>"+
+        "</filter>"+
+      "</defs>"+
       "</svg></div>",
     link: function(scope, elem, attrs){
       scope.popupContent = "<b>Tier 1 organizations</b> consist of Koch-owned businesses, political organizations with very close ties to the Kochs, Koch-owned or founded think tanks, and any organization to which the Koch brothers have donated over one million dollars since 2008 "+
@@ -465,7 +474,7 @@ app.directive('bubbleChart', function($window) {
       var maxRadius = 65;
       var yValue = maxRadius + 30 + 25;
       
-      var labels =  ["Tier One", 'Tier Two', 'Prior Years', 'Lifetime Total'];
+      var labels =  ["Tier One", 'Tier Two', 'Tier One', 'Tier Two'];
 
       var xScale, yScale, xAxisGen, yAxisGen, zScale, amountText, commas;
 
@@ -473,12 +482,15 @@ app.directive('bubbleChart', function($window) {
       var rawSvg=elem.find('svg');
       var svg = d3.select(rawSvg[0]);
 
-       var width, height, barHeight, oldWidth;
+      var width, height, barHeight, oldWidth;
 
       var init = function() { 
         oldWidth = width;
         width = elem.width();
         //height = width * .4
+        maxRadius = width > 65 * 8 ? 65 : 45;
+        yValue = maxRadius + 30 + 25;
+
         height = 216
         barHeight = height - 20;
 
@@ -505,7 +517,7 @@ app.directive('bubbleChart', function($window) {
        
         zScale = d3.scale.sqrt()
           .domain([0, d3.max(scope.data, function(d) { return d; })])
-          .range([0, 65]);
+          .range([0, maxRadius]);
 
         svg.selectAll("circle")
           .attr({
@@ -530,7 +542,7 @@ app.directive('bubbleChart', function($window) {
        
         zScale = d3.scale.sqrt()
           .domain([0, d3.max(scope.data, function(d) { return d; })])
-          .range([0, 65]);
+          .range([0, maxRadius]);
 
         xAxisGen = d3.svg.axis()
           .scale(xScale)
@@ -591,6 +603,7 @@ app.directive('bubbleChart', function($window) {
           .attr('dominant-baseline', 'middle')
           .attr('text-anchor','middle')
           .attr('y', yValue)
+          .style('filter', 'url(#glow)')
 
         amounts.enter().append('text')
           .attr('x',function(d, i) { return xScale(i); })

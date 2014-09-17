@@ -68,7 +68,7 @@ module.exports = exports = {
 
     db.doQuery("select * from candidates where voteSmartId = ?", [candidateId]).then(function(data) {
       var profile = data[0];
-      db.doQuery("select sum(if(cycle=2014 && koch_tier = 1, amount, 0)) as a,sum(if(cycle=2014 && koch_tier = 2, amount, 0)) as b, sum(if(cycle!=2014, amount, 0)) as c,  sum(amount) as d from koch_contribs where votesmartId = ? and for_against = 'f'", [candidateId]).then(function(data) {
+      db.doQuery("select sum(if(cycle=2014 && koch_tier = 1, amount, 0)) as a,sum(if(cycle=2014 && koch_tier = 2, amount, 0)) as b, sum(if(cycle!=2014 && koch_tier = 1, amount, 0)) as c,  sum(if(cycle!=2014 && koch_tier = 2, amount, 0)) as d from koch_contribs where votesmartId = ? and for_against = 'f'", [candidateId]).then(function(data) {
         profile.data = { 
           'totals': Object.keys(data[0]).map(function(v) { return data[0][v];}) //convert to array
         }

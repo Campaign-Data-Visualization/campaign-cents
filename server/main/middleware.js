@@ -6,12 +6,14 @@
 
 module.exports = exports = {
   fourohfour: function(req, res, next){
+    res.status(404);
+
     // redirect to angular frontend
     if (req.accepts('html')) {
-      res.sendFile('index.html', { root: __dirname + '/../../client'});
+      res.redirect("/#/notFound");
+      //res.sendFile('index.html', { root: __dirname + '/../../client'});
       return;
     }
-    res.status(404);
 
     // respond with json
     if (req.accepts('json')) {

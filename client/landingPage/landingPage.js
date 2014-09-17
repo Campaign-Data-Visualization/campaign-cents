@@ -4,7 +4,7 @@ angular.module('kochTracker.landingPage', ['ui.router', 'ngMap'])
 .config(function ($stateProvider) {
   $stateProvider
     .state('kochTracker.landingPage', {
-      url: '/',
+      url: '',
       templateUrl: 'landingPage/landingPage.tpl.html',
       controller: 'LandingPageController'
     });

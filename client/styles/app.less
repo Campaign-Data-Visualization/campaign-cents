@@ -513,7 +513,6 @@ g.tick text, g.amounts text, g.labels text {
 }
 
 g.amounts text.amount-shadow { 
-  filter: url('#glow');
   fill: #333;
 }
 
@@ -536,6 +535,17 @@ g .domain { display: none;}
 .bubble-1 { fill: #2E8C64;}
 .bubble-2 { fill: #007389;}
 .bubble-3 { fill: #00516E;}
+
+.bubble-label { 
+  font-family: ubuntuRegular;
+  font-size: 16px;
+  padding: 0 5%;
+  color: #666;
+}
+.bubble-label > span {
+  border-bottom: 1px solid #999;
+  display: block;
+}
 
 .label-0, .bar-0, .key-0 { 
   fill: #8a262e;
