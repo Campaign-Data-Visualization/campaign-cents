@@ -6,6 +6,8 @@
     'ngFx',
     'countTo',
     'ui.router', 
+    'angulartics',
+    'angulartics.google.analytics',
     'kochTracker.explore',
     'kochTracker.landingPage',
     'kochTracker.staticPages',
@@ -15,7 +17,7 @@
     'kochTracker.candidatesView.candidateProfile'
     ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
-    $locationProvider.html5Mode(true).hashPrefix('#');
+    //$locationProvider.html5Mode(true).hashPrefix('#');
 
     $stateProvider
       .state('kochTracker', {
@@ -25,9 +27,9 @@
       });
 
       //This is some crazy stuff cuz when I reload the page, it adds a / to everything
-      $urlRouterProvider.when(/\/$|\/\?$/, function($match) {
-        return $match.input.replace(/\/$/, '');
-      })
+      //$urlRouterProvider.when(/\/$|\/\?$/, function($match) {
+        //return $match.input.replace(/\/$/, '');
+      //})
       $urlRouterProvider.otherwise('/notFound');
 
   })

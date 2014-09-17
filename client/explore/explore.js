@@ -44,31 +44,51 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
     })
 })
 
-.controller('ExploreMapController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
-  console.log('map control');
+.controller('ExploreMapController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams, $templateCache, $compile, $filter){
   $scope.state = $stateParams.state;
   $scope.makers = {};
   $scope.boundaries = {};
   $scope.layers = {
     'candidate': {
-      fillColor: 'orange',
+      fillColor: '#FBA839',
       visible: true,
       markers: [],
       label: 'Candidates'
     },
-    'campus': {
-      fillColor: 'green',
-      visible: true,
-      markers: [],
-      label: 'Campuses'
-    },
     'assets': {
-      fillColor: 'blue',
+      fillColor: '#D64B2F',
       visible: true,
       markers: [],
       label: 'Assets'
     },
+    'campus': {
+      fillColor: '#F87234',
+      visible: true,
+      markers: [],
+      label: 'Campuses'
+    },
+    'involved': {
+      fillColor: '#89272b',
+      visible: true,
+      markers: [],
+      label: 'Get Involved'
+    },
+    'interest': {
+      fillColor: '#000',
+      visible: true,
+      markers: [],
+      label: 'Points of Interest'
+    },
   }
+
+  $scope.layersOrder = ['candidate', 'assets', 'campus', 'involved', 'interest'];
+
+  $scope.template;
+
+  $http.get('explore/explore.infoWindow.tpl.html', {cache: true}).success(function(html) {
+    $templateCache.put('explore.infoWindow.tpl.html', html)
+    $scope.template = $templateCache.get('explore.infoWindow.tpl.html');
+  });
 
   $scope.mapStyle = [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-100},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-100},{"lightness":40}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-10},{"lightness":30}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-60},{"lightness":10}]},{"featureType":"landscape.natural","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-60},{"lightness":60}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"},{"saturation":-100},{"lightness":60}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"},{"saturation":-100},{"lightness":60}]}]
   
@@ -86,21 +106,15 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
   };
 
   $scope.showInfoWindow = function(marker, item) {
-    //This is terrible - hopefully ater I can move this into a directive with an external template.
+    $scope.item = item;
     $scope.infoWindow.close();
-    var content = '';
-    if (item.layer == 'candidate') {
-      content = "<img style='width: 50px; float: left; margin-right: 10px;' src='http://votesmart.org/canphoto/"+item.id+".jpg'/>"+
-                "<h3>"+item.title+"</h3>"+
-                "<div style='clear: both'>$"+item.amount+ " from Koch since 2000</div>";
-    } else { 
-      content = "<h3>"+item.title+"</h3>";
-      if (item.description) {
-        content += '<div>'+item.description+'</div>';
-      }
-    }
-    $scope.infoWindow.setContent(content);
-    $scope.infoWindow.open($scope.map, marker);
+
+    var content = $compile($scope.template)($scope)[0];
+    $scope.$apply(function() {
+      $scope.infoWindow.setContent(content);
+      $scope.infoWindow.open($scope.map, marker);
+    });
+    
   }
 
   $scope.topoJson;

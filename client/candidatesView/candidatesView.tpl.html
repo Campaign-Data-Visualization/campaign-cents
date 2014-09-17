@@ -9,33 +9,34 @@
       <div class='worst-offender' worst-offender/>
     </div> <!-- /.sidebar -->
     <div class="col-md-8 col-xs-12 candidate-main">      
-      <ul class="nav nav-tabs" id="myTab">
-        <li class="active"><a data-target="#candidates" data-toggle="tab">Candidates</a></li>
-        <li ng-if='layers.assets'><a data-target="#organizations" data-toggle="tab">Organizations</a></li>
-        <li ng-if='layers.campus'><a data-target="#campuses" data-toggle="tab">Campuses</a></li>
-      </ul>
-      <div class="tab-content">
-        <div class="tab-pane active" id="candidates">
-          <!-- Candidates List -->
-          <div ui-view></div>
-        </div> <!-- /#candidates -->
-        <div class="tab-pane" id="organizations">
-        <h3>Organizations</h3>
-          <div ng-repeat='asset in layers.assets'>
-            <h4>{{asset.title}}</h4>
-            <h5 ng-if='asset.city'>{{asset.city}}, {{viewparams.state}}</h5> 
-            <p ng-bind-html='asset.description | safehtml'></p>
+      <tabset>
+        <tab heading='Candidates'>
+          <div class="tab-pane" id="candidates">
+            <!-- Candidates List -->
+            <div ui-view></div>
+          </div> <!-- /#candidates -->
+        </tab>
+        <tab ng-if='layers.assets.length' heading='Organizations'>
+          <div class="tab-pane" id="organizations">
+            <h3>Organizations</h3>
+            <div ng-repeat='asset in layers.assets'>
+              <h4>{{asset.title}}</h4>
+              <h5 ng-if='asset.city'>{{asset.city}}, {{viewparams.state}}</h5> 
+              <p ng-bind-html='asset.description | safehtml'></p>
+            </div>
           </div>
-        </div>
-        <div class="tab-pane" id="universities">
-          <h3>Universities</h3>
+        </tab>
+        <tab ng-if='layers.campus.length' heading='Campuses'>
+          <div class="tab-pane" id="campuses">
+            <h3>Universities</h3>
             <div ng-repeat='asset in layers.campus'>
               <h4>{{asset.title}}</h4>
               <h5 ng-if='asset.city'>{{asset.city}}, {{viewparams.state}}</h5> 
               <p ng-bind-html='asset.description | safehtml'></p>
             </div>
-        </div> 
-
+          </div>           
+        </tab> 
+      </tabset> 
       <!-- GET INVOLVED -->
       <div class="row get-involved">
         <!-- <div ng-if='dayOne >= 0' class='election-countdown-tag'> -->
@@ -62,6 +63,5 @@
         </div>
       </div>
     </div><!--  /.candidate-main -->
-    </div> <!-- /.tab-content -->
   </div>
 </div>

@@ -67,7 +67,6 @@ body {
 @navbar-height: 120px;
 
 .navbar {
-	background-image: url('../images/nav-gradient.png');
 	background-repeat: repeat-y;
 	background-position: left;
 	background-color: @cc-gray-medium;
@@ -165,6 +164,10 @@ ul.navbar-nav li:last-child h4, ul.navbar-nav li:last-child a {
 	padding-top: 15px;
 }
 
+.box-text:last-child {
+	padding-bottom: 15px;
+}
+
 ul.box-text li div {
 	height: 100px;
 }
@@ -194,10 +197,10 @@ ul.box-text li div {
 
 
 ///search box
-.search-box { margin-top: 10px; }
-.search-result img { height: 35px; }
-.search-result { cursor: pointer; }
-.search-details { font-size: .8em; }
+// .search-box { margin-top: 10px; }
+// .search-result img { height: 35px; }
+// .search-result { cursor: pointer; }
+// .search-details { font-size: .8em; }
 
 
 ///////////
@@ -221,7 +224,6 @@ ul.box-text li div {
 	}
 }
 .map-sidebar-container h1 {
-	font-family: @font-family-sans-serif;
 	color: @cc-blue-light;
 }
 
@@ -236,6 +238,7 @@ ul.box-text li div {
 	letter-spacing: 2px;
 	text-align: center;
 	color: @cc-gray-dark;
+	font-family: @font-family-sans-serif;
 }
 
 .map-sidebar p {
@@ -261,12 +264,13 @@ ul.box-text li div {
 	padding-top: 20px;
 }
 
-.map-sidebar-calendar  h1 {
+.map-sidebar-calendar h1 {
 	display: inline;
 	vertical-align: middle;
+	font: @font-family-serif;
 }
 
-.map-sidebar-calendar  h1 span {
+.map-sidebar-calendar h1 span {
 	margin-top: 20px;
 }
 
@@ -278,34 +282,37 @@ ul.box-text li div {
 	padding-left: 5px;
 }
 
+.map-sidebar-search {
+	margin-top: 30px;
+	@media (min-width: @screen-sm-min) {
+		margin-top: 0;
+	}
 
-.map-sidebar-search form {
+}
+.map-sidebar-search .input-group {
 	background-color: @cc-gray-search;
-	padding: 15px;
+	text-align: left;
+	width: auto;
+	padding: 10px;
 }
 
-.map-sidebar-search .form-control, .map-sidebar-search .btn {
+.map-sidebar-search .form-control, .map-sidebar-search .btn, .map-sidebar-search input {
 	border-radius: 0;
 }
 
 .map-sidebar-search h1 {
-	margin: 0;
 	color: #000;
 	font-family: @font-family-serif;
-	text-align: left;
 }
 
 .map-sidebar-search input {
 	border: 3px #000 solid;
-	float: left;
-	width: auto;
 }
 
 .map-sidebar-search .btn {
 	background-color: #000;
 	color: #fff;
-	margin-top: 10px;
-	float: right;
+	padding: 4px;
 }
 
 .legend {
@@ -316,10 +323,15 @@ ul.box-text li div {
 	float: left;
 	margin-top: 0 !important;
 }
+
 .legend img {
 	float: left;
 	border: 2px solid #000;
-	margin-right: 25px;
+	margin-right: 10px;
+}
+
+.legend span {
+	float: left;
 }
 
 //candidate sidebar 
@@ -501,7 +513,6 @@ g.tick text, g.amounts text, g.labels text {
 }
 
 g.amounts text.amount-shadow { 
-  filter: url('#glow');
   fill: #333;
 }
 
@@ -525,6 +536,17 @@ g .domain { display: none;}
 .bubble-2 { fill: #007389;}
 .bubble-3 { fill: #00516E;}
 
+.bubble-label { 
+  font-family: ubuntuRegular;
+  font-size: 16px;
+  padding: 0 5%;
+  color: #666;
+}
+.bubble-label > span {
+  border-bottom: 1px solid #999;
+  display: block;
+}
+
 .label-0, .bar-0, .key-0 { 
   fill: #8a262e;
 }
@@ -545,8 +567,8 @@ g .domain { display: none;}
 
 .state-boundaries { 
   cursor: pointer;
-  fill: #33f;
-  fill-opacity:0;
+  fill: #fff;
+  fill-opacity:.4;
   stroke: #333;
   stroke-width:1;
   stroke-linejoin: bevel;
@@ -555,7 +577,7 @@ g .domain { display: none;}
 .state-boundaries.selected {
   transition: stroke-width .2s ease;
   stroke: @cc-red;
-  stroke-width:5;
+  stroke-width:3;
 }
 
 .static-map .marker {
@@ -570,6 +592,7 @@ g .domain { display: none;}
 .inset-map .state-boundaries {
 	stroke: #333;
 	stroke-opacity: .4;
+	fill-opacity: 0;
 }
 
 .inset-map .state-boundaries.selected {
@@ -583,21 +606,26 @@ g .domain { display: none;}
 	stroke:@cc-red;
 }
 
-//explore
+///////////explore
 .tentacle-title {
+	height: 120px;
+}
+
+.tentacle-title h2 {
 	background-image: url('../images/tentacle.png');
 	background-position: center;
 	background-repeat: no-repeat;
-}
-
-//victims voices
-
-.explore h2 {
 	text-align: center;
 	height: 85px;
 	padding-top: 20px;
 	text-shadow: 0 1px 0 #fff;
 	margin-bottom: 20px;
+}
+
+.explore .row {
+	@media (min-width: @screen-sm-min) {
+		margin: 0;
+	}
 }
 
 .explore h1 {
@@ -610,14 +638,72 @@ g .domain { display: none;}
 	}
 }
 
-#join-convo {
+#join-convo, #map-layers {
 	background-color: #D5D5D5;
 	padding: 20px;
 }
 
+ul#map-layers {
+	text-align: center;
+}
+
+ul#map-layers h4 {
+	@media (min-width: @screen-sm-min) {
+		display: inline;
+	}
+}
+
+ul#map-layers li {
+	display: inline;
+	margin: 15px;
+	width: auto;
+	padding: 7px;
+	background-color: #fff;
+}
+
+ul#map-layers li p {
+	display: inline;
+	margin-left: -8px;
+	padding: 0 5px
+}
+
+ul#map-layers li span {
+	padding: 7px;
+	margin-right: -20px;
+}
+
+ul#map-layers li.candidate span {
+	background-color: #FBA839;
+}
+
+ul#map-layers li.campus span {
+	background-color: #F87234;
+}
+
+ul#map-layers li.assets span {
+	background-color: #D64B2F;
+}
+
+ul#map-layers li.involved span {
+	background-color: #89272b;
+}
+
+ul#map-layers li.interest span {
+	background-color: #000;
+}
+
+ul#map-layers li input {
+	margin: 3px;
+}
+
+
 #join-convo h1 {
 	background-color: #D5D5D5;
 	padding: 20px;
+}
+
+.map-layers > div {
+	display: inline
 }
 
 .tile {
@@ -668,11 +754,4 @@ h4.modal-title {
 	font-family: @font-family-sans-serif;
 }
 
-//Hack to make button look like icon
-.info-popup {
-	color: @cc-blue-light;
-	background: none !important;
-	border: none !important;
-	padding: 0px;
-	margin: 0px;
-}
+

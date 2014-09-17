@@ -1,0 +1,14 @@
+<div class='infowindow'>
+  <div ng-switch="item.layer">
+    <div ng-switch-when="candidate">
+      <img style='width: 50px; float: left; margin-right: 10px;' ng-src='http://votesmart.org/canphoto/{{item.id}}.jpg'/>
+        <h3>{{item.title}}</h3>
+        <div style='clear: both'>${{item.amount}} from Koch since 2000</div>
+    </div>
+    <div ng-switch-default>
+      <h3>{{item.title}}</h3>
+      <div ng-if='item.description' ng-bind-html="item.description | safehtml">
+      </div>
+    </div>
+  </div>
+</div>

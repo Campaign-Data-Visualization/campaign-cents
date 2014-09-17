@@ -11,11 +11,11 @@
       <img class="col-sm-3 col-xs-12 img-responsive not-overlapped" ng-src="{{candidateProfile.photoURL}}" err-src="/images/profile-blank.jpg">
       <h2>{{candidateProfile.nameFirstLast}}</h2>
       <h3>{{candidateProfile.party}} Party, {{candidateProfile.electionStatus}}</h3>
-      <h4>{{candidate.electionstatus}}</h4>
       <!-- need to pull variable for which state -->
       <h4>{{candidateProfile.office}} <span class='candidate-state'>( {{candidateProfile.state}}<span class='candidate-district' ng-if="candidateProfile.district != ''">-{{candidateProfile.district}}</span> )</span></h4>
       <h4 ng-if='! bioLoading && candidateBio.office[0].firstElect[0]'>First Elected: {{candidateBio.office[0].firstElect[0]}}</h4>
       <h4 ng-if='! bioLoading && candidateBio.office[0].nextElect[0]'>Next Election: {{candidateBio.office[0].nextElect[0]}}</h4>
+      <span class='lifetime-total'>$<span class="odometer" count-to='{{candidateProfile.since2000contrib}}' value='0' duration='2'></span></h1>
     </div>
   </div>
   <div class="row">
@@ -27,7 +27,7 @@
   <div ng-if='!profileLoading && candidateProfile.since2000contrib' class="row">
     <div class="col-xs-12">
       <h4 class="center">Top Donors by Organization</h4>
-        <div bar-chart data='topDonors'/>
+        <div bar-chart data='donors'/>
     </div>
   </div>
   <div class="row">

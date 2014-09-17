@@ -1,33 +1,36 @@
-<div class="searchPage search">  
-  <section class="map-section">
-     <div class="container">
-       <div class="row">
-       <style>
-           .map>div {
-               position: relative;
-               padding-bottom: 75%; // This is the aspect ratio
-               height: 0;
-               overflow: hidden;
-           }
-           .map>div iframe {
-               position: absolute;
-               top: 0;
-               left: 0;
-               width: 100% !important;
-               height: 100% !important;
-           }
-       </style>
-        <div class="col-sm-8 col-xs-12 map-main">
-          <div class='google-maps' style='display:block; height: 500px;'>
-            <map id='map' center="[39.50, -98.35]" zoom="3" styles="{{mapStyle}}" map-type-control='false' street-view-control='false'> </map>
-          </div>
-          <div class='map-control'>
-            <div ng-repeat='(type, layer) in layers' >
-              <label class="checkbox inline"> <input ng-change='toggleLayer(type)' ng-model='layer.visible' type='checkbox'>{{layer.label}}</label>
-            </div>
-          </div>
-        </div>
-       </div>
-     </div>
-  </section>
-</div> <!-- /.page -->
+<style>
+  .map>div {
+    position: relative;
+    padding-bottom: 75%; // This is the aspect ratio
+    height: 0;
+    overflow: hidden;
+  }
+  .map>div iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .google-maps {
+    margin-bottom: 100px;
+    border: 2px #D5D5D5 solid;
+  }
+</style>
+
+<div class="row tentacle-title">
+  <h2>National Map</h2>
+</div>
+<div class="row">
+  <ul id="map-layers">
+    <h4>Display Options:</h4>
+    <li ng-repeat='type in layersOrder' class="map-layer-option" ng-class="type">
+      <p><input ng-change='toggleLayer(type)' ng-model='layers[type].visible' type='checkbox'>{{layers[type].label}}</p><span></span>
+    </li>
+  </ul>
+  </div>
+</div>
+<div class='google-maps' style='display:block; height: 500px;'>
+  <map id='map' center="[39.50, -98.35]" zoom="3" styles="{{mapStyle}}" map-type-control='false' street-view-control='false'> 
+  </map>
+</div>
