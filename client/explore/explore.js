@@ -50,25 +50,25 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
   $scope.boundaries = {};
   $scope.layers = {
     'candidate': {
-      fillColor: '#FBA839',
+      fillColor: '#89272d',
       visible: true,
       markers: [],
       label: 'Candidates'
     },
     'assets': {
-      fillColor: '#D64B2F',
+      fillColor: '#f17522',
       visible: true,
       markers: [],
       label: 'Assets'
     },
     'campus': {
-      fillColor: '#F87234',
+      fillColor: '#6baf00',
       visible: true,
       markers: [],
       label: 'Campuses'
     },
     'involved': {
-      fillColor: '#89272b',
+      fillColor: '#004e70',
       visible: true,
       markers: [],
       label: 'Get Involved'
