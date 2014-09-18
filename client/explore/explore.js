@@ -55,33 +55,27 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
       markers: [],
       label: 'Candidates'
     },
-    'assets': {
-      fillColor: '#f17522',
-      visible: true,
-      markers: [],
-      label: 'Assets'
-    },
     'campus': {
-      fillColor: '#6baf00',
+      fillColor: '#f17522',
       visible: true,
       markers: [],
       label: 'Campuses'
     },
-    'involved': {
+    'assets': {
       fillColor: '#004e70',
+      visible: true,
+      markers: [],
+      label: 'Assets'
+    },
+    'involved': {
+      fillColor: '#6baf00',
       visible: true,
       markers: [],
       label: 'Get Involved'
     },
-    'interest': {
-      fillColor: '#000',
-      visible: true,
-      markers: [],
-      label: 'Points of Interest'
-    },
   }
 
-  $scope.layersOrder = ['candidate', 'assets', 'campus', 'involved', 'interest'];
+  $scope.layersOrder = ['candidate', 'campus', 'involved', 'assets'];
 
   $scope.template;
 
