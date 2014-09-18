@@ -122,7 +122,7 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
   
   $scope.$on('mapInitialized', function(event, map){
     $scope.$watch('topoJson', function() {
-      if ($scope.topoJson) {
+      if ($scope.topoJson && $scope.state) {
         var state_boundary = $.grep($scope.topoJson.objects.usa.geometries, function(i) { return i.id == $scope.state;});
         var geoJsonObject = topojson.feature($scope.topoJson, state_boundary[0]);
         map.data.addGeoJson(geoJsonObject);
