@@ -16,11 +16,10 @@
     <div collapse='collapse' class="collapse navbar-collapse" id="navbar-collapse">
        <div class="row links">
        <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown"><h4><a class="dropdown-toggle" data-toggle="dropdown">In My District</a></h4><span class="hidden-xs">&#149;</span>
-        <input class="visible-xs input-sm ng-pristine ng-valid" type="text" ng-model="searchValue" placeholder="Candidate Name or Zipcode" typeahead="result.label as result for result in search($viewValue)" typeahead-template-url="common/search-results.tpl.html" typeahead-loading="loadingSearch" typeahead-editable="false" typeahead-on-select="select($item, $model, $label)" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-00D-5484">
+        <li auto-focus class="dropdown"><h4><a class="dropdown-toggle" data-toggle="dropdown">Get Local</a></h4><span class="hidden-xs">&#149;</span>
           <ul class="dropdown-menu hidden-xs" id="dropdown-search" role="menu">
-            <li>
-            <input class="input-sm ng-pristine ng-valid" type="text" ng-model="searchValue" placeholder="Candidate Name or Zipcode" typeahead="result.label as result for result in search($viewValue)" typeahead-template-url="common/search-results.tpl.html" typeahead-loading="loadingSearch" typeahead-editable="false" typeahead-on-select="select($item, $model, $label)" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-00D-5484">
+            <li prevent-default>
+              <search-box button='false'/>
             <li>
           </ul>
         </li>

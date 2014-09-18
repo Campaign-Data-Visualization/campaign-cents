@@ -637,15 +637,17 @@ app.directive('bubbleChart', function($window) {
 app.directive('searchBox', function(DataRequestFactory, $state) {
   return {
     restrict: 'E',
-    scope: true,
+    scope: {
+    	button:'='
+    },
     template:
-      "<input class='input-sm' type='text' ng-model='searchValue' placeholder='Candidate Name or Zipcode' typeahead='result.label as result for result in search($viewValue)' typeahead-template-url='common/search-results.tpl.html' typeahead-loading='loadingSearch' typeahead-editable='false' class='' typeahead-on-select='select($item, $model, $label)'>"+
-      "<button class=' btn btn-md btn-detault searchButton' type='submit' ng-click='search()'>GO</button>"+
+      "<input class='input-sm' type='text' ng-model='searchValue' placeholder='Candidate Name or Zipcode' typeahead-append-to-body='true' typeahead='result.label as result for result in search($viewValue)' typeahead-template-url='common/search-results.tpl.html' typeahead-loading='loadingSearch' typeahead-editable='false' class='' typeahead-on-select='select($item, $model, $label)'>"+
+      "<button ng-if='button' class=' btn btn-md btn-detault searchButton' type='submit' ng-click='search()'>GO</button>"+
       "<div ng-show='loadingSearch'>Insert Loading Indicator</div>",
     link: function(scope, element, attribs) {
       scope.searchValue = '';
       scope.loadingSearch = false;
-
+      element.find('input').focus();
       scope.search = function(value) {
         //scope.loadingSearch = true;
         return DataRequestFactory.getData('search', value).then(function(res) { 
@@ -711,6 +713,29 @@ app.directive("popoverHtmlUnsafePopup", function () {
    }
 })
 
-.directive("popoverHtmlUnsafe", [ "$tooltip", function ($tooltip) {
+app.directive("popoverHtmlUnsafe", [ "$tooltip", function ($tooltip) {
   return $tooltip("popoverHtmlUnsafe", "popover", "click");
 }]);
+
+app.directive('preventDefault', function () {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+      element.bind('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    }
+  };
+});
+
+app.directive('autoFocus', function () {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+    	element.bind('click', function (event) {
+	    	element.find('input').focus();
+	    })
+    }
+  };
+});
