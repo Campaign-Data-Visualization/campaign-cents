@@ -1,6 +1,6 @@
 <!-- nav bar for entire app -->
 <header>  
-  <nav class="navbar navbar-default" role="navigation">
+  <nav class="navbar" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" ng-init='collapse=true' class="navbar-toggle" ng-click='collapse=!collapse'>
@@ -14,13 +14,43 @@
       </div>
     </div>
     <div collapse='collapse' class="collapse navbar-collapse" id="navbar-collapse">
+       <div class="row links">
        <ul class="nav navbar-nav navbar-right">
-        <li><a ui-sref="#"><h4>In My District</h4><span class="hidden-xs">&#149;</span></a></li>
-        <li><a ui-sref="kochTracker.explore.landing"><h4>Explore</h4><span class="hidden-xs">&#149;</span></a></li>
-        <li><a ui-sref="kochTracker.theKochs"><h4>The Kochs</h4><span class="hidden-xs">&#149;</span></a></li>
-        <li><a ui-sref="kochTracker.aboutUs"><h4>About Us</h4><span class="hidden-xs">&#149;</span></a></li>
-        <li><a href="#"><h4>Get Involved</h4></a></li>
+        <li class="dropdown"><h4><a class="dropdown-toggle" data-toggle="dropdown">In My District</a></h4><span class="hidden-xs">&#149;</span>
+        <input class="visible-xs input-sm ng-pristine ng-valid" type="text" ng-model="searchValue" placeholder="Candidate Name or Zipcode" typeahead="result.label as result for result in search($viewValue)" typeahead-template-url="common/search-results.tpl.html" typeahead-loading="loadingSearch" typeahead-editable="false" typeahead-on-select="select($item, $model, $label)" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-00D-5484">
+          <ul class="dropdown-menu hidden-xs" id="dropdown-search" role="menu">
+            <li>
+            <input class="input-sm ng-pristine ng-valid" type="text" ng-model="searchValue" placeholder="Candidate Name or Zipcode" typeahead="result.label as result for result in search($viewValue)" typeahead-template-url="common/search-results.tpl.html" typeahead-loading="loadingSearch" typeahead-editable="false" typeahead-on-select="select($item, $model, $label)" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-00D-5484">
+            <li>
+          </ul>
+        </li>
+        <li class="dropdown"><h4><a class="dropdown-toggle" data-toggle="dropdown">Explore</a></h4><span class="hidden-xs">&#149;</span>
+        <ul class="visible-xs" role="menu">
+            <li><a ui-sref="kochTracker.explore.map">National Maps</a></li>
+            <li><a ui-sref="kochTracker.explore.voices">Victim's Voices</a></li>
+            <li><a ui-sref="kochTracker.explore.offenders">Worst Offenders</a></li>
+            <li><a ui-sref="kochTracker.explore.orgs">Orgs to Watch</a></li>
+          </ul>
+          <ul class="dropdown-menu hidden-xs" id="dropdown-explore" role="menu">
+            <li><a ui-sref="kochTracker.explore.map">National Maps</a></li>
+            <li><a ui-sref="kochTracker.explore.voices">Victim's Voices</a></li>
+            <li><a ui-sref="kochTracker.explore.offenders">Worst Offenders</a></li>
+            <li><a ui-sref="kochTracker.explore.orgs">Orgs to Watch</a></li>
+          </ul>
+        </li>
+        <li><h4><a ui-sref="kochTracker.theKochs">The Kochs</a></h4><span class="hidden-xs">&#149;</span></li>
+        <li><h4><a ui-sref="kochTracker.aboutUs">About Us</a></h4><span class="hidden-xs">&#149;</span></li>
+        <li><h4><a href="#">Get Involved</a></h4></li>
       </ul>
+      </div>
+      <div class="row social">
+        <div class="navbar-right">
+          <div id="pinterest"></div>
+          <div id="twitter"></div>
+          <div id="facebook"></div>
+          <div id="tumblr"></div>
+        </div>
+      </div>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
