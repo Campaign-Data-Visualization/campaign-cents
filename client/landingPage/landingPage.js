@@ -22,7 +22,7 @@ angular.module('kochTracker.landingPage', ['ui.router', 'ngMap'])
   var today = new Date();
   var election = new Date('11/4/2014');
   var beginning = new Date('6/14/2014');
-  var perDay = 5000000 / (election - beginning);
+  var perDay = 500000000 / (election - beginning);
 
   var days = Math.ceil((election - today)/1000/3600/24).toString();
 
