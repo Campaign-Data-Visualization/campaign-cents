@@ -260,8 +260,6 @@ body {
 
 
 
-
-
 //landing page
 
 .landing-box h3 {
@@ -831,10 +829,6 @@ g .domain { display: none;}
 	color: @cc-blue-light;
 	text-shadow: 0 1px 0 #fff;
 	font-family: @font-family-sans-serif;
-	text-align: left;
-	@media (min-width: @screen-sm-min) {
-		//text-align: right;
-	}
 }
 
 #join-convo, #map-layers {
@@ -909,13 +903,50 @@ ul#map-layers li input {
 	border: 2px solid rgb(51, 51, 51)
 }
 
-#join-convo h1 {
-	background-color: #D5D5D5;
-	padding: 20px;
-}
-
 .map-layers > div {
 	display: inline
+}
+
+
+//victim's voices page
+
+#join-convo {
+	text-align: center;
+}
+#join-convo h1 {
+	background-color: #D5D5D5;
+	padding-top: 10px;
+}
+
+.join-convo-form {
+	padding-top: 10px;
+}
+
+.join-convo-form input,.share-story-form input, .share-story-form select, .share-story-form textarea {
+	border: 2px #000 solid;
+	border-radius: 0;
+}
+
+.join-convo-form button, .modal-body button {
+	height: 70px;
+	background-color: #000;
+	color: #fff;
+	border-radius: 0;
+} 
+
+.victim-author {
+	text-align: right;
+	padding-top: 20px;
+}
+
+img.quote-left {
+	padding: 5px;
+	margin-top: -20px;
+}
+
+img.quote-right {
+	padding: 5px;
+	margin-bottom: -20px;
 }
 
 .tile {
@@ -923,6 +954,12 @@ ul#map-layers li input {
 	height: auto;
 	margin: 20px 0;
 	padding: 20px;
+}
+
+.tile img.author {
+	width: 100%;
+	height: auto;
+	padding-bottom: 20px;
 }
 
 .tile-column:first-child {
@@ -936,22 +973,6 @@ ul#map-layers li input {
 		padding-right: 0;
 	}
 }
-
-.join-convo-form input,.share-story-form input, .share-story-form select, .share-story-form textarea {
-	border: 2px #000 solid;
-	border-radius: 0;
-}
-
-.join-convo-form input {
-	height: 70px;
-}
-
-.join-convo-form button, .modal-body button {
-	height: 70px;
-	background-color: #000;
-	color: #fff;
-	border-radius: 0;
-} 
 
 ul.bulleted, ul.bulleted li, li.bulleted, {
 	list-style: initial;
