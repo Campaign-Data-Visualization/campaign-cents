@@ -679,8 +679,8 @@ app.directive('searchBox', function(DataRequestFactory, $state) {
       };
 
       scope.select = function(item, model, label) {
+      	scope.searchValue = '';
         if (item.err) { 
-          scope.searchValue = '';
           return; 
         } else {
           var route = item.type == 'c' ? 'candidateProfile' : 'candidateList';
