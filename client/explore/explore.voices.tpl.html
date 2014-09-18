@@ -2,76 +2,37 @@
     <h2>Victim's Voices</h2>
 </div>
 <div class="row" id="join-convo">
-  <h1 class="col-sm-6 col-xs-12">Join the Conversation</h1>
-<div class="col-sm-6 col-xs-12">
-    <div class="join-convo-form input-group ">
-      <input type="text" class="form-control">
-      <span class="input-group-btn">
+  <h1>Join the Conversation </h1>
+      <span class="join-convo-form input-group-btn">
          <span share-story-button/>
       </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
   <div share-story-form/>
-  <div ng-repeat = 'voice in voices'>
-    <p>
-      "<span ng-bind-html='voice.description | safehtml'></span>"
-    </p>
-    <h4 ng-bind-html='voice.title | safehtml'></h4>
-    <h5 ng-bind-html='voice.detail | safehtml'></h5>
-  </div>  
 </div> <!-- /#join-convo -->
-<div class="row" id="victim-tiles">
+
+<div class="row" id="victim-tiles" >
   <div class="col-sm-4 tile-column">
-    <div class="tile">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-    <div class="tile">orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure</div>
+    
+  <!-- example tile with image -->
+    <div class="tile">
+    <img class="author" src="/images/images-voices-danielle.jpg">
+    <img class="quote-left" src="/images/graphic-quote-left.png"><span ng-bind-html='voice.description | safehtml'></span><img class="quote-right" src="/images/graphic-quote-right.png">
+      <div class="victim-author"><h3 ng-bind-html='"--" + voice.title | safehtml'></h3><h4 ng-bind-html='voice.detail | safehtml'></h4></div>
+    </div>
+  <!-- end example -->
+
+
+    <div class="tile"  ng-repeat ='voice in voices' ng-if="$index % 3 == 0"><img class="quote-left" src="/images/graphic-quote-left.png"><span ng-bind-html='voice.description | safehtml'></span><img class="quote-right" src="/images/graphic-quote-right.png">
+      <div class="victim-author"><h3 ng-bind-html='"--" + voice.title | safehtml'></h3><h4 ng-bind-html='voice.detail | safehtml'></h4></div>
+    </div>
   </div>
-  <div class="col-sm-4 tile-column">
-    <div class="tile">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillumation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-    <div class="tile">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+  <div class="col-sm-4 tile-column" >
+    <div class="tile" ng-repeat ='voice in voices' ng-if="($index+1) % 3 == 0"><img class="quote-left" src="/images/graphic-quote-left.png"><span ng-bind-html='voice.description | safehtml'></span><img class="quote-right" src="/images/graphic-quote-right.png">
+    <div class="victim-author"><h3 ng-bind-html='"--" + voice.title | safehtml'></h3><h4 ng-bind-html='voice.detail | safehtml'></h4></div>
+    </div>
   </div>
-  <div class="col-sm-4 tile-column">
-    <div class="tile">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-    <div class="tile">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+  <div class="col-sm-4 tile-column" >
+    <div class="tile" ng-repeat ='voice in voices' ng-if="($index+2) % 3 == 0"><img class="quote-left" src="/images/graphic-quote-left.png"><span ng-bind-html='voice.description | safehtml'></span><img class="quote-right" src="/images/graphic-quote-right.png">
+    <div class="victim-author"><h3 ng-bind-html='"--" + voice.title | safehtml'></h3><h4 ng-bind-html='voice.detail | safehtml'></h4></div>
+    </div>
   </div>
 </div>
-
