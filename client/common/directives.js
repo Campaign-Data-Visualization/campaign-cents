@@ -509,6 +509,7 @@ app.directive('bubbleChart', function($window) {
       }
      
       scope.$watch('data', function() {
+      	console.log(scope.data)
         init();
         drawBubbleChart();
       });
@@ -532,6 +533,9 @@ app.directive('bubbleChart', function($window) {
             cx: function(d, i) { return xScale(i); },
             r: function(d) { return zScale(d); }
           })
+
+        svg.selectAll('image')
+          .attr('x',function(d, i) { return xScale(i)-32; })
 
         svg.selectAll('.amount')
           .attr('x',function(d, i) { return xScale(i); })
@@ -582,7 +586,7 @@ app.directive('bubbleChart', function($window) {
           .attr("transform", "translate(0,"+(yValue)+")")
           .call(xAxisGen)
 
-        var circle = svg.selectAll("circle").data(scope.data)
+        var circle = svg.selectAll("circle").data(scope.data) //.filter(function(d) { return d > 0; }))
         
         circle.enter().append("svg:circle")
           .attr({
@@ -597,7 +601,18 @@ app.directive('bubbleChart', function($window) {
           .duration(1000)
           .delay(function(d, i) { return i * 200; })
           .attr('r', function(d) { return zScale(d); })
-                 
+
+				var images = svg.selectAll('image').data(scope.data);
+				images.enter().append('image')
+					.attr({
+	          x: function(d, i) { return xScale(i) - 32; },
+						y: yValue - 26,
+						width: 64,
+						height: 71,
+						opacity: function(d) { return d > 0 ? 0 : 1; },
+						'xlink:href': 'images/graphic-no-funding.png'
+					})
+
         svg.append('g').attr('class', 'amounts');
 
         var amounts_group = svg.selectAll('g.amounts')
@@ -626,7 +641,7 @@ app.directive('bubbleChart', function($window) {
           .tween('text', function(d) { 
             var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d);
             return function(t) { 
-              this.textContent = amountText(d, i(t));
+              this.textContent = d > 0 ? amountText(d, i(t)) : '';
             }
           })
       } 
