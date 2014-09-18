@@ -1,4 +1,7 @@
 <div>
 	<h2>Key Races</h2>
-
+  <div class='race' ng-repeat='race in races'>
+    <h3>{{race.title}}</h3>
+    <div ng-bind-html="race.description | safehtml"></div>
+  </div>
 </div>

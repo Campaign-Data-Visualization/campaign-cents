@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html ng-app="kochTracker">
 <head>
-  <meta charset='utf8'>
+  <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width">
   <title>KochTracker</title>
-  <base href="/">
+  <!--<base href="/">-->
+  <!--[if IE]><script type="text/javascript">
+      // Fix for IE ignoring relative base tags.
+      // See http://stackoverflow.com/questions/3926197/html-base-tag-and-local-folder-path-with-internet-explorer
+      (function() {
+          var baseTag = document.getElementsByTagName('base')[0];
+          baseTag.href = baseTag.href;
+      })();
+  </script><![endif]--> 
   <link rel="stylesheet" href="styles/app.css"/>
+  <link rel="stylesheet" href="lib/jReject/css/jquery.reject.css"/>
+  <link href='http://fonts.googleapis.com/css?family=Rokkitt:700' rel='stylesheet' type='text/css'>
 </head>
   <body class="body" resize>
 
     <div ui-view></div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="lib/jReject/js/jquery.reject.js"></script>
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="lib/ngFx/dist/ngFx.js"></script>
-    <script src="lib/ng-map.js"></script>
-    <script src="lib/d3/d3.min.js"></script>
-    <script src="lib/topojson/topojson.js"></script>
-    <script src="lib/angular-count-to.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAjfCwXNJeP5TUjtdli2WtjmOd1GbDERw"></script>
     <script src="app.js"></script>
     <script src="landingPage/landingPage.js"></script>
     <script src="candidateList/candidateList.js"></script>
@@ -29,10 +34,48 @@
     <script src="orgProfile/orgProfile.js"></script>
     <script src="staticPages/staticPages.js"></script>
     <script src="explore/explore.js"></script>
+    <script src="common/filters.js"></script>
     <script src="common/factories.js"></script>
     <script src="common/services.js"></script>
     <script src="common/directives.js"></script>
-    <script src="common/filters.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="lib/ngFx/dist/ngFx.js"></script>
+    <script src="lib/ng-map.js"></script>
+    <script src="lib/d3/d3.min.js"></script>
+    <script src="lib/topojson/topojson.js"></script>
+    <script src="lib/angular-count-to.min.js"></script>
+    <script src="lib/angulartics/dist/angulartics.min.js"></script>
+    <script src="lib/angulartics/dist/angulartics-ga.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAjfCwXNJeP5TUjtdli2WtjmOd1GbDERw"></script>
+    <script>
+      $(function() { 
+        $.reject({
+          reject: {msie: 8},
+          imagePath: './lib/jReject/images/',
+          display: ['firefox','chrome'], // Displays only firefox, chrome, and opera  
+          close: false,
+          header: "<p class='text-center'><img src='http://www.kochtracker.com/images/logo-octopus.png' style='width: 80px;'/><h3 class='text-center'>Unsupported Browser</h3></p>",
+          paragraph1: "We're sorry, but your web browser is out of date and we are unable to support it. Please try a more modern browser. Use the links below to download a supported web browser. ",
+          paragraph2: ''
+        })
+      })
+    </script>
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-541a72d62544bc80"></script>
+
+    <!--google analytics code-->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-54822417-1', 'auto');
+
+      var addthis_config = {
+        data_ga_property: 'UA-54822417-1',
+        data_ga_social : true
+      }
+    </script>
+    <!--end google analytics code-->
   </body>
 </html>

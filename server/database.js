@@ -4,16 +4,23 @@ var mysql = require('mysql'),
     request = require('request'),
     parseString = require('xml2js').parseString,
     Q = require('q'),
-    mysqlUtilities = require('mysql-utilities');
+    mysqlUtilities = require('mysql-utilities'),
+    config = require('config');
 
 // <<<<<<==========  Create MySQL connection =============>>>>>>>>
 
-var connection_config = {
-  host     : process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1',
-  user     : process.env.OPENSHIFT_MYSQL_DB_USERNAME || 'root',
-  password : process.env.OPENSHIFT_MYSQL_DB_PASSWORD || '',
-  port : process.env.OPENSHIFT_MYSQL_DB_PORT || null,
-  database : process.env.database || 'kochtracker'
+var connection_config = {};
+
+if (config.mysql) { 
+  connection_config = config.mysql;
+} else {
+  connection_config = {
+    host     : process.env.OPENSHIFT_MYSQL_DB_HOST || '127.0.0.1',
+    user     : process.env.OPENSHIFT_MYSQL_DB_USERNAME || 'root',
+    password : process.env.OPENSHIFT_MYSQL_DB_PASSWORD || '',
+    port : process.env.OPENSHIFT_MYSQL_DB_PORT || null,
+    database : process.env.database || 'kochtracker'
+  }
 }
 
 var pool = mysql.createPool(connection_config);
@@ -56,6 +63,8 @@ exports.query = function(method, query, args) {
       connection[method](query, args, function(err, rows, field) { 
         connection.release();
          if (err) {
+          console.log("Error running query "+query+ " with args "+args);
+          console.log(err);
           deferred.reject(err);
         } else { 
           //console.log(rows.affectedRows);

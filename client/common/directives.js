@@ -1,13 +1,13 @@
 'use strict';
 var app = angular.module('kochTracker')
 
-app.directive('messages', function($messages) {
+app.directive('messages', function($messages, $filter) {
   return {
     restrict: 'A',
     scope: {
-    	modal: '=?',
+      modal: '=?',
     },
-    template: "<div ng-if='modal == messageService.modal'><alert class='message' type='{{message.type}}' close='close($index)' ng-repeat='message in messageService.messages'><div>{{message.message}}</div></alert></div>",
+    template: "<div ng-if='modal == messageService.modal'><alert class='message' type='{{message.type}}' close='close($index)' ng-repeat='message in messageService.messages'><div ng-bind-html='message.message | safehtml'></div></alert></div>",
     link: function(scope, element, attribs) { 
       scope.messageService = $messages;
       scope.close = $messages.deleteMessage;
@@ -27,87 +27,87 @@ app.directive('loading', function() {
 });
 
 app.directive('insetMap', function($window, $state) {
-	return {
-	  restrict: 'A',
-	  scope: {
-	  	state: '='
-	  },
-	  template: "<div class='inset-map'><svg></svg></div>",
-	  link: function(scope, elem, attrs){
-		  var d3 = $window.d3;
+  return {
+    restrict: 'A',
+    scope: {
+      state: '='
+    },
+    template: "<div class='inset-map'><svg></svg></div>",
+    link: function(scope, elem, attrs){
+      var d3 = $window.d3;
       var rawSvg=elem.find('svg');
       var svg = d3.select(rawSvg[0]);
       var width = elem.width();
-      var height = width * .6
+      var height = width * .7;
       var current_state = '';
 
       svg.attr({
-      	width: width,
-      	height: height
+        width: width,
+        height: height
       })
       
-      var projection = d3.geo.albersUsa()
-      	.scale(1)
-      	.translate([0,0])
-    	
-    	var path = d3.geo.path().projection(projection);
+      var projection = d3.geo.mercator()
+        .scale(1)
+        .translate([0,0])
+      
+      var path = d3.geo.path().projection(projection);
 
       d3.json("/lib/us-states.json", function(json) {
-      	var boundary = $.grep(json.objects.usa.geometries, function(e){ return e.id == scope.state;})[0];
-	      var bounds = path.bounds(topojson.feature(json,boundary)),
-					dx = bounds[1][0] - bounds[0][0],
-					dy = bounds[1][1] - bounds[0][1],
-					x = (bounds[0][0] + bounds[1][0]) / 2,
-					y = (bounds[0][1] + bounds[1][1]) / 2,
-					scale = .9 / Math.max(dx / width, dy / height),
-					translate = [width / 2 - scale * x, height / 2 - scale * y];
-				
-				projection.scale(scale).translate(translate);
+        var boundary = $.grep(json.objects.usa.geometries, function(e){ return e.id == scope.state;})[0];
+        var bounds = path.bounds(topojson.feature(json,boundary)),
+          dx = bounds[1][0] - bounds[0][0],
+          dy = bounds[1][1] - bounds[0][1],
+          x = scope.state == 'AK' ? -2.7 : (bounds[0][0] + bounds[1][0]) / 2,
+          y = (bounds[0][1] + bounds[1][1]) / 2,
+          scale = scope.state == 'AK' ? 270 : .8 / Math.max(dx / width, dy / height),
+          translate = [width / 2 - scale * x, height / 2 - scale * y];
+        
+        projection.scale(scale).translate(translate);
 
-	 			var states = svg.append('g').attr('class', 'states').selectAll('.state-boundaries').data(json.objects.usa.geometries)
-	 			states.enter().append("path")
-					.attr("class", function(d) { 
-						var selected = d.id == scope.state ? ' selected ': '';
-						return selected+"state-boundaries state-"+d.id; 
-					})
-					.datum(function(d, i){ return topojson.feature(json, json.objects.usa.geometries[i]) })
-					.attr("d", path)
-	      
-				$('.states')[0].appendChild($('.state-'+scope.state)[0]);
-			});
-    	svg.on('click', function() {
-    		$state.go('kochTracker.explore.map', {state:scope.state});
-    	})
-    	
-    	function resize() {
-  	    width = parseInt(d3.select('#map').style('width'));
-  	    height = width * .6;
+         var states = svg.append('g').attr('class', 'states').selectAll('.state-boundaries').data(json.objects.usa.geometries)
+         states.enter().append("path")
+          .attr("class", function(d) { 
+            var selected = d.id == scope.state ? ' selected ': '';
+            return selected+"state-boundaries state-"+d.id; 
+          })
+          .datum(function(d, i){ return topojson.feature(json, json.objects.usa.geometries[i]) })
+          .attr("d", path)
+        
+        $('.states')[0].appendChild($('.state-'+scope.state)[0]);
+      });
+      svg.on('click', function() {
+        $state.go('kochTracker.explore.map', {state:scope.state});
+      })
+      
+      function resize() {
+        width = parseInt(d3.select('#map').style('width'));
+        height = width * .6;
 
-  	    // update projection
-  	    projection
-	        .translate([width / 2, height / 2])
-	        .scale(width * 1.3);
+        // update projection
+        projection
+          .translate([width / 2, height / 2])
+          .scale(width * 1.3);
 
-  	    // resize the map container
-  	    svg
-	        .style('width', width + 'px')
-	        .style('height', height + 'px');
+        // resize the map container
+        svg
+          .style('width', width + 'px')
+          .style('height', height + 'px');
 
-  	    // resize the map
-  	    svg.selectAll('.state-boundaries').attr('d', path);
-    	}
+        // resize the map
+        svg.selectAll('.state-boundaries').attr('d', path);
+      }
     }
   }
 })
 
 
 app.directive('staticMap', function($window, DataRequestFactory, $state) {
-	return {
-	  restrict: 'A',
-	  scope: true,
-	  template: "<div class='static-map'><svg></svg></div>",
-	  link: function(scope, elem, attrs){
-		  var d3 = $window.d3;
+  return {
+    restrict: 'A',
+    scope: true,
+    template: "<div class='static-map'><svg></svg></div>",
+    link: function(scope, elem, attrs){
+      var d3 = $window.d3;
       var rawSvg=elem.find('svg');
       var svg = d3.select(rawSvg[0]);
       var width = elem.width();
@@ -115,84 +115,92 @@ app.directive('staticMap', function($window, DataRequestFactory, $state) {
       var current_state = '';
 
       svg.attr({
-      	width: width,
-      	height: height
+        width: width,
+        height: height
       })
 
       var projection = d3.geo.albersUsa()
-      	.scale(width*1.3) //not sure why I need to augment the scale...
-      	.translate([width / 2, height / 2])
+        .scale(width*1.3) //not sure why I need to augment the scale...
+        .translate([width / 2, height / 2])
       var path = d3.geo.path().projection(projection)
       var state_group = svg.append('g').attr('class', 'states');
       var marker_group = svg.append('g').attr('class', 'map-markers')
 
       d3.json("/lib/us-states.json", function(json) {
-	 			var states = state_group.selectAll('.state-boundaries').data(json.objects.usa.geometries,  function(d) { return d.id; })
-	 			states.enter().append("path")
-					.attr("class", function(d) { return "state-boundaries state-"+d.id; })
-					.datum(function(d, i){ return topojson.feature(json, json.objects.usa.geometries[i]) })
-					.attr("d", path)
-					.style('pointer-events','all')
-					.on('mouseenter', function(d) {
-						var selected =  d3.selectAll('.state-boundaries.selected');
-						angular.forEach(selected, function(s) {
-							if ($(s)) {
-								d3.selectAll(s).classed('selected', false)
-							}
-						})
-						states.sort(function(a, b) { if (a.id == d.id) { return 1; }})
-						d3.select(this).classed('selected', true);
-					})
-					.on('mouseleave', function(d) {
-						if (! d3.event.relatedTarget || d3.event.relatedTarget.tagName != 'circle'){
-							d3.select(this).classed('selected', false)
-						}
-					})
-					.on('click', function(d) {
-						$state.go('kochTracker.explore.map', {state:d.id});
-					})
-			});
-    	
-    	DataRequestFactory.getData('map', 'summary').then(function(data) {
-				var markers = marker_group.selectAll('.marker').data(data)
-				markers.enter().append("circle")
-					.attr("r",0)
-					.attr("transform", function(d) {return "translate(" + projection([d.lng,d.lat]) + ")";})
-					.attr('fill-opacity', .8)
-					.attr('fill', 'red')
-					.attr('class', 'marker')
-					.on('click', function(d) {
-						$state.go('kochTracker.explore.map', {state:d.state});
-					})
+         var states = state_group.selectAll('.state-boundaries').data(json.objects.usa.geometries,  function(d) { return d.id; })
+         states.enter().append("path")
+          .attr("class", function(d) { return "state-boundaries state-"+d.id; })
+          .datum(function(d, i){ return topojson.feature(json, json.objects.usa.geometries[i]) })
+          .attr("d", path)
+          .style('pointer-events','all')
+          .on('mouseenter', function(d) {
+            var selected =  d3.selectAll('.state-boundaries.selected');
+            angular.forEach(selected, function(s) {
+              if ($(s)) {
+                d3.selectAll(s).classed('selected', false)
+              }
+            })
+            states.sort(function(a, b) { if (a.id == d.id) { return 1; }})
+            d3.select(this).classed('selected', true);
+          })
+          .on('mouseleave', function(d) {
+            if (! d3.event.relatedTarget || d3.event.relatedTarget.tagName != 'circle'){
+              d3.select(this).classed('selected', false)
+            }
+          })
+          .on('click', function(d) {
+            $state.go('kochTracker.explore.map', {state:d.id});
+          })
+      });
+      
+      DataRequestFactory.getData('map', 'summary').then(function(data) {
+        var markers = marker_group.selectAll('.marker').data(data)
+        markers.enter().append("circle")
+          .attr("r",0)
+          .attr("transform", function(d) {return "translate(" + projection([d.lng,d.lat]) + ")";})
+          .attr('fill-opacity', .8)
+          .attr('fill', 'red')
+          .attr('class', 'marker')
+          .on('click', function(d) {
+            $state.go('kochTracker.explore.map', {state:d.state});
+          })
+          .on('mouseenter', function(d) {
+             d3.selectAll('.state-'+d.state).classed('selected', true)
+          })
+          .on('mouseleave', function(d) {
+            if (! d3.event.relatedTarget || ( d3.event.relatedTarget.tagName != 'path' && d3.event.relatedTarget.tagName != 'circle')){
+             d3.selectAll('.state-boundaries.selected').classed('selected', false)
+            }
+          })
 
-				markers.transition()
-					.duration(700)
-					.ease('bounce')
-					.delay(function(d, i) { return i * 3; })
-					.attr('fill', 'orange')
-					.attr('r', 5)
+        markers.transition()
+          .duration(700)
+          .ease('bounce')
+          .delay(function(d, i) { return i * 3; })
+          .attr('fill', 'orange')
+          .attr('r', 5)
       });
 
-    	scope.$on('windowResize', resize)
-    	
-    	function resize() {
-  	    width = parseInt(d3.select('#map').style('width'));
-  	    height = width * .6;
+      scope.$on('windowResize', resize)
+      
+      function resize() {
+        width = parseInt(d3.select('#map').style('width'));
+        height = width * .6;
 
-  	    // update projection
-  	    projection
-	        .translate([width / 2, height / 2])
-	        .scale(width * 1.3);
+        // update projection
+        projection
+          .translate([width / 2, height / 2])
+          .scale(width * 1.3);
 
-  	    // resize the map container
-  	    svg
-	        .style('width', width + 'px')
-	        .style('height', height + 'px');
+        // resize the map container
+        svg
+          .style('width', width + 'px')
+          .style('height', height + 'px');
 
-  	    // resize the map
-  	    svg.selectAll('.state-boundaries').attr('d', path);
-  	    svg.selectAll('.marker').attr("transform", function(d) {return "translate(" + projection([d.lng,d.lat]) + ")";})
-    	}
+        // resize the map
+        svg.selectAll('.state-boundaries').attr('d', path);
+        svg.selectAll('.marker').attr("transform", function(d) {return "translate(" + projection([d.lng,d.lat]) + ")";})
+      }
     }
   }
 })
@@ -209,195 +217,239 @@ app.directive('resize', function($window) {
 });
 
 app.directive('barChart', function($window) {
-	return {
-	  restrict: 'A',
-	  scope: {
-	    data: '='
-	  },
-	  template: "<div class='bar-chart'><svg></svg></div>",
-	  link: function(scope, elem, attrs){
-	      
-      var maxRadius = 65;
-      var yValue = maxRadius + 30 + 25;
+  return {
+    restrict: 'A',
+    scope: {
+      data: '='
+    },
+    template: "<div class='bar-chart text-center'><div class='bar-chart-control'>"+
+      "<label class='radio-inline'><input type='radio' ng-model='time' value='total'>Total</label>"+
+      "<label class='radio-inline'><input type='radio' ng-model='time' value='current'>2014 Cycle</label>"+
+      "<label class='radio-inline'><input type='radio' ng-model='time' value='previous'>Prior Years</label>"+
+      "</div><svg></svg></div>",
+    link: function(scope, elem, attrs){
       
-      var pathClass="path";
-      var xScale, yScale, xAxisGen, yAxisGen, zScale, amountText, commas;
-
+      scope.time = 'total';
+      //scope.data[0].total = 15000000;
+        
       var d3 = $window.d3;
       var rawSvg=elem.find('svg');
       var svg = d3.select(rawSvg[0]);
    
-   		var width, height, barHeight, oldWidth;
+       var width, height, oldWidth, barWidth, xScale, amountText, commas, wrap;
 
-      var init = function() { 
-	      oldWidth = width;
-	      width = elem.width();
-	      height = width * .4
-	      barHeight = height - 20;
+      var exitDuration = 200,
+        transformDuration = 500,
+        barHeight = 50,
+        barMargin = 5,
+        keyWidth = 140,
+        keyMargin = 10,
+        labelWidth = 100,
+        labelMargin = 5;
 
-	      svg.attr({
-	      	width: width,
-	      	height: height
-	      })
-	    }
-     
-      scope.$watch('data', function() {
-    		init();
-    		drawBarChart();
-      });
+      var init = function() {
+         svg.append("svg:g")
+           .attr("class", "bar-group")
+           .attr("transform", "translate("+keyWidth+",0)")
 
-      scope.$on('windowResize', resize)
-      //d3.select(window).on('resize', resize);
-    	
-    	function resize() {
-    		init();
-    		if (oldWidth == width) { return; }
+         svg.append("svg:g")
+           .attr('class', 'labels')
+           .attr("transform", "translate("+keyWidth+",0)")
 
-    		xScale = d3.scale.ordinal()
-    			.rangeRoundBands([0, width-200], .2)
-    			.domain(scope.data.map(function(d) { return d.name}))
-    		
-    		yScale = d3.scale.linear()
-    		  .domain([0, d3.max(scope.data, function(d) { return d.amount; })])
-    		  .range([barHeight, 0]);
+          svg.append('svg:g')
+           .attr('class', 'key')
+      }
 
-    		svg.selectAll('.bar')
-	    		.attr({
-	    			'x': function(d, i) { return xScale(d.name); },
-	    			'width': xScale.rangeBand(),
-						'height': function(d) { return barHeight - yScale(d.amount)},
-			  		'y' : function(d) { return yScale(d.amount); },
-			  	})
+      var setChartParameters = function() {
+        oldWidth = width;
+        width = elem.width();
+        height = (scope.data.length)*barHeight;
+        barWidth = width - keyWidth - labelWidth;
 
-		  	svg.selectAll('.label')
-			  	.attr({
-			  		'x': function(d, i) { return xScale(d.name) + xScale.rangeBand()/2; },
-			  		'y' : function(d) { return yScale(barHeight) + 18; },
-			  		'width': xScale.rangeBand(),
-			  	})
+        svg.attr({
+          width: width,
+          height: height
+        })
 
-			  svg.selectAll('.key')
-			  	.attr({transform: 'translate('+(width-215)+', 20)'});
+        xScale = d3.scale.linear()
+          .domain([0, d3.max(scope.data, function(d) { return d.total; })])
+          .range([0, barWidth]);
+      }
 
-			  svg.selectAll('.key-item')
-			  	.attr('transform', function(d, i) { return 'translate(0, '+ i*30+')'; })
-    	}
-      //scope.data[3].amount=200000;
-      //scope.data[3].name='Young Americans for Liberty'
+      var amountText = function(d, value) { 
+        var text = '';
+        return '$' + commas(Math.floor(value));
+      }
 
-      function setChartParameters(){
-        xScale = d3.scale.ordinal()
-        	.rangeRoundBands([0, width-200], .2)
-        	.domain(scope.data.map(function(d) { return d.name}))
-       
-        yScale = d3.scale.linear()
-          .domain([0, d3.max(scope.data, function(d) { return d.amount; })])
-          .range([barHeight, 0]);
-
-        amountText = function(d, value) { 
-          var text = '';
-          return '$' + commas(Math.floor(value));
+      var commas = function(val){
+        while (/(\d+)(\d{3})/.test(val.toString())){
+          val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
         }
+        return val;
+      }
 
-		    commas = function(val){
-		  		while (/(\d+)(\d{3})/.test(val.toString())){
-		    		val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
-		  		}
-		  		return val;
-				}
-
-       }
+      var wrap = function(text, width) {
+        text.each(function() {
+          var text = d3.select(this),
+              words = text.text().split(/\s+/).reverse(),
+              word,
+              line = [],
+              lineNumber = 0,
+              lineHeight = 1.1, // ems
+              y = text.attr("y"),
+              dy = parseFloat(text.attr("dy")),
+              tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+          while (word = words.pop()) {
+            line.push(word);
+            tspan.text(line.join(" "));
+            if (tspan.node().getComputedTextLength() > width) {
+              line.pop();
+              tspan.text(line.join(" "));
+              line = [word];
+              tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+            }
+          }
+        });
+      }
 
       function drawBarChart() {
+        setChartParameters();
 
-      	setChartParameters();
+        var filteredData = scope.data.filter(function(d) { return d[scope.time] != 0; });
+        var dataKey = function(d) { return d.name; }
 
-        var barGroup = svg.append("svg:g")
-          .attr("class", "bar-group")
-          .attr("transform", "translate(0,"+0+")")
+        //BARS
+         var bars = svg.select('.bar-group').selectAll(".bar").data(filteredData, dataKey)
 
-       	var bars = barGroup.selectAll(".bar").data(scope.data)
+         bars.enter().append('svg:rect')
+           .attr({
+             'y': function(d, i) { return barHeight * i; },
+             'x' : 0,
+             'width': 0,
+             'height': barHeight - barMargin,
+             'fill': 'red',
+             'class': function(d, i) { return 'bar bar-'+i; }
+           })
 
-       	bars.enter().append('svg:rect')
-	       	.attr({
-	       		'x': function(d, i) { return xScale(d.name); },
-	       		'y' : barHeight,
-	       		'width': xScale.rangeBand(),
-	       		'height': 0,
-	       		'fill': 'red',
-	       		'class': function(d, i) { return 'bar bar-'+i; }
-	       	})
+         bars.transition()
+           .delay(!bars.exit().empty()*exitDuration)
+           .duration(transformDuration)
+           .attr({
+             'width': function(d) { return xScale(d[scope.time])},
+             'y': function(d, i) { return barHeight * i; },
+           })
 
-       	bars.transition()
-       		.delay(function(d, i) { return i * 200; })
-       		.duration(500)
-       		.attr({
-       			'height': function(d) { return barHeight - yScale(d.amount)},
-         		'y' : function(d) { return yScale(d.amount); },
-       		})
+         bars.exit().transition()
+           .duration(exitDuration)
+           .attr({
+             width: 0,
+           })
+           .style('opacity','0')
+           .remove();
 
-       	var labelGroup = svg.append("svg:g")
-       		.attr('class', 'labels')
+        //LABELS
+         var labels = svg.select('.labels').selectAll('.label').data(filteredData, dataKey)
 
-     		var labels = labelGroup.selectAll('.label').data(scope.data)
+         labels.enter().append('svg:text')
+           .attr({
+             x: labelMargin,
+             y: function(d, i) { return (barHeight * i) + ((barHeight- barMargin)/2); },
+             class: function(d, i) {return 'label label-'+ i; },
+             'dominant-baseline': 'middle',
+             height: barHeight -barMargin
+           })
+           .style('opacity','0')
 
-     		labels.enter().append('svg:text')
-     			.attr({
-     				'x': function(d, i) { return xScale(d.name) + xScale.rangeBand()/2; },
-     				'y' : function(d) { return yScale(barHeight) + 18; },
-     				'width': xScale.rangeBand(),
-     				'class': function(d, i) {return 'label label-'+ i; },
-     				'text-anchor': 'middle',
-     			})
-
-     		labels.transition()	
- 					.delay(function(d, i) { return i * 200; })
-     			.duration(500)
-        	.tween('text', function(d) { 
-            var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d.amount);
+         labels.transition()  
+           .delay(!labels.exit().empty()*exitDuration)
+           .duration(transformDuration)
+           .attr({
+             x: function(d) { return xScale(d[scope.time]) +labelMargin},
+             y: function(d, i) { return (barHeight * i) + ((barHeight-barMargin)/2); },
+           })
+          .tween('text', function(d) { 
+            var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d[scope.time]);
             return function(t) { 
               this.textContent = amountText(d, i(t));
             }
-        	})	
+          })
+           .style('opacity','1')
 
-        var keyGroup = svg.append('svg:g')
-        	.attr({
-        		'class':'key',
-        		transform: 'translate('+(width-215)+', 20)',
-        	})
+        labels.exit().transition()
+          .duration(exitDuration)
+          .attr({
+            x: labelMargin,
+          })
+           .style('opacity','0')
+          .remove();
 
+        //KEY
 
-        var keyItems = keyGroup.selectAll('.key-item').data(scope.data, function(d) { return d.name})
+        var keyItems = svg.select('.key').selectAll('.key-item').data(filteredData, dataKey);
+
         keyItems.enter().append('svg:g')
-        	.attr({
-        		'class':'key-item',
- 						'transform': function(d, i) { return 'translate('+(width-420)+', '+ (i*30)+')'; },
-        	})
+          .attr({
+            'class':'key-item',
+             'transform': function(d, i) {
+               return 'translate('+(keyWidth-keyMargin)+', '+ (barHeight * i)+')'; },
+          })
+           .style('opacity','0')
+          .append('svg:text')
+            .attr({
+              'class': 'key-text',
+              'y': (barHeight-barMargin)/2,
+              'dominant-baseline': 'middle',
+              'text-anchor': 'end',
+              'width': keyWidth-keyMargin,
+              'height': barHeight -barMargin,
+              dy: '0em'
+            })
+            .text(function(d) { return d.name})
+            .call(wrap, keyWidth-keyMargin)
 
         keyItems.transition()
-         	.ease('elastic')
-          .delay(function(d, i) { return i * 200; })
-         	.duration(500)
-         	.attr('transform', function(d, i) { return 'translate(0, '+ i*30+')'; })
-       
-       	keyItems.append('rect')
-       		.attr({
-       			'class': function(d, i) { return 'key-swatch key-'+i; },
-       			width: 20,
-       			height: 20,
-       			x: 0,
-       			y: -20,
-   				})
+           .delay(!keyItems.exit().empty()*exitDuration)
+           .duration(transformDuration)
+           .attr('transform', function(d, i) { return 'translate('+(keyWidth-keyMargin)+', '+ (barHeight * i)+')'; })
+           .style('opacity','1')
 
-        keyItems.append('svg:text')
-        	.attr({
-        		'class': 'key-text',
-        		//'width': 150,
-        		'x': 25,
-        		'y': -9,
-        		'dominant-baseline': 'middle'
-        	})
-        	.text(function(d) { return d.name})
+        keyItems.exit().transition()
+          .duration(exitDuration)
+          .style('opacity','0')
+          .remove()
+          
+      }
+
+      scope.$watch('time', function(a, b) {
+        if (a && a != b) {
+          drawBarChart();
+        }
+      })
+
+      scope.$watch('data', function() {
+        init();
+        drawBarChart();
+      });
+
+      scope.$on('windowResize', resize)
+      
+      function resize() {
+        setChartParameters();
+
+        if (oldWidth == width) { return; }
+
+        svg.selectAll('.bar')
+          .attr({
+             'width': function(d) { return xScale(d[scope.time])},
+             'y': function(d, i) { return barHeight * i; },
+          })
+
+        svg.selectAll('.label')
+          .attr({
+             x: function(d) { return xScale(d[scope.time]) +labelMargin},
+             y: function(d, i) { return (barHeight * i) + ((barHeight-barMargin)/2); },
+          })
+
       }
     }
   }
@@ -410,72 +462,90 @@ app.directive('bubbleChart', function($window) {
       data: '='
     },
     template: "<div class='bubble-chart'>"+
-    	"<div class='bubble-label'>2014 Spending <span tooltip='Tier 1 organizations consist of: •    Koch-owned business, such as Koch Industries and Flint Hills resources •    Political organizations with very close ties to the Kochs, i.e. they founded the company or sit on the board. Examples include Americans for Prosperity and Club for Growth •    Koch-owned or founded think tanks, such as the Cato Institute. Not many donations from these are included in our data. •    Any organization to which the Koch brothers have donated over one million dollars since 2008 Tier 2 organizations consist of: •    Any organization that receives considerable funding from the Koch brothers that totals less than one million dollars.'>[?]</span></div>"+
-    	"<svg>"+
-    	"<filter id='glow' x='-30%' y='-30%' width='160%' height='160%'><feGaussianBlur stdDeviation='1 1' result='glow'/><feMerge><feMergeNode in='glow'/><feMergeNode in='glow'/><feMergeNode in='glow'/></feMerge></filter>"+
-    	"</svg></div>",
+      "<div class='bubble-label col-xs-6 text-center'><span>2014 Cycle Funding <span info-popup content='{{popupContent}}'></span></span></div>"+
+      "<div class='bubble-label col-xs-6 text-center'><span>Prior Year Funding <span info-popup content='{{popupContent}}'></span></span></div>"+
+      "<svg><defs>"+
+        "<filter id='glow' x='-30%' y='-30%' width='160%' height='160%'>"+
+          "<feGaussianBlur stdDeviation='1 1' result='glow'/>"+
+          "<feMerge>"+
+            "<feMergeNode in='glow' />"+
+            "<feMergeNode in='glow' />"+
+            "<feMergeNode in='glow' />"+
+          "</feMerge>"+
+        "</filter>"+
+      "</defs>"+
+      "</svg></div>",
     link: function(scope, elem, attrs){
+      scope.popupContent = "<b>Tier 1 organizations</b> consist of Koch-owned businesses, political organizations with very close ties to the Kochs, Koch-owned or founded think tanks, and any organization to which the Koch brothers have donated over one million dollars since 2008 "+
+        "<p><b>Tier 2 organizations</b> consist of any organization that receives considerable funding from the Koch brothers that totals less than one million dollars.</p>";
       
       var maxRadius = 65;
       var yValue = maxRadius + 30 + 25;
       
-      var labels =  ["Tier One", 'Tier Two', 'Prior Years', 'Lifetime Total'];
+      var labels =  ["Tier One", 'Tier Two', 'Tier One', 'Tier Two'];
 
-      var pathClass="path";
       var xScale, yScale, xAxisGen, yAxisGen, zScale, amountText, commas;
 
       var d3 = $window.d3;
       var rawSvg=elem.find('svg');
       var svg = d3.select(rawSvg[0]);
 
-   		var width, height, barHeight, oldWidth;
+      var width, height, barHeight, oldWidth;
 
       var init = function() { 
-	      oldWidth = width;
-	      width = elem.width();
-	      height = width * .4
-	      barHeight = height - 20;
+        oldWidth = width;
+        width = elem.width();
+        //height = width * .4
+        maxRadius = width > 65 * 8 ? 65 : 45;
+        yValue = maxRadius + 30 + 25;
 
-	      svg.attr({
-	      	width: width,
-	      	height: height
-	      })
-	    }
+        height = 216
+        barHeight = height - 20;
+
+        svg.attr({
+          width: width,
+          height: height
+        })
+      }
      
       scope.$watch('data', function() {
-    		init();
-    		drawBubbleChart();
+      	console.log(scope.data)
+        init();
+        drawBubbleChart();
       });
 
       scope.$on('windowResize', resize)
-      	
-    	function resize() {
-    		init();
-    		if (oldWidth == width) { return; }
+        
+      function resize() {
+        init();
+        if (oldWidth == width) { return; }
 
         xScale = d3.scale.linear()
           .domain([0, 3])
           .range([maxRadius, width - maxRadius]);
        
         zScale = d3.scale.sqrt()
-	        .domain([0, d3.max(scope.data, function(d) { return d; })])
-	        .range([0, 65]);
+          .domain([0, d3.max(scope.data, function(d) { return d; })])
+          .range([0, maxRadius]);
 
         svg.selectAll("circle")
-        	.attr({
-      			cx: function(d, i) { return xScale(i); },
-						r: function(d) { return zScale(d); }
-					})
+          .attr({
+            cx: function(d, i) { return xScale(i); },
+            r: function(d) { return zScale(d); }
+          })
 
-				svg.selectAll('.amount')
-					.attr('x',function(d, i) { return xScale(i); })
+        svg.selectAll('image')
+          .attr('x',function(d, i) { return xScale(i)-32; })
 
-				svg.selectAll('.amount-shadow')
-					.attr('x',function(d, i) { return xScale(i); })	
-				
-				svg.select('.axis')
-					.call(xAxisGen.scale(xScale))
-    	}
+        svg.selectAll('.amount')
+          .attr('x',function(d, i) { return xScale(i); })
+
+        svg.selectAll('.amount-shadow')
+          .attr('x',function(d, i) { return xScale(i); })  
+        
+        svg.select('.axis')
+          .call(xAxisGen.scale(xScale))
+      }
 
       function setChartParameters(){
         xScale = d3.scale.linear()
@@ -483,28 +553,28 @@ app.directive('bubbleChart', function($window) {
           .range([maxRadius, width - maxRadius]);
        
         zScale = d3.scale.sqrt()
-	        .domain([0, d3.max(scope.data, function(d) { return d; })])
-	        .range([0, 65]);
+          .domain([0, d3.max(scope.data, function(d) { return d; })])
+          .range([0, maxRadius]);
 
         xAxisGen = d3.svg.axis()
-	        .scale(xScale)
-	        .orient("top")
-	        .ticks(scope.data.length)
-	        .tickValues([0, 1, 2,3])
-	        .tickFormat(function(d, i) { return labels[i]; })
-	        .innerTickSize(maxRadius + 30)
+          .scale(xScale)
+          .orient("top")
+          .ticks(scope.data.length)
+          .tickValues([0, 1, 2,3])
+          .tickFormat(function(d, i) { return labels[i]; })
+          .innerTickSize(maxRadius + 30)
 
         amountText = function(d, value) { 
           var text = '';
           return '$' + commas(Math.floor(value));
         }
 
-		    commas = function(val){
-		  		while (/(\d+)(\d{3})/.test(val.toString())){
-		    		val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
-		  		}
-		  		return val;
-				}
+        commas = function(val){
+          while (/(\d+)(\d{3})/.test(val.toString())){
+            val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+          }
+          return val;
+        }
        }
     
       function drawBubbleChart() {
@@ -516,7 +586,7 @@ app.directive('bubbleChart', function($window) {
           .attr("transform", "translate(0,"+(yValue)+")")
           .call(xAxisGen)
 
-        var circle = svg.selectAll("circle").data(scope.data)
+        var circle = svg.selectAll("circle").data(scope.data) //.filter(function(d) { return d > 0; }))
         
         circle.enter().append("svg:circle")
           .attr({
@@ -527,11 +597,22 @@ app.directive('bubbleChart', function($window) {
           });
 
         circle.transition()
-        	.ease('elastic')
+          .ease('elastic')
           .duration(1000)
           .delay(function(d, i) { return i * 200; })
           .attr('r', function(d) { return zScale(d); })
-                 
+
+				var images = svg.selectAll('image').data(scope.data);
+				images.enter().append('image')
+					.attr({
+	          x: function(d, i) { return xScale(i) - 32; },
+						y: yValue - 26,
+						width: 64,
+						height: 71,
+						opacity: function(d) { return d > 0 ? 0 : 1; },
+						'xlink:href': 'images/graphic-no-funding.png'
+					})
+
         svg.append('g').attr('class', 'amounts');
 
         var amounts_group = svg.selectAll('g.amounts')
@@ -540,14 +621,15 @@ app.directive('bubbleChart', function($window) {
           .data(scope.data);
 
          amounts.enter().append('text')
-	      	.attr('x',function(d, i) { return xScale(i); })
+          .attr('x',function(d, i) { return xScale(i); })
           .attr('class','chart-label amount-shadow')
           .attr('dominant-baseline', 'middle')
           .attr('text-anchor','middle')
           .attr('y', yValue)
+          .style('filter', 'url(#glow)')
 
         amounts.enter().append('text')
-        	.attr('x',function(d, i) { return xScale(i); })
+          .attr('x',function(d, i) { return xScale(i); })
           .attr('class','chart-label amount')
           .attr('dominant-baseline', 'middle')
           .attr('text-anchor','middle')
@@ -559,7 +641,7 @@ app.directive('bubbleChart', function($window) {
           .tween('text', function(d) { 
             var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d);
             return function(t) { 
-              this.textContent = amountText(d, i(t));
+              this.textContent = d > 0 ? amountText(d, i(t)) : '';
             }
           })
       } 
@@ -570,15 +652,17 @@ app.directive('bubbleChart', function($window) {
 app.directive('searchBox', function(DataRequestFactory, $state) {
   return {
     restrict: 'E',
-    scope: true,
-    template: "<div class='search-box-container'>"+
-      "<input type='text' ng-model='searchValue' placeholder='Candidate Name or Zipcode' typeahead='result.label as result for result in search($viewValue)' typeahead-template-url='common/search-results.tpl.html' typeahead-loading='loadingSearch' typeahead-editable='false' class='form-control search-box' typeahead-on-select='select($item, $model, $label)'>"+
-      "<button class=' btn btn-md btn-detault searchButton' type='submit' ng-click='search()'>Search</button></div>"+
+    scope: {
+    	button:'='
+    },
+    template:
+      "<input class='input-sm' type='text' ng-model='searchValue' placeholder='Candidate Name or Zipcode' typeahead-append-to-body='true' typeahead='result.label as result for result in search($viewValue)' typeahead-template-url='common/search-results.tpl.html' typeahead-loading='loadingSearch' typeahead-editable='false' class='' typeahead-on-select='select($item, $model, $label)'>"+
+      "<button ng-if='button' class=' btn btn-md btn-detault searchButton' type='submit' ng-click='search()'>GO</button>"+
       "<div ng-show='loadingSearch'>Insert Loading Indicator</div>",
     link: function(scope, element, attribs) {
       scope.searchValue = '';
       scope.loadingSearch = false;
-
+      element.find('input').focus();
       scope.search = function(value) {
         //scope.loadingSearch = true;
         return DataRequestFactory.getData('search', value).then(function(res) { 
@@ -606,3 +690,83 @@ app.directive('searchBox', function(DataRequestFactory, $state) {
     }
   };
 });
+
+app.directive('infoPopup', function($state) {
+  return {
+    restrict: "A",
+    scope: { 
+      content: "@",
+      link: "@"
+    },
+    template: 
+      "<span ng-click='go()' class='glyphicon glyphicon-question-sign info-popup' popover-placement='top' popover-append-to-body='true' popover-trigger='mouseenter' popover-html-unsafe='{{content}}'/>",
+    link: function(scope, element, attr) {
+      scope.go = function() {
+        if (scope.link) {
+          $state.go(scope.link);
+        }
+      }
+    }
+  }
+})
+
+app.directive("popoverHtmlUnsafePopup", function () {
+  return {
+    restrict: "EA",
+    replace: true,
+    scope: { title: "@", content: "@", placement: "@", animation: "&", isOpen: "&" },
+    template: 
+    "<div class='popover {{placement}}' ng-class='{ in: isOpen(), fade: animation() }'>"+
+    "  <div class='arrow'></div>"+
+    "  <div class='popover-inner'>"+
+    "      <h3 class='popover-title' ng-bind='title' ng-show='title'></h3>"+
+    "      <div class='popover-content' bind-html-unsafe='content'></div>"+
+    "  </div>"+
+    "</div>",
+    link: function(scope, element, attr) {
+    }
+   }
+})
+
+app.directive("popoverHtmlUnsafe", [ "$tooltip", function ($tooltip) {
+  return $tooltip("popoverHtmlUnsafe", "popover", "click");
+}]);
+
+app.directive('preventDefault', function () {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+      element.bind('click', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    }
+  };
+});
+
+app.directive('autoFocus', function () {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+    	element.bind('click', function (event) {
+	    	element.find('input').focus();
+	    })
+    }
+  };
+});
+
+app.directive('shareThis', function ($location) {
+  return {
+    restrict: 'A',
+    scope: true,
+    template: "<div class='addthis_sharing_toolbox'></div>",
+    link: function (scope, element, attrs) {
+    	// scope.url = $location.absUrl();
+    	// scope.$on('$locationChangeSuccess', function(event) {
+    	// 	scope.url = $location.absUrl();
+    	// });
+    }
+  };
+});
+
+

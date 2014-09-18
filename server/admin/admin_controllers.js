@@ -17,92 +17,168 @@ module.exports = exports = {
       'facts': {
         sheetId: 'od6',
         descField: 1,
-        columnDef: ['description', 'detail', 'published']
+        columnDef: ['description', 'published'],
+        table: 'content'
       },
       'voices': {
         sheetId: 'op3qyu',
         descField: 3,
-        columnDef: ['title', 'detail', 'description', 'published']
+        columnDef: ['title', 'detail', 'description', 'published'],
+        table: 'content'
       },
       'offenders': {
         sheetId: 'ognp1n8',
         descField: 3,
-        columnDef: ['detail', 'title', 'description', 'published']
+        columnDef: ['detail', 'null', 'description', 'published'],
+        table: 'content'
+      },
+      'realtime': {
+        sheetId: 'oek222k',
+        descField: 3,
+        columnDef: ['voteSmartId', 'null', 'amount', 'date', 'donor_name', 'published'],
+        table: 'koch_contribs'
+      },
+      'races': {
+        sheetId: 'ooogrp6',
+        descField: 2,
+        columnDef: ['title', 'description', 'published'],
+        table: 'content'
       },
     }
     var count = 0;
+    var dataChanged = 0;
 
     var fetchSheet = function(sheet) {
       var sheetInfo = sheets[sheet];
+      var table = sheetInfo.table;
       var deferred = Q.defer();
+      sheetInfo.type = sheet == 'realtime' ? 'source' : 'type';
 
-      db.doQuery("drop table if exists content_tmp").then(function() {
-        db.doQuery("create table content_tmp like content").then(function() {
-          Spreadsheet.load({
-            //debug: true,
-            spreadsheetId: config.google.contentSheetId,
-            worksheetId:sheetInfo.sheetId,
-            oauth : {
-              email: config.google.email,
-              key: config.google.oauthKey,
-            }
-          }, function sheetReady(err, spreadsheet) {
+      Spreadsheet.load({
+          //debug: true,
+          spreadsheetId: config.google.contentSheetId,
+          worksheetId:sheetInfo.sheetId,
+          oauth : {
+            email: config.google.email,
+            key: config.google.oauthKey,
+          }
+        }, function sheetReady(err, spreadsheet) {
+          if (err) {
+            deferred.reject(err);
+          }
+          spreadsheet.receive(function(err, rows, info) {
             if (err) {
               deferred.reject(err);
             }
-            spreadsheet.receive(function(err, rows, info) {
-              if (err) {
-                deferred.reject(err);
+            var promises = [];
+            Object.keys(rows).forEach(function(r) { 
+              if (r != 1) {
+                var row =  rows[r];
+                promises.push(processRow(row, r, sheetInfo));
               }
-              var promises = [];
-              Object.keys(rows).forEach(function(r) { 
-                var row = rows[r];
-                if (r == 1) { return; }
-                if (row[sheetInfo.descField] == undefined) { return; }
-                var itemDeferred = Q.defer();
-                promises.push(itemDeferred.promise);
-                var item = {type: sheet};
-                sheetInfo.columnDef.forEach(function(field, i) { 
-                  if (sheet == 'offenders' && field == 'title') { return; }
-                  if (field == 'published') { 
-                    item[field] = row[i+1] == 'Published' ? 1 : 0;
+            })  
+            Q.all(promises)
+              .then(function() { return Q.fcall(function() { 
+                dataChanged = 1;
+              })})
+              .then(function() { return db.doQuery("delete from "+table+" where "+sheetInfo.type+" = ?", sheet); })
+              .then(function() { return db.doQuery("insert into "+table+" select * from "+table+"_tmp"); })
+              .then(function() { return db.doQuery("drop table "+table+"_tmp"); })
+              .then(function() {
+                  var cleanupDeferred = Q.defer();
+                  if (sheet == 'offenders') {
+                    db.doQuery("update content a join candidates b on voteSmartId = detail set title = nameFirstLast where type = 'offenders'").then(function() {
+                      cleanupDeferred.resolve();
+                    }, cleanupDeferred.reject);
+                  } else if (sheet == 'realtime') {
+                    db.doQuery("update candidates join (select sum(amount) as amount, crpid from koch_contribs where for_against = 'f' and cycle = 2014 group by crpid) b using(crpid) set 2014contrib = amount")
+                      .then(function() { return db.doQuery("update candidates join (select sum(amount) as amount, crpid from koch_contribs where for_against = 'f' group by crpid) b using(crpid) set since2000contrib = amount"); })
+                      .then(function() { return db.doQuery("update koch_contribs a join koch_orgs b on donor_name = org_name set koch_tier = tier where koch_tier is null"); })
+                      .then(function() {
+                        cleanupDeferred.resolve();   
+                      })
+                      .fail(cleanupDeferred.reject);
                   } else {
-                    item[field] = row[i+1];
+                    cleanupDeferred.resolve();   
                   }
-                })
-                db.doQuery("insert into content_tmp set ?", item).then(function() {
-                  count++;
-                  itemDeferred.resolve();
-                }, deferred.reject);
-              })  
-              Q.all(promises).then(function() { 
-                db.doQuery("delete from content where type = ?", sheet).then(function() {
-                  db.doQuery("insert into content select * from content_tmp").then(function() {
-                    db.doQuery("drop table content_tmp").then(function() {
-                      db.doQuery("update content a join candidates b on voteSmartId = detail set title = nameFirstLast where type = 'offenders'").then(function() {
-                        deferred.resolve();
-                      }, deferred.reject);
-                    }, deferred.reject);
-                  }, deferred.reject);
-                }, deferred.reject);
-              }, deferred.reject);
-            });
+                return cleanupDeferred.promise
+              })
+              .then(function() {
+                deferred.resolve();
+              })
+              .catch(function(err) {
+                deferred.reject(err);
+              });
           });
-        }, deferred.reject);
-      }, deferred.reject);
+        }
+      );
       return deferred.promise;
     }
+
+    var setupTmpTable = function(table) {
+      var deferred = Q.defer();
+      db.doQuery("drop table if exists "+table+"_tmp")
+        .then(function() { return db.doQuery("create table "+table+"_tmp like "+table); })
+        .then(deferred.resolve)
+        .catch(deferred.reject)
+      return deferred.promise;
+    }
+
+    var processRow = function(row, r, sheetInfo) {
+      var itemDeferred = Q.defer();
+      var table = sheetInfo.table;
+      var type = sheetInfo.type;
+      if (r == 1 || row[sheetInfo.descField] == undefined) { 
+        itemDeferred.resolve();
+      }
+      var item = {};
+      item[type] = sheet;
+
+      var publish = 0;
+      sheetInfo.columnDef.forEach(function(field, i) { 
+        if (field == 'null') { return; }
+        if (field == 'published') { 
+          publish = row[i+1] == 'Published' ? 1 : 0;
+          if (table == 'content') {
+            item[field] = publish;
+          }
+        } else {
+          item[field] = row[i+1];
+        }
+      })
+      if (publish) {
+        if (sheet == 'realtime') { 
+          item['cycle'] = 2014;
+          var dates = item.date.split("/");
+          item.date = dates[2]+"/"+dates[0]+"/"+dates[1];
+        }
+        db.doQuery("insert into "+table+"_tmp set ?", item).then(function() {
+          count++;
+          itemDeferred.resolve();
+        }, itemDeferred.reject);
+      } else {
+        itemDeferred.resolve();
+      }
+      return itemDeferred.promise;
+    }
+
 
     if (! sheets[sheet]) {
       next(new Error("Invalid sheet ("+sheet+")"))
     } else {
-      fetchSheet(sheet).then(function() {
-        res.send({type: 'admin', data: count}) 
-      }, function(err) { 
-        db.doQuery("drop table id exists content_tmp").then(function() {
-          next(err);
-        },next);
-      });
+      var sheetInfo = sheets[sheet];
+      setupTmpTable(sheetInfo.table)
+        .then(function() { return fetchSheet(sheet); })
+        .then(function() {
+          res.send({type: 'admin', data: count}) 
+        })      
+        .catch(function(err){
+          var message = dataChanged == 1 ? "<b>Data was changed</b>" : "Data was not changed";
+          err.message += "<br/>"+message;
+          db.doQuery("drop table if exists "+sheetInfo.table+"_tmp").then(function() {
+            next(err);
+          },next);
+        })
     }
   },
 
@@ -167,7 +243,7 @@ module.exports = exports = {
                       deferred.resolve();
                     }, error)
                   });
-                }, 200*i);
+                }, 300*i);
               });
             }
             Q.all(promises).then(function() {

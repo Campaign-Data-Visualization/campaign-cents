@@ -8,13 +8,7 @@ var Q  = require('q'),
     db = require('../database.js'),
     nodemailer = require('nodemailer');
 
-var transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        user: config.google.contactEmail,
-        pass: config.google.contactEmailPassword
-    }
-});
+var transporter;
 
 module.exports = exports = {
   search: function(req, res, next) { 
@@ -74,12 +68,12 @@ module.exports = exports = {
 
     db.doQuery("select * from candidates where voteSmartId = ?", [candidateId]).then(function(data) {
       var profile = data[0];
-      db.doQuery("select sum(if(cycle=2014 && koch_tier = 1, amount, 0)) as a,sum(if(cycle=2014 && koch_tier = 2, amount, 0)) as b, sum(if(cycle!=2014, amount, 0)) as c,  sum(amount) as d from koch_contribs where votesmartId = ? and for_against = 'f'", [candidateId]).then(function(data) {
+      db.doQuery("select sum(if(cycle=2014 && koch_tier = 1, amount, 0)) as a,sum(if(cycle=2014 && koch_tier = 2, amount, 0)) as b, sum(if(cycle!=2014 && koch_tier = 1, amount, 0)) as c,  sum(if(cycle!=2014 && koch_tier = 2, amount, 0)) as d from koch_contribs where votesmartId = ? and for_against = 'f'", [candidateId]).then(function(data) {
         profile.data = { 
           'totals': Object.keys(data[0]).map(function(v) { return data[0][v];}) //convert to array
         }
-        db.doQuery("select donor_name as name, sum(amount) as amount from koch_contribs b where votesmartid = ? and for_against = 'f' group by donor_name order by sum(amount) desc limit 4", [candidateId]).then(function(data) {
-          profile.data.top_donors = data;
+        db.doQuery("select donor_name as name, koch_tier, sum(amount) as total, sum(if(cycle = 2014, amount, 0)) as current, sum(if(cycle = 2014, 0, amount)) as previous from koch_contribs b where votesmartid = ? and for_against = 'f' group by donor_name order by sum(amount) desc", [candidateId]).then(function(data) {
+          profile.data.donors = data;
           res.send({type: 'candidateProfile', data:profile})
         }, next);
       }, next);
@@ -145,6 +139,9 @@ module.exports = exports = {
       facts: {
         query: "content where type = 'facts' and published = 1"
       },
+      races: {
+        query: "content where type = 'races' and published = 1"
+      },
       kochCandidates: {
         query: "candidates where since2000contrib != 0 ",
         order: 'since2000contrib desc'
@@ -171,12 +168,21 @@ module.exports = exports = {
     var utc = d.getTime() - (d.getTimezoneOffset() * 60000);
     var date = new Date(utc + (3600000*7)).toLocaleString();
     var mailOptions = {
-        from: 'Greg Michalec <gregmichalec@gmail.com>', // sender address
-        to: 'greg@primate.net', // list of receivers
+        from: config.google.contactEmail, // sender address
+        to: config.google.contactEmail, // list of receivers
         subject: "Victim's Voices Submission", // Subject line
     };
     var body = "A new Victim's Voice entry was submitted on "+date+"\n\n";
     var error;
+    if (! transporter) { 
+      transporter = nodemailer.createTransport({
+          service: 'Gmail',
+          auth: {
+              user: config.google.contactEmail,
+              pass: config.google.contactEmailPassword
+          }
+      });
+    }
 
     fields.forEach(function(field) {
       var f = req.body[field];
