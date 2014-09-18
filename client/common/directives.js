@@ -656,7 +656,7 @@ app.directive('searchBox', function(DataRequestFactory, $state) {
     	button:'='
     },
     template:
-      "<input class='input-sm' type='text' ng-model='searchValue' placeholder='Candidate Name or Zipcode' typeahead-append-to-body='true' typeahead='result.label as result for result in search($viewValue)' typeahead-template-url='common/search-results.tpl.html' typeahead-loading='loadingSearch' typeahead-editable='false' class='' typeahead-on-select='select($item, $model, $label)'>"+
+      "<input class='input-sm' type='text' ng-model='searchValue' placeholder='Candidate Name or Zipcode' typeahead-wait-ms='200' typeahead-append-to-body='true' typeahead='result.label as result for result in search($viewValue)' typeahead-template-url='common/search-results.tpl.html' typeahead-loading='loadingSearch' typeahead-editable='false' typeahead-on-select='select($item, $model, $label)'>"+
       "<button ng-if='button' class=' btn btn-md btn-detault searchButton' type='submit' ng-click='search()'>GO</button>"+
       "<div ng-show='loadingSearch'>Insert Loading Indicator</div>",
     link: function(scope, element, attribs) {
