@@ -739,3 +739,19 @@ app.directive('autoFocus', function () {
     }
   };
 });
+
+app.directive('shareThis', function ($location) {
+  return {
+    restrict: 'A',
+    scope: true,
+    template: "<div class='addthis_sharing_toolbox'></div>",
+    link: function (scope, element, attrs) {
+    	// scope.url = $location.absUrl();
+    	// scope.$on('$locationChangeSuccess', function(event) {
+    	// 	scope.url = $location.absUrl();
+    	// });
+    }
+  };
+});
+
+

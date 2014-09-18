@@ -910,14 +910,15 @@ body{background-color:#e1e1e1;font-family:'ubuntuRegular'}
 .social,.links{margin:0}@media (min-width:768px){.social,.links{margin:0 -15px}}
 .social{float:right}@media (min-width:768px){}
 .social div{float:left}
-.social div#pinterest{background-image:url('../images/graphic-share-pinterest.png');background-repeat:none;width:41px;height:30px}
-.social div#pinterest:hover{background-image:url('../images/graphic-share-pinterest_ON.png')}
-.social div#twitter{background-image:url('../images/graphic-share-twitter.png');background-repeat:none;width:31px;height:30px}
-.social div#twitter:hover{background-image:url('../images/graphic-share-twitter_ON.png')}
-.social div#facebook{background-image:url('../images/graphic-share-facebook.png');background-repeat:none;width:31px;height:30px}
-.social div#facebook:hover{background-image:url('../images/graphic-share-facebook_ON.png')}
-.social div#tumblr{background-image:url('../images/graphic-share-tumblr.png');width:31px;background-repeat:none;height:30px}
-.social div#tumblr:hover{background-image:url('../images/graphic-share-tumblr_ON.png')}
+.social .addthis_32x32_style .at300bs.at15t_pinterest_share{width:41px !important;height:30px !important}
+.social div#pinterest,.social .addthis_32x32_style .at300bs.at15t_pinterest_share{background:url('../images/graphic-share-pinterest.png') !important;background-repeat:none;width:41px !important;height:30px !important}
+.social div#pinterest:hover,.social .addthis_32x32_style .at300bs.at15t_pinterest_share:hover{background:url('../images/graphic-share-pinterest_ON.png') !important}
+.social div#twitter,.social .addthis_32x32_style .at300bs.at15t_twitter{background:url('../images/graphic-share-twitter.png') !important;background-repeat:none;width:31px !important;height:30px !important}
+.social div#twitter:hover,.social .addthis_32x32_style .at300bs.at15t_twitter:hover{background:url('../images/graphic-share-twitter_ON.png') !important}
+.social div#facebook,.addthis_32x32_style .at300bs.at15t_facebook{background:url('../images/graphic-share-facebook.png') !important;background-repeat:none;width:31px !important;height:30px !important}
+.social div#facebook:hover,.addthis_32x32_style .at300bs.at15t_facebook:hover{background:url('../images/graphic-share-facebook_ON.png') !important}
+.social div#tumblr,.addthis_32x32_style .at300bs.at15t_tumblr{background:url('../images/graphic-share-tumblr.png') !important;width:31px !important;background-repeat:none;height:30px !important}
+.social div#tumblr:hover,.addthis_32x32_style .at300bs.at15t_tumblr:hover{background:url('../images/graphic-share-tumblr_ON.png') !important}
 #dropdown-search{width:250px;text-align:center;padding:10px}
 #dropdown-search input{text-align:center;margin:0 auto}
 .navbar-nav>li>.dropdown-menu a{color:#fff}
