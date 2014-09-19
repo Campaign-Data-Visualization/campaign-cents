@@ -6,25 +6,42 @@ var mysql       = require('mysql'),
     middle      = require('./middleware'),
     config      = require('config'),
     db          = require('../database'),
-    auth        = require('http-auth');
+    session     = require('express-session'),
+    passport    = require('passport'),
+    localStrategy = require('passport-local');
+
+passport.serializeUser(function(username, done) {
+  done(null, username);
+});
+passport.deserializeUser(function(username, done) {
+  done(null, username);
+});
+
+passport.use(new localStrategy(
+  function(username, password, done) {
+    if(username === config.auth.user && password === config.auth.password) {
+      return done(null, username)
+    } else {
+      console.log('bad login');
+      return done(null, false, { message: 'Invalid password' });
+    }
+  }
+));
 
 /*
  * Include all your global env variables here.
 */
 module.exports = exports = function (app, express, routers) {
-  app.basicAuth = auth.connect(
-    auth.basic({
-      realm: "IFG Admin"  
-    }, function (username, password, callback) { // Custom authentication method.
-      callback(username === config.auth.user && password === config.auth.password);
-    })
-  );
+  app.passport = passport;
   app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 9000);
   app.set('ip', process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1');
   app.set('base url', process.env.URL || 'http://localhost');
   app.use(morgan('dev'));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
+  app.use(session({ secret: 'hereissomesalt', resave:true, saveUninitialized:true, cookie: { maxAge: 3600000 } }));
+  app.use(passport.initialize());
+  app.use(passport.session());
   //simulate latency
   //app.use(function(req,res,next){setTimeout(next,1000)});
   app.use(middle.cors);
@@ -37,6 +54,7 @@ module.exports = exports = function (app, express, routers) {
   app.use(middle.handleError);
   app.use(middle.fourohfour);
 };
+
 
 //This DB section is commented out to deploy. 
 //It should be uncommented once get cloud db running

@@ -107,8 +107,8 @@ module.exports = exports = {
       }, next)
     }
     if (mapType == 'layers') {
-      db.doQuery("select 'candidate' as layer, lat, lng, nameFirstLast as title, '' as description, format(since2000contrib, 0) as amount, voteSmartId as id from candidates where since2000contrib != 0 and lat != 0 and lng != 0 "+
-          "union select layer, lat, lng, title, description, null, null from koch_assets where country = 'us'"
+      db.doQuery("select 'candidate' as layer, lat, lng, state, nameFirstLast as title, '' as description, format(since2000contrib, 0) as amount, voteSmartId as id from candidates where since2000contrib != 0 and lat != 0 and lng != 0 "+
+          "union select layer, lat, lng, state, title, description, null, null from koch_assets where country = 'us'"
         ).then(function(data) {
         results.data = data;
         res.send(results);

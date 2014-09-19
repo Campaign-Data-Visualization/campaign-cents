@@ -58,6 +58,7 @@ module.exports = exports = {
           //debug: true,
           spreadsheetId: config.google.contentSheetId,
           worksheetId:sheetInfo.sheetId,
+          useCellTextValues: false,
           oauth : {
             email: config.google.email,
             key: config.google.oauthKey,
@@ -186,8 +187,11 @@ module.exports = exports = {
     var actionType = req.params.action;
     var count = 0;
     var layers = {
-      'campus': 'https://www.google.com/maps/ms?dg=feature&ie=UTF8&authuser=0&msa=0&output=kml&msid=212809903200638764816.0004ffe8cc6d60dc02d24',
-      'assets': 'https://maps.google.com/maps/ms?dg=feature&ie=UTF8&authuser=0&msa=0&output=kml&msid=208766254594228440027.0004d61d0323693e5957b',
+      // 'campus': 'https://www.google.com/maps/ms?dg=feature&ie=UTF8&authuser=0&msa=0&output=kml&msid=212809903200638764816.0004ffe8cc6d60dc02d24',
+      // 'assets': 'https://maps.google.com/maps/ms?dg=feature&ie=UTF8&authuser=0&msa=0&output=kml&msid=208766254594228440027.0004d61d0323693e5957b',
+      'assets': '210733691135073649242.0004c583afbfcf4ba47d5',
+      'involved': 'zs1gHoiwa3Mk.kUbDz5AIEUiM',
+      'campus': '212809903200638764816.0004ffe8cc6d60dc02d24',
     }
     var states = {};
 
@@ -201,7 +205,7 @@ module.exports = exports = {
 
       db.doQuery('drop table if exists koch_assets_tmp').then(function() {
         db.doQuery('create table koch_assets_tmp like koch_assets').then(function() {
-          db.deferredRequest(layers[actionType]).then(function(data) { 
+          db.deferredRequest('https://maps.google.com/maps/ms?dg=feature&ie=UTF8&authuser=0&msa=0&output=kml&msid='+layers[actionType]).then(function(data) { 
             var promises = [];
             var results = [];
             if (data && data.kml && data.kml.Document[0].Placemark[0]) {
