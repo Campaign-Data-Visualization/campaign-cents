@@ -53,7 +53,7 @@ ul, li {
 }
 
 body {
-	background-color: @cc-gray-light;
+	background-color: #e9e8e8;
 	font-family: @font-family-sans-serif;
 }
 
@@ -339,12 +339,16 @@ ul.box-text li div {
 }
 
 ///////////
+.map-section, .explore, .page-section {
+	background-image: -webkit-linear-gradient(#f8f8f8, #d6d6d6);
+	background-image: -o-linear-gradient(#f8f8f8, #d6d6d6);
+	background-image: linear-gradient(#f8f8f8, #d6d6d6);
+}	
 
+.page-section {
+	height: 100vh;
+}
 .map-section {
-	background-image:
-    linear-gradient(
-      #F9F9F9, @cc-gray-map-section
-    );
 	height: auto;
 	padding: 40px 0 20px 0;
 }
@@ -494,10 +498,9 @@ ul.box-text li div {
 	padding: 0 0 10px 0;
 }
 
-.sidebar .clock {
-	margin-bottom: 10px;
+.sidebar p {
+	text-align: left;
 }
-
 .sidebar-tile {
 	background-color: @cc-gray-search;
 	padding: 20px;
@@ -770,7 +773,7 @@ g .domain { display: none;}
 	fill: #000;
 }
 
-///// landing page map
+
 
 .state-boundaries { 
   cursor: pointer;
@@ -1000,4 +1003,14 @@ h4.modal-title {
 	font-family: @font-family-sans-serif;
 }
 
+//error messages
+.alert-danger {
+	text-align: center;
+	padding: 50px;
+	font-size: 30px;
+}
+
+.alert-danger button.close {
+	color: #000;
+}
 
