@@ -946,7 +946,7 @@ ul.box-text li div{height:100px}
 .landing-box-races h3,.landing-box-races a{color:#198e68}
 .landing-box-watch h3,.landing-box-watch a{color:#60af37}
 .dropdown-menu img{width:28px;border-width:1px;border-color:#333;border-style:solid;margin-right:5px}
-.map-section{background-color:#f0f0f0;height:auto;padding:40px 0 20px 0}
+.map-section{background-image:linear-gradient(#f9f9f9, #f0f0f0);height:auto;padding:40px 0 20px 0}
 .map-sidebar-container{text-align:center;height:auto}@media (min-width:767px){.map-sidebar-container{height:450px;position:relative;margin-top:10px}}@media (min-width:768px){.map-sidebar-container{margin-bottom:40px}}@media (min-width:1200px){.map-sidebar-container{margin-bottom:0}}
 .map-main{margin-top:-15px}
 .map-sidebar-container h1{color:#0071bc}
@@ -955,7 +955,7 @@ ul.box-text li div{height:100px}
 .map-sidebar-ticker h1 span{color:#0071bc;height:50px}
 .map-sidebar-ticker h1 span{text-align:center;background:url('../images/bg-counter.svg') repeat center}
 .map-sidebar-calendar{background-image:url('../images/calendar-bg.png');background-repeat:no-repeat;background-position:center;height:68px;width:105px;margin:0 auto 50px auto;padding-top:20px}
-.map-sidebar-calendar h1{display:inline;vertical-align:middle;font-family:'Rokkitt',serif;font-size:40px}
+.map-sidebar-calendar h1,.election-countdown-tag h1{display:inline;vertical-align:middle;font-family:'Rokkitt',serif;font-size:40px}
 .map-sidebar-calendar h1 span{margin-top:20px}
 .map-sidebar-calendar h1 span:first-child{padding-right:6px}
 .map-sidebar-calendar h1 span:last-child{padding-left:5px}
@@ -974,31 +974,32 @@ ul.box-text li div{height:100px}
 .sidebar h3{color:#000;padding:0 0 10px 0}
 .sidebar .clock{margin-bottom:10px}
 .sidebar-tile{background-color:#c8c7c7;padding:20px;margin:20px 0}
-.tab-content .row{margin-left:0;margin-right:0}
-.candidate-main{margin-top:15px}
-.candidate-main h1,.candidate-main h2,.candidate-main h3{color:#0071bc}
-ul.nav-tabs{border-bottom:2px solid #0071bc;background:none !important}
-ul.nav-tabs li{margin-right:5px;padding:10px;background-color:#0071bc}@media (max-width:767px){ul.nav-tabs li{margin-right:0;float:none;border-bottom:1px solid #fff}}
-ul.nav-tabs li>a{background-color:#b7b5b6;font-family:'rockwellRegular';color:#fff;font-size:16px;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;border-bottom:1px solid #0071bc}@media (max-width:767px){ul.nav-tabs li>a{margin-right:0;border-bottom:0}}
-.nav-tabs>li.active>a,.nav-tabs>li.active>a:hover,.nav-tabs>li.active>a:focus,.nav-tabs>li>a:hover{border:0;background-color:#0071bc;color:#fff;border-bottom:1px solid #0071bc}
-.show-all{border-bottom:1px solid #0071bc}
-.tab-content .row{padding:15px 0}
-.tab-content .row img{padding:0 10px 0 0}
-.tab-content,.get-involved{background-color:#fff}
-.get-involved h3,.get-involved p a{color:#ad272d}
-.get-involved>div{text-align:center}
-.get-involved>div>img{padding-bottom:15px}
-ul.candidate-list{display:block;padding-left:0;margin-top:-10px;background-color:#fff}
+.candidate-main{padding:0;margin-top:15px}
+.tab-pane h1,.tab-pane h2,.tab-pane h3{color:#0071bc}
+ul.nav-tabs{border-bottom:2px solid #0071bc;background:transparent !important}
+ul.nav-tabs li{margin-right:5px;border:0}@media (max-width:767px){ul.nav-tabs li{margin-right:0;float:none;border-bottom:1px solid #fff}}
+ul.nav-tabs li>a{background-color:#5b5a5a;font-family:'rockwellRegular';color:#fff;font-size:16px;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;border:0}@media (max-width:767px){ul.nav-tabs li>a{margin-right:0;border-bottom:0}}
+.nav-tabs>li.active>a,.nav-tabs>li.active>a:hover,.nav-tabs>li.active>a:focus,.nav-tabs>li>a:hover{background-color:#0071bc;color:#fff;border:0}
+.show-all{border-bottom:1px solid #0071bc;padding:15px}
+.tab-content{background-color:#fff}
+#candidates.tab-pane .row{margin:0;padding-top:15px}
+ul.candidate-list{display:block;padding-left:0;background-color:#fff}
 ul.candidate-list li{position:relative;border-bottom:2px solid #0071bc;border-top:3px solid #fff;border-right:3px solid #fff;border-left:3px solid #fff;height:auto;padding:30px}
-ul.candidate-list li:hover{border:3px solid #60af37}
+#candidates ul.candidate-list li:hover{border:3px solid #60af37}
 ul.candidate-list li img{padding:0 10px 0 0;height:100px;width:auto;float:left}@media (max-width:767px){ul.candidate-list li img{padding-bottom:0 0 10px 0}}
 ul.candidate-list li h4{color:#0071bc;font-family:'rockwellRegular';margin-top:2px}
-ul.candidate-list li p{position:absolute;bottom:20px;left:121px}
+ul.candidate-list>#candidates li p{position:absolute;bottom:20px;left:121px}
 span.bold{font-family:ubuntuBold}
-.election-countdown-tag{width:auto;padding:5px;text-align:center}
-.election-countdown-tag{background-image:url('../images/calendar-bg-grey.png');background-repeat:no-repeat;background-position:center;height:105px;padding-top:20px}
-.election-countdown-tag span{padding-top:10px;font-family:'Rokkitt',serif}
-.get-involved>div>h3{padding:30px 0}
+.election-countdown-tag{padding-top:20px;text-align:center}
+.election-countdown-tag{background-image:url('../images/calendar-bg-grey.png');background-repeat:no-repeat;background-position:center;height:73px}
+.election-countdown-tag h1{padding-top:20px}
+.election-countdown-tag h1 span:first-child{padding-right:6px}
+.election-countdown-tag h1 span:last-child{padding-left:5px}
+.get-involved{background-color:#fff;padding:30px;margin-top:-15px}
+.get-involved h3{padding:30px 0}
+.get-involved p a{color:#ad272d}
+.get-involved>div{text-align:center}
+.get-involved>div>img{padding-bottom:15px}
 .page{background-color:#fff;padding:30px}
 .page h1{border-bottom:2px solid #0071bc;margin-bottom:30px}
 .page h1,.page h2{color:#0071bc}

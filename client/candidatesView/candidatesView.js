@@ -40,6 +40,21 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
 
 })
 
+// .directive('voiceSidebar', function(DataRequestFactory) {
+//   return {
+//     restrict: 'A',
+//     scope: true,
+//     template: "<h3>Victim's Voices</h3>"+
+//       "<p ng-bind-html='voice.description | safehtml'></p>",
+//     link: function(scope, element, attribs) {
+//       scope.fact = {};
+//       DataRequestFactory.getData('fetch', 'voices/random').then(function(data) {
+//         scope.fact = data[0];
+//       })
+//     }
+//   }
+// })
+
 .directive('kochFact', function(DataRequestFactory) {
   return {
     restrict: 'A',
@@ -60,7 +75,7 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
     restrict: 'A',
     scope: true,
     template: "<h3>Worst Offender</h3>"+
-      "<img width='20px' ng-src='{{offender.photoURL}}'>"+
+      "<img width='80px' ng-src='{{offender.photoURL}}'>"+
       "<h4>{{offender.nameFirstLast}}</h4>"+
       "<p ng-bind-html='offender.description|safehtml'></p>",
     link: function(scope, element, attribs) {
