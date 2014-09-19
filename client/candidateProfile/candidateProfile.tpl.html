@@ -15,7 +15,7 @@
       <h4>{{candidateProfile.office}} <span class='candidate-state'>( {{candidateProfile.state}}<span class='candidate-district' ng-if="candidateProfile.district != ''">-{{candidateProfile.district}}</span> )</span></h4>
       <h4 ng-if='! bioLoading && candidateBio.office[0].firstElect[0]'>First Elected: {{candidateBio.office[0].firstElect[0]}}</h4>
       <h4 ng-if='! bioLoading && candidateBio.office[0].nextElect[0]'>Next Election: {{candidateBio.office[0].nextElect[0]}}</h4>
-      <span class='lifetime-total'>$<span class="odometer" count-to='candidateProfile.since2000contrib' value='0' duration='2'></span></h1>
+      <h3 class='lifetime-total'>Lifetime Total Donations: $<span ng-if='candidateProfile.since2000contrib != 0' class="odometer" count-to='candidateProfile.since2000contrib' value='0' duration='2'></span><span ng-if='candidateProfile.since2000contrib==0'>0</span></h3>
     </div>
   </div>
   <div class="row">

@@ -895,7 +895,7 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
 @media print{.hidden-print{display:none !important}}
 @font-face{font-family:'Glyphicons Halflings';src:url('fonts/glyphicons-halflings-regular.eot');src:url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),url('fonts/glyphicons-halflings-regular.woff') format('woff'),url('fonts/glyphicons-halflings-regular.ttf') format('truetype'),url('fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg')}@font-face{font-family:'ubuntuRegular';src:url('fonts/ubuntu/Ubuntu-Regular.ttf') format('truetype')}@font-face{font-family:'ubuntuBold';src:url('fonts/ubuntu/Ubuntu-Bold.ttf') format('truetype')}@font-face{font-family:'rockwellRegular';src:url('fonts/rockwell/rockwell.ttf') format('truetype')}h1,h2,h3{font-family:'rockwellRegular';padding:0;margin:0}
 ul,li{list-style:none;text-decoration:none}
-body{background-color:#e1e1e1;font-family:'ubuntuRegular'}
+body{background-color:#e9e8e8;font-family:'ubuntuRegular'}
 .center{text-align:center}
 .navbar{background-repeat:repeat-y;background-position:left;background-color:#b7b5b6;margin-bottom:0;color:#5b5a5a;font-family:'ubuntuRegular'}
 .navbar .brand img{height:130px;margin-bottom:-30px}
@@ -946,7 +946,9 @@ ul.box-text li div{height:100px}
 .landing-box-races h3,.landing-box-races a{color:#198e68}
 .landing-box-watch h3,.landing-box-watch a{color:#60af37}
 .dropdown-menu img{width:28px;border-width:1px;border-color:#333;border-style:solid;margin-right:5px}
-.map-section{background-image:linear-gradient(#f9f9f9, #f0f0f0);height:auto;padding:40px 0 20px 0}
+.map-section,.explore,.page-section{background-image:-webkit-linear-gradient(#f8f8f8, #d6d6d6);background-image:-o-linear-gradient(#f8f8f8, #d6d6d6);background-image:linear-gradient(#f8f8f8, #d6d6d6)}
+.page-section{height:100vh}
+.map-section{height:auto;padding:40px 0 20px 0}
 .map-sidebar-container{text-align:center;height:auto}@media (min-width:767px){.map-sidebar-container{height:450px;position:relative;margin-top:10px}}@media (min-width:768px){.map-sidebar-container{margin-bottom:40px}}@media (min-width:1200px){.map-sidebar-container{margin-bottom:0}}
 .map-main{margin-top:-15px}
 .map-sidebar-container h1{color:#0071bc}
@@ -972,7 +974,7 @@ ul.box-text li div{height:100px}
 .legend span{float:left}
 .sidebar{padding:30px 0;text-align:center}@media (min-width:992px){.sidebar{padding:0 30px 30px 0}}
 .sidebar h3{color:#000;padding:0 0 10px 0}
-.sidebar .clock{margin-bottom:10px}
+.sidebar p{text-align:left}
 .sidebar-tile{background-color:#c8c7c7;padding:20px;margin:20px 0}
 .candidate-main{padding:0;margin-top:15px}
 .tab-pane h1,.tab-pane h2,.tab-pane h3{color:#0071bc}
@@ -1073,3 +1075,5 @@ img.quote-right{padding:5px;margin-bottom:-20px}
 ul.bulleted,ul.bulleted li,li.bulleted{list-style:initial;text-decoration:initial}
 .modal-header{background-color:#d5d5d5}
 h4.modal-title{color:#0071bc;text-shadow:0 1px 0 #fff;font-family:'ubuntuRegular'}
+.alert-danger{text-align:center;padding:50px;font-size:30px}
+.alert-danger button.close{color:#000}
