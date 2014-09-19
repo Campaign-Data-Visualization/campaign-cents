@@ -17,6 +17,7 @@ var app = angular.module('kochTracker', [ 'ui.bootstrap', 'ui.router', 'kochTrac
     $scope.dataTypes = [
       {action: 'campus', method: 'adminMap', niceName: 'Campuses'},
       {action: 'assets', method: 'adminMap', niceName: 'Assets'},
+      {action: 'action', method: 'adminMap', niceName: "Take Action"},
       {action: 'voices', method: 'adminSheet', niceName: "Victim's Voices"},
       {action: 'offenders', method: 'adminSheet', niceName: "Koch Heads"},
       {action: 'facts', method: 'adminSheet', niceName: "Koch Facts"},
