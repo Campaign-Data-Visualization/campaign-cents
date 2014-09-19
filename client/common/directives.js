@@ -770,3 +770,54 @@ app.directive('shareThis', function ($location) {
 });
 
 
+app.directive('shareStoryButton', function(DataRequestFactory, $modal, $messages) {
+  return {
+    restrict: 'A',
+    replace:true,
+    scope: true,
+    template: "<button class='btn btn-default share-story-button' ng-click='showForm()'>Share your story</button>",
+    link: function(scope, elem, attrs){
+      scope.showForm = function() {
+        var modalInstance = $modal.open({
+          windowClass: 'share-story-modal share-story-form',
+          templateUrl: "/explore/explore.shareStoryForm.tpl.html",
+          controller: function($scope, $modalInstance){
+            $scope.forms = {};
+            $scope.formData = {
+              name: '',
+              email: '',
+              city: '',
+              state: '',
+              story: '', 
+            }
+            $scope.close = function() {
+              $modalInstance.close();
+            }
+            $scope.invalid = false;
+            $scope.success = false;
+            $scope.loading = false;
+
+            $scope.share = function() {
+              $messages.clearMessages();
+              $messages.modal = true;
+
+              $scope.invalid = $scope.forms.shareStory.$invalid;
+              if (! $scope.invalid) {
+                $scope.loading = true;
+                DataRequestFactory.postData('shareStory', $scope.formData).then(function(data){
+                  $scope.loading = false;
+                  if (data == 'Success') {
+                    $scope.success = true;
+                    $messages.modal = false;
+                  }
+                }, function(e) { 
+                  $scope.loading = false;
+                })
+              }
+            }
+          }
+        });
+      }
+    }
+  }
+})

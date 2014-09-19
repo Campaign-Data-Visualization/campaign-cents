@@ -1066,7 +1066,7 @@ ul#map-layers li input{margin:3px}
 #join-convo h1{background-color:#d5d5d5;padding-top:10px}
 .join-convo-form{padding-top:10px}
 .join-convo-form input,.share-story-form input,.share-story-form select,.share-story-form textarea{border:2px #000 solid;border-radius:0}
-.join-convo-form button,.modal-body button{height:70px;background-color:#000;color:#fff;border-radius:0}
+.join-convo-form button,.share-story-button,.modal-body button{height:70px;background-color:#000;color:#fff;border-radius:0}
 .victim-author{text-align:right;padding-top:20px}
 img.quote-left{padding:5px;margin-top:-20px}
 img.quote-right{padding:5px;margin-bottom:-20px}
