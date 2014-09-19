@@ -26,7 +26,7 @@
         templateUrl: 'app.tpl.html',
         controller: function($rootScope) {
           $rootScope.$on('$viewContentLoaded', function() { 
-            $('.dropdown-menu').remove(); //remove dropdowns that sometimes stay
+            $('body>ul.dropdown-menu').remove(); //remove dropdowns that sometimes stay
           })
         }
       });
