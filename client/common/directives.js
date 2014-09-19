@@ -21,8 +21,9 @@ app.directive('loading', function() {
     restrict: 'E',
     scope: {
           loading: '=',
+          class: '=?'
       },
-    template: "<div ng-show='loading' class='loading-image'>[Insert loading image here]</div>",
+    template: "<div ng-show='loading' ng-class='{{class}}' class='loading-image text-center'><span class='glyphicon glyphicon-refresh spin'></span></div>",
   };
 });
 
@@ -509,7 +510,6 @@ app.directive('bubbleChart', function($window) {
       }
      
       scope.$watch('data', function() {
-      	console.log(scope.data)
         init();
         drawBubbleChart();
       });
@@ -658,7 +658,7 @@ app.directive('searchBox', function(DataRequestFactory, $state) {
     template:
       "<input class='input-sm' type='text' ng-model='searchValue' placeholder='Candidate Name or Zipcode' typeahead-wait-ms='200' typeahead-append-to-body='true' typeahead='result.label as result for result in search($viewValue)' typeahead-template-url='common/search-results.tpl.html' typeahead-loading='loadingSearch' typeahead-editable='false' typeahead-on-select='select($item, $model, $label)'>"+
       "<button ng-if='button' class=' btn btn-md btn-detault searchButton' type='submit' ng-click='search()'>GO</button>"+
-      "<div ng-show='loadingSearch'>Insert Loading Indicator</div>",
+      "<loading class='small' loading='loadingSearch'/>",
     link: function(scope, element, attribs) {
       scope.searchValue = '';
       scope.loadingSearch = false;

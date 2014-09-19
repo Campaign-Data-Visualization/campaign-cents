@@ -504,7 +504,7 @@ ul.box-text li div {
 .sidebar p {
 	text-align: left;
 }
-.sidebar-tile {
+.sidebar-tile>div {
 	background-color: @cc-gray-search;
 	padding: 20px;
 	margin: 20px 0;
@@ -1040,3 +1040,30 @@ h4.modal-title {
 	color: #000;
 }
 
+.loading-image {
+	font-size: 60px;
+	color: @cc-blue-dark;
+	padding: 20px;
+}
+
+.small .loading-image {
+	font-size: 18px;
+	padding: 0px;
+	text-align: right;
+	margin-top: -25px;
+	margin-right: 18px;
+}
+
+.spin{
+	-webkit-transform-origin: 50% 50%;
+	transform-origin:50% 50%;
+	-ms-transform-origin:50% 50%; /* IE 9 */
+	-webkit-animation: spin 1.5s infinite linear;
+	-moz-animation: spin 1.5s infinite linear;
+	-o-animation: spin 1.5s infinite linear;
+	animation: spin 1.5s infinite linear;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

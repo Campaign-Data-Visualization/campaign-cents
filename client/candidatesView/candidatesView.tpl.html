@@ -15,15 +15,16 @@
       </div>
     </div> 
 
-    <div class="col-md-8 col-xs-12 candidate-main">  
-      <tabset>
+    <div class="col-md-8 col-xs-12 candidate-main">
+      <loading loading="layersLoading"/>
+      <tabset ng-if='!loading'>
         <tab heading='Candidates'>
           <div class="tab-pane" id="candidates">
-            <div ui-view></div>
+            <div class='fx-fade-normal'  ui-view></div>
           </div> 
         </tab>
         <tab ng-if='layers.assets.length' heading='Organizations'>
-          <div class="tab-pane" id="organizations">
+          <div class='fx-fade-normal' class="tab-pane" id="organizations">
             <ul class="candidate-list">
               <li ng-repeat='asset in layers.assets'>
                 <h3>{{asset.title}}</h3>
@@ -33,7 +34,7 @@
           </div>
         </tab>
         <tab ng-if='layers.campus.length' heading='Campuses'>
-          <div class="tab-pane" id="campuses">
+          <div class='fx-fade-normal' class="tab-pane" id="campuses">
             <ul class="candidate-list">
               <li  ng-repeat='asset in layers.campus'>
               <h3>{{asset.title}}</h3>
@@ -44,7 +45,7 @@
           </div>           
         </tab> 
         <tab heading='Take Action'>
-          <div class="tab-pane" id="take-action">
+          <div class='fx-fade-normal' class="tab-pane" id="take-action">
             <ul class="candidate-list">
               <li  ng-repeat='asset in layers.campus'>
               <h3>{{asset.title}}</h3>
