@@ -545,6 +545,7 @@ ul.nav-tabs li > a {
 	-moz-border-radius: 0;
 	border-radius: 0;
 	border: 0;
+	cursor: pointer;
 	@media (max-width: @screen-xs-max) {
 		margin-right: 0;
 		border-bottom: 0;
@@ -592,11 +593,12 @@ ul.candidate-list li {
 	border-left: 3px solid #fff;
 	height: auto;
 	padding: 30px;
-	
+
 }
 
 #candidates ul.candidate-list li:hover{
 	border: 3px solid @cc-green;
+	cursor: pointer;
 }
 
 ul.candidate-list li img {
@@ -861,7 +863,11 @@ ul#map-layers h4 {
 		display: inline;
 	}
 }
-
+ul#map-layers label {
+	font-weight: normal;
+	margin-right: 5px;
+	cursor: pointer;
+}
 ul#map-layers li {
 	display: inline;
 	margin: 15px;
