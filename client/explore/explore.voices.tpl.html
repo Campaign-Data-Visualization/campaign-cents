@@ -1,42 +1,76 @@
 <div class="row tentacle-title">
     <h2>Victim's Voices</h2>
 </div>
-<div class="row" id="join-convo">
+<!-- <div class="row" id="join-convo">
   <h1>Join the Conversation </h1>
       <span class="join-convo-form input-group-btn">
          <span share-story-button/>
       </span>
   <div share-story-form/>
-</div> <!-- /#join-convo -->
+</div> 
+
+ -->
+<div class="row" id="join-convo">
+  <div class="col-sm-8 col-xs-12">
+    <h1>Join the Conversation </h1>
+  </div>
+  <div class="col-sm-4 col-xs-12">
+        <span class="join-convo-form input-group-btn">
+         <span share-story-button/>
+      </span>
+  <div share-story-form/>
+  </div>
+
+
+  
+
+</div> 
+
+
+
+
 
 <div class="row" id="victim-tiles" >
   <div class="col-sm-4 tile-column">
-    
-  <!-- example tile with image -->
-    <div class="tile">
+        <div class="tile">
       <img class="author" src="/images/images-voices-danielle.jpg">
+      <div class="tile-text">
       <span>On August 24, 1996, teenagers Danielle Smalley and Jason Stone were burned alive by a butane leak from a Koch Industries pipeline. The teens smelled the deadly butane vapor that was spreading through their community. Because their house had no working phone, they took off in a pick-up truck to dial 911 from a neighbor’s. En route, the truck stalled in a fog of the vapor. Seconds later, when Danielle restarted the truck, the gas ignited in a “huge explosion and horrendous fireball,” a witness said. The 570-mile-long pipeline transporting liquid butane from Oklahoma to Texas had corroded so badly that pipeline safety expert Edward Ziegler likened it to Swiss cheese. An investigation conducted by the National Transportation Safety Board found that Koch Industries never provided any of the 40-45 families living near the explosion site—including those of the killed teenagers—any safety protocols for an emergency. The Board concluded that Koch could have protected the pipeline from corrosion if it was properly managed and the necessary inspections were conducted. The state jury found that Koch Industries acted with malice, as it had been aware of the extreme risks of using the faulty pipeline. Danielle Smalley’s family used the settlement money to create a foundation in her name dedicated to pipeline safety and public education. While large oil companies like ExxonMobil, BP, and Kinder Morgan accept free services from the foundation, Koch refuses them.</span>
+      </div>
     </div>
-    <div class="tile"  ng-repeat ='voice in voices' ng-if="$index % 3 == 0"><img class="quote-left" src="/images/graphic-quote-left.png"><span ng-bind-html='voice.description | safehtml'></span><img class="quote-right" src="/images/graphic-quote-right.png">
+    <div class="tile"  ng-repeat ='voice in voices' ng-if="$index % 3 == 0">
+    <div class="tile-text">
+    <img class="quote-left" src="/images/graphic-quote-left.png"><span ng-bind-html='voice.description | safehtml'></span><img class="quote-right" src="/images/graphic-quote-right.png">
       <div class="victim-author"><h3 ng-bind-html='"--" + voice.title | safehtml'></h3><h4 ng-bind-html='voice.detail | safehtml'></h4></div>
+      </div>
     </div>
   </div>
   <div class="col-sm-4 tile-column" >
     <div class="tile">
       <img class="author" src="/images/images-voices-drevyon.jpg">
+      <div class="tile-text">
       <span>Dre’vyon Jones is a three-year-old who lives with his single mother, Latricia, in a community that residents refer to as “cancer neighborhood.” The Jones’ live two blocks away from Koch-owned Flint Hills Resources oil refinery, which emits deadly greenhouse gases that cause cancer, birth defects, and lung damage. Dre’vyon currently suffers from such crippling asthma that, in addition to the expensive, mood-altering medication he must take twice a day, he has to spend 30-60 minutes on a breathing machine every night. Yet “he’s still in the ER every other month.” Doctors say, “as long as [they] live near the refineries, he’ll always have the asthma attacks.” Like many in the Corpus Christi community, the Jones’ simply can’t afford to move away. While Dre’vyon struggles to breathe as a toddler and his mother fights every day to make just enough money to get by, the neighboring Koch refineries continue to generate unfathomable profits for Koch Industries. The Kochs’ dirty secret is how they manage to make money off the poor and disenfranchised and then use their wealth to dissuade the media from covering the story and instead divert their attention to industry accusations against “big government” and the “job-killing EPA” that costs businesses money.</span>
+      </div>
     </div>
-    <div class="tile" ng-repeat ='voice in voices' ng-if="($index+1) % 3 == 0"><img class="quote-left" src="/images/graphic-quote-left.png"><span ng-bind-html='voice.description | safehtml'></span><img class="quote-right" src="/images/graphic-quote-right.png">
-    <div class="victim-author"><h3 ng-bind-html='"--" + voice.title | safehtml'></h3><h4 ng-bind-html='voice.detail | safehtml'></h4></div>
+    <div class="tile" ng-repeat ='voice in voices' ng-if="($index+1) % 3 == 0">
+    <div class="tile-text">
+      <img class="quote-left" src="/images/graphic-quote-left.png"><span ng-bind-html='voice.description | safehtml'></span><img class="quote-right" src="/images/graphic-quote-right.png">
+      <div class="victim-author"><h3 ng-bind-html='"--" + voice.title | safehtml'></h3><h4 ng-bind-html='voice.detail | safehtml'></h4></div>
+    </div>
     </div>
   </div>
   <div class="col-sm-4 tile-column" >
     <div class="tile">
       <img class="author" src="/images/images-voices-sally.jpg">
+      <div class="tile-text">
       <span>In 2007, Koch Industries pleaded guilty to intentionally concealing their level of uncontrolled benzene emissions from their Texas refineries, which had waged disastrous effects on the residents of the surrounding “cancer neighborhood.” In 1995, then-employee Sally Barnes-Soliz was instructed to “falsify data for a report to the state” on the emissions. She refused, and in return was transferred to a different location with an unfavorable evaluation. Before pleading guilty, Koch spokesperson, in line with their trend of concealment, said “Koch believes these charges are outrageous. The government has got this one very wrong.” After Koch pleaded guilty, they paid $20 million in fines for the 97 felonies and in return the charges against the company were dropped and former high-ranking officials successfully avoided prison sentences.</span>
+      </div>
     </div>
-    <div class="tile" ng-repeat ='voice in voices' ng-if="($index+2) % 3 == 0"><img class="quote-left" src="/images/graphic-quote-left.png"><span ng-bind-html='voice.description | safehtml'></span><img class="quote-right" src="/images/graphic-quote-right.png">
+    <div class="tile" ng-repeat ='voice in voices' ng-if="($index+2) % 3 == 0">
+    <div class="tile-text">
+    <img class="quote-left" src="/images/graphic-quote-left.png"><span ng-bind-html='voice.description | safehtml'></span><img class="quote-right" src="/images/graphic-quote-right.png">
     <div class="victim-author"><h3 ng-bind-html='"--" + voice.title | safehtml'></h3><h4 ng-bind-html='voice.detail | safehtml'></h4></div>
+    </div>
     </div>
   </div>
 </div>

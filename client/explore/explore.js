@@ -251,7 +251,7 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
     restrict: 'A',
     replace:true,
     scope: true,
-    template: "<button class='btn btn-default' ng-click='showForm()'>Share your story</button>",
+    template: "<button class='btn btn-default' ng-click='showForm()'><h4>SHARE YOUR STORY</h4></button>",
     link: function(scope, elem, attrs){
       scope.showForm = function() {
         var modalInstance = $modal.open({

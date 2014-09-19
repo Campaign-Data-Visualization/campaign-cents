@@ -346,7 +346,7 @@ ul.box-text li div {
 }	
 
 .page-section, .explore {
-	height: 100vh;
+	height: 100%;
 }
 .map-section {
 	height: auto;
@@ -922,22 +922,28 @@ ul#map-layers li input {
 
 
 //victim's voices page
-
 #join-convo {
 	text-align: center;
 }
 #join-convo h1 {
 	background-color: #D5D5D5;
-	padding-top: 10px;
+	margin-top: 10px;
 }
 
-.join-convo-form {
-	padding-top: 10px;
+#join-convo h3 {
+	font-family: @font-family-sans-serif
 }
 
 .join-convo-form input,.share-story-form input, .share-story-form select, .share-story-form textarea {
 	border: 2px #000 solid;
 	border-radius: 0;
+}
+
+.join-convo-form button {
+	background-image: -webkit-linear-gradient(#A8272D, #8A272D);
+	background-image: -o-linear-gradient(#A8272D, #8A272D);
+	background-image: linear-gradient(#A8272D, #8A272D);
+	width: 100%;
 }
 
 .join-convo-form button, .modal-body button {
@@ -954,19 +960,24 @@ ul#map-layers li input {
 
 img.quote-left {
 	padding: 5px;
-	margin-top: -20px;
+	margin-top: -30px;
+	margin-left: -30px;
 }
 
 img.quote-right {
 	padding: 5px;
-	margin-bottom: -20px;
+	margin-bottom: -30px;
+	margin-right: -30px;
 }
 
 .tile {
 	background-color: #D5D5D5;
 	height: auto;
 	margin: 20px 0;
-	padding: 20px;
+}
+
+.tile-text {
+	padding: 40px;
 }
 
 .tile img.author {
