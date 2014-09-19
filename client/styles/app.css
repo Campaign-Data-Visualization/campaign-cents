@@ -920,7 +920,7 @@ body{background-color:#e9e8e8;font-family:'ubuntuRegular'}
 .social div#tumblr,.addthis_32x32_style .at300bs.at15t_tumblr{background:url('../images/graphic-share-tumblr.png') !important;width:31px !important;background-repeat:none;height:30px !important}
 .social div#tumblr:hover,.addthis_32x32_style .at300bs.at15t_tumblr:hover{background:url('../images/graphic-share-tumblr_ON.png') !important}
 #dropdown-search{width:250px;text-align:center;padding:10px}
-#dropdown-search input{text-align:center;margin:0 auto}
+#dropdown-search input{margin:0 auto}
 .navbar-nav>li>.dropdown-menu a{color:#fff}
 .navbar-nav>li>.dropdown-menu li:hover{background-color:#53a7d0}
 .dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus{text-decoration:none;background-color:#53a7d0}
