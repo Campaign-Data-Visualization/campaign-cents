@@ -341,7 +341,10 @@ ul.box-text li div {
 ///////////
 
 .map-section {
-	background-color: @cc-gray-map-section;
+	background-image:
+    linear-gradient(
+      #F9F9F9, @cc-gray-map-section
+    );
 	height: auto;
 	padding: 40px 0 20px 0;
 }
@@ -400,7 +403,7 @@ ul.box-text li div {
 	padding-top: 20px;
 }
 
-.map-sidebar-calendar h1 {
+.map-sidebar-calendar h1, .election-countdown-tag h1 {
 	display: inline;
 	vertical-align: middle;
 	font-family: 'Rokkitt', serif;
@@ -503,29 +506,23 @@ ul.box-text li div {
 
 ////candidate page
 
-.tab-content .row {
-	margin-left: 0;
-	margin-right: 0;
-}
-
-
 .candidate-main {
+	padding: 0;
 	margin-top: 15px;
 }
 
-.candidate-main h1, .candidate-main h2, .candidate-main h3 {
+.tab-pane h1, .tab-pane h2, .tab-pane h3 {
 	color: @cc-blue-light;
 }
 
 ul.nav-tabs {
 	border-bottom: 2px solid @cc-blue-light;
-	background: none !important;
+	background: transparent !important;
 }
 
 ul.nav-tabs li {
 	margin-right: 5px;
-	padding: 10px;
-	background-color: @cc-blue-light;
+	border: 0;
 	@media (max-width: @screen-xs-max) {
 		margin-right: 0;
 		float: none;
@@ -534,14 +531,14 @@ ul.nav-tabs li {
 }
 
 ul.nav-tabs li > a {
-	background-color: @cc-gray-medium;
+	background-color: @cc-gray-dark;
 	font-family: @font-family-serif;
 	color: #fff;
 	font-size: 16px;
 	-webkit-border-radius: 0;
 	-moz-border-radius: 0;
 	border-radius: 0;
-	border-bottom: 1px solid @cc-blue-light;
+	border: 0;
 	@media (max-width: @screen-xs-max) {
 		margin-right: 0;
 		border-bottom: 0;
@@ -552,50 +549,34 @@ ul.nav-tabs li > a {
 .nav-tabs > li.active > a:hover, 
 .nav-tabs > li.active > a:focus, 
 .nav-tabs > li > a:hover {
-	border: 0;
 	background-color: @cc-blue-light;
 	color: #fff;
-	border-bottom: 1px solid @cc-blue-light;
-
+	border: 0;
 }
+
 .show-all {
 	border-bottom: 1px solid @cc-blue-light;
-}
-
-.tab-content .row,   {
-	padding: 15px 0;
+	padding: 15px;
 }
 
 
-.tab-content .row img {
-	padding: 0 10px 0 0;
-}
-
-.tab-content, .get-involved {
+.tab-content {
 	background-color: #fff;
 }
 
 
-.get-involved h3, .get-involved p a {
-	color: @cc-red;
-}
-
-.get-involved > div {
-	text-align: center;
-}
-
-
-.get-involved > div > img {
-	padding-bottom: 15px;
-}
-
 ///////
+
+#candidates.tab-pane .row {
+	margin: 0;
+	padding-top: 15px;
+}
 
 ul.candidate-list {
 	display: block;
 	padding-left: 0;
-	margin-top: -10px;
-	background-color: #fff;}
+	background-color: #fff;
+}
 
 ul.candidate-list li {
 	position: relative;
@@ -608,7 +589,7 @@ ul.candidate-list li {
 	
 }
 
-ul.candidate-list li:hover{
+#candidates ul.candidate-list li:hover{
 	border: 3px solid @cc-green;
 }
 
@@ -628,7 +609,7 @@ ul.candidate-list li h4 {
 	margin-top: 2px;
 }
 
-ul.candidate-list li p {
+ul.candidate-list > #candidates li p {
 	position: absolute;
 	bottom: 20px;
 	left: 121px;
@@ -639,8 +620,7 @@ span.bold {
 }
 
 .election-countdown-tag {
-	width: auto;
-	padding: 5px;
+	padding-top: 20px;
 	text-align: center;
 }
 
@@ -648,18 +628,42 @@ span.bold {
 	background-image: url('../images/calendar-bg-grey.png');
 	background-repeat: no-repeat;
 	background-position: center;
-	height: 105px;
+	height: 73px;
+}
+
+.election-countdown-tag h1 {
 	padding-top: 20px;
 }
 
-.election-countdown-tag span {
-	padding-top: 10px;
-	font-family: 'Rokkitt', serif; 
+.election-countdown-tag h1 span:first-child {
+	padding-right: 6px;
 }
 
-.get-involved > div > h3 {
+.election-countdown-tag h1 span:last-child {
+	padding-left: 5px;
+}
+
+.get-involved {
+	background-color: #fff;
+	padding: 30px;
+	margin-top: -15px;
+}
+.get-involved h3 {
 	padding: 30px 0;
 }
+
+.get-involved p a {
+	color: @cc-red;
+}
+
+.get-involved > div {
+	text-align: center;
+}
+
+.get-involved > div > img {
+	padding-bottom: 15px;
+}
+
 
 ////pages
 
