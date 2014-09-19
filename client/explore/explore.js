@@ -71,7 +71,7 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
       fillColor: '#6baf00',
       visible: true,
       markers: [],
-      label: 'Get Involved'
+      label: 'Take Action'
     },
   }
 
