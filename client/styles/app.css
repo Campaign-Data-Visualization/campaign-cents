@@ -1051,7 +1051,7 @@ ul#map-layers li.campus span{background-color:#f17522}
 ul#map-layers li.involved span{background-color:#6baf00}
 ul#map-layers li.interest span{background-color:#000}
 ul#map-layers li input{margin:3px}
-#marker-tooltip{display:none;position:absolute;background-color:#000;color:#fff;margin:8px;margin-top:-28px;padding:5px;border-radius:6px;z-index:1000;opacity:.9;border:2px solid #333}
+#marker-tooltip{display:none;position:absolute;background-color:#000;color:#fff;margin:8px;margin-top:-28px;padding:10px;z-index:1000;opacity:.9}
 .map-layers>div{display:inline}
 #join-convo{text-align:center}
 #join-convo h1{background-color:#d5d5d5;padding-top:10px}
