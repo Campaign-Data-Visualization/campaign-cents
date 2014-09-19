@@ -42,11 +42,12 @@ module.exports = exports = function (app, express, routers) {
   app.use(session({ secret: 'hereissomesalt', resave:true, saveUninitialized:true, cookie: { maxAge: 3600000 } }));
   app.use(passport.initialize());
   app.use(passport.session());
-  //simulate latency
-  //app.use(function(req,res,next){setTimeout(next,1000)});
   app.use(middle.cors);
   app.use(express.static(__dirname + '/../../client'));
   app.use('/admin', express.static(__dirname + '/../../admin'));
+  // simulate latency
+  //app.use(function(req,res,next){setTimeout(next,100000)});
+
   app.use('/dataRequest', routers.DataRequestRouter);
   app.use('/adminRequest', routers.AdminRouter);
   //app.use('/admin', express.static(__dirname + '/../../admin'));

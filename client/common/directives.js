@@ -533,6 +533,12 @@ app.directive('bubbleChart', function($window) {
             cx: function(d, i) { return xScale(i); },
             r: function(d) { return zScale(d); }
           })
+        
+        svg.selectAll('.noneback')
+          .attr('x', function(d, i) { return xScale(i) - 39; });
+
+				svg.selectAll('.none')
+          .attr('x',function(d, i) { return xScale(i); })
 
         svg.selectAll('image')
           .attr('x',function(d, i) { return xScale(i)-32; })
@@ -602,16 +608,36 @@ app.directive('bubbleChart', function($window) {
           .delay(function(d, i) { return i * 200; })
           .attr('r', function(d) { return zScale(d); })
 
-				var images = svg.selectAll('image').data(scope.data);
-				images.enter().append('image')
+				var noneback = svg.selectAll('.noneback').data(scope.data);
+				noneback.enter()
+					.append('rect')
 					.attr({
-	          x: function(d, i) { return xScale(i) - 32; },
-						y: yValue - 26,
-						width: 64,
-						height: 71,
+	          x: function(d, i) { return xScale(i) - 39; },
+						y: yValue - 16,
+						fill: '#fff',
+						width: 78,
+						height: 26,
+						class: 'noneback',
 						opacity: function(d) { return d > 0 ? 0 : 1; },
-						'xlink:href': 'images/graphic-no-funding.png'
+					})	
+
+				var none = svg.selectAll('.none').data(scope.data);
+				none.enter()	
+					.append('text')
+					.attr({
+	          x: function(d, i) { return xScale(i); },
+						y: yValue,
+						class: 'none',
+						'dominant-baseline': 'middle',
+						'text-anchor':'middle',
+						opacity: function(d) { return d > 0 ? 0 : 1; },
+						'background-color': '#fff',
+						'padding': '10px',
+						'font-family': 'rockwellRegular',
+						'font-size': '20px',
+						fill: '#666'
 					})
+					.text('NONE')
 
         svg.append('g').attr('class', 'amounts');
 

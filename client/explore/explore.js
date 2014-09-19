@@ -67,7 +67,7 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
       markers: [],
       label: 'Assets'
     },
-    'involved': {
+    'action': {
       fillColor: '#6baf00',
       visible: true,
       markers: [],
@@ -75,7 +75,7 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
     },
   }
 
-  $scope.layersOrder = ['candidate', 'campus', 'involved', 'assets'];
+  $scope.layersOrder = ['candidate', 'campus', 'action', 'assets'];
 
   $scope.template;
 

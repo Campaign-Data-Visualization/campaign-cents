@@ -47,10 +47,10 @@
         <tab heading='Take Action'>
           <div class='fx-fade-normal' class="tab-pane" id="take-action">
             <ul class="candidate-list">
-              <li  ng-repeat='asset in layers.campus'>
-              <h3>{{asset.title}}</h3>
-              <h4 ng-if='asset.city'>{{asset.city}}, {{viewparams.state}}</h4> 
-              <p ng-bind-html='asset.description | safehtml'></p>
+              <li  ng-repeat='item in layers.action'>
+              <h3>{{item.title}}</h3>
+              <h4 ng-if='item.city'>{{item.city}}, {{viewparams.state}}</h4> 
+              <p ng-bind-html='item.description | safehtml'></p>
               </li>
             </ul>
           </div>           

@@ -206,7 +206,6 @@ module.exports = exports = {
       db.doQuery('drop table if exists koch_assets_tmp').then(function() {
         db.doQuery('create table koch_assets_tmp like koch_assets').then(function() {
           db.deferredRequest('https://maps.google.com/maps/ms?dg=feature&ie=UTF8&authuser=0&msa=0&output=kml&msid='+layers[actionType]).then(function(data) { 
-            console.log(data);
             var promises = [];
             var results = [];
             if (data && data.kml && data.kml.Document[0].Placemark[0]) {
@@ -225,6 +224,7 @@ module.exports = exports = {
                   lng: coords[0],
                   description: c.description || ''
                 }
+                if(! asset.lat || !asset.lng) { return; }
                 setTimeout(function() {
                   geocode(geocoder, asset).then(
                     function(res) { 
