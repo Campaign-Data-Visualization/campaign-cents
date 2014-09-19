@@ -107,6 +107,7 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
     $scope.$apply(function() {
       $scope.infoWindow.setContent(content);
       $scope.infoWindow.open($scope.map, marker);
+      $scope.infoWindow.border = marker.icon.fillColor;
     });
     
   }
@@ -135,6 +136,9 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
     })
 
     $scope.infoWindow = new google.maps.InfoWindow(); 
+    google.maps.event.addListener($scope.infoWindow, 'domready', function(){
+      $('#map > div > div > div:nth-child(1) > div:nth-child(3) > div:nth-child(4) > div > div:nth-child(1) > div:nth-child(4)').css({'border': '4px solid '+$scope.infoWindow.border})
+    })
 
     DataRequestFactory.getData('map', 'layers').then(function(data) {
       data.forEach(function(item) {
@@ -165,6 +169,7 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
         });
         google.maps.event.addListener(marker, 'mouseout', function () {
             $('#marker-tooltip').hide();
+
         });
       });
     })
