@@ -1,5 +1,7 @@
-<div>
-	<h2>Key Races</h2>
+<div class="row tentacle-title">
+  <h2>Key Races</h2>
+</div>
+<div class='row'>
   <div class='race' ng-repeat='race in races'>
     <h3>{{race.title}}</h3>
     <div ng-bind-html="race.description | safehtml"></div>

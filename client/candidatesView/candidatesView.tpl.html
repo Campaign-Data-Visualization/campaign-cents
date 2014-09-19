@@ -1,10 +1,6 @@
-<!-- <div> -->
   <div class="container">
-    <!-- Start Sidebar -->
-    <div class="col-md-4 col-xs-12 sidebar">  
-      
-    
 
+    <div class="col-md-4 col-xs-12 sidebar">  
       <div class="col-xs-12">
         <div id='map' inset-map state='viewparams.state'/>
       </div>
@@ -15,56 +11,63 @@
         <div class='worst-offender' worst-offender/>
       </div>
        <div class="col-xs-12 sidebar-tile">
-        Victims Voices
+        <div class='victims-voice' victims-voice/>
       </div>
-      
-      
-    
+    </div> 
 
-
-    </div> <!-- /.sidebar -->
-
-
-
-
-
-
-
-    <div class="col-md-8 col-xs-12 candidate-main">      
-      <tabset>
+    <div class="col-md-8 col-xs-12 candidate-main">
+      <loading loading="layersLoading"/>
+      <tabset ng-if='!loading'>
         <tab heading='Candidates'>
           <div class="tab-pane" id="candidates">
-            <!-- Candidates List -->
-            <div ui-view></div>
-          </div> <!-- /#candidates -->
+            <div class='fx-fade-normal'  ui-view></div>
+          </div> 
         </tab>
         <tab ng-if='layers.assets.length' heading='Organizations'>
-          <div class="tab-pane" id="organizations">
-            <h3>Organizations</h3>
-            <div ng-repeat='asset in layers.assets'>
-              <h4>{{asset.title}}</h4>
-              <h5 ng-if='asset.city'>{{asset.city}}, {{viewparams.state}}</h5> 
-              <p ng-bind-html='asset.description | safehtml'></p>
-            </div>
+          <div class='fx-fade-normal' class="tab-pane" id="organizations">
+            <ul class="candidate-list">
+              <li ng-repeat='asset in layers.assets'>
+                <h3>{{asset.title}}</h3>
+                <p ng-bind-html='asset.description | safehtml'></p>
+              </li>
+            </ul>
           </div>
         </tab>
         <tab ng-if='layers.campus.length' heading='Campuses'>
-          <div class="tab-pane" id="campuses">
-            <h3>Universities</h3>
-            <div ng-repeat='asset in layers.campus'>
-              <h4>{{asset.title}}</h4>
-              <h5 ng-if='asset.city'>{{asset.city}}, {{viewparams.state}}</h5> 
+          <div class='fx-fade-normal' class="tab-pane" id="campuses">
+            <ul class="candidate-list">
+              <li  ng-repeat='asset in layers.campus'>
+              <h3>{{asset.title}}</h3>
+              <h4 ng-if='asset.city'>{{asset.city}}, {{viewparams.state}}</h4> 
               <p ng-bind-html='asset.description | safehtml'></p>
-            </div>
+              </li>
+            </ul>
+          </div>           
+        </tab> 
+        <tab heading='Take Action'>
+          <div class='fx-fade-normal' class="tab-pane" id="take-action">
+            <ul class="candidate-list">
+              <li  ng-repeat='asset in layers.campus'>
+              <h3>{{asset.title}}</h3>
+              <h4 ng-if='asset.city'>{{asset.city}}, {{viewparams.state}}</h4> 
+              <p ng-bind-html='asset.description | safehtml'></p>
+              </li>
+            </ul>
           </div>           
         </tab> 
       </tabset> 
+
+
       <!-- GET INVOLVED -->
-      <div class="row get-involved">
-        <!-- <div ng-if='dayOne >= 0' class='election-countdown-tag'> -->
+      <div class="get-involved">
+        <div class="row">
          <div class="col-xs-12">
-         <h3 ng-if='dayOne >= 0' class='election-countdown-tag'>Days Until the Election:<span>{{dayOne}}{{dayTwo}}</span></h3>
-        <!-- </div> -->
+          <h3>Days Until the Election:</h3>
+          <div ng-if='dayOne >= 0' class="election-countdown-tag">
+            <h1><span>{{dayOne}}</span></h1>
+            <h1><span>{{dayTwo}}</span></h1>
+          </div>
+         
         </div>
         <div class="col-xs-12">
           <h3>GET INVOLVED</h3>
@@ -85,7 +88,7 @@
           <img src="images/icon-megaphone-red.svg">
           <p>Report a <a href="#">Koch Problem</a> in your area</p>
         </div>
+        </div>
       </div>
     </div><!--  /.candidate-main -->
   </div>
-<!-- </div> -->

@@ -1,9 +1,10 @@
-<div class='infowindow'>
+<div class='info-window' ng-class="'info-window-'+item.layer">
   <div ng-switch="item.layer">
     <div ng-switch-when="candidate">
-      <img style='width: 50px; float: left; margin-right: 10px;' ng-src='http://votesmart.org/canphoto/{{item.id}}.jpg'/>
+      <img style='height: 100px; float: left; margin-right: 10px;' ng-src='http://votesmart.org/canphoto/{{item.id}}.jpg'/>
         <h3>{{item.title}}</h3>
-        <div style='clear: both'>${{item.amount}} from Koch since 2000</div>
+        <div><b>${{item.amount}}</b> taken to date</div>
+        <div class='info-window-link'><a ui-sref='kochTracker.candidatesView.candidateProfile({state: item.state, input:item.id})'>READ MORE</a></div>
     </div>
     <div ng-switch-default>
       <h3>{{item.title}}</h3>

@@ -1,6 +1,12 @@
 'use strict';
 var app = angular.module('kochTracker', [ 'ui.bootstrap', 'ui.router', 'kochTracker' ])
-  .controller('adminController',  function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $messages, $timeout){
+  .controller('adminController',  function($scope, $window, $modal, $http, DataRequestFactory, $rootElement, $location, $q, $state, $messages, $timeout){
+    if ($location.host() != 'localhost' && $location.protocol() != 'https') {
+      $window.location.href = $location.absUrl().replace('http', 'https');
+    }
+
+    $scope.logged_in = 'wait';
+
     $scope.success = 0;
     $scope.fail = 1;
     $scope.progress = 0;
@@ -11,12 +17,62 @@ var app = angular.module('kochTracker', [ 'ui.bootstrap', 'ui.router', 'kochTrac
     $scope.dataTypes = [
       {action: 'campus', method: 'adminMap', niceName: 'Campuses'},
       {action: 'assets', method: 'adminMap', niceName: 'Assets'},
+      {action: 'action', method: 'adminMap', niceName: "Take Action"},
       {action: 'voices', method: 'adminSheet', niceName: "Victim's Voices"},
       {action: 'offenders', method: 'adminSheet', niceName: "Koch Heads"},
       {action: 'facts', method: 'adminSheet', niceName: "Koch Facts"},
       {action: 'races', method: 'adminSheet', niceName: "Key Races"},
       {action: 'realtime', method: 'adminSheet', niceName: "Realtime Contributions"},
     ]
+
+    DataRequestFactory.getAdmin('auth', 'checkLogin').then(function(data) {
+      $scope.logged_in = data.login;
+    }, function(err){
+      $scope.logged_in = -2;
+      $messages.clearMessages();
+    })
+
+    $scope.$watch('logged_in', function() {
+      if ($scope.logged_in <= 0) {
+        var modalInstance = $modal.open({
+          backdrop: 'static',
+          keyboard: false,
+          windowClass: 'panel-info',
+          templateUrl: 'login.html',
+          resolve: {
+            login: function() { return $scope.logged_in; }
+          },
+          controller: function($scope, login) {
+            $scope.logged_in = login;
+            $scope.user = {
+              username: '',
+              password: '',
+            }
+            $scope.login = function() {
+              DataRequestFactory.postAdmin('login', {username: $scope.user.username, password: $scope.user.password}).then(function(data) {
+                if (data.login) {
+                  modalInstance.close(data.login);
+                } else { 
+                  $scope.user.password = '';
+                  $scope.logged_in = 0;
+                }
+              })
+            }
+          }
+        });
+        modalInstance.result.then(function(res) {
+          $scope.logged_in = res;
+        })
+      }
+    })
+
+    $scope.logout = function() {
+      DataRequestFactory.getAdmin('auth', 'logout').then(function(data) {
+        $scope.logged_in = data;
+        console.log(data);
+
+      })
+    }
 
     $scope.updateAllData = function() {
       reset();
@@ -43,7 +99,10 @@ var app = angular.module('kochTracker', [ 'ui.bootstrap', 'ui.router', 'kochTrac
     }
     
     $scope.updateData = function(dataType) {
+      console.log(dataType)
+      console.log($scope.whichData)
       if ($scope.whichData != 'all' && dataType.action != $scope.whichData) {
+        console.log(dataType.action)
         return $q.when();
       };
 
@@ -56,7 +115,12 @@ var app = angular.module('kochTracker', [ 'ui.bootstrap', 'ui.router', 'kochTrac
 
     var handleError = function(err) {
       reset();
-      $scope.error = 1;
+      if (err.data && err.data.error == 'Logged Out') {
+        $messages.clearMessages();
+        $scope.logged_in = -1;
+      } else {
+        $scope.error = 1;
+      }
     }
     var reset = function() {
       $scope.counts = {};

@@ -10,14 +10,36 @@
 </head>
   <body class="body" ng-controller='adminController'>
     <div style='padding: 50px;' class='container text-center'>
-      <div class='panel panel-info'>
+       <script type="text/ng-template" id="login.html">
+          <div class="panel-heading">
+            <h2>Log In</h2>
+          </div>
+          <div class="panel-body">
+            <div ng-if='logged_in==0' class='alert alert-danger' style='padding: 10px; font-size: 16px;'>Invalid Login. Please try again.</div>
+            <div ng-if='logged_in==-1' class='alert alert-danger' style='padding: 10px; font-size: 16px;'>Login Expired.</div>
+            <form role="form" ng-submit='login()'>
+              <fieldset>
+                <div class="form-group">
+                  <input class="form-control input-lg" ng-model='user.username' placeholder="Username" name="username" autofocus="true">
+                </div>
+                <div class="form-group">
+                  <input class="form-control input-lg" ng-model='user.password' placeholder="Password" name="password" type="password" value="">
+                </div>
+                <button type='submit' class="btn btn-lg btn-success">Log In</button>
+              </fieldset>
+            </form>
+          </div>
+        </script>
+      <div class='panel panel-info' ng-show='logged_in == 1'>
         <div class='panel-heading'>
           <h1>KochTracker Admin Tool</h1>
         </div>
         <div class='panel-body'>
           <div messages id='messages'></div>
+          <div class='pull-right'><button ng-click="logout()" class="btn btn-info">Log Out</button></div>
           <div class='row col-lg-offset-3 col-lg-6 well '>
             This will load data from the google docs and maps into the KochTracker website. Use the select box below to choose which data to update (or leave to 'All Data'), then press the 'Update the Data!' button.
+            <p>Note: There is a daily request limit on the geocoding service we are using. If you update the geographical assets too often in one day, you will exceed that limit.</p>
           </div>
           <div class='row'>
             <div ng-if='success' class='alert alert-success col-lg-offset-4 col-lg-4 text-left'>

@@ -23,7 +23,12 @@
       .state('kochTracker', {
         url: '',
         abstract: true,
-        templateUrl: 'app.tpl.html'
+        templateUrl: 'app.tpl.html',
+        controller: function($rootScope) {
+          $rootScope.$on('$viewContentLoaded', function() { 
+            $('body>ul.dropdown-menu').remove(); //remove dropdowns that sometimes stay
+          })
+        }
       });
 
       //This is some crazy stuff cuz when I reload the page, it adds a / to everything
@@ -31,7 +36,6 @@
         //return $match.input.replace(/\/$/, '');
       //})
       $urlRouterProvider.otherwise('/notFound');
-
   })
 }(angular));
 

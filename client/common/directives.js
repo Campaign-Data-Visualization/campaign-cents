@@ -21,8 +21,9 @@ app.directive('loading', function() {
     restrict: 'E',
     scope: {
           loading: '=',
+          class: '=?'
       },
-    template: "<div ng-show='loading' class='loading-image'>[Insert loading image here]</div>",
+    template: "<div ng-show='loading' ng-class='{{class}}' class='loading-image text-center'><span class='glyphicon glyphicon-refresh spin'></span></div>",
   };
 });
 
@@ -509,7 +510,6 @@ app.directive('bubbleChart', function($window) {
       }
      
       scope.$watch('data', function() {
-      	console.log(scope.data)
         init();
         drawBubbleChart();
       });
@@ -656,9 +656,9 @@ app.directive('searchBox', function(DataRequestFactory, $state) {
     	button:'='
     },
     template:
-      "<input class='input-sm' type='text' ng-model='searchValue' placeholder='Candidate Name or Zipcode' typeahead-append-to-body='true' typeahead='result.label as result for result in search($viewValue)' typeahead-template-url='common/search-results.tpl.html' typeahead-loading='loadingSearch' typeahead-editable='false' class='' typeahead-on-select='select($item, $model, $label)'>"+
+      "<input class='input-sm' type='text' ng-model='searchValue' placeholder='Candidate Name or Zipcode' typeahead-wait-ms='200' typeahead-append-to-body='true' typeahead='result.label as result for result in search($viewValue)' typeahead-template-url='common/search-results.tpl.html' typeahead-loading='loadingSearch' typeahead-editable='false' typeahead-on-select='select($item, $model, $label)'>"+
       "<button ng-if='button' class=' btn btn-md btn-detault searchButton' type='submit' ng-click='search()'>GO</button>"+
-      "<div ng-show='loadingSearch'>Insert Loading Indicator</div>",
+      "<loading ng-class=\"{small: !button, 'small-button': button}\" loading='loadingSearch'/>",
     link: function(scope, element, attribs) {
       scope.searchValue = '';
       scope.loadingSearch = false;
@@ -679,8 +679,8 @@ app.directive('searchBox', function(DataRequestFactory, $state) {
       };
 
       scope.select = function(item, model, label) {
+      	scope.searchValue = '';
         if (item.err) { 
-          scope.searchValue = '';
           return; 
         } else {
           var route = item.type == 'c' ? 'candidateProfile' : 'candidateList';
@@ -770,3 +770,54 @@ app.directive('shareThis', function ($location) {
 });
 
 
+app.directive('shareStoryButton', function(DataRequestFactory, $modal, $messages) {
+  return {
+    restrict: 'A',
+    replace:true,
+    scope: true,
+    template: "<button class='btn btn-default share-story-button' ng-click='showForm()'>Share your story</button>",
+    link: function(scope, elem, attrs){
+      scope.showForm = function() {
+        var modalInstance = $modal.open({
+          windowClass: 'share-story-modal share-story-form',
+          templateUrl: "/explore/explore.shareStoryForm.tpl.html",
+          controller: function($scope, $modalInstance){
+            $scope.forms = {};
+            $scope.formData = {
+              name: '',
+              email: '',
+              city: '',
+              state: '',
+              story: '', 
+            }
+            $scope.close = function() {
+              $modalInstance.close();
+            }
+            $scope.invalid = false;
+            $scope.success = false;
+            $scope.loading = false;
+
+            $scope.share = function() {
+              $messages.clearMessages();
+              $messages.modal = true;
+
+              $scope.invalid = $scope.forms.shareStory.$invalid;
+              if (! $scope.invalid) {
+                $scope.loading = true;
+                DataRequestFactory.postData('shareStory', $scope.formData).then(function(data){
+                  $scope.loading = false;
+                  if (data == 'Success') {
+                    $scope.success = true;
+                    $messages.modal = false;
+                  }
+                }, function(e) { 
+                  $scope.loading = false;
+                })
+              }
+            }
+          }
+        });
+      }
+    }
+  }
+})
