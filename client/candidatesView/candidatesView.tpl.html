@@ -11,20 +11,19 @@
         <div class='worst-offender' worst-offender/>
       </div>
        <div class="col-xs-12 sidebar-tile">
-        <div class='victims-voice' victims-voice/>
+        <h3>Victim's Voices</h3>
       </div>
     </div> 
 
-    <div class="col-md-8 col-xs-12 candidate-main">
-      <loading loading="layersLoading"/>
-      <tabset ng-if='!loading'>
+    <div class="col-md-8 col-xs-12 candidate-main">  
+      <tabset>
         <tab heading='Candidates'>
           <div class="tab-pane" id="candidates">
-            <div class='fx-fade-normal'  ui-view></div>
+            <div ui-view></div>
           </div> 
         </tab>
         <tab ng-if='layers.assets.length' heading='Organizations'>
-          <div class='fx-fade-normal' class="tab-pane" id="organizations">
+          <div class="tab-pane" id="organizations">
             <ul class="candidate-list">
               <li ng-repeat='asset in layers.assets'>
                 <h3>{{asset.title}}</h3>
@@ -34,7 +33,7 @@
           </div>
         </tab>
         <tab ng-if='layers.campus.length' heading='Campuses'>
-          <div class='fx-fade-normal' class="tab-pane" id="campuses">
+          <div class="tab-pane" id="campuses">
             <ul class="candidate-list">
               <li  ng-repeat='asset in layers.campus'>
               <h3>{{asset.title}}</h3>
@@ -45,12 +44,12 @@
           </div>           
         </tab> 
         <tab heading='Take Action'>
-          <div class='fx-fade-normal' class="tab-pane" id="take-action">
+          <div class="tab-pane" id="take-action">
             <ul class="candidate-list">
-              <li  ng-repeat='item in layers.action'>
-              <h3>{{item.title}}</h3>
-              <h4 ng-if='item.city'>{{item.city}}, {{viewparams.state}}</h4> 
-              <p ng-bind-html='item.description | safehtml'></p>
+              <li  ng-repeat='asset in layers.campus'>
+              <h3>{{asset.title}}</h3>
+              <h4 ng-if='asset.city'>{{asset.city}}, {{viewparams.state}}</h4> 
+              <p ng-bind-html='asset.description | safehtml'></p>
               </li>
             </ul>
           </div>           

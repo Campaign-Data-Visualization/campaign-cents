@@ -67,15 +67,15 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
       markers: [],
       label: 'Assets'
     },
-    'action': {
+    'involved': {
       fillColor: '#6baf00',
       visible: true,
       markers: [],
-      label: 'Take Action'
+      label: 'Get Involved'
     },
   }
 
-  $scope.layersOrder = ['candidate', 'campus', 'action', 'assets'];
+  $scope.layersOrder = ['candidate', 'campus', 'involved', 'assets'];
 
   $scope.template;
 
@@ -107,7 +107,6 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
     $scope.$apply(function() {
       $scope.infoWindow.setContent(content);
       $scope.infoWindow.open($scope.map, marker);
-      $scope.infoWindow.border = marker.icon.fillColor;
     });
     
   }
@@ -136,9 +135,6 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
     })
 
     $scope.infoWindow = new google.maps.InfoWindow(); 
-    google.maps.event.addListener($scope.infoWindow, 'domready', function(){
-      $('#map > div > div > div:nth-child(1) > div:nth-child(3) > div:nth-child(4) > div > div:nth-child(1) > div:nth-child(4)').css({'border': '4px solid '+$scope.infoWindow.border})
-    })
 
     DataRequestFactory.getData('map', 'layers').then(function(data) {
       data.forEach(function(item) {
@@ -169,7 +165,6 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
         });
         google.maps.event.addListener(marker, 'mouseout', function () {
             $('#marker-tooltip').hide();
-
         });
       });
     })
@@ -251,3 +246,54 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
   });
 })
 
+.directive('shareStoryButton', function(DataRequestFactory, $modal, $messages) {
+  return {
+    restrict: 'A',
+    replace:true,
+    scope: true,
+    template: "<button class='btn btn-default' ng-click='showForm()'><h4>SHARE YOUR STORY</h4></button>",
+    link: function(scope, elem, attrs){
+      scope.showForm = function() {
+        var modalInstance = $modal.open({
+          windowClass: 'share-story-modal share-story-form',
+          templateUrl: "/explore/explore.shareStoryForm.tpl.html",
+          controller: function($scope, $modalInstance){
+            $scope.forms = {};
+            $scope.formData = {
+              name: '',
+              email: '',
+              city: '',
+              state: '',
+              story: '', 
+            }
+            $scope.close = function() {
+              $modalInstance.close();
+            }
+            $scope.invalid = false;
+            $scope.success = false;
+            $scope.loading = false;
+
+            $scope.share = function() {
+              $messages.clearMessages();
+              $messages.modal = true;
+
+              $scope.invalid = $scope.forms.shareStory.$invalid;
+              if (! $scope.invalid) {
+                $scope.loading = true;
+                DataRequestFactory.postData('shareStory', $scope.formData).then(function(data){
+                  $scope.loading = false;
+                  if (data == 'Success') {
+                    $scope.success = true;
+                    $messages.modal = false;
+                  }
+                }, function(e) { 
+                  $scope.loading = false;
+                })
+              }
+            }
+          }
+        });
+      }
+    }
+  }
+})

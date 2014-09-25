@@ -57,10 +57,6 @@ body {
 	font-family: @font-family-sans-serif;
 }
 
-.pointer { 
-	cursor: pointer;
-}
-
 .center {
 	text-align: center
 }
@@ -194,6 +190,7 @@ body {
 }
 
 #dropdown-search input {
+	text-align: center;
 	margin: 0 auto;
 }	
 
@@ -322,7 +319,7 @@ ul.box-text li div {
 
 
 .landing-box-involved h3, .landing-box-involved a {
-	color: @cc-blue-light;
+	color: #004e70;
 }
 
 .landing-box-races h3, .landing-box-races a {
@@ -348,8 +345,8 @@ ul.box-text li div {
 	background-image: linear-gradient(#f8f8f8, #d6d6d6);
 }	
 
-.page-section {
-	height: 100vh;
+.explore,.page-section {
+	height: 100%;
 }
 .map-section {
 	height: auto;
@@ -504,7 +501,7 @@ ul.box-text li div {
 .sidebar p {
 	text-align: left;
 }
-.sidebar-tile>div {
+.sidebar-tile {
 	background-color: @cc-gray-search;
 	padding: 20px;
 	margin: 20px 0;
@@ -545,7 +542,6 @@ ul.nav-tabs li > a {
 	-moz-border-radius: 0;
 	border-radius: 0;
 	border: 0;
-	cursor: pointer;
 	@media (max-width: @screen-xs-max) {
 		margin-right: 0;
 		border-bottom: 0;
@@ -593,12 +589,11 @@ ul.candidate-list li {
 	border-left: 3px solid #fff;
 	height: auto;
 	padding: 30px;
-
+	
 }
 
 #candidates ul.candidate-list li:hover{
 	border: 3px solid @cc-green;
-	cursor: pointer;
 }
 
 ul.candidate-list li img {
@@ -863,11 +858,7 @@ ul#map-layers h4 {
 		display: inline;
 	}
 }
-ul#map-layers label {
-	font-weight: normal;
-	margin-right: 5px;
-	cursor: pointer;
-}
+
 ul#map-layers li {
 	display: inline;
 	margin: 15px;
@@ -899,7 +890,7 @@ ul#map-layers li.campus span {
 	background-color: #f17522;
 }
 
-ul#map-layers li.action span {
+ul#map-layers li.involved span {
 	background-color: #6baf00;
 }
 
@@ -918,28 +909,11 @@ ul#map-layers li input {
 	color: #fff;
 	margin: 8px;
 	margin-top: -28px;
-	padding: 10px;
+	padding: 5px;
+	border-radius: 6px;
 	z-index: 1000;
 	opacity: .9;
-}
-
-#map > div > div > div:nth-child(1) > div:nth-child(3) > div:nth-child(4) > div > div:nth-child(1) > div:nth-child(4) {
-	border: 3px solid green;
-}
-
-.info-window {
-	min-width: 300px;
-}
-
-.info-window-candidate {
-	min-height: 100px;
-}
-
-.info-window-link {
-	margin-top: 8px;
-	margin-left: 92px;
-	font-size: 18px;
-	font-weight: bold;	
+	border: 2px solid rgb(51, 51, 51)
 }
 
 .map-layers > div {
@@ -948,17 +922,16 @@ ul#map-layers li input {
 
 
 //victim's voices page
-
 #join-convo {
 	text-align: center;
 }
 #join-convo h1 {
 	background-color: #D5D5D5;
-	padding-top: 10px;
+	margin-top: 10px;
 }
 
-.join-convo-form {
-	padding-top: 10px;
+#join-convo h3 {
+	font-family: @font-family-sans-serif
 }
 
 .join-convo-form input,.share-story-form input, .share-story-form select, .share-story-form textarea {
@@ -966,7 +939,14 @@ ul#map-layers li input {
 	border-radius: 0;
 }
 
-.join-convo-form button, .share-story-button, .modal-body button {
+.join-convo-form button {
+	background-image: -webkit-linear-gradient(#A8272D, #8A272D);
+	background-image: -o-linear-gradient(#A8272D, #8A272D);
+	background-image: linear-gradient(#A8272D, #8A272D);
+	width: 100%;
+}
+
+.join-convo-form button, .modal-body button {
 	height: 70px;
 	background-color: #000;
 	color: #fff;
@@ -980,19 +960,24 @@ ul#map-layers li input {
 
 img.quote-left {
 	padding: 5px;
-	margin-top: -20px;
+	margin-top: -30px;
+	margin-left: -30px;
 }
 
 img.quote-right {
 	padding: 5px;
-	margin-bottom: -20px;
+	margin-bottom: -30px;
+	margin-right: -30px;
 }
 
 .tile {
 	background-color: #D5D5D5;
 	height: auto;
 	margin: 20px 0;
-	padding: 20px;
+}
+
+.tile-text {
+	padding: 40px;
 }
 
 .tile img.author {
@@ -1040,34 +1025,3 @@ h4.modal-title {
 	color: #000;
 }
 
-.loading-image {
-	font-size: 60px;
-	color: @cc-blue-dark;
-	padding: 20px;
-}
-
-.small .loading-image, .small-button .loading-image {
-	font-size: 18px;
-	padding: 0px;
-	text-align: right;
-	margin-top: -25px;
-	margin-right: 18px;
-}
-
-.small-button .loading-image {
-	margin-right: 56px;
-}
-
-.spin{
-	-webkit-transform-origin: 50% 50%;
-	transform-origin:50% 50%;
-	-ms-transform-origin:50% 50%; /* IE 9 */
-	-webkit-animation: spin 1.5s infinite linear;
-	-moz-animation: spin 1.5s infinite linear;
-	-o-animation: spin 1.5s infinite linear;
-	animation: spin 1.5s infinite linear;
-}
-
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
