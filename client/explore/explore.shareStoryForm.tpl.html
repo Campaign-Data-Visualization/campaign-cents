@@ -9,6 +9,8 @@
           <div modal='true' messages id='modal-messages'></div>
         </div>
         <div class="modal-body">
+          <p>Do you have a personal experience you’d like to share about Koch influence in America? Join the conversation! All comments will be approved by the International Forum on Globalization Action Pac before being posted on KochProblem.org. Please note that submissions may be edited for length and propriety.</p>
+        
           <div ng-show='success' class='alert-success alert'>
             <h3>Thank you for submitting!</h3>
             <button class='btn btn-default' ng-click="close()">Close</button>
@@ -18,8 +20,8 @@
             <div class="form-group" ng-class="{ 'has-error': forms.shareStory.story.$invalid && ( forms.shareStory.story.$dirty || invalid )}">
               <label for="inputStory" class="col-sm-2 control-label">Story</label>
               <div class="col-sm-10">
-                <textarea class="form-control" id="inputStory" rows="10" maxlength='350' name='story' ng-model='formData.story' required placeholder="Share your story..." ></textarea>
-                <span class="help-block">{{350-formData.story.length}} characters remaining...</span>
+                <textarea class="form-control" id="inputStory" rows="10" maxlength='2500' name='story' ng-model='formData.story' required placeholder="Share your story..." ></textarea>
+                <span class="help-block">{{2500-formData.story.length}} characters remaining...</span>
                 <p class="help-block" ng-if="invalid && forms.shareStory.name.$error.required">Please enter your story.</p>
               </div>
             </div>
