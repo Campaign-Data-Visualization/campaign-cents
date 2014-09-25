@@ -40,23 +40,21 @@ var updateContribs = function() {
   var deferred = Q.defer();
   console.log('<=====Updating Contribs');
 
-  db.doQuery("delete from koch_contribs").then(function() {
-
-    db.doQuery("insert into koch_contribs select cid, ultorg, pacid, date, amount, '', 'pac_to_can', fecrecno, 'f', cycle, null from IFG_PAC2Cand_Data join candidates on cid = crpid").then(function() {
-      db.doQuery("insert into koch_contribs select recipid, if(ultorg != '', ultorg, if(orgname != '', orgname, fecoccemp)), contribid, date, amount, '', 'individual', fectransid, 'f', cycle, null from IFG_IndivData join candidates on recipid = crpid").then(function() {
-        db.doQuery("insert into koch_contribs select cid, if(ultorg != '', ultorg, pacshort), '', date, amount, '', 'outside_cand', id, if(crpsuppopp = 'S', 'f', 'a'), cycle, null from IFG_Outside_Cand_Expends join candidates on cid = crpid").then(function() {
-          db.doQuery("insert into koch_contribs select b.crpid, if(ultorg != '', ultorg, a.pacshort), filerid, date, amount, '', 'pac_to_com', fecrecno, 'f', cycle, null from IFG_PAC2Cmte_Data a join leadership_pacs b on recipid = cmteid and b.crpid != ''").then(function() {
-            db.doQuery("update koch_contribs a join koch_orgs b on donor_name = org_name set a.koch_tier = b.tier").then(function() {
-              db.doQuery("update koch_contribs a join candidates b using (crpid) set a.voteSmartId = b.voteSmartId").then(function() {
-                console.log('<=====Contribs Updated');
-                deferred.resolve();
-              }, logError);
-            }, logError);
-          }, logError);
-        }, logError);
-      }, logError);
-    }, logError);
-  });
+  db.doQuery("delete from koch_contribs")
+    .then(function() { return db.doQuery("insert into koch_contribs select cid, ultorg, pacid, date, amount, '', 'pac_to_can', fecrecno, 'f', cycle, null, null from IFG_PAC2Cand_Data join candidates on cid = crpid"); })
+    .then(function() { return db.doQuery("insert into koch_contribs select recipid, if(orgname != '', orgname, if(ultorg != '', ultorg, fecoccemp)), contribid, date, amount, '', 'individual', fectransid, 'f', cycle, null, null from IFG_IndivData join candidates on recipid = crpid"); })
+    .then(function() { return db.doQuery("insert into koch_contribs select cid, if(ultorg != '', ultorg, pacshort), '', date, amount, '', 'outside_cand', id, if(crpsuppopp = 'S', 'f', 'a'), cycle, null, null from IFG_Outside_Cand_Expends join candidates on cid = crpid"); })
+    .then(function() { return db.doQuery("insert into koch_contribs select b.crpid, if(ultorg != '', ultorg, a.pacshort), filerid, date, amount, '', 'pac_to_com', fecrecno, 'f', cycle, null, null from IFG_PAC2Cmte_Data a join leadership_pacs b on recipid = cmteid and b.crpid != ''"); })
+    .then(function() { return db.doQuery("update koch_contribs a join koch_orgs b on donor_name = org_name set a.koch_tier = b.tier, a.donor_name = b.org_alias "); })
+    .then(function() { return db.doQuery("update koch_contribs a join candidates b using (crpid) set a.voteSmartId = b.voteSmartId"); })
+    .then(function() {
+      console.log('<=====Contribs Updated');
+      deferred.resolve();
+    })
+    .catch(function(err) {
+      console.log(err);
+      deferred.reject(err);
+    });
   return deferred.promise;
 };
 
@@ -78,6 +76,21 @@ var updateCandidateAmounts = function() {
 var logError = function(err) { 
   console.log(err);
 }
+
+/*
+org names
+select org_name, sum(donation_count) as donation_count, sum(amount) as amount, max(max_cycle) as max_cycle from (
+SELECT if(ultorg != '', ultorg, if(orgname != '', orgname, fecoccemp)) as org_name, count(*) as donation_count, sum(amount) as amount, max(cycle) as max_cycle FROM IFG_IndivData I group by if(ultorg != '', ultorg, if(orgname != '', orgname, fecoccemp))  
+union
+select ultorg, count(*), sum(amount), max(cycle) from IFG_PAC2Cand_Data group by ultorg
+
+union
+select if(ultorg != '', ultorg, pacshort), count(*), sum(amount), max(cycle)  from IFG_Outside_Cand_Expends group by if(ultorg != '', ultorg, pacshort)
+union
+
+select if(ultorg != '', ultorg, a.pacshort),  count(*), sum(amount), max(cycle) from IFG_PAC2Cmte_Data a join leadership_pacs b on recipid = cmteid and b.crpid != '' group by if(ultorg != '', ultorg, a.pacshort)
+) a group by org_name
+*/
 /* I'm giving up on updating the fusion tables - too much of a headache, and it turns out there's no way to automate the geocode. I'm moving to just pulling the markers from our own table
 var updateFusionTables = function() {
   console.log('<=====Updating Fusion Tables');
@@ -129,15 +142,14 @@ var updateFusionTables = function() {
 };
 */
 
-convertFiles().then(function() {
-  updateContribs().then(function(){
-    updateCandidateAmounts().then(function(){
-      //updateFusionTables().then(function(){
-        db.exit();
-      //})
-    })
-  })
-});
+convertFiles()
+  .then(updateContribs)
+  .then(updateCandidateAmounts)
+  .then(function(){
+    //updateFusionTables().then(function(){
+      db.exit();
+    //})
+  });
 
 
 
