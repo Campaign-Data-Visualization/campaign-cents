@@ -3,8 +3,8 @@
 </div>
 <div class='row'>
   <div ng-repeat='candidate in offenders'>
-    <h3>{{candidate.nameFirstLast}}</h3>
-    ${{candidate.since2000contrib | number}}
+    <h3><a ui-sref='kochTracker.candidatesView.candidateProfile({input: offender.voteSmartId, state:offender.state})'>{{candidate.nameFirstLast}}</a></h3>
+    Koch Contributions: ${{candidate.since2000contrib | number}}
     <p ng-bind-html='candidate.description | safehtml'>
   </div>
 </div>
