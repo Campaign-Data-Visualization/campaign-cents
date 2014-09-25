@@ -64,17 +64,18 @@ DROP TABLE IF EXISTS `koch_contribs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `koch_contribs` (
-  `crpid` varchar(20) CHARACTER SET utf8 NOT NULL,
-  `donor_name` varchar(200) CHARACTER SET latin1 NOT NULL,
-  `donor_id` varchar(20) CHARACTER SET latin1 NOT NULL,
+  `crpid` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
+  `donor_name_orig` varchar(200) DEFAULT NULL,
+  `donor_id` varchar(20) CHARACTER SET latin1 DEFAULT NULL,
   `date` date NOT NULL,
   `amount` int(11) NOT NULL DEFAULT '0',
-  `koch_tier` int(11) NOT NULL,
+  `koch_tier` int(11) DEFAULT NULL,
   `source` varchar(20) CHARACTER SET latin1 NOT NULL,
-  `source_id` varchar(20) CHARACTER SET latin1 NOT NULL,
+  `source_id` varchar(20) CHARACTER SET latin1 DEFAULT NULL,
   `for_against` varchar(1) CHARACTER SET latin1 NOT NULL DEFAULT 'f',
   `cycle` int(11) NOT NULL,
   `voteSmartId` mediumint(7) unsigned NOT NULL,
+  `donor_name` varchar(200) CHARACTER SET latin1 NOT NULL,
   KEY `cycle` (`crpid`,`for_against`,`cycle`) USING BTREE,
   KEY `tier` (`crpid`,`for_against`,`koch_tier`),
   KEY `cycle2` (`voteSmartId`,`for_against`,`cycle`),
@@ -91,6 +92,7 @@ DROP TABLE IF EXISTS `koch_orgs`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `koch_orgs` (
   `org_name` varchar(100) NOT NULL,
+  `org_alias` varchar(100) NOT NULL,
   `tier` int(11) NOT NULL,
   PRIMARY KEY (`org_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -167,9 +169,9 @@ DROP TABLE IF EXISTS `content`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `content` (
-  `title` varchar(200) NOT NULL,
+  `title` varchar(200) DEFAULT NULL,
   `description` text NOT NULL,
-  `detail` varchar(200) NOT NULL,
+  `detail` varchar(200) DEFAULT NULL,
   `published` tinyint(1) DEFAULT '0',
   `type` varchar(10) NOT NULL,
   KEY `type` (`type`,`published`) USING BTREE,
@@ -195,7 +197,8 @@ CREATE TABLE `koch_assets` (
   `state` char(2) DEFAULT NULL,
   `zipcode` varchar(10) DEFAULT NULL,
   `country` char(2) DEFAULT NULL,
-  KEY `state` (`state`,`layer`)
+  KEY `state` (`state`,`layer`),
+  KEY `country` (`country`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -208,4 +211,4 @@ CREATE TABLE `koch_assets` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-09-12  3:12:04
+-- Dump completed on 2014-09-25 15:38:27
