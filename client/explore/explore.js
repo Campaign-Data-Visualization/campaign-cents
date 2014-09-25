@@ -103,11 +103,12 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
     $scope.item = item;
     $scope.infoWindow.close();
 
-    var content = $compile($scope.template)($scope)[0];
+    var content = $($compile($scope.template)($scope)[0]);
     $scope.$apply(function() {
-      $scope.infoWindow.setContent(content);
+      $scope.infoWindow.setContent(content[0]);
       $scope.infoWindow.open($scope.map, marker);
       $scope.infoWindow.border = marker.icon.fillColor;
+      $scope.infoWindow.setContent(content[0]); //add content again to try and force window to size right
     });
     
   }
