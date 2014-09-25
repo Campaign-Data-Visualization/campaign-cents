@@ -44,7 +44,7 @@
             </ul>
           </div>           
         </tab> 
-        <tab heading='Take Action'>
+        <tab ng-if='layers.action.length' heading='Take Action'>
           <div class='fx-fade-normal' class="tab-pane" id="take-action">
             <ul class="candidate-list">
               <li  ng-repeat='item in layers.action'>

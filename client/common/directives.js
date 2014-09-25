@@ -801,7 +801,7 @@ app.directive('shareStoryButton', function(DataRequestFactory, $modal, $messages
     restrict: 'A',
     replace:true,
     scope: true,
-    template: "<button class='btn btn-default share-story-button' ng-click='showForm()'>Share your story</button>",
+    template: "<button class='btn btn-default share-story-button' ng-click='showForm()'><h4>SHARE YOUR STORY</h4></button>",
     link: function(scope, elem, attrs){
       scope.showForm = function() {
         var modalInstance = $modal.open({
