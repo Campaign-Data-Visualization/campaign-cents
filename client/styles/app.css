@@ -1058,7 +1058,7 @@ ul#map-layers li.interest span{background-color:#000}
 ul#map-layers li input{margin:3px}
 #marker-tooltip{display:none;position:absolute;background-color:#000;color:#fff;margin:8px;margin-top:-28px;padding:10px;z-index:1000;opacity:.9}
 #map>div>div>div:nth-child(1)>div:nth-child(3)>div:nth-child(4)>div>div:nth-child(1)>div:nth-child(4){border:3px solid #008000}
-.info-window{min-width:300px}
+.info-window{min-width:300px;max-width:420px}
 .info-window-candidate{min-height:100px}
 .info-window-link{margin-top:8px;margin-left:92px;font-size:18px;font-weight:bold}
 .map-layers>div{display:inline}

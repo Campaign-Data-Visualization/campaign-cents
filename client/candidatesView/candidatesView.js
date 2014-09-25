@@ -79,8 +79,8 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
     scope: true,
     replace: true,
     template: "<div class='worst-offender' ng-if='offender'><h3>Worst Offender</h3>"+
-      "<img width='80px' ng-src='{{offender.photoURL}}'>"+
-      "<h4>{{offender.nameFirstLast}}</h4>"+
+      "<a ui-sref='kochTracker.candidatesView.candidateProfile({input: offender.voteSmartId, state:offender.state})'><img width='80px' ng-src='{{offender.photoURL}}'></a>"+
+      "<h4><a ui-sref='kochTracker.candidatesView.candidateProfile({input: offender.voteSmartId, state:offender.state})'>{{offender.nameFirstLast}}</a></h4>"+
       "<p ng-bind-html='offender.description|characters:350: false | safehtml'></p><a ui-sref='kochTracker.explore.offenders'>Read More</a></div>",
     link: function(scope, element, attribs) {
       scope.offender = '';
