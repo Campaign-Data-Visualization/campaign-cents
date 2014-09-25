@@ -63,7 +63,7 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
     scope: true,
     replace: true,
     template: "<div class='koch-fact' ng-if='fact'><h3>Koch Fact</h3>"+
-      "<p ng-bind-html='fact.description|safehtml'></p></div>",
+      "<p ng-bind-html='fact.description|safehtml'></p><a ng-if='fact.detail' target='_blank' href='{{fact.detail}}'>Source</a></div>",
     link: function(scope, element, attribs) {
       scope.fact = '';
       DataRequestFactory.getData('fetch', 'facts/random').then(function(data) {

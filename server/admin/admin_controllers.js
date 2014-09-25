@@ -17,7 +17,7 @@ module.exports = exports = {
       'facts': {
         sheetId: 'od6',
         descField: 1,
-        columnDef: ['description', 'published'],
+        columnDef: ['description', 'detail', 'published'],
         table: 'content'
       },
       'voices': {
