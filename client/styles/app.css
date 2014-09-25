@@ -948,7 +948,7 @@ ul.box-text li div{height:100px}
 .landing-box-watch h3,.landing-box-watch a{color:#60af37}
 .dropdown-menu img{width:28px;border-width:1px;border-color:#333;border-style:solid;margin-right:5px}
 .map-section,.explore,.page-section{background-image:-webkit-linear-gradient(#f8f8f8, #d6d6d6);background-image:-o-linear-gradient(#f8f8f8, #d6d6d6);background-image:linear-gradient(#f8f8f8, #d6d6d6)}
-.page-section{height:100vh}
+.explore,.page-section{height:100%}
 .map-section{height:auto;padding:40px 0 20px 0}
 .map-sidebar-container{text-align:center;height:auto}@media (min-width:767px){.map-sidebar-container{height:450px;position:relative;margin-top:10px}}@media (min-width:768px){.map-sidebar-container{margin-bottom:40px}}@media (min-width:1200px){.map-sidebar-container{margin-bottom:0}}
 .map-main{margin-top:-15px}
@@ -1063,14 +1063,16 @@ ul#map-layers li input{margin:3px}
 .info-window-link{margin-top:8px;margin-left:92px;font-size:18px;font-weight:bold}
 .map-layers>div{display:inline}
 #join-convo{text-align:center}
-#join-convo h1{background-color:#d5d5d5;padding-top:10px}
-.join-convo-form{padding-top:10px}
-.join-convo-form input,.share-story-form input,.share-story-form select,.share-story-form textarea{border:2px #000 solid;border-radius:0}
+#join-convo h1{background-color:#d5d5d5;margin-top:10px}
+#join-convo h3{font-family:'ubuntuRegular'}
+.join-convo-form button{background-image:-webkit-linear-gradient(#a8272d, #8a272d);background-image:-o-linear-gradient(#a8272d, #8a272d);background-image:linear-gradient(#a8272d, #8a272d);width:100%}
+.join-convo-form button,.modal-body button{border:2px #000 solid;border-radius:0}
 .join-convo-form button,.share-story-button,.modal-body button{height:70px;background-color:#000;color:#fff;border-radius:0}
 .victim-author{text-align:right;padding-top:20px}
-img.quote-left{padding:5px;margin-top:-20px}
-img.quote-right{padding:5px;margin-bottom:-20px}
-.tile{background-color:#d5d5d5;height:auto;margin:20px 0;padding:20px}
+img.quote-left{padding:5px;margin-top:-30px;margin-left:-30px}
+img.quote-right{padding:5px;margin-bottom:-30px;margin-right:-30px}
+.tile{background-color:#d5d5d5;height:auto;margin:20px 0}
+.tile-text{padding:40px}
 .tile img.author{width:100%;height:auto;padding-bottom:20px}
 @media (min-width:768px){.tile-column:first-child{padding-left:0}}
 @media (min-width:768px){.tile-column:last-child{padding-right:0}}
