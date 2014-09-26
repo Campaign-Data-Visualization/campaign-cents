@@ -23,10 +23,10 @@
             <div class='fx-fade-normal'  ui-view></div>
           </div> 
         </tab>
-        <tab ng-if='layers.assets.length' heading='Organizations'>
-          <div class='fx-fade-normal' class="tab-pane" id="organizations">
+        <tab ng-if='layers.assets.length' heading='Assets'>
+          <div class='fx-fade-normal' class="tab-pane" id="assets">
             <ul class="candidate-list">
-              <li ng-repeat='asset in layers.assets'>
+              <li class='clearfix' ng-repeat='asset in layers.assets'>
                 <h3>{{asset.title}}</h3>
                 <p ng-bind-html='asset.description | safehtml'></p>
               </li>
@@ -36,7 +36,7 @@
         <tab ng-if='layers.campus.length' heading='Campuses'>
           <div class='fx-fade-normal' class="tab-pane" id="campuses">
             <ul class="candidate-list">
-              <li  ng-repeat='asset in layers.campus'>
+              <li class='clearfix' ng-repeat='asset in layers.campus'>
               <h3>{{asset.title}}</h3>
               <h4 ng-if='asset.city'>{{asset.city}}, {{viewparams.state}}</h4> 
               <p ng-bind-html='asset.description | safehtml'></p>
@@ -47,7 +47,7 @@
         <tab ng-if='layers.action.length' heading='Take Action'>
           <div class='fx-fade-normal' class="tab-pane" id="take-action">
             <ul class="candidate-list">
-              <li  ng-repeat='item in layers.action'>
+              <li class='clearfix' ng-repeat='item in layers.action'>
               <h3>{{item.title}}</h3>
               <h4 ng-if='item.city'>{{item.city}}, {{viewparams.state}}</h4> 
               <p ng-bind-html='item.description | safehtml'></p>

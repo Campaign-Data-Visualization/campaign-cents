@@ -1020,6 +1020,7 @@ g .domain{display:none}
 .bubble-label{font-family:ubuntuRegular;font-size:16px;padding:0 5%;color:#666}
 .bubble-label>span{border-bottom:1px solid #999;display:block}
 .bar-chart-control label{padding:0 10px 15px 10px}
+.bar{fill:#000}
 .label0,.bar-0,.key-0{fill:#630a15}
 .label1,.bar-1,.key-1{fill:#75151e}
 .label2,.bar-2,.key-2{fill:#89272d}
@@ -1059,6 +1060,7 @@ ul#map-layers li input{margin:3px}
 #marker-tooltip{display:none;position:absolute;background-color:#000;color:#fff;margin:8px;margin-top:-28px;padding:10px;z-index:1000;opacity:.9}
 #map>div>div>div:nth-child(1)>div:nth-child(3)>div:nth-child(4)>div>div:nth-child(1)>div:nth-child(4){border:3px solid #008000}
 .info-window{min-width:300px;max-width:420px}
+.info-window-description{max-height:200px;overflow-x:auto}
 .info-window-candidate{min-height:100px}
 .info-window-link{margin-top:8px;margin-left:92px;font-size:18px;font-weight:bold}
 .map-layers>div{display:inline}
