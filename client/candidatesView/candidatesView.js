@@ -19,8 +19,13 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
   $scope.dayTwo = 0;
   $scope.viewparams = {
     state: $stateParams.state,
-    zip: ''
+    zip: '', 
+    state_name: ''
   };
+
+  DataRequestFactory.getData('states', $scope.viewparams.state).then(function(data) {
+    $scope.viewparams.state_name = data.state_name;
+  })
 
   DataRequestFactory.getData('assets', 'state/'+$scope.viewparams.state).then(function(data) {
     $scope.layers = data;
