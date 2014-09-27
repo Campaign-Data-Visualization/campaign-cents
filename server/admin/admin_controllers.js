@@ -36,7 +36,7 @@ module.exports = exports = {
         sheetId: 'oek222k',
         descField: 3,
         columnDef: ['voteSmartId', 'null', 'amount', 'date', 'donor_name', 'published'],
-        table: 'koch_contribs'
+        table: 'realtime_contribs'
       },
       'races': {
         sheetId: 'ooogrp6',
@@ -92,9 +92,10 @@ module.exports = exports = {
                       cleanupDeferred.resolve();
                     }, cleanupDeferred.reject);
                   } else if (sheet == 'realtime') {
-                    db.doQuery("update candidates join (select sum(amount) as amount, crpid from koch_contribs where for_against = 'f' and cycle = 2014 group by crpid) b using(crpid) set 2014contrib = amount")
-                      .then(function() { return db.doQuery("update candidates join (select sum(amount) as amount, crpid from koch_contribs where for_against = 'f' group by crpid) b using(crpid) set since2000contrib = amount"); })
-                      .then(function() { return db.doQuery("update koch_contribs a join koch_orgs b on donor_name = org_name set koch_tier = tier where koch_tier is null"); })
+                    db.doQuery("update realtime_contribs a join koch_orgs b on donor_name = org_name set koch_tier = tier where koch_tier is null")
+                      .then(function() { return db.doQuery("delete from koch_contribs where source = 'realtime'"); })
+                      .then(function() { return db.doQuery("insert into koch_contribs select * from realtime_contribs"); })
+                      .then(function() { return db.doQuery("update candidates join (select sum(amount) as total, sum(if(cycle = 2014, amount,0)) as current,  votesmartid from koch_contribs where for_against = 'f' and cycle = 2014 group by votesmartid) b using(votesmartid) set 2014contrib = current, since2000contrib = total"); })
                       .then(function() {
                         cleanupDeferred.resolve();   
                       })

@@ -16,7 +16,7 @@ angular.module('kochTracker.landingPage', ['ui.router', 'ngMap'])
   $scope.kochTotal = 0;
   $scope.prevKochTotal = 0;
   $scope.duration = 4;
-  $scope.tickerPopup = "Based off a stated goal made June 14th, 2014, to aggregate and distribute $500 million for upcoming Senate campaigns. <br/>Click below for more details.<!--<br/>Source: <a target='_new' href='http://www.thenation.com/article/180267/exclusive-behind-koch-brothers-secret-billionaire-summit'>The Nation - 6/17/14</a>-->"
+  $scope.tickerPopup = "Based off a stated goal made June 14th, 2014, to raise $500 million for upcoming Senate campaigns."
   $scope.calendarPopup = "Map reflects Koch Candidates, Assets, Campuses, and other Points of Interest.";
   $scope.tickerRefresh = 33;
 
