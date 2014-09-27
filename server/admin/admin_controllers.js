@@ -23,7 +23,7 @@ module.exports = exports = {
       'voices': {
         sheetId: 'op3qyu',
         descField: 3,
-        columnDef: ['title', 'detail', 'description', 'published'],
+        columnDef: ['title', 'detail', 'description', 'image', 'published'],
         table: 'content'
       },
       'offenders': {

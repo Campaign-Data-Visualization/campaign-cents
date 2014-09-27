@@ -118,8 +118,8 @@ module.exports = exports = {
 
   lookupStates: function(req, res, next) {
     var state = req.params.state;
-    db.doQuery("select * from states where state = ?", state).then(function(data) { 
-      res.send({type:'states', data:data});
+    db.doQuery("select state_name from states where state = ?", state).then(function(data) { 
+      res.send({type:'states', data:data[0]});
     }, next)
   },
 
@@ -130,7 +130,7 @@ module.exports = exports = {
     var types = {
       voices: {
         query: "content where type='voices' and published = 1",
-        order: ''
+        order: 'image desc'
       }, 
       offenders: {
         query: "candidates a join content b on detail = votesmartid where type = 'offenders' and published = 1",
