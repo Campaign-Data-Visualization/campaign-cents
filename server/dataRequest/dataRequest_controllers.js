@@ -130,7 +130,7 @@ module.exports = exports = {
     var types = {
       voices: {
         query: "content where type='voices' and published = 1",
-        order: ''
+        order: 'image desc'
       }, 
       offenders: {
         query: "candidates a join content b on detail = votesmartid where type = 'offenders' and published = 1",
