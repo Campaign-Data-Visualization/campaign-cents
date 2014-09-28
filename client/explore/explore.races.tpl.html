@@ -1,10 +1,29 @@
 <div class="row tentacle-title">
   <h2>Key Races</h2>
 </div>
-<div class='row'>
- <p>The Republicans need to gain only six seats to take the Senate and therefore have control over both houses of congress. The Koch brothers stand to gain more from this than anybody, as they would be perfectly positioned to use their influence over the Tea Party Caucus to push through legislation to deregulate the energy industry and privatize social services. These races will prove most critical to deciding the fate of the Senate.</p> 
-  <div class='race' ng-repeat='race in races'>
-    <h3>{{race.title}}</h3>
-    <div ng-bind-html="race.description | safehtml"></div>
+<div class="row" id="races-tiles" >
+  <div class="col-sm-4 tile-column">
+    <div class="tile"  ng-repeat ='race in races' ng-if="$index % 3 == 0">
+      <div class="tile-text">
+        <h3>{{race.title}}</h3>
+        <div ng-bind-html="race.description | safehtml"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 tile-column">
+    <div class="tile"  ng-repeat ='race in races' ng-if="($index+1) % 3 == 0">
+      <div class="tile-text">
+        <h3>{{race.title}}</h3>
+        <div ng-bind-html="race.description | safehtml"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 tile-column">
+    <div class="tile"  ng-repeat ='race in races' ng-if="($index+2) % 3 == 0">
+      <div class="tile-text">
+        <h3>{{race.title}}</h3>
+        <div ng-bind-html="race.description | safehtml"></div>
+      </div>
+    </div>
   </div>
 </div>
