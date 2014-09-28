@@ -88,7 +88,7 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
   
   if ($scope.state) {
     DataRequestFactory.getData("states", $scope.state).then(function(data){
-      $scope.boundaries = data[0];
+      $scope.boundaries = data;
     })
   }
 
