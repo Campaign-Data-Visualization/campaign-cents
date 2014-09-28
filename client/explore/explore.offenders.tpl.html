@@ -7,11 +7,11 @@
     Koch Contributions: ${{candidate.since2000contrib | number}}
     <p ng-bind-html='candidate.description | safehtml'>
   </div> -->
-  <ul class="candidate-list">
-    <li ng-repeat='candidate in offenders' class="col-xs-12">
+  <ul class="candidate-list worst-list">
+    <li ui-sref='kochTracker.candidatesView.candidateProfile({input:candidate.voteSmartId})'  ng-repeat='candidate in offenders' class="col-xs-12">
         <img class="candidate-photo" ng-src="http://votesmart.org/canphoto/{{candidate.voteSmartId}}.jpg" err-src="../images/profile-blank.jpg">  
         <h3><a ui-sref='kochTracker.candidatesView.candidateProfile({input: offender.voteSmartId, state:offender.state})'>{{candidate.nameFirstLast}}</a></h3>
-    Koch Contributions: ${{candidate.since2000contrib | number}}
+    <h4>Koch Contributions: ${{candidate.since2000contrib | number}}</h4>
     <p ng-bind-html='candidate.description | safehtml'>
     </li>
   </ul>
