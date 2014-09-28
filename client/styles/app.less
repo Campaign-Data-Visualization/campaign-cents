@@ -643,10 +643,11 @@ ul.candidate-list li {
 	border-left: 3px solid #fff;
 	height: auto;
 	padding: 30px;
+	background-color: #fff;
 
 }
 
-#candidates ul.candidate-list li:hover{
+ul.candidate-list li:hover {
 	border: 3px solid @cc-green;
 	cursor: pointer;
 }
@@ -671,6 +672,10 @@ ul.candidate-list > #candidates li p {
 	position: absolute;
 	bottom: 20px;
 	left: 121px;
+}
+
+.worst-list h4 {
+	color: @cc-red !important;
 }
 
 span.bold {
@@ -737,6 +742,10 @@ span.bold {
 
 .page h1, .page h2 {
 	color: @cc-blue-light;
+}
+
+.page-section h3 {
+	padding-bottom: 15px;
 }
 
 ////charts
@@ -1082,6 +1091,11 @@ img.quote-right {
 	@media (min-width: @screen-sm-min) {
 		padding-right: 0;
 	}
+}
+
+#races-tiles h3 {
+	color: @cc-teal;
+	padding-bottom: 15px;
 }
 
 ul.bulleted, ul.bulleted li, li.bulleted, {
