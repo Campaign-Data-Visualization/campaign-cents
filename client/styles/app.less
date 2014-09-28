@@ -52,9 +52,16 @@ ul, li {
 	text-decoration: none;
 }
 
-body {
-	background-color: #e9e8e8;
+body , .map-section{
 	font-family: @font-family-sans-serif;
+	background-image: -webkit-linear-gradient(#f8f8f8, #d6d6d6);
+	background-image: -o-linear-gradient(#f8f8f8, #d6d6d6);
+	background-image: linear-gradient(#f8f8f8, #d6d6d6);
+}
+
+.landing-section {
+	background-color: #e9e8e8;
+	padding: 0 30px;
 }
 
 .pointer { 
@@ -342,15 +349,7 @@ ul.box-text li div {
 }
 
 ///////////
-.map-section, .explore, .page-section {
-	background-image: -webkit-linear-gradient(#f8f8f8, #d6d6d6);
-	background-image: -o-linear-gradient(#f8f8f8, #d6d6d6);
-	background-image: linear-gradient(#f8f8f8, #d6d6d6);
-}	
 
-.explore, .page-section {
-	height: 100vh;
-}
 
 .map-section {
 	height: auto;
