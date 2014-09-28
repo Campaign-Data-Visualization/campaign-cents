@@ -980,7 +980,7 @@ ul.box-text li div{height:100px}
 .sidebar p{text-align:left}
 .sidebar-tile>div{background-color:#c8c7c7;padding:20px;margin:20px 0}
 .sidebar #explore-map button{width:100%;height:70px;background-color:#0071bc;color:#fff;border:none}
-.sidebar #explore-map button:hover{background-color:#ad272d}
+.sidebar #explore-map button.active{background-color:#ad272d}
 .sidebar .victims-voice .share-story-button{margin-top:15px}
 .sidebar .worst-offender h4 a{color:#000}
 .sidebar .sidebar-white,.sidebar .sidebar-white a,.sidebar .sidebar-white a:hover{color:#fff}
@@ -1043,10 +1043,10 @@ g .domain{display:none}
 .state-boundaries{cursor:pointer;fill:#fff;fill-opacity:.4;stroke:#333;stroke-width:1;stroke-linejoin:bevel}
 .state-boundaries.selected{transition:stroke-width .2s ease;stroke:#ad272d;stroke-width:3}
 .static-map .marker{cursor:pointer}
-.inset-map{padding:20px;margin:0 auto}
+.inset-map{padding:20px 0;margin:0 auto}
 .inset-map .state-boundaries{stroke:#333;stroke-opacity:.4;fill-opacity:0}
 .inset-map .state-boundaries.selected{stroke:#0071bc;stroke-opacity:1;fill-opacity:1;fill:#fff}
-.inset-map .state-boundaries.selected:hover{stroke:#ad272d}
+.inset-map .state-boundaries.selected.active{stroke:#ad272d}
 .tentacle-title{height:120px}
 .tentacle-title h2{background-image:url('../images/tentacle.png');background-position:center;background-repeat:no-repeat;text-align:center;height:85px;padding-top:20px;text-shadow:0 1px 0 #fff;margin-bottom:20px}
 @media (min-width:768px){.explore .row{margin:0}}

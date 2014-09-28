@@ -33,7 +33,10 @@ app.directive('insetMap', function($window, $state) {
     scope: {
       state: '='
     },
-    template: "<div class='inset-map'><svg></svg></div>",
+    template: "<div class='inset-map'>"+
+    	"<svg id='inset-map'></svg>"+
+    	"<div id='explore-map'><button id='explore-map-button'><h4>EXPLORE IN MAP VIEW</h4></button></div>"+
+    	"</div>",
     link: function(scope, elem, attrs){
       var d3 = $window.d3;
       var rawSvg=elem.find('svg');
@@ -41,7 +44,7 @@ app.directive('insetMap', function($window, $state) {
       var width = elem.width();
       var height = width * .7;
       var current_state = '';
-
+      var button = $('explore-map-button');
       svg.attr({
         width: width,
         height: height
@@ -76,8 +79,19 @@ app.directive('insetMap', function($window, $state) {
         
         $('.states')[0].appendChild($('.state-'+scope.state)[0]);
       });
-      svg.on('click', function() {
+      
+      $("#inset-map, #explore-map-button").on('click', function() {
         $state.go('kochTracker.explore.map', {state:scope.state});
+      })
+
+      $("#inset-map, #explore-map-button").on('mouseenter', function() {
+        $('#inset-map .state-boundaries.selected')[0].classList.add('active');
+        $('#explore-map-button').addClass('active');
+      })
+
+      $("#inset-map, #explore-map-button").on('mouseleave', function() {
+        $('#inset-map .state-boundaries.selected')[0].classList.remove('active');
+        $('#explore-map-button').removeClass('active');
       })
       
       function resize() {
