@@ -795,8 +795,6 @@ app.directive('shareThis', function ($location) {
   };
 });
 
-var share
-
 app.directive('shareStoryButton', function(DataRequestFactory, $modal, $messages) {
   return {
     restrict: 'A',
