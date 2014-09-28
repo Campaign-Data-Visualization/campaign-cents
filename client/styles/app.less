@@ -349,15 +349,16 @@ ul.box-text li div {
 }	
 
 .explore, .page-section {
-<<<<<<< HEAD
-	height: 100%;
-=======
 	height: 100vh;
->>>>>>> fixed page height fixes #151
 }
+
 .map-section {
 	height: auto;
 	padding: 40px 0 20px 0;
+}
+
+.map-main {
+	margin-top: -15px;
 }
 
 .map-sidebar-container {	
@@ -376,13 +377,20 @@ ul.box-text li div {
 	}
 }
 
-.map-main {
-	margin-top: -15px;
-}
-
 .map-sidebar-container h1 {
 	color: @cc-blue-light;
 }
+
+.map-sidebar p {
+	margin-top: 5px;
+}
+
+.map-sidebar-ticker {
+	@media (max-width: @screen-lg-min) {
+		padding-bottom: 20px;
+	}
+}
+
 
 .map-sidebar-ticker h1 {
 	letter-spacing: 2px;
@@ -391,17 +399,23 @@ ul.box-text li div {
 	font-family: @font-family-sans-serif;
 }
 
-.map-sidebar p {
-	margin-top: 5px;
+.map-sidebar-ticker p {
+	text-align: center;
 }
 
-.map-sidebar-ticker h1 span {
+.map-sidebar-ticker h1 span.odometer span {
 	color: @cc-blue-light;
 	height: 50px;
 }
-.map-sidebar-ticker h1 span {
+
+.map-sidebar-ticker h1 span.odometer span {
 	text-align: center;
 	background: url('../images/bg-counter.svg') repeat center;
+	padding: 0 2px;;
+	@media (min-width: @screen-md-min) {
+		padding: 0 5px;
+		border: 1px @cc-gray-dark solid;
+	}
 }
 
 .map-sidebar-calendar {
@@ -1101,3 +1115,23 @@ h4.modal-title {
 .state-name {
 	padding-top: 8px;
 }
+
+///google maps
+  .map>div {
+    position: relative;
+    padding-bottom: 75%; // This is the aspect ratio
+    height: 0;
+    overflow: hidden;
+  }
+  .map>div iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .google-maps {
+    margin-bottom: 100px;
+    border: 2px #D5D5D5 solid;
+  }
+

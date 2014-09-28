@@ -1,29 +1,10 @@
-<style>
-  .map>div {
-    position: relative;
-    padding-bottom: 75%; // This is the aspect ratio
-    height: 0;
-    overflow: hidden;
-  }
-  .map>div iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100% !important;
-    height: 100% !important;
-  }
-  .google-maps {
-    margin-bottom: 100px;
-    border: 2px #D5D5D5 solid;
-  }
-</style>
-
 <div class="row tentacle-title">
   <h2>National Map</h2>
 </div>
 <div class="row">
   <ul id="map-layers">
     <h4>Display Options:</h4>
+    
     <li ng-repeat='type in layersOrder' class="map-layer-option" ng-class="type">
       <label><input ng-change='toggleLayer(type)' ng-model='layers[type].visible' type='checkbox'> {{layers[type].label}}</label><span></span>
     </li>
