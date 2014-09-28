@@ -795,15 +795,19 @@ app.directive('shareThis', function ($location) {
   };
 });
 
+var share
 
 app.directive('shareStoryButton', function(DataRequestFactory, $modal, $messages) {
   return {
     restrict: 'A',
-    replace:true,
-    scope: true,
-    template: "<button class='btn btn-default share-story-button' ng-click='showForm()'><h4>SHARE YOUR STORY</h4></button>",
+    //replace:true,
+    scope: {
+    	link: '=?'
+    },
+   //template: "<button ng-if='!link' class='btn btn-default share-story-button' ng-click='showForm()'><h4>SHARE YOUR STORY</h4></button>"+
+    //"<a ng-click='showForm()',
     link: function(scope, elem, attrs){
-      scope.showForm = function() {
+      elem.bind('click', function() {
         var modalInstance = $modal.open({
           windowClass: 'share-story-modal share-story-form',
           templateUrl: "/explore/explore.shareStoryForm.tpl.html",
@@ -843,7 +847,7 @@ app.directive('shareStoryButton', function(DataRequestFactory, $modal, $messages
             }
           }
         });
-      }
+      })
     }
   }
 })

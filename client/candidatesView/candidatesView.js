@@ -106,7 +106,7 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
       "<span ng-bind-html='voice.description|characters:350: false | safehtml'></span>"+
       "<img ng-if='voice.title' class='quote-right' src='/images/graphic-quote-right.png'></p>"+
       "<div><b ng-if='voice.title'>{{voice.title}} in {{voice.detail}}<br/></b><a class='sidebar-white' ui-sref='kochTracker.explore.voices'>Read More</a></div>"+
-      "<div class='text-center'><span share-story-button/></span></div></div>",
+      "<div class='text-center'><button class='btn btn-default share-story-button' share-story-button>SHARE YOUR STORY</button></div></div>",
     link: function(scope, element, attribs) {
       scope.voice = '';
       DataRequestFactory.getData('fetch', 'voices/random').then(function(data) {
