@@ -958,7 +958,8 @@ ul.box-text li div{height:100px}
 .map-sidebar-ticker h1{letter-spacing:2px;text-align:center;color:#5b5a5a;font-family:'ubuntuRegular'}
 .map-sidebar-ticker p{text-align:center}
 .map-sidebar-ticker h1 span.odometer span{color:#0071bc;height:50px}
-.map-sidebar-ticker h1 span.odometer span{text-align:center;background:url('../images/bg-counter.svg') repeat center;padding:0 2px}@media (min-width:992px){.map-sidebar-ticker h1 span.odometer span{padding:0 5px;border:1px #5b5a5a solid}}
+.map-sidebar-ticker h1 span.odometer span{text-align:center;background:url('../images/bg-counter.svg') repeat center;padding:0 2px}@media (min-width:992px){.map-sidebar-ticker h1 span.odometer span{padding:0 5px;border:1px #5b5a5a solid;border-right:none}}
+@media (min-width:992px){.map-sidebar-ticker h1 span.odometer span:last-child{border-right:1px #5b5a5a solid}}
 .map-sidebar-calendar{background-image:url('../images/calendar-bg.png');background-repeat:no-repeat;background-position:center;height:68px;width:105px;margin:0 auto 50px auto;padding-top:20px}
 .map-sidebar-calendar h1,.election-countdown-tag h1{display:inline;vertical-align:middle;font-family:'Rokkitt',serif;font-size:40px}
 .map-sidebar-calendar h1 span{margin-top:20px}
@@ -973,8 +974,8 @@ ul.box-text li div{height:100px}
 .map-sidebar-search .btn{background-color:#000;color:#fff;padding:4px}
 .legend{height:35px;margin-top:15px}
 .legend p{float:left;margin-top:0 !important}
-.legend img{float:left;border:2px solid #000;margin-right:10px}
-.legend span{float:left}
+.legend>img{float:left;border:2px solid #000;margin-right:10px}
+.legend>span{float:left}
 .sidebar{padding:30px 0;text-align:center}@media (min-width:992px){.sidebar{padding:0 30px 30px 0}}
 .sidebar h3{color:#000;padding:0 0 10px 0}
 .sidebar p{text-align:left}

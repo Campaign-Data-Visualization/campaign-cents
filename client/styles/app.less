@@ -411,10 +411,17 @@ ul.box-text li div {
 .map-sidebar-ticker h1 span.odometer span {
 	text-align: center;
 	background: url('../images/bg-counter.svg') repeat center;
-	padding: 0 2px;;
+	padding: 0 2px;
 	@media (min-width: @screen-md-min) {
 		padding: 0 5px;
 		border: 1px @cc-gray-dark solid;
+		border-right: none;
+	}
+}
+
+.map-sidebar-ticker h1 span.odometer span:last-child {
+	@media (min-width: @screen-md-min) {
+		border-right: 1px @cc-gray-dark solid;
 	}
 }
 
@@ -494,13 +501,13 @@ ul.box-text li div {
 	margin-top: 0 !important;
 }
 
-.legend img {
+.legend>img {
 	float: left;
 	border: 2px solid #000;
 	margin-right: 10px;
 }
 
-.legend span {
+.legend>span {
 	float: left;
 }
 
