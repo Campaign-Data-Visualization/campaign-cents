@@ -68,7 +68,7 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
     scope: true,
     replace: true,
     template: "<div class='koch-fact' ng-if='fact'><h3>Koch Fact</h3>"+
-      "<p ng-bind-html='fact.description|safehtml'></p><a ng-if='fact.detail' target='_blank' href='{{fact.detail}}'>Source</a></div>",
+      "<p ng-bind-html='fact.description|safehtml'></p><a class='sidebar-white' ng-if='fact.detail' target='_blank' href='{{fact.detail}}'>Source</a></div>",
     link: function(scope, element, attribs) {
       scope.fact = '';
       DataRequestFactory.getData('fetch', 'facts/random').then(function(data) {
@@ -83,10 +83,10 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
     restrict: 'A',
     scope: true,
     replace: true,
-    template: "<div class='worst-offender' ng-if='offender'><h3>Worst Offender</h3>"+
+    template: "<div class='worst-offender' ng-if='offender'><h3>Worst Offender</h3>"+"<div class='worst-tab'>"+
       "<a ui-sref='kochTracker.candidatesView.candidateProfile({input: offender.voteSmartId, state:offender.state})'><img width='80px' ng-src='{{offender.photoURL}}'></a>"+
       "<h4><a ui-sref='kochTracker.candidatesView.candidateProfile({input: offender.voteSmartId, state:offender.state})'>{{offender.nameFirstLast}}</a></h4>"+
-      "<p ng-bind-html='offender.description|characters:350: false | safehtml'></p><a ui-sref='kochTracker.explore.offenders'>Read More</a></div>",
+      "<p ng-bind-html='offender.description|characters:350: false | safehtml'></p><a class='sidebar-white' ui-sref='kochTracker.explore.offenders'>Read More</a></div>",
     link: function(scope, element, attribs) {
       scope.offender = '';
       DataRequestFactory.getData('fetch', 'offenders/random').then(function(data) {
@@ -105,7 +105,7 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
       "<p><img ng-if='voice.title' class='quote-left' src='/images/graphic-quote-left.png'>"+
       "<span ng-bind-html='voice.description|characters:350: false | safehtml'></span>"+
       "<img ng-if='voice.title' class='quote-right' src='/images/graphic-quote-right.png'></p>"+
-      "<div class='text-right'><b ng-if='voice.title'>{{voice.title}} in {{voice.detail}}<br/></b><a ui-sref='kochTracker.explore.voices'>Read More</a></div>"+
+      "<div><b ng-if='voice.title'>{{voice.title}} in {{voice.detail}}<br/></b><a class='sidebar-white' ui-sref='kochTracker.explore.voices'>Read More</a></div>"+
       "<div class='text-center'><span share-story-button/></span></div></div>",
     link: function(scope, element, attribs) {
       scope.voice = '';
