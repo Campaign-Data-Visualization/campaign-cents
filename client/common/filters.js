@@ -7,10 +7,14 @@ app.filter('safehtml', function($sce) {
     };
 });
 
-app.filter('counter', function($sce, $filter) {
+app.filter('counter', function($filter) {
     return function(val) {
+    var result = '';
         var num = $filter('number')(val, 0);
-        return '<span>'+(num.split("").join('</span><span>'))+'</span>'
+        num.split("").forEach(function(n) {
+          result += (n == ',' ? "<span class='comma'>" : "<span>")+n+"</span>";
+        })
+        return result;
     };
 });
 

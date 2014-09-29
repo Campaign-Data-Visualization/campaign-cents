@@ -396,6 +396,7 @@ ul.box-text li div {
 	text-align: center;
 	color: @cc-gray-dark;
 	font-family: @font-family-sans-serif;
+	line-height: 53px;
 }
 
 .map-sidebar-ticker p {
@@ -409,13 +410,20 @@ ul.box-text li div {
 
 .map-sidebar-ticker h1 span.odometer span {
 	text-align: center;
-	background: url('../images/bg-counter.svg') repeat center;
+	background: url('../images/graphic-bg-ticker.png') repeat center;
 	padding: 0 2px;
+	font-family: 'Rokkitt', serif;
 	@media (min-width: @screen-md-min) {
-		padding: 0 5px;
+		padding: 0 6px;
 		border: 1px @cc-gray-dark solid;
 		border-right: none;
+		width: 30px;
+		display: inline-block;
 	}
+}
+
+.map-sidebar-ticker h1 span.odometer span.comma {
+	width: 20px;
 }
 
 .map-sidebar-ticker h1 span.odometer span:last-child {
