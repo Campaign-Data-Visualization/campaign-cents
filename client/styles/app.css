@@ -956,10 +956,10 @@ ul.box-text li div{height:100px}
 .map-sidebar-container h1{color:#0071bc}
 .map-sidebar p{margin-top:5px}
 @media (max-width:1200px){.map-sidebar-ticker{padding-bottom:20px}}
-.map-sidebar-ticker h1{letter-spacing:2px;text-align:center;color:#5b5a5a;font-family:'ubuntuRegular';line-height:53px}
+.map-sidebar-ticker h1{letter-spacing:2px;text-align:center;color:#5b5a5a;font-family:'Rokkitt',serif;line-height:43px;height:43px}
 .map-sidebar-ticker p{text-align:center}
-.map-sidebar-ticker h1 span.odometer span{color:#0071bc;height:50px}
-.map-sidebar-ticker h1 span.odometer span{text-align:center;background:url('../images/graphic-bg-ticker.png') repeat center;padding:0 2px;font-family:'Rokkitt',serif}@media (min-width:992px){.map-sidebar-ticker h1 span.odometer span{padding:0 6px;border:1px #5b5a5a solid;border-right:none;width:30px;display:inline-block}}
+.map-sidebar-ticker h1 span.odometer span{color:#0071bc;height:43px}
+.map-sidebar-ticker h1 span.odometer span{text-align:center;background:url('../images/graphic-bg-ticker.png') repeat center;padding:0 2px}@media (min-width:992px){.map-sidebar-ticker h1 span.odometer span{padding:0 6px;border:1px #5b5a5a solid;border-right:none;width:30px;display:inline-block}}
 .map-sidebar-ticker h1 span.odometer span.comma{width:20px}
 @media (min-width:992px){.map-sidebar-ticker h1 span.odometer span:last-child{border-right:1px #5b5a5a solid}}
 .map-sidebar-calendar{background-image:url('../images/calendar-bg.png');background-repeat:no-repeat;background-position:center;height:68px;width:105px;margin:0 auto 50px auto;padding-top:20px}
