@@ -990,6 +990,7 @@ ul.box-text li div{height:100px}
 .sidebar .sidebar-white,.sidebar .sidebar-white a,.sidebar .sidebar-white a:hover{color:#fff}
 .candidate-main{padding:0;margin-top:15px}
 .tab-pane h1,.tab-pane h2,.tab-pane h3{color:#0071bc}
+.tab-pane h3.bad{color:#ad272d}
 ul.nav-tabs{border-bottom:2px solid #0071bc;background:transparent !important}
 ul.nav-tabs li{margin-right:5px;border:0;cursor:pointer}@media (max-width:767px){ul.nav-tabs li{margin-right:0;float:none;border-bottom:1px solid #fff}}
 ul.nav-tabs li>a{background-color:#5b5a5a;font-family:'rockwellRegular';color:#fff;font-size:16px;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;border:0;cursor:pointer}@media (max-width:767px){ul.nav-tabs li>a{margin-right:0;border-bottom:0}}
