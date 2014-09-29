@@ -118,7 +118,7 @@ module.exports = exports = {
 
   lookupStates: function(req, res, next) {
     var state = req.params.state;
-    db.doQuery("select state_name from states where state = ?", state).then(function(data) { 
+    db.doQuery("select * from states where state = ?", state).then(function(data) { 
       res.send({type:'states', data:data[0]});
     }, next)
   },

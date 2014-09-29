@@ -20,7 +20,7 @@ var updateCandidates = function() {
     db.doQuery("select state from states").then(function(rows) { 
       var promises = [];
       //rows = [{state: 'PA'}, {state: 'MI'}, {state: 'DC'}];
-      //rows = [{state: 'MI'}];
+      //rows = [{state: 'VT'}];
       rows.forEach(function(state) { 
         var promise = fetchVoteSmartCandidates(state.state);
         promises.push(promise);
@@ -65,7 +65,7 @@ var fetchVoteSmartCandidates = function(state) {
           //if (candidate.candidateId != 26817 && candidate.candidateId != 1721) { return; }
           if (
               (candidate.electionStatus == 'Running' || (!candidate.electionStatus[0] && candidate.officeStatus == 'active')) &&  //don't get non-running non-members
-              (candidate.party != 'Independent' || (candidate.electionStateId == 'VT' && candidate.lastName == 'Sanders')) //limit to primary parties
+              (candidate.party != 'Independent' || candidate.candidateId == '27110') //limit to primary parties & Bernie Sanders
             ) { 
             if(queryCount == 0) { 
               current[candidate.candidateId] = 1;
