@@ -931,8 +931,8 @@ body,.map-section{font-family:'ubuntuRegular';background-image:-webkit-linear-gr
 .dropdown-menu:after{position:absolute;top:-6px;left:50%;display:inline-block;border-right:6px solid transparent;border-bottom:6px solid #0088be;border-left:6px solid transparent;content:''}
 .navbar-nav{float:right;padding-top:60px}
 .navbar-nav li h4{display:inline;margin:0 5px}@media (min-width:992px){.navbar-nav li h4{margin:0 20px}}
-.navbar-nav li h4 a{color:#777}
-.navbar-nav li h4 a:hover{text-decoration:none;color:#5b5a5a}
+.navbar-nav li h4 a{color:#5b5a5a;font-weight:bold}
+.navbar-nav li h4 a:hover{text-decoration:none;color:#000}
 .landing-box h3{text-align:center;padding:20px 0;border-bottom:3px #b7b5b6 solid}
 .landing-box p{font-size:16px;line-height:25px;padding:0 15px 30px 15px}@media (min-width:768px){.landing-box p{padding-bottom:0}}
 .landing-box h4{margin-top:40px;text-align:center}
