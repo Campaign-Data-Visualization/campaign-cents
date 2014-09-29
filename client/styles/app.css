@@ -915,7 +915,7 @@ body,.map-section{font-family:'ubuntuRegular';background-image:-webkit-linear-gr
 .navbar-nav li h4 a{color:#777}
 .navbar-nav li h4 a:hover{text-decoration:none;color:#5b5a5a}
 .social,.links{margin:0}@media (min-width:768px){.social,.links{margin:0 -15px}}
-.social{float:right}@media (min-width:768px){.social{margin-top:-30px}}
+.social{height:35px;float:right}@media (min-width:768px){.social{margin-top:-30px}}
 .social div{float:left}
 .social .addthis_32x32_style .at300bs.at15t_pinterest_share{width:41px !important;height:30px !important}
 .social div#pinterest,.social .addthis_32x32_style .at300bs.at15t_pinterest_share{background:url('../images/graphic-share-pinterest.png') !important;background-repeat:none;width:41px !important;height:30px !important}
