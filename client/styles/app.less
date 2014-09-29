@@ -1054,19 +1054,19 @@ ul#map-layers li input {
 	font-family: @font-family-sans-serif
 }
 
-.join-convo-form button {
+.join-convo-form button, .share-story-button {
 	background-image: -webkit-linear-gradient(#A8272D, #8A272D);
 	background-image: -o-linear-gradient(#A8272D, #8A272D);
 	background-image: linear-gradient(#A8272D, #8A272D);
 	width: 100%;
 }
 
-.join-convo-form button, .modal-body button {
+.join-convo-form button, .share-story-button, .modal-body button {
 	border: 2px @cc-red solid;
 	border-radius: 0;
 }
 
-.join-convo-form button:hover, .join-convo-form button:focus {
+.join-convo-form button:hover, .join-convo-form button:focus, .share-story-button:hover,  .share-story-button:focus,{
 	border: 2px @cc-red solid;
 	background-color: #fff;
 	background-image: none;
@@ -1079,6 +1079,11 @@ ul#map-layers li input {
 	color: #fff;
 	border-radius: 0;
 } 
+
+.share-story-button {
+	width: auto;
+	padding: 10px 20px;
+}
 
 .victim-author {
 	text-align: right;
