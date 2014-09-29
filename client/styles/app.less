@@ -95,33 +95,20 @@ body, .map-section {
 }
 
 .navbar .brand img {
+	@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+	 	width: 200px;
+	}
 	@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
-	 	width: 355px;
+	 	width: 350px;
 	}
 	@media (min-width: @screen-lg-min) {
 	 	width: 450px;
 	}
 }
 
-.navbar-nav {
-	@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
-	 	margin-top: 20px;
-	}
-	
-	@media (min-width: @screen-lg-min) {
-	 	margin-top: 20px;
-	}
-}
-.navbar-right {
-	@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
-	 	padding-top: 25px;
-	}
-	@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
-	 	padding-top: 15px;
-	}
-	@media (min-width: @screen-lg-min) {
-	 	padding-top: 10px;
-	}
+#navbar-collapse {
+	vertical-align: bottom;
+	height: 140px;
 }
 
 .donate {
@@ -131,11 +118,31 @@ body, .map-section {
 	}
 }
 
-.navbar-header {
+.navbar-right {
 	padding: 0 15px;
-	// @media (min-width: @screen-sm-min){
-	// 	padding: inherit;
-	// }
+}
+.links .navbar-right {
+	@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+	 	margin-top: 25px;
+	}
+	@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+	 	margin-top: 20px;
+	}
+	@media (min-width: @screen-lg-min) {
+	 	margin-top: 50px;
+	}
+}
+
+.social .navbar-right {
+	@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+	 	margin-top: 25px;
+	}
+	@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+	 	margin-top: 25px;
+	}
+	@media (min-width: @screen-lg-min) {
+	 	margin-top: 20px;
+	}
 }
 
 .navbar-toggle {
@@ -147,7 +154,7 @@ body, .map-section {
 	background-color:@cc-blue-light;
 }
 
-.navbar-right .dropdown-menu {
+.navbar-nav .dropdown-menu {
 	margin-top: 10px
 }
 
@@ -173,10 +180,6 @@ body, .map-section {
 	border-radius: 0;
 }
 
-.navbar-nav {
-	//float: right;
-	//padding-top: 40px;
-}
 
 .navbar-nav li h4 {
 	display: inline;
