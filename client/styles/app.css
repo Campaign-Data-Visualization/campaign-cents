@@ -1105,5 +1105,5 @@ h4.modal-title{color:#0071bc;text-shadow:0 1px 0 #fff;font-family:'ubuntuRegular
 .landing-box-involved p{padding-left:62px}
 .get-involved img{height:62px;margin-bottom:10px}
 .donate-button{margin-top:15px;background-color:#004e70 !important;color:#fff;border:none}
-#koch-graph{border:1px solid #b7b5b6;width:50%;padding:10px;margin:10px;margin-top:0}
-#koch-graph h4{color:#ad272d}
+#koch-graph{border:1px solid #b7b5b6;padding:10px;margin:0 0 10px 10px;text-align:center;background:#fff;width:400px}
+.koch-tag{color:#ad272d;font-weight:normal;text-align:center}
