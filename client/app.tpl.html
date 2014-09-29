@@ -2,6 +2,7 @@
 <header>  
   <nav class="navbar" role="navigation">
   <div class="container">
+  <div class="row">
     <div class="navbar-header">
       <button type="button" ng-init='collapse=true' class="navbar-toggle" ng-click='collapse=!collapse'>
         <span class="sr-only">Toggle navigation</span>
@@ -9,12 +10,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <div class="brand">
+      <div class="brand hidden-xs hidden-sm">
         <a href="#"><img class='at-exclude' src="images/logo-header.jpg"></a>
       </div>
+      <div class="brand visible-sm-block visible-xs">
+        <a href="#"><img src="images/logo-header-sm.jpg"></a>
+      </div>
     </div>
-    <div collapse='collapse' class="collapse navbar-collapse" id="navbar-collapse">
-       <div class="row links">
+    <!-- <div class="col-sm-6"> -->
+    <div collapse='collapse' class="collapse navbar-collapse col-xs-8" id="navbar-collapse">
+       <div class="links">
        <ul class="nav navbar-nav navbar-right">
         <li auto-focus class="dropdown"><h4><a class="pointer dropdown-toggle" data-toggle="dropdown">Get Local</a></h4><span class="hidden-xs">&#149;</span>
           <ul class="dropdown-menu hidden-xs" id="dropdown-search" role="menu">
@@ -44,17 +49,16 @@
         <li class='donate'>
           <a class='btn btn-default donate-button' target='_blank' href='https://secure.actblue.com/contribute/page/ifgactionfund'>DONATE</a>
         </li>
-
-        <!-- <span class="hidden-xs">&#149;</span></li> -->
-        <!-- <li><h4><a href="#">Get Involved</a></h4></li> -->
       </ul>
       </div>
-      <div class="row social">
+      <div class="social">
         <div class="navbar-right">
           <div share-this/>
         </div>
       </div>
     </div><!-- /.navbar-collapse -->
+    <!-- </div> -->
+    </div>
   </div><!-- /.container-fluid -->
 </nav>
 </header>
@@ -64,5 +68,19 @@
 <!-- template loaded here -->
 <main class='fx-fade-normal' ui-view></main>
 <!-- footer for the whole app -->
-<footer></footer>
+<footer>
+KochProblem.org is a project of the International Forum on Globalization Action Fund<br/>
+<ul>
+<li><a href="mailto:IFGactionfund@ifg.org" target="_blank">
+Contact Us</a></li>&#149;
+<li>Find out more information about <a href="http://kochcash.org/" target="_blank">
+KochCash</a></li>&#149;
+<li>
+View the interactive <a href="http://kochcash.org/the-kochtopus" target="_blank">Kochtopus</a>
+</li>&#149;
+<li>
+Check out our sister organization, <a href="http://ifg.org" target="_blank"> International Forum on Globalization</a>
+</li>
+</ul>
+</footer>
 
