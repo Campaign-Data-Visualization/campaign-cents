@@ -38,7 +38,7 @@ angular.module('kochTracker.landingPage', ['ui.router', 'ngMap'])
   
   $scope.kochTotal = Math.ceil(perDay * (today - beginning));
   $timeout(function() {
-    $scope.tickerRefresh = 66;
+    $scope.tickerRefresh = 99;
     $scope.duration = (election-today)/1000;
     $scope.prevKochTotal = $scope.kochTotal;
     $scope.kochTotal = 500000000;
