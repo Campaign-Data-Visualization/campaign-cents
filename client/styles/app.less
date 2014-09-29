@@ -47,16 +47,21 @@ h1, h2, h3 {
 @cc-teal: #198E68;
 
 //general styles
+
 ul, li {
 	list-style: none;
 	text-decoration: none;
 }
 
-body , .map-section{
+body, .map-section {
 	font-family: @font-family-sans-serif;
 	background-image: -webkit-linear-gradient(#f8f8f8, #d6d6d6);
 	background-image: -o-linear-gradient(#f8f8f8, #d6d6d6);
 	background-image: linear-gradient(#f8f8f8, #d6d6d6);
+}
+
+.page-section {
+	padding-bottom: 10%;
 }
 
 .landing-section {
@@ -80,11 +85,15 @@ body , .map-section{
 	margin-bottom: 0;
 	color: @cc-gray-dark;
 	font-family: @font-family-sans-serif;
+	//height: 140px;
 }
 
 .navbar .brand img {
-	height: 130px;
-	margin-bottom: -30px
+	width: 450px;
+	margin-bottom: -5px;
+	@media (min-width: @screen-sm-min){
+		margin-left: -100px
+	}
 }
 
 .navbar-header {
@@ -129,6 +138,28 @@ body , .map-section{
 	border-radius: 0;
 }
 
+
+.navbar-nav {
+	float: right;
+	padding-top: 20px;
+}
+
+.navbar-nav li h4 {
+	display: inline;
+	margin: 0 5px;
+	@media (min-width: @screen-md-min) {	
+		margin: 0 20px;
+	}
+}
+
+.navbar-nav li h4 a {
+	color: #777777;
+}
+
+.navbar-nav li h4 a:hover {
+	text-decoration: none;
+	color: @cc-gray-dark;
+}
 .social, .links {
 	margin: 0;
 	@media (min-width: @screen-sm-min){
@@ -139,7 +170,7 @@ body , .map-section{
 .social {
 	float: right;
 	@media (min-width: @screen-sm-min){
-		
+		margin-top: -30px;
 	}
 }
 
@@ -245,27 +276,7 @@ body , .map-section{
   content: '';
 }
 
-.navbar-nav {
-	float: right;
-	padding-top: 60px;
-}
 
-.navbar-nav li h4 {
-	display: inline;
-	margin: 0 5px;
-	@media (min-width: @screen-md-min) {	
-		margin: 0 20px;
-	}
-}
-
-.navbar-nav li h4 a {
-	color: #777777;
-}
-
-.navbar-nav li h4 a:hover {
-	text-decoration: none;
-	color: @cc-gray-dark;
-}
 
 
 
@@ -1037,8 +1048,15 @@ ul#map-layers li input {
 }
 
 .join-convo-form button, .modal-body button {
-	border: 2px #000 solid;
+	border: 2px @cc-red solid;
 	border-radius: 0;
+}
+
+.join-convo-form button:hover, .join-convo-form button:focus {
+	border: 2px @cc-red solid;
+	background-color: #fff;
+	background-image: none;
+	color: @cc-red;
 }
 
 .join-convo-form button, .share-story-button, .modal-body button {
