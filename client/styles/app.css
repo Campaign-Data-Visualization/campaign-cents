@@ -1095,6 +1095,7 @@ img.quote-right{padding:5px;margin-bottom:-30px;margin-right:-30px}
 @media (min-width:768px){.tile-column:first-child{padding-left:0}}
 @media (min-width:768px){.tile-column:last-child{padding-right:0}}
 #races-tiles h3{color:#198e68;padding-bottom:15px}
+#races-tiles a{color:#60af37}
 ul.bulleted,ul.bulleted li,li.bulleted{list-style:initial;text-decoration:initial}
 .modal-header{background-color:#d5d5d5}
 h4.modal-title{color:#0071bc;text-shadow:0 1px 0 #fff;font-family:'ubuntuRegular'}
