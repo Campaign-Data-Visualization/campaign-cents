@@ -911,7 +911,7 @@ body,.map-section{font-family:'ubuntuRegular';background-image:-webkit-linear-gr
 .dropdown-menu#dropdown-search{left:-50px}
 .navbar-nav>li>.dropdown-menu{margin-top:10px;background-image:linear-gradient(#0088be, #0075b7)}
 .navbar-nav>li>.dropdown-menu{padding:5px;width:auto;border-radius:0}
-.navbar-nav{float:right;padding-top:20px}
+.navbar-nav{float:right;padding-top:40px}
 .navbar-nav li h4{display:inline;margin:0 5px}@media (min-width:992px){.navbar-nav li h4{margin:0 10px}}
 .navbar-nav li h4 a{color:#5b5a5a}
 .navbar-nav li h4 a:hover{text-decoration:none;color:#000}
@@ -1107,7 +1107,8 @@ h4.modal-title{color:#0071bc;text-shadow:0 1px 0 #fff;font-family:'ubuntuRegular
 .google-maps{margin-bottom:100px;border:2px #d5d5d5 solid}
 .landing-box-involved p{padding-left:62px}
 .get-involved img{height:62px;margin-bottom:10px}
-.donate-button{background-color:#e1e1e1;color:0;border:none;border-radius:0;padding:10px !important;margin-top:-10px;font-weight:bold;font-size:18px}
+li.donate{margin-right:15px}
+.donate-button{background-color:#e1e1e1;color:0;border:none;border-radius:0;padding:6px 12px !important;margin-top:-6px;font-weight:bold;font-size:18px;display:inline-block}
 .donate-button:hover{background:#0071bc !important;color:#fff}
 #koch-graph{border:1px solid #b7b5b6;padding:10px;margin:0 0 10px 10px;text-align:center;background:#fff;width:400px}
 .koch-tag{color:#ad272d;font-weight:normal;text-align:center}
