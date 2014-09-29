@@ -911,9 +911,9 @@ body,.map-section{font-family:'ubuntuRegular';background-image:-webkit-linear-gr
 .navbar-nav>li>.dropdown-menu{margin-top:10px;background-image:linear-gradient(#0088be, #0075b7)}
 .navbar-nav>li>.dropdown-menu{padding:5px;width:auto;border-radius:0}
 .navbar-nav{float:right;padding-top:20px}
-.navbar-nav li h4{display:inline;margin:0 5px}@media (min-width:992px){.navbar-nav li h4{margin:0 20px}}
-.navbar-nav li h4 a{color:#777}
-.navbar-nav li h4 a:hover{text-decoration:none;color:#5b5a5a}
+.navbar-nav li h4{display:inline;margin:0 5px}@media (min-width:992px){.navbar-nav li h4{margin:0 10px}}
+.navbar-nav li h4 a{color:#5b5a5a}
+.navbar-nav li h4 a:hover{text-decoration:none;color:#000}
 .social,.links{margin:0}@media (min-width:768px){.social,.links{margin:0 -15px}}
 .social{height:35px;float:right}@media (min-width:768px){.social{margin-top:-30px}}
 .social div{float:left}
