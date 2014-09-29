@@ -48,6 +48,7 @@ h1, h2, h3 {
 
 //general styles
 
+
 ul, li {
 	list-style: none;
 	text-decoration: none;
@@ -113,7 +114,7 @@ body, .map-section {
 	 	padding-top: 25px;
 	}
 	@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
-	 	padding-top: 20px;
+	 	padding-top: 15px;
 	}
 	@media (min-width: @screen-lg-min) {
 	 	padding-top: 30px;
@@ -1272,4 +1273,26 @@ footer {
 	background-color: #575757;
 	color: #fff;
 	padding: 15px;
+}
+
+footer ul {
+	padding-left: 0;
+	margin-bottom: 0;
+}
+
+footer li {
+	display: inline;
+	padding: 10px 10px 0 10px;
+}
+
+footer li a {
+	color: @cc-green;
+}
+
+footer li a:hover {
+	color: #fff;
+}
+
+footer li:first-child {
+	padding-left: 0;
 }
