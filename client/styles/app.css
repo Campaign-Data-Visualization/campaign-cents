@@ -895,7 +895,7 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
 @media print{.hidden-print{display:none !important}}
 @font-face{font-family:'Glyphicons Halflings';src:url('fonts/glyphicons-halflings-regular.eot');src:url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),url('fonts/glyphicons-halflings-regular.woff') format('woff'),url('fonts/glyphicons-halflings-regular.ttf') format('truetype'),url('fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg')}@font-face{font-family:'ubuntuRegular';src:url('fonts/ubuntu/Ubuntu-Regular.ttf') format('truetype')}@font-face{font-family:'ubuntuBold';src:url('fonts/ubuntu/Ubuntu-Bold.ttf') format('truetype')}@font-face{font-family:'rockwellRegular';src:url('fonts/rockwell/rockwell.ttf') format('truetype')}h1,h2,h3{font-family:'rockwellRegular';padding:0;margin:0}
 ul,li{list-style:none;text-decoration:none}
-body,.map-section{font-family:'ubuntuRegular';background-image:-webkit-linear-gradient(#f8f8f8, #d6d6d6);background-image:-o-linear-gradient(#f8f8f8, #d6d6d6);background-image:linear-gradient(#f8f8f8, #d6d6d6)}
+body,.map-section{font-family:'ubuntuRegular';background-color:#d6d6d6;background-repeat:no-repeat;background-image:-webkit-linear-gradient(#f8f8f8, #d6d6d6);background-image:-o-linear-gradient(#f8f8f8, #d6d6d6);background-image:linear-gradient(#f8f8f8, #d6d6d6)}
 .btn{font-family:'Montserrat',sans-serif}
 .page-section{padding-bottom:10%}
 .landing-section{background-color:#e9e8e8;padding:0 30px}
