@@ -48,6 +48,7 @@ h1, h2, h3 {
 
 //general styles
 
+
 ul, li {
 	list-style: none;
 	text-decoration: none;
@@ -55,11 +56,16 @@ ul, li {
 
 body, .map-section {
 	font-family: @font-family-sans-serif;
+	background-color: #d6d6d6;
+	background-repeat: no-repeat;
 	background-image: -webkit-linear-gradient(#f8f8f8, #d6d6d6);
 	background-image: -o-linear-gradient(#f8f8f8, #d6d6d6);
 	background-image: linear-gradient(#f8f8f8, #d6d6d6);
 }
 
+.btn {
+	font-family: 'Montserrat', sans-serif;
+}
 .page-section {
 	padding-bottom: 10%;
 }
@@ -85,22 +91,51 @@ body, .map-section {
 	margin-bottom: 0;
 	color: @cc-gray-dark;
 	font-family: @font-family-sans-serif;
-	//height: 140px;
+	height: auto;
 }
 
 .navbar .brand img {
-	width: 450px;
-	margin-bottom: -5px;
-	@media (min-width: @screen-sm-min){
-		margin-left: -100px
+	@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+	 	width: 355px;
+	}
+	@media (min-width: @screen-lg-min) {
+	 	width: 450px;
+	}
+}
+
+.navbar-nav {
+	@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+	 	margin-top: 20px;
+	}
+	
+	@media (min-width: @screen-lg-min) {
+	 	margin-top: 20px;
+	}
+}
+.navbar-right {
+	@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+	 	padding-top: 25px;
+	}
+	@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+	 	padding-top: 15px;
+	}
+	@media (min-width: @screen-lg-min) {
+	 	padding-top: 10px;
+	}
+}
+
+.donate {
+	margin-top: 10px;
+	@media (min-width: @screen-sm-min) {
+	 	margin: 0;
 	}
 }
 
 .navbar-header {
 	padding: 0 15px;
-	@media (min-width: @screen-sm-min){
-		padding: inherit;
-	}
+	// @media (min-width: @screen-sm-min){
+	// 	padding: inherit;
+	// }
 }
 
 .navbar-toggle {
@@ -139,45 +174,34 @@ body, .map-section {
 }
 
 .navbar-nav {
-	float: right;
-	padding-top: 20px;
+	//float: right;
+	//padding-top: 40px;
 }
 
 .navbar-nav li h4 {
 	display: inline;
 	margin: 0 5px;
 	@media (min-width: @screen-md-min) {	
-		margin: 0 20px;
+		margin: 0 10px;
 	}
 }
 
 .navbar-nav li h4 a {
-	color: #777777;
+	color: @cc-gray-dark;
 }
 
 .navbar-nav li h4 a:hover {
 	text-decoration: none;
-	color: @cc-gray-dark;
+	color: #000;
 }
 
-.social, .links {
-	margin: 0;
-	@media (min-width: @screen-sm-min){
-		margin: 0 -15px;
-	}
-}
-
-.social {
-	height: 35px;
+.collapse {
 	float: right;
-	@media (min-width: @screen-sm-min){
-		margin-top: -30px;
-	}
 }
 
-.social div {
-	float: left;
-}
+
+
+
 .social .addthis_32x32_style .at300bs.at15t_pinterest_share {
 	width: 41px !important;
 	height: 30px !important;
@@ -335,8 +359,11 @@ ul.box-text li div {
 	clear: both;
 }
 
+.landing-box-involved h3 {
+	color: @cc-blue-light;
+}
 
-.landing-box-involved h3, .landing-box-involved a {
+.landing-box-involved a {
 	color: #004e70;
 }
 
@@ -398,13 +425,13 @@ ul.box-text li div {
 	}
 }
 
-
 .map-sidebar-ticker h1 {
 	letter-spacing: 2px;
 	text-align: center;
 	color: @cc-gray-dark;
-	font-family: @font-family-sans-serif;
-	line-height: 53px;
+	font-family: 'Rokkitt', serif;
+	line-height: 43px;
+	height: 43px;
 }
 
 .map-sidebar-ticker p {
@@ -413,14 +440,13 @@ ul.box-text li div {
 
 .map-sidebar-ticker h1 span.odometer span {
 	color: @cc-blue-light;
-	height: 50px;
+	height: 43px;
 }
 
 .map-sidebar-ticker h1 span.odometer span {
 	text-align: center;
 	background: url('../images/graphic-bg-ticker.png') repeat center;
 	padding: 0 2px;
-	font-family: 'Rokkitt', serif;
 	@media (min-width: @screen-md-min) {
 		padding: 0 6px;
 		border: 1px @cc-gray-dark solid;
@@ -584,6 +610,10 @@ ul.box-text li div {
 
 .tab-pane h1, .tab-pane h2, .tab-pane h3 {
 	color: @cc-blue-light;
+}
+
+.tab-pane h3.bad { 
+	color: @cc-red;
 }
 
 ul.nav-tabs {
@@ -1045,19 +1075,19 @@ ul#map-layers li input {
 	font-family: @font-family-sans-serif
 }
 
-.join-convo-form button {
+.join-convo-form button, .share-story-button {
 	background-image: -webkit-linear-gradient(#A8272D, #8A272D);
 	background-image: -o-linear-gradient(#A8272D, #8A272D);
 	background-image: linear-gradient(#A8272D, #8A272D);
 	width: 100%;
+	border: 2px @cc-red solid;
 }
 
-.join-convo-form button, .modal-body button {
-	border: 2px @cc-red solid;
+.join-convo-form button, .share-story-button, .modal-body button {
 	border-radius: 0;
 }
 
-.join-convo-form button:hover, .join-convo-form button:focus {
+.join-convo-form button:hover, .join-convo-form button:focus, .share-story-button:hover,  .share-story-button:focus,{
 	border: 2px @cc-red solid;
 	background-color: #fff;
 	background-image: none;
@@ -1070,6 +1100,11 @@ ul#map-layers li input {
 	color: #fff;
 	border-radius: 0;
 } 
+
+.share-story-button {
+	width: auto;
+	padding: 10px 20px;
+}
 
 .victim-author {
 	text-align: right;
@@ -1119,6 +1154,19 @@ img.quote-right {
 #races-tiles h3 {
 	color: @cc-teal;
 	padding-bottom: 15px;
+}
+
+#races-tiles a {
+	color: @cc-green;
+}
+
+#orgs {
+	background-color: #e9e8e8;
+	padding: 75px;
+}
+
+#orgs ul {
+	padding-left: 0;
 }
 
 ul.bulleted, ul.bulleted li, li.bulleted, {
@@ -1208,9 +1256,14 @@ h4.modal-title {
 	padding-left: 62px;
 }
 
+
 .get-involved img {
 	height: 62px;
 	margin-bottom: 10px;
+}
+
+li.donate { 
+	margin-right: 15px;
 }
 
 .donate-button {
@@ -1218,10 +1271,11 @@ h4.modal-title {
 	color: 000;
 	border: none;
 	border-radius: 0px;
-	padding: 10px !important;
-	margin-top: -10px;
+	padding: 6px 12px !important;
+	margin-top: -6px;
 	font-weight: bold;
 	font-size: 18px;
+	display: inline-block;
 }
 
 .donate-button:hover {
@@ -1229,7 +1283,6 @@ h4.modal-title {
 	color: #fff;
 }
 #koch-graph { 
-	border: 1px solid @cc-gray-medium;
 	padding: 10px;
 	margin: 0 0 10px 10px;
 	text-align: center;
@@ -1241,4 +1294,34 @@ h4.modal-title {
 	color: @cc-red;
 	font-weight: normal;
 	text-align: center;
+}
+
+footer {
+	background-color: #000;
+	color: #808080;
+	padding: 15px;
+	text-align: center;
+}
+
+footer ul {
+	padding-left: 0;
+	margin-bottom: 0;
+	margin-top: 6px;
+}
+
+footer li {
+	display: inline;
+	padding: 10px 10px 0 10px;
+}
+
+footer li a {
+	color: #b2b2b2;
+}
+
+footer li a:hover {
+	color: #b2b2b2;
+}
+
+footer li:first-child {
+	padding-left: 0;
 }

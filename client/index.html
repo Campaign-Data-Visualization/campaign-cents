@@ -4,6 +4,8 @@
   <meta charset='utf-8'>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width">
+  <meta content="http://kochproblem.org/images/graphic-pinterest-image.jpg" property="og:image" />
+  <link rel='shortcut icon' href='images/favicon.ico'>
   <title>KochProblem.org</title>
   <!--<base href="/">-->
   <!--[if IE]><script type="text/javascript">
@@ -17,9 +19,9 @@
   <link rel="stylesheet" href="styles/app.css"/>
   <link rel="stylesheet" href="lib/jReject/css/jquery.reject.css"/>
   <link href='http://fonts.googleapis.com/css?family=Rokkitt:700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 </head>
   <body class="body" resize>
-
     <div ui-view></div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="lib/angular/angular.min.js"></script>
@@ -73,7 +75,8 @@
 
       var addthis_config = {
         data_ga_property: 'UA-54822417-1',
-        data_ga_social : true
+        data_ga_social : true,
+        image_exclude: "at-exclude"
       }
     </script>
     <!--end google analytics code-->
