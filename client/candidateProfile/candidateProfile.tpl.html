@@ -13,8 +13,8 @@
       <h3>{{candidateProfile.party}} Party, {{candidateProfile.electionStatus}}</h3>
       <!-- need to pull variable for which state -->
       <h4>{{candidateProfile.office}} <span class='candidate-state'>( {{candidateProfile.state}}<span class='candidate-district' ng-if="candidateProfile.district != ''">-{{candidateProfile.district}}</span> )</span></h4>
-      <h4 ng-if='! bioLoading && candidateBio.office[0].firstElect[0]'>First Elected: {{candidateBio.office[0].firstElect[0]}}</h4>
-      <h4 ng-if='! bioLoading && candidateBio.office[0].nextElect[0]'>Next Election: {{candidateBio.office[0].nextElect[0]}}</h4>
+      <h4 ng-if="! bioLoading && candidateProfile.electionStatus != 'Challenger' && candidateBio.office[0].firstElect[0]">First Elected: {{candidateBio.office[0].firstElect[0]}}</h4>
+      <h4 ng-if="! bioLoading && candidateProfile.electionStatus == 'Not up for reelection' && candidateBio.office[0].nextElect[0]">Next Election: {{candidateBio.office[0].nextElect[0]}}</h4>
       <h3 ng-class="{'bad': candidateProfile.since2000contrib > 0}" class='lifetime-total'>Koch Network donations since 2000: $<span ng-if='candidateProfile.since2000contrib != 0' class="odometer" count-to='candidateProfile.since2000contrib' value='0' duration='2'></span><span ng-if='candidateProfile.since2000contrib==0'>0</span></h3>
     </div>
   </div>
