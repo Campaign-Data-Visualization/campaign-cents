@@ -1000,8 +1000,8 @@ ul.nav-tabs li>a{background-color:#5b5a5a;font-family:'rockwellRegular';color:#f
 .tab-content{background-color:#fff}
 #candidates.tab-pane .row{margin:0;padding-top:15px}
 ul.candidate-list{display:block;padding-left:0;background-color:#fff}
-ul.candidate-list li{position:relative;border-bottom:2px solid #0071bc;border-top:3px solid #fff;border-right:3px solid #fff;border-left:3px solid #fff;height:auto;padding:30px;background-color:#fff}
-ul.candidate-list li:hover{border:3px solid #60af37;cursor:pointer}
+ul.candidate-list li{position:relative;border-bottom:2px solid #0071bc;border-top:3px solid #fff;border-right:3px solid #fff;border-left:3px solid #fff;height:auto;padding:30px;background-color:#fff;padding-bottom:31px}
+ul.candidate-list li:hover{border:3px solid #60af37;cursor:pointer;padding-bottom:30px}
 #campuses ul.candidate-list li:hover,#assets ul.candidate-list li:hover,#take-action ul.candidate-list li:hover{cursor:default;border-bottom:2px solid #0071bc;border-top:3px solid #fff;border-right:3px solid #fff;border-left:3px solid #fff}
 ul.candidate-list li img{padding:0 10px 0 0;height:100px;width:auto;float:left}@media (max-width:767px){ul.candidate-list li img{padding-bottom:0 0 10px 0}}
 ul.candidate-list li h4{color:#0071bc;font-family:'rockwellRegular';margin-top:2px}

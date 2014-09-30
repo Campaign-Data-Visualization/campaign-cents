@@ -693,17 +693,23 @@ ul.candidate-list li {
 	height: auto;
 	padding: 30px;
 	background-color: #fff;
-
+	padding-bottom: 31px;
 }
 
 ul.candidate-list li:hover {
 	border: 3px solid @cc-green;
 	cursor: pointer;
+	padding-bottom: 30px;
+
+	// padding-top: 32px;
 }
 
-#campuses ul.candidate-list li:hover, #assets ul.candidate-list li:hover, #action ul.candidate-list li:hover {
+#campuses ul.candidate-list li:hover, #assets ul.candidate-list li:hover, #take-action ul.candidate-list li:hover {
 	cursor: default;
-	
+	border-bottom: 2px solid @cc-blue-light;
+	border-top: 3px solid #fff;
+	border-right: 3px solid #fff;
+	border-left: 3px solid #fff;
 }
 
 ul.candidate-list li img {
