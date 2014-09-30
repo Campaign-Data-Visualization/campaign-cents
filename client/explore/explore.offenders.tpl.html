@@ -6,7 +6,7 @@
     <li ui-sref='kochTracker.candidatesView.candidateProfile({input:candidate.voteSmartId, state:candidate.state})' ng-repeat='candidate in offenders' class="col-xs-12">
         <img class="candidate-photo" ng-src="http://votesmart.org/canphoto/{{candidate.voteSmartId}}.jpg" err-src="../images/profile-blank.jpg">  
         <h3><a ui-sref='kochTracker.candidatesView.candidateProfile({input: candidate.voteSmartId, state:candidate.state})'>{{candidate.nameFirstLast}}</a></h3>
-    <h4>Koch Contributions: ${{candidate.since2000contrib | number}}</h4>
+    <h4>Koch Network donations since 2000: ${{candidate.since2000contrib | number}}</h4>
     <p ng-bind-html='candidate.description | safehtml'>
     </li>
   </ul>

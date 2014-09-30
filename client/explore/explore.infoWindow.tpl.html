@@ -3,7 +3,7 @@
     <div ng-switch-when="candidate">
       <img style='height: 100px; float: left; margin-right: 10px;' ng-src='http://votesmart.org/canphoto/{{item.id}}.jpg'/>
         <h3>{{item.title}}</h3>
-        <div><b>${{item.amount}}</b> taken to date</div>
+        <div>Koch Network donations since 2000: <b>${{item.amount}}</b></div>
         <div class='info-window-link'><a ui-sref='kochTracker.candidatesView.candidateProfile({state: item.state, input:item.id})'>READ MORE</a></div>
     </div>
     <div ng-switch-default>
