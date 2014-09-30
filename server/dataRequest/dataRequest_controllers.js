@@ -66,7 +66,7 @@ module.exports = exports = {
   lookupCandidate: function(req, res, next) {
     var candidateId = req.params.candidateId;
 
-    db.doQuery("select * from candidates where voteSmartId = ?", [candidateId]).then(function(data) {
+    db.doQuery("select a.*, b.published as worst from candidates a left join content b on detail = voteSmartId where voteSmartId = ?", [candidateId]).then(function(data) {
       var profile = data[0];
       db.doQuery("select sum(if(cycle=2014 && koch_tier = 1, amount, 0)) as a,sum(if(cycle=2014 && koch_tier = 2, amount, 0)) as b, sum(if(cycle!=2014 && koch_tier = 1, amount, 0)) as c,  sum(if(cycle!=2014 && koch_tier = 2, amount, 0)) as d from koch_contribs where votesmartId = ? and for_against = 'f'", [candidateId]).then(function(data) {
         profile.data = { 
