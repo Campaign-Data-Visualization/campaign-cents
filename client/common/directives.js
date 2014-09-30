@@ -245,19 +245,19 @@ app.directive('barChart', function($window) {
     link: function(scope, elem, attrs){
       
       scope.time = 'total';
-      //scope.data[0].total = 15000000;
+      //scope.data[0].name = "National Federation of Independent Business";
         
       var d3 = $window.d3;
       var rawSvg=elem.find('svg');
       var svg = d3.select(rawSvg[0]);
    
-       var width, height, oldWidth, barWidth, xScale, amountText, commas, wrap;
+      var width, height, oldWidth, barWidth, xScale, amountText, commas, wrap;
 
       var exitDuration = 200,
         transformDuration = 500,
         barHeight = 50,
         barMargin = 5,
-        keyWidth = 140,
+        keyWidth = 170,
         keyMargin = 10,
         labelWidth = 100,
         labelMargin = 5;
@@ -412,12 +412,14 @@ app.directive('barChart', function($window) {
           .append('svg:text')
             .attr({
               'class': 'key-text',
-              'y': (barHeight-barMargin)/2,
-              'dominant-baseline': 'middle',
+              'font-size': function(d) { return d.name.length > 27 ? '.8em' : '1em'; },
+
+              'y': 0, //(barHeight-barMargin)/2,
+              //'dominant-baseline': 'hanging',
               'text-anchor': 'end',
               'width': keyWidth-keyMargin,
               'height': barHeight -barMargin,
-              dy: '0em'
+              dy: '1em'
             })
             .text(function(d) { return d.name})
             .call(wrap, keyWidth-keyMargin)
