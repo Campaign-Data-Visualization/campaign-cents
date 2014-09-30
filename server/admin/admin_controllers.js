@@ -95,7 +95,7 @@ module.exports = exports = {
                     db.doQuery("update realtime_contribs a join koch_orgs b on donor_name = org_name set koch_tier = tier where koch_tier is null")
                       .then(function() { return db.doQuery("delete from koch_contribs where source = 'realtime'"); })
                       .then(function() { return db.doQuery("insert into koch_contribs select * from realtime_contribs"); })
-                      .then(function() { return db.doQuery("update candidates join (select sum(amount) as total, sum(if(cycle = 2014, amount,0)) as current,  votesmartid from koch_contribs where for_against = 'f' and cycle = 2014 group by votesmartid) b using(votesmartid) set 2014contrib = current, since2000contrib = total"); })
+                      .then(function() { return db.doQuery("update candidates join (select sum(amount) as total, sum(if(cycle = 2014, amount,0)) as current,  votesmartid from koch_contribs where for_against = 'f' group by votesmartid) b using(votesmartid) set 2014contrib = current, since2000contrib = total"); })
                       .then(function() {
                         cleanupDeferred.resolve();   
                       })
