@@ -16,7 +16,7 @@
     'kochTracker.orgProfile',
     'kochTracker.candidatesView.candidateProfile'
     ])
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $uiViewScrollProvider, $anchorScrollProvider) {
     //$locationProvider.html5Mode(true).hashPrefix('#');
 
     $stateProvider
@@ -36,6 +36,8 @@
         //return $match.input.replace(/\/$/, '');
       //})
       $urlRouterProvider.otherwise('/notFound');
+      $uiViewScrollProvider.useAnchorScroll()
+      //$anchorScrollProvider.disableAutoScrolling();
   })
 }(angular));
 
