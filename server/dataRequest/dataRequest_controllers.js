@@ -31,7 +31,28 @@ module.exports = exports = {
 
   lookupZip: function(req, res, next) { 
     var zipcode = req.params.zipcode;
-    db.deferredRequest({url: "http://congress.api.sunlightfoundation.com/districts/locate?apikey="+config.sunlight.apiKey+"&zip="+zipcode}).then(function(data) { 
+    db.deferredRequest({url: 'http://api.votesmart.org/District.getByZip?key='+ config.votesmart.apiKey +'&zip5='+ zipcode}).then(function(data) {
+      if (! data.error && data.districtList && data.districtList.district) { 
+        var districts = [];
+        var state = '';
+        data.districtList.district.forEach(function(d, i){
+          if (d.officeId == 5) {
+            state = d.stateId;
+            districts.push(d.name)
+          }
+        });
+        db.doQuery("select * from candidates where state = ? and (office = 'U.S. Senate' or district in (?)) order by district", [state, districts]).then(function(results) {
+          res.send({type:'zip', data: results});
+          //console.log(results);
+        }, next);
+        //console.log(data.districtList.district);
+      } else { 
+        next(new Error("Invalid Zipcode"));
+      }
+    }, function(err) { next(new Error("Unable to contact zipcode lookup service")) });
+
+
+/*    db.deferredRequest({url: "http://congress.api.sunlightfoundation.com/districts/locate?apikey="+config.sunlight.apiKey+"&zip="+zipcode}).then(function(data) { 
       if (data.results && data.count) { 
         var districts = [];
         var state = '';
@@ -49,7 +70,7 @@ module.exports = exports = {
         next(new Error("Invalid Zipcode"));
       }
     }, function(err) { next(new Error("Unable to contact zipcode lookup service")) });
-  },
+*/  },
 
   lookupCandidateBio: function(req, res, next) { 
     var candidateId = req.params.candidateId;
