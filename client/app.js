@@ -23,6 +23,7 @@
         abstract: true,
         templateUrl: 'app.tpl.html',
         controller: ['$rootScope', function($rootScope) {
+          $rootScope.title = 'KochProblem.org';
           $rootScope.$on('$viewContentLoaded', function() { 
             $('body>ul.dropdown-menu').remove(); //remove dropdowns that sometimes stay
           })
