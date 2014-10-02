@@ -34,6 +34,7 @@
     "jshint-stylish": "*",
     "gulp-concat": "*",
     "gulp-uglify": "*",
+    "gulp-usemin": "*",
     "gulp-stylus": "*"
   }
 }

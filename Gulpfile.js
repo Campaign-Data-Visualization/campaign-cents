@@ -8,6 +8,8 @@ var gulp    = require('gulp'),
     client  = require('tiny-lr')(),
     run  = require('gulp-run'),
     nodemon = require('gulp-nodemon'),
+    usemin = require('gulp-usemin'),
+    uglify = require('gulp-uglify'),
     lr_port = 35728;
 
 
@@ -52,6 +54,16 @@ gulp.task('live', function () {
       return console.error(err);
     }
   });
+});
+
+gulp.task('deploy', function () {
+  gulp.src('client/index.html')
+    .pipe(usemin({
+      //assetsDir: 'client',
+      js: [uglify(), 'concat']
+    }))
+    .pipe(gulp.dest('client'));
+    return 1;
 });
 
 gulp.task('watch', function () {

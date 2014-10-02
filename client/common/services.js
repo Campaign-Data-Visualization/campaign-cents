@@ -1,7 +1,7 @@
 'use strict';
 var app = angular.module('kochTracker')
 
-app.service('$messages', function($rootScope) {
+app.service('$messages', ['$rootScope', function($rootScope) {
 	var service = this;
 	service.messages = [];
 	service.modal = false;
@@ -32,4 +32,4 @@ app.service('$messages', function($rootScope) {
 	$rootScope.$on("$stateChangeStart", function(event, next, current) {
 		service.clearMessages();
 	});
-});
+}]);

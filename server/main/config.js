@@ -43,7 +43,7 @@ module.exports = exports = function (app, express, routers) {
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(middle.cors);
-  app.use(express.static(__dirname + '/../../client'));
+  app.use(express.static(__dirname + '/../../client', {maxAge:'1d'}));
   app.use('/admin', express.static(__dirname + '/../../admin'));
   // simulate latency
   //app.use(function(req,res,next){setTimeout(next,100000)});

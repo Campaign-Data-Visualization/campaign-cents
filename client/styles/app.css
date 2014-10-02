@@ -243,7 +243,7 @@ td,th{padding:0}
 *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 *:before,*:after{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 html{font-size:10px;-webkit-tap-highlight-color:rgba(0,0,0,0)}
-body{font-family:'ubuntuRegular';font-size:14px;line-height:1.428571429;color:#333;background-color:#fff}
+body{font-family:'ubuntu';font-size:14px;line-height:1.428571429;color:#333;background-color:#fff}
 input,button,select,textarea{font-family:inherit;font-size:inherit;line-height:inherit}
 a{color:#428bca;text-decoration:none}a:hover,a:focus{color:#2a6496;text-decoration:underline}
 a:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}
@@ -893,15 +893,15 @@ button.close{padding:0;cursor:pointer;background:transparent;border:0;-webkit-ap
 .visible-print-inline{display:none !important}@media print{.visible-print-inline{display:inline !important}}
 .visible-print-inline-block{display:none !important}@media print{.visible-print-inline-block{display:inline-block !important}}
 @media print{.hidden-print{display:none !important}}
-@font-face{font-family:'Glyphicons Halflings';src:url('fonts/glyphicons-halflings-regular.eot');src:url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),url('fonts/glyphicons-halflings-regular.woff') format('woff'),url('fonts/glyphicons-halflings-regular.ttf') format('truetype'),url('fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg')}@font-face{font-family:'ubuntuRegular';src:url('fonts/ubuntu/Ubuntu-Regular.ttf') format('truetype')}@font-face{font-family:'ubuntuBold';src:url('fonts/ubuntu/Ubuntu-Bold.ttf') format('truetype')}@font-face{font-family:'rockwellRegular';src:url('fonts/rockwell/rockwell.ttf') format('truetype')}h1,h2,h3{font-family:'rockwellRegular';padding:0;margin:0}
+@font-face{font-family:'Glyphicons Halflings';src:url('fonts/glyphicons-halflings-regular.eot');src:url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),url('fonts/glyphicons-halflings-regular.woff') format('woff'),url('fonts/glyphicons-halflings-regular.ttf') format('truetype'),url('fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg')}@font-face{font-family:'rockwellRegular';src:url('fonts/rockwell/rockwell.ttf') format('truetype')}h1,h2,h3{font-family:'rockwellRegular';padding:0;margin:0}
 ul,li{list-style:none;text-decoration:none}
-body,.map-section{font-family:'ubuntuRegular';background-color:#d6d6d6;background-repeat:no-repeat;background-image:-webkit-linear-gradient(#f8f8f8, #d6d6d6);background-image:-o-linear-gradient(#f8f8f8, #d6d6d6);background-image:linear-gradient(#f8f8f8, #d6d6d6)}
+body,.map-section{font-family:'ubuntu';background-color:#d6d6d6;background-repeat:no-repeat;background-image:-webkit-linear-gradient(#f8f8f8, #d6d6d6);background-image:-o-linear-gradient(#f8f8f8, #d6d6d6);background-image:linear-gradient(#f8f8f8, #d6d6d6)}
 .btn{font-family:'Montserrat',sans-serif}
 .page-section{padding-bottom:10%}
 .landing-section{background-color:#e9e8e8;padding:0 30px}
 .pointer{cursor:pointer}
 .center{text-align:center}
-.navbar{background-repeat:repeat-y;background-position:left;background-color:#b7b5b6;margin-bottom:0;color:#5b5a5a;font-family:'ubuntuRegular';height:auto}
+.navbar{background-repeat:repeat-y;background-position:left;background-color:#b7b5b6;margin-bottom:0;color:#5b5a5a;font-family:'ubuntu';height:auto}
 @media (min-width:768px) and (max-width:991px){.navbar .brand img{width:200px}}@media (min-width:992px) and (max-width:1199px){.navbar .brand img{width:350px}}@media (min-width:1200px){.navbar .brand img{width:450px}}
 #navbar-collapse{vertical-align:bottom;height:140px}
 .donate{margin-top:10px}@media (min-width:768px){.donate{margin:0}}
@@ -1023,7 +1023,7 @@ span.bold{font-family:ubuntuBold}
 .page h1,.page h2{color:#0071bc}
 .page-section h3{padding-bottom:15px}
 g.tick line{stroke:#999;stroke-width:1px}
-g.tick text,g.amounts text,g.labels text{font-family:ubuntuRegular;font-weight:bold;font-size:16px}
+g.tick text,g.amounts text,g.labels text{font-family:'Ubuntu';font-weight:bold;font-size:16px}
 g.amounts text.amount-shadow{fill:#333}
 g.amounts text.amount{fill:#fff}
 g.tick text{fill:#666}
@@ -1033,7 +1033,7 @@ g .domain{display:none}
 .bubble-1{fill:#2e8c64}
 .bubble-2{fill:#007389}
 .bubble-3{fill:#00516e}
-.bubble-label{font-family:ubuntuRegular;font-size:16px;padding:0 5%;color:#666}
+.bubble-label{font-family:'Ubuntu';font-size:16px;padding:0 5%;color:#666}
 .bubble-label>span{border-bottom:1px solid #999;display:block}
 .bar-chart-control label{padding:0 10px 15px 10px}
 .bar{fill:#000}
@@ -1059,7 +1059,7 @@ g .domain{display:none}
 .tentacle-title{height:120px}
 .tentacle-title h2{background-image:url('../images/tentacle.png');background-position:center;background-repeat:no-repeat;text-align:center;height:85px;padding-top:20px;text-shadow:0 1px 0 #fff;margin-bottom:20px}
 @media (min-width:768px){.explore .row{margin:0}}
-.explore h1{color:#0071bc;text-shadow:0 1px 0 #fff;font-family:'ubuntuRegular'}
+.explore h1{color:#0071bc;text-shadow:0 1px 0 #fff;font-family:'ubuntu'}
 #join-convo,#map-layers{background-color:#d5d5d5;padding:20px}
 ul#map-layers{text-align:center}
 @media (min-width:768px){ul#map-layers h4{display:inline}}
@@ -1082,7 +1082,7 @@ ul#map-layers li input{margin:3px}
 .map-layers>div{display:inline}
 #join-convo{text-align:center}
 #join-convo h1{background-color:#d5d5d5;margin-top:10px}
-#join-convo h3{font-family:'ubuntuRegular'}
+#join-convo h3{font-family:'ubuntu'}
 .join-convo-form button,.share-story-button{background-image:-webkit-linear-gradient(#a8272d, #8a272d);background-image:-o-linear-gradient(#a8272d, #8a272d);background-image:linear-gradient(#a8272d, #8a272d);width:100%;border:2px #ad272d solid}
 .join-convo-form button,.share-story-button,.modal-body button{border-radius:0}
 .join-convo-form button:hover,.join-convo-form button:focus,.share-story-button:hover,.share-story-button:focus{border:2px #ad272d solid;background-color:#fff;background-image:none;color:#ad272d}
@@ -1102,7 +1102,7 @@ img.quote-right{padding:5px;margin-bottom:-30px;margin-right:-30px}
 #orgs ul{padding-left:0}
 ul.bulleted,ul.bulleted li,li.bulleted{list-style:initial;text-decoration:initial}
 .modal-header{background-color:#d5d5d5}
-h4.modal-title{color:#0071bc;text-shadow:0 1px 0 #fff;font-family:'ubuntuRegular'}
+h4.modal-title{color:#0071bc;text-shadow:0 1px 0 #fff;font-family:'ubuntu'}
 .alert-danger{text-align:center;padding:50px;font-size:30px}
 .alert-danger button.close{color:#000}
 .loading-image{font-size:60px;color:#004e70;padding:20px}
@@ -1128,3 +1128,4 @@ footer a{color:#b2b2b2}
 footer li a:hover{color:#b2b2b2}
 footer li:first-child{padding-left:0}
 .worst-offender-link a{color:#ad272d;font-weight:bold}
+#_atssh{display:none}

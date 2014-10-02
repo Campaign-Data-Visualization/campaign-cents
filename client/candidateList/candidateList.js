@@ -1,7 +1,7 @@
 'use strict';
 angular.module('kochTracker.candidatesView.candidateList', ['ui.router'])
 
-.config(function ($stateProvider) {
+.config(['$stateProvider', function ($stateProvider) {
 
   $stateProvider
     .state('kochTracker.candidatesView.candidateList', {
@@ -9,7 +9,7 @@ angular.module('kochTracker.candidatesView.candidateList', ['ui.router'])
       templateUrl: 'candidateList/candidateList.tpl.html',
       controller: 'CandidateListController'
     });
-})
+}])
 .directive('errSrc', function() {
   return {
     link: function(scope, element, attrs) {
@@ -26,7 +26,7 @@ angular.module('kochTracker.candidatesView.candidateList', ['ui.router'])
     }
   }
 })
-.controller('CandidateListController', function($scope, $stateParams, DataRequestFactory, $state) {
+.controller('CandidateListController', ['$scope', '$stateParams', 'DataRequestFactory', function($scope, $stateParams, DataRequestFactory) {
 
   $scope.candidates = [];
   $scope.loading = 1;
@@ -38,4 +38,4 @@ angular.module('kochTracker.candidatesView.candidateList', ['ui.router'])
   }, function(err) {
     $scope.loading = 0;
   });
-});
+}]);

@@ -1,16 +1,16 @@
 'use strict';
 angular.module('kochTracker.landingPage', ['ui.router', 'ngMap'])
 
-.config(function ($stateProvider) {
+.config(['$stateProvider', function ($stateProvider) {
   $stateProvider
     .state('kochTracker.landingPage', {
       url: '',
       templateUrl: 'landingPage/landingPage.tpl.html',
       controller: 'LandingPageController'
     });
-})
+}])
 
-.controller('LandingPageController', function($scope, $timeout){
+.controller('LandingPageController', ['$scope', '$timeout', function($scope, $timeout){
   $scope.dayOne = 0;
   $scope.dayTwo = 0;
   $scope.kochTotal = 0;
@@ -60,4 +60,4 @@ angular.module('kochTracker.landingPage', ['ui.router', 'ngMap'])
   }
   updateTotal(true);*/
 
-});
+}]);
