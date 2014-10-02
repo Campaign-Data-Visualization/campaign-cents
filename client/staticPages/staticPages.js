@@ -1,7 +1,7 @@
 'use strict';
 angular.module('kochTracker.staticPages', ['ui.router'])
 
-.config(function ($stateProvider) {
+.config(['$stateProvider', function ($stateProvider) {
 
   $stateProvider
     .state('kochTracker.aboutUs', {
@@ -17,4 +17,4 @@ angular.module('kochTracker.staticPages', ['ui.router'])
       templateUrl: 'staticPages/notFound.tpl.html',
     })
 
-})
+}])

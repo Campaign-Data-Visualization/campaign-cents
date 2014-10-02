@@ -1,7 +1,7 @@
 'use strict';
 angular.module('kochTracker.candidatesView', ['ui.router'])
 
-.config(function ($stateProvider) {
+.config(['$stateProvider', function ($stateProvider) {
 
   $stateProvider
     .state('kochTracker.candidatesView', {
@@ -10,9 +10,9 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
       templateUrl: 'candidatesView/candidatesView.tpl.html',
       controller: 'CandidatesViewController'
     })
-})
+}])
 
-.controller('CandidatesViewController', function($scope, $stateParams, DataRequestFactory, $state, $sce) {
+.controller('CandidatesViewController', ['$scope', '$stateParams', 'DataRequestFactory', function($scope, $stateParams, DataRequestFactory) {
   $scope.layerLoading = 1;
   $scope.layers = {};
   $scope.dayOne = 0;
@@ -45,7 +45,7 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
     }
   }
 
-})
+}])
 
 // .directive('voiceSidebar', function(DataRequestFactory) {
 //   return {
@@ -62,7 +62,7 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
 //   }
 // })
 
-.directive('kochFact', function(DataRequestFactory) {
+.directive('kochFact', ['DataRequestFactory', function(DataRequestFactory) {
   return {
     restrict: 'A',
     scope: true,
@@ -76,9 +76,9 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
       })
     }
   }
-})
+}])
 
-.directive('worstOffender', function(DataRequestFactory) {
+.directive('worstOffender', ['DataRequestFactory', function(DataRequestFactory) {
   return {
     restrict: 'A',
     scope: true,
@@ -94,9 +94,9 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
       })
     }
   }
-})
+}])
 
-.directive('victimsVoice', function(DataRequestFactory) {
+.directive('victimsVoice', ['DataRequestFactory', function(DataRequestFactory) {
   return {
     restrict: 'A',
     scope: true,
@@ -114,5 +114,4 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
       })
     }
   }
-})
-
+}]);

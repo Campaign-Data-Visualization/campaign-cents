@@ -1,7 +1,7 @@
 'use strict';
 var app = angular.module('kochTracker')
 
-app.directive('messages', function($messages, $filter) {
+app.directive('messages', ['$messages', '$filter', function($messages, $filter) {
   return {
     restrict: 'A',
     scope: {
@@ -14,7 +14,7 @@ app.directive('messages', function($messages, $filter) {
       scope.modal = scope.modal || false;
     }
   }
-});
+}]);
 
 app.directive('loading', function() {
   return {
@@ -27,7 +27,7 @@ app.directive('loading', function() {
   };
 });
 
-app.directive('insetMap', function($window, $state) {
+app.directive('insetMap', ['$window', '$state', function($window, $state) {
   return {
     restrict: 'A',
     scope: {
@@ -113,10 +113,10 @@ app.directive('insetMap', function($window, $state) {
       }
     }
   }
-})
+}])
 
 
-app.directive('staticMap', function($window, DataRequestFactory, $state) {
+app.directive('staticMap', ['$window', 'DataRequestFactory', '$state', function($window, DataRequestFactory, $state) {
   return {
     restrict: 'A',
     scope: true,
@@ -218,9 +218,9 @@ app.directive('staticMap', function($window, DataRequestFactory, $state) {
       }
     }
   }
-})
+}])
 
-app.directive('resize', function($window) {
+app.directive('resize', ['$window', function($window) {
   return {
     link: function(scope) {
       angular.element($window).on('resize', function(e) {
@@ -229,9 +229,9 @@ app.directive('resize', function($window) {
       });
     }
   }
-});
+}]);
 
-app.directive('barChart', function($window) {
+app.directive('barChart', ['$window', function($window) {
   return {
     restrict: 'A',
     scope: {
@@ -470,9 +470,9 @@ app.directive('barChart', function($window) {
       }
     }
   }
-});
+}]);
 
-app.directive('bubbleChart', function($window) {
+app.directive('bubbleChart',  ['$window', function($window) {
   return {
     restrict: 'A',
     scope: {
@@ -689,9 +689,9 @@ app.directive('bubbleChart', function($window) {
       } 
    }
  }
-})
+}])
 
-app.directive('searchBox', function(DataRequestFactory, $state) {
+app.directive('searchBox', ['DataRequestFactory', '$state', function(DataRequestFactory, $state) {
   return {
     restrict: 'E',
     scope: {
@@ -731,9 +731,9 @@ app.directive('searchBox', function(DataRequestFactory, $state) {
       }
     }
   };
-});
+}]);
 
-app.directive('infoPopup', function($state) {
+app.directive('infoPopup', ['$state', function($state) {
   return {
     restrict: "A",
     scope: { 
@@ -750,7 +750,7 @@ app.directive('infoPopup', function($state) {
       }
     }
   }
-})
+}])
 
 app.directive("popoverHtmlUnsafePopup", function () {
   return {
@@ -797,7 +797,7 @@ app.directive('autoFocus', function () {
   };
 });
 
-app.directive('shareThis', function ($location) {
+app.directive('shareThis', function () {
   return {
     restrict: 'A',
     scope: true,
@@ -811,7 +811,7 @@ app.directive('shareThis', function ($location) {
   };
 });
 
-app.directive('shareStoryButton', function(DataRequestFactory, $modal, $messages) {
+app.directive('shareStoryButton', ['DataRequestFactory', '$modal', '$messages', function(DataRequestFactory, $modal, $messages) {
   return {
     restrict: 'A',
     //replace:true,
@@ -864,4 +864,4 @@ app.directive('shareStoryButton', function(DataRequestFactory, $modal, $messages
       })
     }
   }
-})
+}])

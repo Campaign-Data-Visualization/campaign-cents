@@ -1,13 +1,13 @@
 'use strict';
 var app = angular.module('kochTracker')
 
-app.filter('safehtml', function($sce) {
+app.filter('safehtml', ['$sce', function($sce) {
     return function(val) {
         return $sce.trustAsHtml(val);
     };
-});
+}]);
 
-app.filter('counter', function($filter) {
+app.filter('counter', ['$filter', function($filter) {
     return function(val) {
     var result = '';
         var num = $filter('number')(val, 0);
@@ -16,7 +16,7 @@ app.filter('counter', function($filter) {
         })
         return result;
     };
-});
+}]);
 
 app.filter('characters', function () {
     return function (input, chars, breakOnWord) {

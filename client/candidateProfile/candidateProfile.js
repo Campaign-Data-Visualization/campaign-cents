@@ -1,6 +1,6 @@
 'use strict';
 angular.module('kochTracker.candidatesView.candidateProfile', ['ui.router'])
-.config(function ($stateProvider) {
+.config(['$stateProvider', function ($stateProvider) {
 
   $stateProvider
     .state('kochTracker.candidatesView.candidateProfile', {
@@ -8,8 +8,8 @@ angular.module('kochTracker.candidatesView.candidateProfile', ['ui.router'])
       templateUrl: 'candidateProfile/candidateProfile.tpl.html',
       controller: 'CandidateProfileController'
     });
-})
-.controller('CandidateProfileController', function($scope, $stateParams, DataRequestFactory) {
+}])
+.controller('CandidateProfileController', ['$scope', '$stateParams', 'DataRequestFactory', function($scope, $stateParams, DataRequestFactory) {
   $scope.candidateId = $stateParams.input;
   $scope.candidateProfile = {};
   $scope.candidateBio = {};
@@ -43,4 +43,4 @@ angular.module('kochTracker.candidatesView.candidateProfile', ['ui.router'])
       $scope.profileLoading = 0;
     }
   );
-});
+}]);

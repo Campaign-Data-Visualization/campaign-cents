@@ -1,7 +1,7 @@
 'use strict';
 angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
 
-.config(function ($stateProvider) {
+.config(['$stateProvider', function ($stateProvider) {
   $stateProvider
     .state('kochTracker.explore', {
       url: '/explore',
@@ -42,9 +42,9 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
       templateUrl: 'explore/explore.races.tpl.html',
       controller: 'ExploreRacesController'
     })
-})
+}])
 
-.controller('ExploreMapController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams, $templateCache, $compile, $filter){
+.controller('ExploreMapController', ['$scope', '$http', 'DataRequestFactory', '$stateParams', '$templateCache', '$compile', function($scope, $http, DataRequestFactory, $stateParams, $templateCache, $compile){
   $scope.state = $stateParams.state;
   $scope.makers = {};
   $scope.boundaries = {};
@@ -219,30 +219,30 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
   //     }
   //  )}();
 
-})
+}])
 
-.controller('ExploreVoicesController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
+.controller('ExploreVoicesController', ['$scope', 'DataRequestFactory', function($scope, DataRequestFactory){
   $scope.voices = {};
   DataRequestFactory.getData('fetch', 'voices/all').then(function(data) {
     $scope.voices = data;
   });
-})
+}])
 
-.controller('ExploreOffendersController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
+.controller('ExploreOffendersController', ['$scope', 'DataRequestFactory', function($scope, DataRequestFactory){
   $scope.offenders = {};
   DataRequestFactory.getData('fetch', 'offenders/all').then(function(data) {
     $scope.offenders = data;
   });
-})
+}])
 
-.controller('ExploreCandidatesController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
+.controller('ExploreCandidatesController', ['$scope', 'DataRequestFactory', function($scope, DataRequestFactory){
   $scope.candidates = {};
   DataRequestFactory.getData('fetch', 'kochCandidates/all').then(function(data) {
     $scope.candidates = data;
   });
-})
+}])
 
-.controller('ExploreOrgsController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
+.controller('ExploreOrgsController', ['$scope', 'DataRequestFactory', function($scope, DataRequestFactory){
   $scope.orgs = [
     {
       name: 'Americans for Prosperity',
@@ -273,12 +273,12 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
       description: "<b>60+</b> is an organization that is heavily funded by the Koch brothers, receiving $15.7 from Freedom Partners and $2.6 from American Encore (another group with Koch ties) in 2012. This organization promotes limited government and economic freedom, focusing on the interests of seniors. They opposed the Health Care Reform in 2010 and released television ads that claimed that the Affordable Care Act would make monstrous cuts to Medicare and weaken medical institutions, and in turn, hurting seniors. However, several fact-checking organizations refute 60+'s claim, such as <a target='_blank' href='http://www.politifact.com/truth-o-meter/statements/2010/sep/20/60-plus-association/medicare-cuts-health-care-law-will-hurt-seniors-sa/'>Politifact</a> and Media Matters, yet it still became one of the GOP's favorite attack lines against the act.",
     }
   ];
-})
+}])
 
-.controller('ExploreRacesController', function($scope, $http, DataRequestFactory, $rootElement, $location, $q, $state, $stateParams){
+.controller('ExploreRacesController', ['$scope', 'DataRequestFactory', function($scope, DataRequestFactory){
   $scope.races = {};
   DataRequestFactory.getData('fetch', 'races/all').then(function(data) {
     $scope.races = data;
   });
-})
+}])
 

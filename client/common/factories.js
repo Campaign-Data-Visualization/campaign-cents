@@ -1,7 +1,7 @@
 'use strict';
 var app = angular.module('kochTracker')
 
-app.factory('DataRequestFactory', function($http, $messages, $q){
+app.factory('DataRequestFactory', ['$http', '$messages', '$q', function($http, $messages, $q){
 
   var getData = function(route, input, callback){
 
@@ -65,10 +65,10 @@ app.factory('DataRequestFactory', function($http, $messages, $q){
     'postData': postData,
     'postAdmin': postAdmin,
   };
-});
+}]);
 
 app.config(['$httpProvider', function($httpProvider) {
- $httpProvider.interceptors.push(function($q) {
+ $httpProvider.interceptors.push(['$q', function($q) {
    return {
       'request': function(config) {
         return config;
@@ -89,5 +89,5 @@ app.config(['$httpProvider', function($httpProvider) {
         return $q.reject(rejection);
       }
     };
-  });
+  }]);
 }]);
