@@ -44,7 +44,8 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
     })
 }])
 
-.controller('ExploreMapController', ['$scope', '$http', 'DataRequestFactory', '$stateParams', '$templateCache', '$compile', function($scope, $http, DataRequestFactory, $stateParams, $templateCache, $compile){
+.controller('ExploreMapController', ['$scope', '$rootScope', '$http', 'DataRequestFactory', '$stateParams', '$templateCache', '$compile', function($scope, $rootScope, $http, DataRequestFactory, $stateParams, $templateCache, $compile){
+  $rootScope.title = 'KochProblem.org - Explore - National Map';
   $scope.state = $stateParams.state;
   $scope.makers = {};
   $scope.boundaries = {};
@@ -221,28 +222,32 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
 
 }])
 
-.controller('ExploreVoicesController', ['$scope', 'DataRequestFactory', function($scope, DataRequestFactory){
+.controller('ExploreVoicesController', ['$scope', '$rootScope', 'DataRequestFactory', function($scope, $rootScope, DataRequestFactory){
+  $rootScope.title = "KochProblem.org - Explore - Victim's Voices";
   $scope.voices = {};
   DataRequestFactory.getData('fetch', 'voices/all').then(function(data) {
     $scope.voices = data;
   });
 }])
 
-.controller('ExploreOffendersController', ['$scope', 'DataRequestFactory', function($scope, DataRequestFactory){
+.controller('ExploreOffendersController', ['$scope', '$rootScope', 'DataRequestFactory', function($scope, $rootScope, DataRequestFactory){
+  $rootScope.title = "KochProblem.org - Explore - Worst Offenders";
   $scope.offenders = {};
   DataRequestFactory.getData('fetch', 'offenders/all').then(function(data) {
     $scope.offenders = data;
   });
 }])
 
-.controller('ExploreCandidatesController', ['$scope', 'DataRequestFactory', function($scope, DataRequestFactory){
+.controller('ExploreCandidatesController', ['$scope', '$rootScope', 'DataRequestFactory', function($scope, $rootScope, DataRequestFactory){
+  $rootScope.title = "KochProblem.org - Explore - Victim's Voices";
   $scope.candidates = {};
   DataRequestFactory.getData('fetch', 'kochCandidates/all').then(function(data) {
     $scope.candidates = data;
   });
 }])
 
-.controller('ExploreOrgsController', ['$scope', 'DataRequestFactory', function($scope, DataRequestFactory){
+.controller('ExploreOrgsController', ['$scope', '$rootScope', 'DataRequestFactory', function($scope, $rootScope, DataRequestFactory){
+  $rootScope.title = "KochProblem.org - Explore - Orgs to Watch";
   $scope.orgs = [
     {
       name: 'Americans for Prosperity',
@@ -275,7 +280,8 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
   ];
 }])
 
-.controller('ExploreRacesController', ['$scope', 'DataRequestFactory', function($scope, DataRequestFactory){
+.controller('ExploreRacesController', ['$scope', '$rootScope', 'DataRequestFactory', function($scope, $rootScope, DataRequestFactory){
+  $rootScope.title = "KochProblem.org - Explore - Key Races";
   $scope.races = {};
   DataRequestFactory.getData('fetch', 'races/all').then(function(data) {
     $scope.races = data;

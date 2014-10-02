@@ -2,7 +2,6 @@
 angular.module('kochTracker.candidatesView.candidateList', ['ui.router'])
 
 .config(['$stateProvider', function ($stateProvider) {
-
   $stateProvider
     .state('kochTracker.candidatesView.candidateList', {
       url: '/zip/:input',
@@ -26,8 +25,8 @@ angular.module('kochTracker.candidatesView.candidateList', ['ui.router'])
     }
   }
 })
-.controller('CandidateListController', ['$scope', '$stateParams', 'DataRequestFactory', function($scope, $stateParams, DataRequestFactory) {
-
+.controller('CandidateListController', ['$scope', '$rootScope', '$stateParams', 'DataRequestFactory', function($scope, $rootScope, $stateParams, DataRequestFactory) {
+  $rootScope.title = "KochProblem.org - Get Local - "+$stateParams.state+ ' - '+ $stateParams.input;
   $scope.candidates = [];
   $scope.loading = 1;
   $scope.viewparams.zip = $stateParams.input;

@@ -10,7 +10,8 @@ angular.module('kochTracker.landingPage', ['ui.router', 'ngMap'])
     });
 }])
 
-.controller('LandingPageController', ['$scope', '$timeout', function($scope, $timeout){
+.controller('LandingPageController', ['$scope', '$rootScope', '$timeout', function($scope, $rootScope, $timeout){
+  $rootScope.title = "KochProblem.org";
   $scope.dayOne = 0;
   $scope.dayTwo = 0;
   $scope.kochTotal = 0;

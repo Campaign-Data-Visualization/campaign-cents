@@ -9,7 +9,8 @@ angular.module('kochTracker.candidatesView.candidateProfile', ['ui.router'])
       controller: 'CandidateProfileController'
     });
 }])
-.controller('CandidateProfileController', ['$scope', '$stateParams', 'DataRequestFactory', function($scope, $stateParams, DataRequestFactory) {
+.controller('CandidateProfileController', ['$scope', '$rootScope', '$stateParams', 'DataRequestFactory', function($scope, $rootScope, $stateParams, DataRequestFactory) {
+  $rootScope.title = "KochProblem.org - Get Local - "+$stateParams.state;
   $scope.candidateId = $stateParams.input;
   $scope.candidateProfile = {};
   $scope.candidateBio = {};
@@ -33,11 +34,10 @@ angular.module('kochTracker.candidatesView.candidateProfile', ['ui.router'])
     function(response){
       $scope.profileLoading = 0;
       $scope.candidateProfile= response;
+      $rootScope.title = "KochProblem.org - Get Local - "+$stateParams.state+" - "+$scope.candidateProfile.nameFirstLast;
       $scope.totals = $scope.candidateProfile.data.totals;
       $scope.topDonors = $scope.candidateProfile.data.top_donors;
       $scope.donors = $scope.candidateProfile.data.donors;
-
-      
     },
     function(response){
       $scope.profileLoading = 0;
