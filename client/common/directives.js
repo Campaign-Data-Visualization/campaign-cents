@@ -85,12 +85,14 @@ app.directive('insetMap', ['$window', '$state', function($window, $state) {
       })
 
       $("#inset-map, #explore-map-button").on('mouseenter', function() {
-        $('#inset-map .state-boundaries.selected')[0].classList.add('active');
+        //$('#inset-map .state-boundaries.selected')[0].classList.add('active');
+        d3.select('#inset-map .state-boundaries.selected').classed({'active': true});
         $('#explore-map-button').addClass('active');
       })
 
       $("#inset-map, #explore-map-button").on('mouseleave', function() {
-        $('#inset-map .state-boundaries.selected')[0].classList.remove('active');
+        d3.select('#inset-map .state-boundaries.selected').classed({'active': false});
+        // $('#inset-map .state-boundaries.selected')[0].classList.remove('active');
         $('#explore-map-button').removeClass('active');
       })
       
@@ -483,7 +485,7 @@ app.directive('bubbleChart',  ['$window', function($window) {
       "<div class='bubble-label col-xs-6 text-center'><span>Prior Year Funding <span info-popup content='{{popupContent}}'></span></span></div>"+
       "<svg><defs>"+
         "<filter id='glow' x='-30%' y='-30%' width='160%' height='160%'>"+
-          "<feGaussianBlur stdDeviation='1 1' result='glow'/>"+
+          "<feGaussianBlur stdDeviation='1' result='glow'/>"+
           "<feMerge>"+
             "<feMergeNode in='glow' />"+
             "<feMergeNode in='glow' />"+
@@ -570,6 +572,7 @@ app.directive('bubbleChart',  ['$window', function($window) {
       }
 
       function setChartParameters(){
+      	$('#glow')[0].childNodes[0].setAttribute('stdDeviation', 1); //This is for stupid IE because it's stupid
         xScale = d3.scale.linear()
           .domain([0, 3])
           .range([maxRadius, width - maxRadius]);

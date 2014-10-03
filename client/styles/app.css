@@ -907,7 +907,7 @@ body,.map-section{font-family:'ubuntu';background-color:#d6d6d6;background-repea
 .donate{margin-top:10px}@media (min-width:768px){.donate{margin:0}}
 .navbar-right{padding:0 15px}
 @media (min-width:768px) and (max-width:991px){.links .navbar-right{margin-top:25px}}@media (min-width:992px) and (max-width:1199px){.links .navbar-right{margin-top:20px}}@media (min-width:1200px){.links .navbar-right{margin-top:50px}}
-@media (min-width:768px) and (max-width:991px){.social .navbar-right{margin-top:25px}}@media (min-width:992px) and (max-width:1199px){.social .navbar-right{margin-top:25px}}@media (min-width:1200px){.social .navbar-right{margin-top:20px}}
+.social .navbar-right{clear:both}@media (min-width:768px) and (max-width:991px){.social .navbar-right{margin-top:25px}}@media (min-width:992px) and (max-width:1199px){.social .navbar-right{margin-top:25px}}@media (min-width:1200px){.social .navbar-right{margin-top:20px}}
 .navbar-toggle{background-color:#e1e1e1;margin-top:30px}
 .navbar-toggle .icon-bar{background-color:#0071bc}
 .navbar-nav .dropdown-menu{margin-top:10px}
@@ -975,7 +975,7 @@ ul.box-text li div{height:100px}
 .map-sidebar-search .input-group label h2{text-align:left;color:#000;font-family:'rockwellRegular'}
 .map-sidebar-search label{padding-bottom:20px}
 .map-sidebar-search input{border:3px #000 solid}
-.map-sidebar-search .btn{background-color:#000;color:#fff;padding:4px}
+.map-sidebar-search .btn{background-color:#000;color:#fff;padding:4px;vertical-align:top}
 .legend{height:35px;margin-top:15px}
 .legend p{float:left;margin-top:0 !important}
 .legend>img{float:left;border:2px solid #000;margin-right:10px}
