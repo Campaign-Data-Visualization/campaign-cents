@@ -5,7 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width">
   <meta property="og:image" content="http://kochproblem.org/images/graphic-pinterest-image.jpg"/>
-  <meta property="og:title" content="KochProblem.org" />
+  <meta property="og:title" content="{{title}}" />
+  <meta property="og:type" content="website"/>
   <link rel='shortcut icon' href='images/favicon.ico'>
   <title ng-bind='title'>KochProblem.org</title>
   <link rel="stylesheet" href="styles/app.css"/>
@@ -13,15 +14,6 @@
   <link href='http://fonts.googleapis.com/css?family=Rokkitt:700' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
-  <!--<base href="/">-->
-  <!--[if IE]><script type="text/javascript">
-      // Fix for IE ignoring relative base tags.
-      // See http://stackoverflow.com/questions/3926197/html-base-tag-and-local-folder-path-with-internet-explorer
-      (function() {
-          var baseTag = document.getElementsByTagName('base')[0];
-          baseTag.href = baseTag.href;
-      })();
-  </script><![endif]--> 
 </head>
   <body class="body" resize>
     <div ui-view></div>
