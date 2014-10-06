@@ -1,6 +1,5 @@
 "user strict";
 var gulp    = require('gulp'),
-    bower   = require('gulp-bower'),
     jshint  = require('gulp-jshint'),
     refresh = require('gulp-livereload'),
     notify  = require('gulp-notify'),
@@ -18,12 +17,6 @@ var paths = {
   views: ['!client/lib/*.html', 'client/**/*.html', 'client/index.html']
 };
 var build = ['lint'];
-
-
-gulp.task('bowerInstall', function  () {
-  bower()
-  .pipe();
-});
 
 gulp.task('html', function () {
   return gulp.src(paths.views)

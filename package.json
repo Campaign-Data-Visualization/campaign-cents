@@ -22,7 +22,6 @@
   "devDependencies": {
     "gulp": "*",
     "gulp-run": "*",
-    "gulp-bower": "*",
     "tiny-lr": "*",
     "node-geocoder": "*",
     "gulp-jshint": "*",
@@ -34,7 +33,6 @@
     "jshint-stylish": "*",
     "gulp-concat": "*",
     "gulp-uglify": "*",
-    "gulp-usemin": "*",
-    "gulp-stylus": "*"
+    "gulp-usemin": "*"
   }
 }
