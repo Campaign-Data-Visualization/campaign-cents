@@ -95,6 +95,7 @@ module.exports = exports = {
                     db.doQuery("update realtime_contribs a join koch_orgs b on donor_name = org_name set koch_tier = tier where koch_tier is null")
                       .then(function() { return db.doQuery("delete from koch_contribs where source = 'realtime'"); })
                       .then(function() { return db.doQuery("insert into koch_contribs select * from realtime_contribs"); })
+                      .then(function() { return db.doQuery("update candidates set 2014contrib = 0, since2000contrib = 0"); })
                       .then(function() { return db.doQuery("update candidates join (select sum(amount) as total, sum(if(cycle = 2014, amount,0)) as current,  votesmartid from koch_contribs where for_against = 'f' group by votesmartid) b using(votesmartid) set 2014contrib = current, since2000contrib = total"); })
                       .then(function() {
                         cleanupDeferred.resolve();   
@@ -185,6 +186,7 @@ module.exports = exports = {
   },
 
   adminMap: function(req, res, next) {
+    res.setTimeout(0);
     var actionType = req.params.action;
     var count = 0;
     var layers = {
@@ -204,67 +206,79 @@ module.exports = exports = {
         states[state.state_name.toLowerCase()] = state.state;
       });
 
-      db.doQuery('drop table if exists koch_assets_tmp').then(function() {
-        db.doQuery('create table koch_assets_tmp like koch_assets').then(function() {
-          db.deferredRequest('https://maps.google.com/maps/ms?dg=feature&ie=UTF8&authuser=0&msa=0&output=kml&msid='+layers[actionType]).then(function(data) { 
-            var promises = [];
-            var results = [];
-            if (data && data.kml && data.kml.Document[0].Placemark[0]) {
-              var assets = data.kml.Document[0].Placemark;
-              //var assets = [data.kml.Document[0].Placemark[0]];
-              assets.forEach(function(c, i) {
-                if (! c.Point || ! c.Point[0]) {return; } //No point, no keep
-
-                var deferred = Q.defer();
-                promises.push(deferred.promise)
-                var coords = c.Point[0].coordinates[0].split(',');
-                var asset = {
-                  title: c.name[0],
-                  layer: actionType,
-                  lat: coords[1],
-                  lng: coords[0],
-                  description: c.description || ''
-                }
-                if(! asset.lat || !asset.lng) { return; }
-                setTimeout(function() {
-                  geocode(geocoder, asset).then(
-                    function(res) { 
-                      asset = res;
-                    }, 
-                    function(err) {
-                      console.log('geocoding error - falling to 2nd geocoder');
-                      console.log(err);
-                      geocode(geocoder2, asset).then(
-                        function(res) { 
-                          asset = res;
-                        }, function(err) {
-                          console.log('geocoding error: '+err)
-                          deferred.reject(new Error("There was an error with the Geocoder. Most likely we have reached our daily rate limit. Try again tomorrow?"));
-                        }
-                      );
-                    }
-                  ).then(function() {
-                    db.doQuery("insert into koch_assets_tmp set ?", asset).then(function(){
-                      count++;
-                      deferred.resolve();
-                    }, error)
-                  });
-                }, 300*i);
-              });
-            }
-            Q.all(promises).then(function() {
-              db.doQuery('delete from koch_assets where layer = ?', actionType).then(function(){
-                db.doQuery("insert into koch_assets select * from koch_assets_tmp").then(function() {
-                  db.doQuery('drop table if exists koch_assets_tmp').then(function() {
-                    res.send({type: 'admin', data: count}) 
-                  }, error)
-                }, error)
-              }, error)
-            }, error)
-          },next)
-        },next)
-      },next)
-    },next)
+      db.doQuery('drop table if exists koch_assets_tmp')
+        .then( function() { return db.doQuery('create table koch_assets_tmp like koch_assets'); })
+        .then( function() { return db.deferredRequest('https://maps.google.com/maps/ms?dg=feature&ie=UTF8&authuser=0&msa=0&output=kml&msid='+layers[actionType]); })
+        .then( function(data) {
+          var promises = [];
+          var results = [];
+          if (data && data.kml && data.kml.Document[0].Placemark[0]) {
+            var assets = data.kml.Document[0].Placemark;
+            assets.forEach(function(c, i) {
+              var promise = processItem(c, i);
+              promises.push(promise);
+            });
+          }
+          Q.all(promises)
+            .then(function() { return db.doQuery('delete from koch_assets where layer = ?', actionType); })
+            .then(function() { return db.doQuery("insert into koch_assets select * from koch_assets_tmp"); })
+            .then(function() { return db.doQuery('drop table if exists koch_assets_tmp'); })
+            .then(function() {
+              res.send({type: 'admin', data: count})
+            })
+            .catch(function(err) {
+              deferred.reject(err);
+            });
+        })
+        .catch(next);
+    }, next);
+    
+    var processItem = function(c, i) {
+      var deferred = Q.defer();
+      if (! c.Point || ! c.Point[0]) {
+        deferred.resolve();//No point, no keep
+      } else {
+        var coords = c.Point[0].coordinates[0].split(',');
+        var asset = {
+          title: c.name[0],
+          layer: actionType,
+          lat: coords[1],
+          lng: coords[0],
+          description: c.description || ''
+        }
+        if(! asset.lat || !asset.lng) {
+          deferred.resolve();
+        } else { 
+          setTimeout(function() {
+            geocode(geocoder, asset).then(
+              function(res) { 
+                asset = res;
+              }, 
+              function(err) {
+                console.log('geocoding error - falling to 2nd geocoder');
+                console.log(err);
+                geocode(geocoder2, asset).then(
+                  function(res) { 
+                    asset = res;
+                  }, function(err) {
+                    console.log('geocoding error: '+err)
+                    deferred.reject(new Error("There was an error with the Geocoder. Most likely we have reached our daily rate limit. Try again tomorrow?"));
+                  }
+                );
+              }
+            ).then(function() {
+              db.doQuery("insert into koch_assets_tmp set ?", asset).then(function(){
+                count++;
+                deferred.resolve();
+              }, function(err) {
+                deferred.reject(err);
+              })
+            });
+          }, 300*i);
+        }
+      }
+      return deferred.promise;
+    }
 
     var geocode = function(geocodeUtil, asset) {
       var deferred = Q.defer();

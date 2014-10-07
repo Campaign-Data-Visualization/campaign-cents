@@ -24,6 +24,7 @@ app.factory('DataRequestFactory', ['$http', '$messages', '$q', function($http, $
     return $http({
       method: 'GET',
       url: '/adminRequest/'+route+'/'+input,
+      timeout: 600000,
     }).then(function(response) {
       return response.data.data;
     }, handleError);
