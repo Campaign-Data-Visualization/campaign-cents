@@ -41,7 +41,7 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
       url: '/KeyRaces',
       templateUrl: 'explore/explore.races.tpl.html',
       controller: 'ExploreRacesController'
-    })
+    });
 }])
 
 .controller('ExploreMapController', ['$scope', '$rootScope', '$http', 'DataRequestFactory', '$stateParams', '$templateCache', '$compile', function($scope, $rootScope, $http, DataRequestFactory, $stateParams, $templateCache, $compile){
@@ -74,30 +74,30 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
       markers: [],
       label: 'Take Action'
     },
-  }
+  };
 
   $scope.layersOrder = ['candidate', 'campus', 'action', 'assets'];
 
-  $scope.template;
+  $scope.template = "";
 
   $http.get('explore/explore.infoWindow.tpl.html', {cache: true}).success(function(html) {
-    $templateCache.put('explore.infoWindow.tpl.html', html)
+    $templateCache.put('explore.infoWindow.tpl.html', html);
     $scope.template = $templateCache.get('explore.infoWindow.tpl.html');
   });
 
-  $scope.mapStyle = [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-100},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-100},{"lightness":40}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-10},{"lightness":30}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-60},{"lightness":10}]},{"featureType":"landscape.natural","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-60},{"lightness":60}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"},{"saturation":-100},{"lightness":60}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"},{"saturation":-100},{"lightness":60}]}]
+  $scope.mapStyle = [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-100},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-100},{"lightness":40}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"saturation":-10},{"lightness":30}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-60},{"lightness":10}]},{"featureType":"landscape.natural","elementType":"all","stylers":[{"visibility":"simplified"},{"saturation":-60},{"lightness":60}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"},{"saturation":-100},{"lightness":60}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"},{"saturation":-100},{"lightness":60}]}];
   
   if ($scope.state) {
     DataRequestFactory.getData("states", $scope.state).then(function(data){
       $scope.boundaries = data;
-    })
+    });
   }
 
   $scope.toggleLayer = function(layer) {
     var visible = $scope.layers[layer].visible;
     angular.forEach($scope.layers[layer].markers, function(m){
       m.setVisible(visible);
-    })
+    });
   };
 
   $scope.showInfoWindow = function(marker, item) {
@@ -112,10 +112,10 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
       $scope.infoWindow.setContent(content[0]); //add content again to try and force window to size right
     });
     
-  }
+  };
 
-  $scope.topoJson;
-  $.getJSON("lib/us-states.json", function(data) { $scope.topoJson = data; })
+  $scope.topoJson = "";
+  $.getJSON("lib/us-states.json", function(data) { $scope.topoJson = data; });
   
   $scope.$on('mapInitialized', function(event, map){
     $scope.$watch('topoJson', function() {
@@ -127,20 +127,20 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
          // fillColor: '#fff', 
           'fillOpacity':0, 
           strokeColor:'#0071BC'
-        })
+        });
       }
-    })
+    });
     $scope.$watch("boundaries.ne_lat", function(n, o) { 
       if ($scope.boundaries.ne_lat) {
         var bounds = new google.maps.LatLngBounds(new google.maps.LatLng($scope.boundaries.sw_lat, $scope.boundaries.sw_lng), new google.maps.LatLng($scope.boundaries.ne_lat, $scope.boundaries.ne_lng));
         $scope.map.fitBounds(bounds);
       }
-    })
+    });
 
     $scope.infoWindow = new google.maps.InfoWindow(); 
     google.maps.event.addListener($scope.infoWindow, 'domready', function(){
-      $('#map > div > div > div:nth-child(1) > div:nth-child(3) > div:nth-child(4) > div > div:nth-child(1) > div:nth-child(4)').css({'border': '4px solid '+$scope.infoWindow.border})
-    })
+      $('#map > div > div > div:nth-child(1) > div:nth-child(3) > div:nth-child(4) > div > div:nth-child(1) > div:nth-child(4)').css({'border': '4px solid '+$scope.infoWindow.border});
+    });
 
     DataRequestFactory.getData('map', 'layers').then(function(data) {
       data.forEach(function(item) {
@@ -174,7 +174,7 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
 
         });
       });
-    })
+    });
   });
 
   var fromLatLngToPoint = function(latLng, map) {
@@ -183,7 +183,7 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
     var scale = Math.pow(2, map.getZoom());
     var worldPoint = map.getProjection().fromLatLngToPoint(latLng);
     return new google.maps.Point((worldPoint.x - bottomLeft.x) * scale, (worldPoint.y - topRight.y) * scale);
-  }
+  };
     /*var layerDistricts = new google.maps.FusionTablesLayer({
       query: {
         select: 'col0',
@@ -286,5 +286,5 @@ angular.module('kochTracker.explore', ['ui.router', 'ngMap'])
   DataRequestFactory.getData('fetch', 'races/all').then(function(data) {
     $scope.races = data;
   });
-}])
+}]);
 

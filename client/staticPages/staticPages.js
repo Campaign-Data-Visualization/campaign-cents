@@ -31,6 +31,5 @@ angular.module('kochTracker.staticPages', ['ui.router'])
       controller: ['$rootScope', function($rootScope) {
         $rootScope.title = "KochProblem.org - Not Found";
       }]
-    })
-
-}])
+    });
+}]);
