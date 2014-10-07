@@ -23,7 +23,7 @@ angular.module('kochTracker.candidatesView.candidateList', ['ui.router'])
         }
       });
     }
-  }
+  };
 })
 .controller('CandidateListController', ['$scope', '$rootScope', '$stateParams', 'DataRequestFactory', function($scope, $rootScope, $stateParams, DataRequestFactory) {
   $rootScope.title = "KochProblem.org - Get Local - "+$stateParams.state+ ' - '+ $stateParams.input;

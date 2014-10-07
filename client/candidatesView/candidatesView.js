@@ -9,7 +9,7 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
       abstract: true,
       templateUrl: 'candidatesView/candidatesView.tpl.html',
       controller: 'CandidatesViewController'
-    })
+    });
 }])
 
 .controller('CandidatesViewController', ['$scope', '$stateParams', 'DataRequestFactory', function($scope, $stateParams, DataRequestFactory) {
@@ -25,12 +25,12 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
 
   DataRequestFactory.getData('states', $scope.viewparams.state).then(function(data) {
     $scope.viewparams.state_name = data.state_name;
-  })
+  });
 
   DataRequestFactory.getData('assets', 'state/'+$scope.viewparams.state).then(function(data) {
     $scope.layers = data;
     $scope.layerLoading = 0;
-  })
+  });
 
   var today = new Date();
   var election = new Date('11/4/2014');
@@ -73,9 +73,9 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
       scope.fact = '';
       DataRequestFactory.getData('fetch', 'facts/random').then(function(data) {
         scope.fact = data[0];
-      })
+      });
     }
-  }
+  };
 }])
 
 .directive('worstOffender', ['DataRequestFactory', function(DataRequestFactory) {
@@ -91,9 +91,9 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
       scope.offender = '';
       DataRequestFactory.getData('fetch', 'offenders/random').then(function(data) {
         scope.offender = data[0];
-      })
+      });
     }
-  }
+  };
 }])
 
 .directive('victimsVoice', ['DataRequestFactory', function(DataRequestFactory) {
@@ -111,7 +111,7 @@ angular.module('kochTracker.candidatesView', ['ui.router'])
       scope.voice = '';
       DataRequestFactory.getData('fetch', 'voices/random').then(function(data) {
         scope.voice = data[0];
-      })
+      });
     }
-  }
+  };
 }]);
