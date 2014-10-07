@@ -17,7 +17,7 @@ angular.module('kochTracker.landingPage', ['ui.router', 'ngMap'])
   $scope.kochTotal = 0;
   $scope.prevKochTotal = 0;
   $scope.duration = 4;
-  $scope.tickerPopup = "Based off a stated goal made by Koch on June 14th, 2014, to raise $500 million for upcoming Senate campaigns."
+  $scope.tickerPopup = "Based off a stated goal made by Koch on June 14th, 2014, to raise $500 million for upcoming Senate campaigns.";
   $scope.calendarPopup = "Map reflects Koch Candidates, Assets, Campuses, and other Points of Interest.";
   $scope.tickerRefresh = 33;
 
@@ -43,7 +43,7 @@ angular.module('kochTracker.landingPage', ['ui.router', 'ngMap'])
     $scope.duration = (election-today)/1000;
     $scope.prevKochTotal = $scope.kochTotal;
     $scope.kochTotal = 500000000;
-  }, ($scope.duration*1000))
+  }, ($scope.duration*1000));
 /*
   var updateTotal = function(first) {
     $scope.prevKochTotal = $scope.kochTotal;

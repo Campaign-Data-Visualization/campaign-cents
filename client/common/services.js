@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('kochTracker')
+var app = angular.module('kochTracker');
 
 app.service('$messages', ['$rootScope', function($rootScope) {
 	var service = this;
@@ -7,14 +7,14 @@ app.service('$messages', ['$rootScope', function($rootScope) {
 	service.modal = false;
 
 	service.addMessage = function(message, type) {
-		var type = type || 'info';
+		type = type || 'info';
 		service.messages.push({message: message, type: type});
 	};
 
 	service.error = function(message) { 
-		console.log('Error: '+message);
-   		service.addMessage("We're sorry, an error occurred: "+message, 'danger');
-	}
+		//console.log('Error: '+message);
+   	service.addMessage("We're sorry, an error occurred: "+message, 'danger');
+	};
 	
 	service.getMessages = function() { 
 		return service.messages;
@@ -22,12 +22,12 @@ app.service('$messages', ['$rootScope', function($rootScope) {
 
 	service.deleteMessage = function(index) { 
 		service.messages.splice(index, 1);
-	}
+	};
 
 	service.clearMessages = function() { 
 		service.messages = [];
 		service.modal = false;
-	}
+	};
 	
 	$rootScope.$on("$stateChangeStart", function(event, next, current) {
 		service.clearMessages();

@@ -828,7 +828,7 @@ app.directive('shareStoryButton', ['DataRequestFactory', '$modal', '$messages', 
         var modalInstance = $modal.open({
           windowClass: 'share-story-modal share-story-form',
           templateUrl: "/explore/explore.shareStoryForm.tpl.html",
-          controller: function($scope, $modalInstance){
+          controller: ['$scope', '$modalInstance', function($scope, $modalInstance){
             $scope.forms = {};
             $scope.formData = {
               name: '',
@@ -862,7 +862,7 @@ app.directive('shareStoryButton', ['DataRequestFactory', '$modal', '$messages', 
                 });
               }
             };
-          }
+          }]
         });
       });
     }
