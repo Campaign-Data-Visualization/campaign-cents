@@ -86,19 +86,11 @@ module.exports = exports = {
 
   lookupCandidate: function(req, res, next) {
     var candidateId = req.params.candidateId;
-
-    db.doQuery("select a.*, b.published as worst from candidates a left join content b on detail = voteSmartId where voteSmartId = ?", [candidateId]).then(function(data) {
-      var profile = data[0];
-      db.doQuery("select sum(if(cycle=2014 && koch_tier = 1, amount, 0)) as a,sum(if(cycle=2014 && koch_tier = 2, amount, 0)) as b, sum(if(cycle!=2014 && koch_tier = 1, amount, 0)) as c,  sum(if(cycle!=2014 && koch_tier = 2, amount, 0)) as d from koch_contribs where votesmartId = ? and for_against = 'f'", [candidateId]).then(function(data) {
-        profile.data = { 
-          'totals': Object.keys(data[0]).map(function(v) { return data[0][v];}) //convert to array
-        }
-        db.doQuery("select donor_name as name, koch_tier, sum(amount) as total, sum(if(cycle = 2014, amount, 0)) as current, sum(if(cycle = 2014, 0, amount)) as previous from koch_contribs b where votesmartid = ? and for_against = 'f' group by donor_name order by sum(amount) desc", [candidateId]).then(function(data) {
-          profile.data.donors = data;
-          res.send({type: 'candidateProfile', data:profile})
-        }, next);
-      }, next);
-    }, next);
+    db.doQuery("select profile from candidateProfiles where voteSmartId = ?", [candidateId]).then(function(data) {
+      console.log(data[0].profile);
+      var profile = JSON.parse(data[0].profile);
+      res.send({type: 'candidateProfile', data:profile})
+    }, next)
   },
 
   lookupAssets: function(req, res, next) {

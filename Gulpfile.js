@@ -49,6 +49,11 @@ gulp.task('live', function () {
   });
 });
 
+gulp.task('update', function() {
+  var update = require("./server/admin/update_candidate_profiles.js");
+  return update.updateCandidates(1);
+})
+
 gulp.task('deploy', function () {
   gulp.src('client/index.html')
     .pipe(usemin({

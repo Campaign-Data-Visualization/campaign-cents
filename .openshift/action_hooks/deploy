@@ -21,10 +21,6 @@ do
   mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" $database < $OPENSHIFT_REPO_DIR/backend/sql/$t.sql
 done
 
-mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" $database -e "delete from koch_contribs where source = 'realtime'"
-mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" $database -e "insert into koch_contribs select * from realtime_contribs"
-mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" $database -e "update candidates set 2014contrib = 0, since2000contrib = 0"
-mysql -u "$OPENSHIFT_MYSQL_DB_USERNAME" -P "$OPENSHIFT_MYSQL_DB_PORT" --password="$OPENSHIFT_MYSQL_DB_PASSWORD" -h "$OPENSHIFT_MYSQL_DB_HOST" $database -e "update candidates join (select sum(amount) as total, sum(if(cycle = 2014, amount,0)) as current,  votesmartid from koch_contribs where for_against = 'f' group by votesmartid) b using(votesmartid) set 2014contrib = current, since2000contrib = total"
-
 cd $OPENSHIFT_REPO_DIR;
 gulp deploy;
+gulp update;
