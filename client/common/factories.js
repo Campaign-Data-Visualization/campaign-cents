@@ -24,6 +24,7 @@ app.factory('DataRequestFactory', ['$http', '$messages', '$q', function($http, $
     return $http({
       method: 'GET',
       url: '/adminRequest/'+route+'/'+input,
+      timeout: 600000,
     }).then(function(response) {
       return response.data.data;
     }, handleError);
@@ -54,7 +55,7 @@ app.factory('DataRequestFactory', ['$http', '$messages', '$q', function($http, $
     if(response.data && response.data.error) { 
       $messages.error(response.data.error);
     } else {
-      $messages.error('Unable to complete request');
+:      $messages.error('Unable to complete request');
     }
     return $q.reject(response);
   };
