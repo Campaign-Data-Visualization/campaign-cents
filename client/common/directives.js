@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('kochTracker')
+var app = angular.module('kochTracker');
 
 app.directive('messages', ['$messages', '$filter', function($messages, $filter) {
   return {
@@ -13,7 +13,7 @@ app.directive('messages', ['$messages', '$filter', function($messages, $filter) 
       scope.close = $messages.deleteMessage;
       scope.modal = scope.modal || false;
     }
-  }
+  };
 }]);
 
 app.directive('loading', function() {
@@ -42,17 +42,17 @@ app.directive('insetMap', ['$window', '$state', function($window, $state) {
       var rawSvg=elem.find('svg');
       var svg = d3.select(rawSvg[0]);
       var width = elem.width();
-      var height = width * .7;
+      var height = width * 0.7;
       var current_state = '';
       var button = $('explore-map-button');
       svg.attr({
         width: width,
         height: height
-      })
+      });
       
       var projection = d3.geo.mercator()
         .scale(1)
-        .translate([0,0])
+        .translate([0,0]);
       
       var path = d3.geo.path().projection(projection);
 
@@ -63,42 +63,42 @@ app.directive('insetMap', ['$window', '$state', function($window, $state) {
           dy = bounds[1][1] - bounds[0][1],
           x = scope.state == 'AK' ? -2.7 : (bounds[0][0] + bounds[1][0]) / 2,
           y = (bounds[0][1] + bounds[1][1]) / 2,
-          scale = scope.state == 'AK' ? 270 : .8 / Math.max(dx / width, dy / height),
+          scale = scope.state == 'AK' ? 270 : 0.8 / Math.max(dx / width, dy / height),
           translate = [width / 2 - scale * x, height / 2 - scale * y];
         
         projection.scale(scale).translate(translate);
 
-         var states = svg.append('g').attr('class', 'states').selectAll('.state-boundaries').data(json.objects.usa.geometries)
+         var states = svg.append('g').attr('class', 'states').selectAll('.state-boundaries').data(json.objects.usa.geometries);
          states.enter().append("path")
           .attr("class", function(d) { 
             var selected = d.id == scope.state ? ' selected ': '';
             return selected+"state-boundaries state-"+d.id; 
           })
-          .datum(function(d, i){ return topojson.feature(json, json.objects.usa.geometries[i]) })
-          .attr("d", path)
+          .datum(function(d, i){ return topojson.feature(json, json.objects.usa.geometries[i]); })
+          .attr("d", path);
         
         $('.states')[0].appendChild($('.state-'+scope.state)[0]);
       });
       
       $("#inset-map, #explore-map-button").on('click', function() {
         $state.go('kochTracker.explore.map', {state:scope.state});
-      })
+      });
 
       $("#inset-map, #explore-map-button").on('mouseenter', function() {
         //$('#inset-map .state-boundaries.selected')[0].classList.add('active');
         d3.select('#inset-map .state-boundaries.selected').classed({'active': true});
         $('#explore-map-button').addClass('active');
-      })
+      });
 
       $("#inset-map, #explore-map-button").on('mouseleave', function() {
         d3.select('#inset-map .state-boundaries.selected').classed({'active': false});
         // $('#inset-map .state-boundaries.selected')[0].classList.remove('active');
         $('#explore-map-button').removeClass('active');
-      })
+      });
       
       function resize() {
         width = parseInt(d3.select('#map').style('width'));
-        height = width * .6;
+        height = width * 0.6;
 
         // update projection
         projection
@@ -114,8 +114,8 @@ app.directive('insetMap', ['$window', '$state', function($window, $state) {
         svg.selectAll('.state-boundaries').attr('d', path);
       }
     }
-  }
-}])
+  };
+}]);
 
 
 app.directive('staticMap', ['$window', 'DataRequestFactory', '$state', function($window, DataRequestFactory, $state) {
@@ -128,81 +128,81 @@ app.directive('staticMap', ['$window', 'DataRequestFactory', '$state', function(
       var rawSvg=elem.find('svg');
       var svg = d3.select(rawSvg[0]);
       var width = elem.width();
-      var height = width * .6
+      var height = width * 0.6;
       var current_state = '';
 
       svg.attr({
         width: width,
         height: height
-      })
+      });
 
       var projection = d3.geo.albersUsa()
         .scale(width*1.3) //not sure why I need to augment the scale...
-        .translate([width / 2, height / 2])
-      var path = d3.geo.path().projection(projection)
+        .translate([width / 2, height / 2]);
+      var path = d3.geo.path().projection(projection);
       var state_group = svg.append('g').attr('class', 'states');
-      var marker_group = svg.append('g').attr('class', 'map-markers')
+      var marker_group = svg.append('g').attr('class', 'map-markers');
 
       d3.json("/lib/us-states.json", function(json) {
-         var states = state_group.selectAll('.state-boundaries').data(json.objects.usa.geometries,  function(d) { return d.id; })
+         var states = state_group.selectAll('.state-boundaries').data(json.objects.usa.geometries,  function(d) { return d.id; });
          states.enter().append("path")
           .attr("class", function(d) { return "state-boundaries state-"+d.id; })
-          .datum(function(d, i){ return topojson.feature(json, json.objects.usa.geometries[i]) })
+          .datum(function(d, i){ return topojson.feature(json, json.objects.usa.geometries[i]); })
           .attr("d", path)
           .style('pointer-events','all')
           .on('mouseenter', function(d) {
             var selected =  d3.selectAll('.state-boundaries.selected');
             angular.forEach(selected, function(s) {
               if ($(s)) {
-                d3.selectAll(s).classed('selected', false)
+                d3.selectAll(s).classed('selected', false);
               }
-            })
-            states.sort(function(a, b) { if (a.id == d.id) { return 1; }})
+            });
+            states.sort(function(a, b) { if (a.id == d.id) { return 1; }});
             d3.select(this).classed('selected', true);
           })
           .on('mouseleave', function(d) {
             if (! d3.event.relatedTarget || d3.event.relatedTarget.tagName != 'circle'){
-              d3.select(this).classed('selected', false)
+              d3.select(this).classed('selected', false);
             }
           })
           .on('click', function(d) {
             $state.go('kochTracker.explore.map', {state:d.id});
-          })
+          });
       });
       
       DataRequestFactory.getData('map', 'summary').then(function(data) {
-        var markers = marker_group.selectAll('.marker').data(data)
+        var markers = marker_group.selectAll('.marker').data(data);
         markers.enter().append("circle")
           .attr("r",0)
           .attr("transform", function(d) {return "translate(" + projection([d.lng,d.lat]) + ")";})
-          .attr('fill-opacity', .8)
+          .attr('fill-opacity', 0.8)
           .attr('fill', 'red')
           .attr('class', 'marker')
           .on('click', function(d) {
             $state.go('kochTracker.explore.map', {state:d.state});
           })
           .on('mouseenter', function(d) {
-             d3.selectAll('.state-'+d.state).classed('selected', true)
+             d3.selectAll('.state-'+d.state).classed('selected', true);
           })
           .on('mouseleave', function(d) {
             if (! d3.event.relatedTarget || ( d3.event.relatedTarget.tagName != 'path' && d3.event.relatedTarget.tagName != 'circle')){
-             d3.selectAll('.state-boundaries.selected').classed('selected', false)
+             d3.selectAll('.state-boundaries.selected').classed('selected', false);
             }
-          })
+          });
 
         markers.transition()
           .duration(700)
           .ease('bounce')
           .delay(function(d, i) { return i * 3; })
           .attr('fill', 'orange')
-          .attr('r', 5)
+          .attr('r', 5);
       });
 
-      scope.$on('windowResize', resize)
+      scope.$on('windowResize', resize);
       
       function resize() {
         width = parseInt(d3.select('#map').style('width'));
-        height = width * .6;
+        height = width * 0.6;
 
         // update projection
         projection
@@ -216,11 +216,11 @@ app.directive('staticMap', ['$window', 'DataRequestFactory', '$state', function(
 
         // resize the map
         svg.selectAll('.state-boundaries').attr('d', path);
-        svg.selectAll('.marker').attr("transform", function(d) {return "translate(" + projection([d.lng,d.lat]) + ")";})
+        svg.selectAll('.marker').attr("transform", function(d) {return "translate(" + projection([d.lng,d.lat]) + ")";});
       }
     }
-  }
-}])
+  };
+}]);
 
 app.directive('resize', ['$window', function($window) {
   return {
@@ -230,7 +230,7 @@ app.directive('resize', ['$window', function($window) {
         scope.$broadcast('windowResize');
       });
     }
-  }
+  };
 }]);
 
 app.directive('barChart', ['$window', function($window) {
@@ -253,7 +253,7 @@ app.directive('barChart', ['$window', function($window) {
       var rawSvg=elem.find('svg');
       var svg = d3.select(rawSvg[0]);
    
-      var width, height, oldWidth, barWidth, xScale, amountText, commas, wrap;
+      var width, height, oldWidth, barWidth, xScale;
 
       var exitDuration = 200,
         transformDuration = 500,
@@ -267,15 +267,15 @@ app.directive('barChart', ['$window', function($window) {
       var init = function() {
          svg.append("svg:g")
            .attr("class", "bar-group")
-           .attr("transform", "translate("+keyWidth+",0)")
+           .attr("transform", "translate("+keyWidth+",0)");
 
          svg.append("svg:g")
            .attr('class', 'labels')
-           .attr("transform", "translate("+keyWidth+",0)")
+           .attr("transform", "translate("+keyWidth+",0)");
 
           svg.append('svg:g')
-           .attr('class', 'key')
-      }
+           .attr('class', 'key');
+      };
 
       var setChartParameters = function() {
         oldWidth = width;
@@ -286,24 +286,24 @@ app.directive('barChart', ['$window', function($window) {
         svg.attr({
           width: width,
           height: height
-        })
+        });
 
         xScale = d3.scale.linear()
           .domain([0, d3.max(scope.data, function(d) { return d.total; })])
           .range([0, barWidth]);
-      }
+      };
 
       var amountText = function(d, value) { 
         var text = '';
         return '$' + commas(Math.floor(value));
-      }
+      };
 
       var commas = function(val){
         while (/(\d+)(\d{3})/.test(val.toString())){
           val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
         }
         return val;
-      }
+      };
 
       var wrap = function(text, width) {
         text.each(function() {
@@ -327,16 +327,16 @@ app.directive('barChart', ['$window', function($window) {
             }
           }
         });
-      }
+      };
 
       function drawBarChart() {
         setChartParameters();
 
-        var filteredData = scope.data.filter(function(d) { return d[scope.time] != 0; });
-        var dataKey = function(d) { return d.name; }
+        var filteredData = scope.data.filter(function(d) { return d[scope.time] !== 0; });
+        var dataKey = function(d) { return d.name; };
 
         //BARS
-         var bars = svg.select('.bar-group').selectAll(".bar").data(filteredData, dataKey)
+         var bars = svg.select('.bar-group').selectAll(".bar").data(filteredData, dataKey);
 
          bars.enter().append('svg:rect')
            .attr({
@@ -346,15 +346,15 @@ app.directive('barChart', ['$window', function($window) {
              'height': barHeight - barMargin,
              'fill': 'red',
              'class': function(d, i) { return 'bar bar-'+i; }
-           })
+           });
 
          bars.transition()
            .delay(!bars.exit().empty()*exitDuration)
            .duration(transformDuration)
            .attr({
-             'width': function(d) { return xScale(d[scope.time])},
+             'width': function(d) { return xScale(d[scope.time]); },
              'y': function(d, i) { return barHeight * i; },
-           })
+           });
 
          bars.exit().transition()
            .duration(exitDuration)
@@ -365,7 +365,7 @@ app.directive('barChart', ['$window', function($window) {
            .remove();
 
         //LABELS
-         var labels = svg.select('.labels').selectAll('.label').data(filteredData, dataKey)
+         var labels = svg.select('.labels').selectAll('.label').data(filteredData, dataKey);
 
          labels.enter().append('svg:text')
            .attr({
@@ -375,29 +375,29 @@ app.directive('barChart', ['$window', function($window) {
              'dominant-baseline': 'middle',
              height: barHeight -barMargin
            })
-           .style('opacity','0')
+           .style('opacity','0');
 
-         labels.transition()  
-           .delay(!labels.exit().empty()*exitDuration)
-           .duration(transformDuration)
-           .attr({
-             x: function(d) { return xScale(d[scope.time]) +labelMargin},
-             y: function(d, i) { return (barHeight * i) + ((barHeight-barMargin)/2); },
-           })
+       	labels.transition()  
+        	.delay(!labels.exit().empty()*exitDuration)
+          .duration(transformDuration)
+          .attr({
+            x: function(d) { return xScale(d[scope.time]) +labelMargin; },
+            y: function(d, i) { return (barHeight * i) + ((barHeight-barMargin)/2); },
+          })
           .tween('text', function(d) { 
             var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d[scope.time]);
             return function(t) { 
               this.textContent = amountText(d, i(t));
-            }
+            };
           })
-           .style('opacity','1')
+          .style('opacity','1');
 
         labels.exit().transition()
           .duration(exitDuration)
           .attr({
             x: labelMargin,
           })
-           .style('opacity','0')
+          .style('opacity','0')
           .remove();
 
         //KEY
@@ -423,19 +423,19 @@ app.directive('barChart', ['$window', function($window) {
               'height': barHeight -barMargin,
               dy: '1em'
             })
-            .text(function(d) { return d.name})
-            .call(wrap, keyWidth-keyMargin)
+            .text(function(d) { return d.name; })
+            .call(wrap, keyWidth-keyMargin);
 
         keyItems.transition()
            .delay(!keyItems.exit().empty()*exitDuration)
            .duration(transformDuration)
            .attr('transform', function(d, i) { return 'translate('+(keyWidth-keyMargin)+', '+ (barHeight * i)+')'; })
-           .style('opacity','1')
+           .style('opacity','1');
 
         keyItems.exit().transition()
           .duration(exitDuration)
           .style('opacity','0')
-          .remove()
+          .remove();
           
       }
 
@@ -443,14 +443,14 @@ app.directive('barChart', ['$window', function($window) {
         if (a && a != b) {
           drawBarChart();
         }
-      })
+      });
 
       scope.$watch('data', function() {
         init();
         drawBarChart();
       });
 
-      scope.$on('windowResize', resize)
+      scope.$on('windowResize', resize);
       
       function resize() {
         setChartParameters();
@@ -459,19 +459,19 @@ app.directive('barChart', ['$window', function($window) {
 
         svg.selectAll('.bar')
           .attr({
-             'width': function(d) { return xScale(d[scope.time])},
+             'width': function(d) { return xScale(d[scope.time]); },
              'y': function(d, i) { return barHeight * i; },
-          })
+          });
 
         svg.selectAll('.label')
           .attr({
-             x: function(d) { return xScale(d[scope.time]) +labelMargin},
+             x: function(d) { return xScale(d[scope.time]) +labelMargin; },
              y: function(d, i) { return (barHeight * i) + ((barHeight-barMargin)/2); },
-          })
+          });
 
       }
     }
-  }
+  };
 }]);
 
 app.directive('bubbleChart',  ['$window', function($window) {
@@ -518,21 +518,21 @@ app.directive('bubbleChart',  ['$window', function($window) {
         maxRadius = width > 65 * 8 ? 65 : 45;
         yValue = maxRadius + 30 + 25;
 
-        height = 216
+        height = 216;
         barHeight = height - 20;
 
         svg.attr({
           width: width,
           height: height
-        })
-      }
+        });
+      };
      
       scope.$watch('data', function() {
         init();
         drawBubbleChart();
       });
 
-      scope.$on('windowResize', resize)
+      scope.$on('windowResize', resize);
         
       function resize() {
         init();
@@ -550,25 +550,25 @@ app.directive('bubbleChart',  ['$window', function($window) {
           .attr({
             cx: function(d, i) { return xScale(i); },
             r: function(d) { return zScale(d); }
-          })
+          });
         
         svg.selectAll('.noneback')
           .attr('x', function(d, i) { return xScale(i) - 39; });
 
 				svg.selectAll('.none')
-          .attr('x',function(d, i) { return xScale(i); })
+          .attr('x',function(d, i) { return xScale(i); });
 
         svg.selectAll('image')
-          .attr('x',function(d, i) { return xScale(i)-32; })
+          .attr('x',function(d, i) { return xScale(i)-32; });
 
         svg.selectAll('.amount')
-          .attr('x',function(d, i) { return xScale(i); })
+          .attr('x',function(d, i) { return xScale(i); });
 
         svg.selectAll('.amount-shadow')
-          .attr('x',function(d, i) { return xScale(i); })  
+          .attr('x',function(d, i) { return xScale(i); }); 
         
         svg.select('.axis')
-          .call(xAxisGen.scale(xScale))
+          .call(xAxisGen.scale(xScale));
       }
 
       function setChartParameters(){
@@ -587,19 +587,19 @@ app.directive('bubbleChart',  ['$window', function($window) {
           .ticks(scope.data.length)
           .tickValues([0, 1, 2,3])
           .tickFormat(function(d, i) { return labels[i]; })
-          .innerTickSize(maxRadius + 30)
+          .innerTickSize(maxRadius + 30);
 
         amountText = function(d, value) { 
           var text = '';
           return '$' + commas(Math.floor(value));
-        }
+        };
 
         commas = function(val){
           while (/(\d+)(\d{3})/.test(val.toString())){
             val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
           }
           return val;
-        }
+        };
        }
     
       function drawBubbleChart() {
@@ -609,9 +609,9 @@ app.directive('bubbleChart',  ['$window', function($window) {
         svg.append("svg:g")
           .attr("class", "x axis")
           .attr("transform", "translate(0,"+(yValue)+")")
-          .call(xAxisGen)
+          .call(xAxisGen);
 
-        var circle = svg.selectAll("circle").data(scope.data) //.filter(function(d) { return d > 0; }))
+        var circle = svg.selectAll("circle").data(scope.data); //.filter(function(d) { return d > 0; }))
         
         circle.enter().append("svg:circle")
           .attr({
@@ -625,7 +625,7 @@ app.directive('bubbleChart',  ['$window', function($window) {
           .ease('elastic')
           .duration(1000)
           .delay(function(d, i) { return i * 200; })
-          .attr('r', function(d) { return zScale(d); })
+          .attr('r', function(d) { return zScale(d); });
 
 				var noneback = svg.selectAll('.noneback').data(scope.data);
 				noneback.enter()
@@ -638,7 +638,7 @@ app.directive('bubbleChart',  ['$window', function($window) {
 						height: 26,
 						class: 'noneback',
 						opacity: function(d) { return d > 0 ? 0 : 1; },
-					})	
+					});
 
 				var none = svg.selectAll('.none').data(scope.data);
 				none.enter()	
@@ -656,11 +656,11 @@ app.directive('bubbleChart',  ['$window', function($window) {
 						'font-size': '20px',
 						fill: '#666'
 					})
-					.text('NONE')
+					.text('NONE');
 
         svg.append('g').attr('class', 'amounts');
 
-        var amounts_group = svg.selectAll('g.amounts')
+        var amounts_group = svg.selectAll('g.amounts');
 
         var amounts = amounts_group.selectAll('text')
           .data(scope.data);
@@ -671,14 +671,14 @@ app.directive('bubbleChart',  ['$window', function($window) {
           .attr('dominant-baseline', 'middle')
           .attr('text-anchor','middle')
           .attr('y', yValue)
-          .style('filter', 'url(#glow)')
+          .style('filter', 'url(#glow)');
 
         amounts.enter().append('text')
           .attr('x',function(d, i) { return xScale(i); })
           .attr('class','chart-label amount')
           .attr('dominant-baseline', 'middle')
           .attr('text-anchor','middle')
-          .attr('y', yValue)
+          .attr('y', yValue);
 
         amounts_group.selectAll('text').transition()
           .duration(1000)
@@ -687,12 +687,12 @@ app.directive('bubbleChart',  ['$window', function($window) {
             var i = d3.interpolate(this.textContent.replace(/[^0-9]+/g, ''), d);
             return function(t) { 
               this.textContent = d > 0 ? amountText(d, i(t)) : '';
-            }
-          })
+            };
+          });
       } 
    }
- }
-}])
+ };
+}]);
 
 app.directive('searchBox', ['DataRequestFactory', '$state', function(DataRequestFactory, $state) {
   return {
@@ -731,7 +731,7 @@ app.directive('searchBox', ['DataRequestFactory', '$state', function(DataRequest
           var route = item.type == 'c' ? 'candidateProfile' : 'candidateList';
           $state.go('kochTracker.candidatesView.'+route, {input:item.id,state:item.state});
         }
-      }
+      };
     }
   };
 }]);
@@ -750,10 +750,10 @@ app.directive('infoPopup', ['$state', function($state) {
         if (scope.link) {
           $state.go(scope.link);
         }
-      }
+      };
     }
-  }
-}])
+  };
+}]);
 
 app.directive("popoverHtmlUnsafePopup", function () {
   return {
@@ -770,8 +770,8 @@ app.directive("popoverHtmlUnsafePopup", function () {
     "</div>",
     link: function(scope, element, attr) {
     }
-   }
-})
+   };
+});
 
 app.directive("popoverHtmlUnsafe", [ "$tooltip", function ($tooltip) {
   return $tooltip("popoverHtmlUnsafe", "popover", "click");
@@ -795,7 +795,7 @@ app.directive('autoFocus', function () {
     link: function (scope, element, attrs) {
     	element.bind('click', function (event) {
 	    	element.find('input').focus();
-	    })
+	    });
     }
   };
 });
@@ -836,10 +836,10 @@ app.directive('shareStoryButton', ['DataRequestFactory', '$modal', '$messages', 
               city: '',
               state: '',
               story: '', 
-            }
+            };
             $scope.close = function() {
               $modalInstance.close();
-            }
+            };
             $scope.invalid = false;
             $scope.success = false;
             $scope.loading = false;
@@ -859,12 +859,12 @@ app.directive('shareStoryButton', ['DataRequestFactory', '$modal', '$messages', 
                   }
                 }, function(e) { 
                   $scope.loading = false;
-                })
+                });
               }
-            }
+            };
           }
         });
-      })
+      });
     }
-  }
-}])
+  };
+}]);

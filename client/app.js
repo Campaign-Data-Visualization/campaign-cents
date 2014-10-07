@@ -26,7 +26,7 @@
           $rootScope.title = 'KochProblem.org';
           $rootScope.$on('$viewContentLoaded', function() { 
             $('body>ul.dropdown-menu').remove(); //remove dropdowns that sometimes stay
-          })
+          });
         }]
       });
 
@@ -35,9 +35,9 @@
         //return $match.input.replace(/\/$/, '');
       //})
       $urlRouterProvider.otherwise('/notFound');
-      $uiViewScrollProvider.useAnchorScroll()
+      $uiViewScrollProvider.useAnchorScroll();
       //$anchorScrollProvider.disableAutoScrolling();
-  }])
+  }]);
 }(angular));
 
 

@@ -18,6 +18,13 @@ angular.module('kochTracker.staticPages', ['ui.router'])
         $rootScope.title = "KochProblem.org - The Kochs";
       }]
     })
+    .state('kochTracker.methodology', {
+      url: '/methodology',
+      templateUrl: 'staticPages/methodology.tpl.html',
+      controller: ['$rootScope', function($rootScope) {
+        $rootScope.title = "KochProblem.org - Methodology";
+      }]
+    })
     .state('kochTracker.notFound', {
       url: '/notFound',
       templateUrl: 'staticPages/notFound.tpl.html',

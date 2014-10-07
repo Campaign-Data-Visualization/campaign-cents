@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('kochTracker')
+var app = angular.module('kochTracker');
 
 app.filter('safehtml', ['$sce', function($sce) {
     return function(val) {
@@ -13,7 +13,7 @@ app.filter('counter', ['$filter', function($filter) {
         var num = $filter('number')(val, 0);
         num.split("").forEach(function(n) {
           result += (n == ',' ? "<span class='comma'>" : "<span>")+n+"</span>";
-        })
+        });
         return result;
     };
 }]);
@@ -40,7 +40,7 @@ app.filter('characters', function () {
         }
         return input;
     };
-})
+});
 
 app.filter('words', function () {
     return function (input, words) {

@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('kochTracker')
+var app = angular.module('kochTracker');
 
 app.factory('DataRequestFactory', ['$http', '$messages', '$q', function($http, $messages, $q){
 
@@ -17,7 +17,7 @@ app.factory('DataRequestFactory', ['$http', '$messages', '$q', function($http, $
         return response.data.data;
       }
     }, 
-    handleError)
+    handleError);
   };
   
   var getAdmin = function(route, input) {
