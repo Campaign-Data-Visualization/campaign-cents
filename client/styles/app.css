@@ -945,8 +945,9 @@ body,.map-section{font-family:'ubuntu';background-color:#d6d6d6;background-repea
 .box-text{padding-top:15px}
 .box-text:last-child{padding-bottom:15px}
 ul.box-text li div{height:100px}
-.landing-box-involved .box-text>div p{margin-top:5px}
-.landing-box-involved img{float:left;padding:10px;clear:both}
+.landing-box-involved .box-text>div p{margin-top:18px}
+.landing-box-involved img,.landing-box-involved .cal-icon{float:left;padding:10px;clear:both}
+.landing-box-involved .cal-icon{color:#004e70;font-size:40px}
 .landing-box-involved h3{color:#0071bc}
 .landing-box-involved a{color:#004e70}
 .landing-box-races h3,.landing-box-races a{color:#198e68}
@@ -1018,6 +1019,7 @@ span.bold{font-family:ubuntuBold}
 .get-involved p a{color:#ad272d}
 .get-involved>div{text-align:center}
 .get-involved>div>img{padding-bottom:15px}
+.get-involved .cal-icon{color:#ad272d;font-size:60px;padding-bottom:15px}
 .page{background-color:#fff;padding:30px}
 .page h1{border-bottom:2px solid #0071bc;margin-bottom:30px}
 .page h1,.page h2{color:#0071bc}
