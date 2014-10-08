@@ -87,7 +87,6 @@ module.exports = exports = {
   lookupCandidate: function(req, res, next) {
     var candidateId = req.params.candidateId;
     db.doQuery("select profile from candidateProfiles where voteSmartId = ?", [candidateId]).then(function(data) {
-      console.log(data[0].profile);
       var profile = JSON.parse(data[0].profile);
       res.send({type: 'candidateProfile', data:profile})
     }, next)
