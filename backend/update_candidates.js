@@ -65,7 +65,7 @@ var fetchVoteSmartCandidates = function(state) {
           //if (candidate.candidateId != 26817 && candidate.candidateId != 1721) { return; }
           if (
               (candidate.electionStatus == 'Running' || (!candidate.electionStatus[0] && candidate.officeStatus == 'active')) &&  //don't get non-running non-members
-              (candidate.party != 'Independent' || candidate.candidateId == '27110') //limit to primary parties & Bernie Sanders
+              (candidate.party != 'Independent' || candidate.candidateId == '27110' || candidate.candidateId == '116787') //limit to primary parties & Bernie Sanders
             ) { 
             if(queryCount == 0) { 
               current[candidate.candidateId] = 1;
