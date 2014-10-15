@@ -14,8 +14,8 @@
     'kochTracker.candidatesView.candidateList',
     'kochTracker.candidatesView.candidateProfile'
     ])
-  .config(['$stateProvider', '$urlRouterProvider', '$uiViewScrollProvider', function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider) {
-    //$locationProvider.html5Mode(true).hashPrefix('#');
+  .config(['$stateProvider', '$urlRouterProvider', '$uiViewScrollProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $uiViewScrollProvider, $locationProvider) {
+    $locationProvider.html5Mode(true);
 
     $stateProvider
       .state('kochTracker', {
@@ -29,7 +29,6 @@
           });
         }]
       });
-
       //This is some crazy stuff cuz when I reload the page, it adds a / to everything
       //$urlRouterProvider.when(/\/$|\/\?$/, function($match) {
         //return $match.input.replace(/\/$/, '');
