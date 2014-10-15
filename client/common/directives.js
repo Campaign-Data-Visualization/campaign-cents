@@ -671,7 +671,7 @@ app.directive('bubbleChart',  ['$window', function($window) {
           .attr('dominant-baseline', 'middle')
           .attr('text-anchor','middle')
           .attr('y', yValue)
-          .style('filter', 'url(#glow)');
+          .style('filter', 'url('+window.location.href+'#glow)');
 
         amounts.enter().append('text')
           .attr('x',function(d, i) { return xScale(i); })
