@@ -919,6 +919,7 @@ body,.map-section{font-family:'ubuntu';background-color:#d6d6d6;background-repea
 .navbar-nav li h4 a{color:#5b5a5a}
 .navbar-nav li h4 a:hover{text-decoration:none;color:#000}
 .collapse{float:right}
+.addthis_sharing_toolbox{display:inline-block}
 .social .addthis_32x32_style .at300bs.at15t_pinterest_share{width:41px !important;height:30px !important}
 .social div#pinterest,.social .addthis_32x32_style .at300bs.at15t_pinterest_share{background:url('../images/graphic-share-pinterest.png') !important;background-repeat:none;width:41px !important;height:30px !important}
 .social div#pinterest:hover,.social .addthis_32x32_style .at300bs.at15t_pinterest_share:hover{background:url('../images/graphic-share-pinterest_ON.png') !important}
@@ -1118,7 +1119,7 @@ h4.modal-title{color:#0071bc;text-shadow:0 1px 0 #fff;font-family:'ubuntu'}
 .landing-box-involved p{padding-left:62px}
 .get-involved img{height:62px;margin-bottom:10px}
 li.donate{margin-right:15px}
-.donate-button{background-color:#e1e1e1;color:0;border:none;border-radius:0;padding:6px 12px !important;margin-top:-6px;font-weight:bold;font-size:18px;display:inline-block}
+.donate-button{background-color:#e1e1e1;color:0;border:none;border-radius:0;padding:6px 12px !important;margin-top:-22px;font-weight:bold;font-size:18px;display:inline-block}
 .donate-button:hover{background:#0071bc !important;color:#fff}
 #koch-graph{padding:10px;margin:0 0 10px 10px;text-align:center;background:#fff;width:400px}
 .koch-tag{color:#ad272d;font-weight:normal;text-align:center}

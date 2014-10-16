@@ -1,21 +1,8 @@
   <div class="container">
 
-    <div class="col-md-4 col-xs-12 sidebar">
-      <div class="col-xs-12">
-        <div id='map' inset-map state='viewparams.state'/>
-      </div>  
-      <div class="col-xs-12 sidebar-tile">
-        <div class='koch-fact' koch-fact/>
-      </div>
-      <div class="col-xs-12 sidebar-tile">
-        <div class='worst-offender' worst-offender/>
-      </div>
-       <div class="col-xs-12 sidebar-tile">
-        <div class='victims-voice' victims-voice/>
-      </div>
-    </div> 
 
-    <div class="col-md-8 col-xs-12 candidate-main">
+
+    <div class="col-md-8 col-xs-12 col-md-push-4 candidate-main">
       <loading loading="layersLoading"/>
       <h3 class='state-name pull-right'>{{viewparams.state_name}}</h3>
       <tabset ng-if='!loading'>
@@ -96,4 +83,20 @@
         </div>
       </div>
     </div><!--  /.candidate-main -->
+
+
+    <div class="col-md-4 col-xs-12 col-md-pull-8 sidebar">
+      <div class="col-xs-12">
+        <div id='map' inset-map state='viewparams.state'/>
+      </div>  
+      <div class="col-xs-12 sidebar-tile">
+        <div class='koch-fact' koch-fact/>
+      </div>
+      <div class="col-xs-12 sidebar-tile">
+        <div class='worst-offender' worst-offender/>
+      </div>
+       <div class="col-xs-12 sidebar-tile">
+        <div class='victims-voice' victims-voice/>
+      </div>
+    </div> 
   </div>
