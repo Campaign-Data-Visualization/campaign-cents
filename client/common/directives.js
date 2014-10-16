@@ -804,6 +804,7 @@ app.directive('shareThis', function () {
   return {
     restrict: 'A',
     scope: true,
+    replace: true,
     template: "<div class='addthis_sharing_toolbox'></div>",
     link: function (scope, element, attrs) {
     	// scope.url = $location.absUrl();
