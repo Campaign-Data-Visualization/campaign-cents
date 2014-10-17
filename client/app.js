@@ -33,7 +33,7 @@
       //$urlRouterProvider.when(/\/$|\/\?$/, function($match) {
         //return $match.input.replace(/\/$/, '');
       //})
-      $urlRouterProvider.otherwise('/notFound');
+      $urlRouterProvider.otherwise('/');
       $uiViewScrollProvider.useAnchorScroll();
       //$anchorScrollProvider.disableAutoScrolling();
   }]);
