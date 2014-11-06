@@ -20,7 +20,7 @@ var updateCandidates = function() {
     db.doQuery("select state from states").then(function(rows) { 
       var promises = [];
       //rows = [{state: 'PA'}, {state: 'MI'}, {state: 'DC'}];
-      //rows = [{state: 'VT'}];
+      //rows = [{state: 'GA'}];
       rows.forEach(function(state) { 
         var promise = fetchVoteSmartCandidates(state.state);
         promises.push(promise);
