@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.38, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.40, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: kochtracker
 -- ------------------------------------------------------
--- Server version	5.5.38-0ubuntu0.14.04.1
+-- Server version	5.5.40-0ubuntu1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -39,7 +39,7 @@ CREATE TABLE `candidates` (
   `2014contrib` int(10) unsigned DEFAULT '0',
   `since2000contrib` int(10) unsigned DEFAULT '0',
   `district` char(2) DEFAULT NULL,
-  `electionStatus` varchar(20) NOT NULL DEFAULT 'Challeger',
+  `electionStatus` varchar(22) NOT NULL DEFAULT 'Challeger',
   `photoURL` varchar(50) DEFAULT '/images/profile-blank.jpg',
   `CRPId` char(9) DEFAULT NULL,
   `address` varchar(80) NOT NULL,
@@ -174,6 +174,7 @@ CREATE TABLE `content` (
   `detail` varchar(200) DEFAULT NULL,
   `published` tinyint(1) DEFAULT '0',
   `type` varchar(10) NOT NULL,
+  `image` varchar(200) DEFAULT NULL,
   KEY `type` (`type`,`published`) USING BTREE,
   KEY `detail` (`detail`,`published`) USING BTREE,
   KEY `published` (`published`)
@@ -211,4 +212,4 @@ CREATE TABLE `koch_assets` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-09-25 15:38:27
+-- Dump completed on 2014-11-06 15:26:18
