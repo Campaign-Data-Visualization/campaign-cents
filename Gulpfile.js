@@ -76,7 +76,7 @@ gulp.task('database', function() {
 
   tables.forEach(function(t) { 
     console.log("Dumping "+t+" table...");
-    run('mysqldump -u root kochtracker '+t+' > '+dir+t+'.sql').exec()
+    run('mysqldump --skip-extended-insert -u root kochtracker '+t+' > '+dir+t+'.sql').exec()
   });
   console.log("Dumping schema....");
   run('mysqldump -d -u root kochtracker '+tables.join(' ') +' '+ live_tables.join(' ')+ '> '+dir+'schema.sql' ).exec()
