@@ -20,15 +20,17 @@ angular.module('kochTracker.candidatesView.candidateProfile', ['ui.router'])
   $scope.topDonors = {};
   $scope.donors = {};
 
-  DataRequestFactory.getData('candidate', $scope.candidateId+'/bio').then(
-    function(response){
-      $scope.bioLoading = 0;
-      $scope.candidateBio = response.bio;
-    },
-    function(response){
-      $scope.bioLoading = 0;
-    }
-  );
+  // Disabling bio while votesmart is broken
+  // DataRequestFactory.getData('candidate', $scope.candidateId+'/bio').then(
+  //   function(response){
+  //     $scope.bioLoading = 0;
+  //     $scope.candidateBio = response.bio;
+  //   },
+  //   function(response){
+  //     $scope.bioLoading = 0;
+  //   }
+  // );
+  $scope.bioLoading = 0;
 
   DataRequestFactory.getData('candidate', $scope.candidateId).then(
     function(response){

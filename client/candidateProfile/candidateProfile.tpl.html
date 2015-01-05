@@ -35,7 +35,7 @@
     <div class="col-xs-12 candidate-about" ng-if='bioLoading'>
       <loading loading='bioLoading'/>
     </div>
-    <div class="col-xs-12 candidate-about" ng-if='!bioLoading'>
+    <div class="col-xs-12 candidate-about" ng-if='!bioLoading && candidateBio.candidate[0]'>
       <h4 class="center">About Candidate</h4>
       <p ng-if='candidateBio.candidate[0].birthDate[0]'><span class="bold">Birthdate:</span> {{candidateBio.candidate[0].birthDate[0]}}</p>
       <p ng-if='candidateBio.candidate[0].birthPlace[0]'><span class="bold">Birthplace:</span> {{candidateBio.candidate[0].birthPlace[0]}}</p>
