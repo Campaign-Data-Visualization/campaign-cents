@@ -1,7 +1,5 @@
   <div class="container">
 
-
-
     <div class="col-md-8 col-xs-12 col-md-push-4 candidate-main">
       <loading loading="layersLoading"/>
       <h3 class='state-name pull-right'>{{viewparams.state_name}}</h3>
@@ -49,13 +47,12 @@
       <!-- GET INVOLVED -->
       <div class="get-involved">
         <div class="row">
-           <div class="col-xs-12">
+           <div ng-if='dayOne >= 0' class="col-xs-12">
             <h3>Days Until the Election:</h3>
-            <div ng-if='dayOne >= 0' class="election-countdown-tag">
+            <div class="election-countdown-tag">
               <h1><span>{{dayOne}}</span></h1>
               <h1><span>{{dayTwo}}</span></h1>
             </div>
-           
           </div>
           <div class="col-xs-12">
             <h3>GET INVOLVED</h3>
@@ -64,19 +61,19 @@
             <img src="images/icon-camera-red.svg">
             <p>Watch <a href="#">Koch Brothers Exposed</a> online or <a href="#">Citizen Koch</a> at a local screening</p>
           </div>-->
-          <div class="col-sm-3 col-xs-12">
+          <div class="col-sm-4 col-xs-12">
             <img src="images/icon-clipboard-red.svg">
             <p>Sign a <a target='_blank' href="http://petitions.moveon.org/find/?q=koch">petition</a>!</p>
           </div>
-          <div class="col-sm-3 col-xs-12">
+          <!-- <div class="col-sm-3 col-xs-12">
             <img src="images/icon-people-red.svg">
             <p>Volunteer with MoveOn.org to <a target='_blank' href="http://pol.moveon.org/2014calls/whereareyou.html">Help Save the Senate</a></p>
-          </div>
-          <div class="col-sm-3 col-xs-12">
+          </div> -->
+          <div class="col-sm-4 col-xs-12">
             <img src="images/icon-megaphone-red.svg">
             <p>Report a <a href='javascript:;' share-story-button>Koch Problem</a> in your area</p>
           </div>
-          <div class="col-sm-3 col-xs-12">
+          <div class="col-sm-4 col-xs-12">
             <span class='cal-icon glyphicon glyphicon-calendar'/>
             <p>See <a target='_blank' href='https://www.google.com/calendar/render?pli=1#g|month-1+22846+22846+22846'>upcoming actions</a></p>
           </div>
